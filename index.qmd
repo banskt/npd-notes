@@ -1,0 +1,6 @@
+---
+title: "Network effects of neuropsychiatric disorders"
+---
+
+The project aims to use convex optimization methods to understand 
+the network effects of neuropsychiatric disorders.
