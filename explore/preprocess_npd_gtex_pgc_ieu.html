@@ -308,7 +308,7 @@ Read summary statistics for ieu</code></pre>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>assoc_df <span class="op">=</span> assoc_df.drop_duplicates()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>assoc_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -334,12 +334,12 @@ dtypes: Int64(1), float64(4), string(6)
 memory usage: 58.2 MB</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>assoc_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -575,7 +575,7 @@ memory usage: 58.2 MB</code></pre>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>assoc_df_fa <span class="op">=</span> pd.concat([assoc_df_allele1, assoc_df_allele2]) <span class="co"># fa: fixed alleles</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -636,7 +636,7 @@ memory usage: 58.0 MB</code></pre>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp <span class="op">=</span> snps_count[snps_count[<span class="st">'count'</span>] <span class="op">&gt;=</span><span class="dv">20</span> ].merge(assoc_df_fa, on<span class="op">=</span>[<span class="st">'SNP'</span>], how<span class="op">=</span><span class="st">'inner'</span>).<span class="bu">filter</span>(regex <span class="op">=</span> <span class="st">'^(?!.*count)'</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -665,13 +665,13 @@ memory usage: 53.1 MB</code></pre>
 </section>
 <section id="remove-duplicate-snp-id-combinations" class="level3">
 <h3 class="anchored" data-anchor-id="remove-duplicate-snp-id-combinations">Remove duplicate (SNP, ID) combinations</h3>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp_nodup <span class="op">=</span> assoc_df_fa_nsnp.drop_duplicates(subset<span class="op">=</span>[<span class="st">'SNP'</span>, <span class="st">'ID'</span>], keep <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="16">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp_nodup.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -697,12 +697,12 @@ dtypes: Int64(1), float64(4), string(6)
 memory usage: 57.8 MB</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="17">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp_nodup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 
 
@@ -889,7 +889,7 @@ memory usage: 57.8 MB</code></pre>
 </section>
 <section id="data-matrix" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Data Matrix</h1>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="18">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>beta_df <span class="op">=</span> assoc_df_fa_nsnp_nodup[[<span class="st">'SNP'</span>, <span class="st">'ID'</span>, <span class="st">'BETA'</span>]].pivot(index <span class="op">=</span> <span class="st">'SNP'</span>, columns <span class="op">=</span> <span class="st">'ID'</span>, values <span class="op">=</span> <span class="st">'BETA'</span>).fillna(<span class="dv">0</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">0</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
@@ -897,7 +897,7 @@ memory usage: 57.8 MB</code></pre>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>prec_df <span class="op">=</span> se_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="op">/</span> x <span class="op">/</span> x).fillna(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="19">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>beta_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -910,7 +910,7 @@ dtypes: float64(108)
 memory usage: 7.0 MB</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="30">
+<div class="cell" data-execution_count="20">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pd.testing.assert_index_equal(beta_df.index, prec_df.index)</span>
@@ -920,7 +920,7 @@ memory usage: 7.0 MB</code></pre>
 <section id="remove-studies-with-missingness" class="level3">
 <h3 class="anchored" data-anchor-id="remove-studies-with-missingness">Remove studies with missingness</h3>
 <p>Studies with high missingness are not good samples, hence they are removed. See histogram of missingness in <a href="#fig-missingness">Figure&nbsp;2</a></p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="21">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>missing_df <span class="op">=</span> pd.DataFrame(prec_df <span class="op">==</span> <span class="dv">0</span>).mean(axis <span class="op">=</span> <span class="dv">0</span>).reset_index(name <span class="op">=</span> <span class="st">'missingness'</span>).rename(columns <span class="op">=</span> {<span class="st">'index'</span>: <span class="st">'ID'</span>})</span>
@@ -941,7 +941,7 @@ memory usage: 7.0 MB</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="22">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>keep_columns <span class="op">=</span> missing_df[missing_df[<span class="st">'missingness'</span>] <span class="op">&lt;</span> <span class="fl">0.5</span>][<span class="st">'ID'</span>].to_list()</span>
@@ -954,7 +954,7 @@ memory usage: 7.0 MB</code></pre>
 <pre><code>Keeping 80 phenotypes with low missingness</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="23">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>beta_df_sub.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1053,7 +1053,7 @@ memory usage: 5.2 MB</code></pre>
 </section>
 <section id="save-pickle" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Save Pickle</h1>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="24">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>beta_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
