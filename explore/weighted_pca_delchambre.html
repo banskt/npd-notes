@@ -182,11 +182,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+    <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#simple-pca-using-svd" id="toc-simple-pca-using-svd" class="nav-link active" data-scroll-target="#simple-pca-using-svd">Simple PCA using SVD</a></li>
-  <li><a href="#weighted-pca" id="toc-weighted-pca" class="nav-link" data-scroll-target="#weighted-pca">Weighted PCA</a></li>
+  <li><a href="#simple-pca-using-svd" id="toc-simple-pca-using-svd" class="nav-link active" data-scroll-target="#simple-pca-using-svd"><span class="header-section-number">1</span> Simple PCA using SVD</a></li>
+  <li><a href="#weighted-pca" id="toc-weighted-pca" class="nav-link" data-scroll-target="#weighted-pca"><span class="header-section-number">2</span> Weighted PCA</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/explore/weighted_pca_delchambre.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Simple PCA</h1>
+<div class="quarto-title-block"><div><h1 class="title">Simple PCA</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -211,6 +211,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -221,8 +223,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/npd_sumstats/data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prec_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/prec_df.pkl"</span></span>
@@ -231,9 +236,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/../trait_meta.csv"</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prec_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -538,6 +547,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mean_se <span class="op">=</span> prec_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="dv">1</span> <span class="op">/</span> np.sqrt(x)).replace([np.inf, <span class="op">-</span>np.inf], np.nan).mean(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mean_se <span class="op">=</span> pd.DataFrame(mean_se).set_axis([<span class="st">"mean_se"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>beta_std <span class="op">=</span> beta_df.std(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
@@ -553,34 +564,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="vs">r"Standard Deviation of mean $\beta$"</span>)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r"Mean of SE"</span>)</span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="weighted_pca_delchambre_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> error_df.query(<span class="st">"mean_se &lt;= 0.05 &amp; beta_std &lt;= 0.05"</span>).index</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#select_ids = error_df.index</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(beta_df[select_ids]).T</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>colmeans <span class="op">=</span> np.mean(X, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Xcent <span class="op">=</span> X <span class="op">-</span> colmeans</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ncomp <span class="op">=</span> <span class="bu">min</span>(Xcent.shape)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components <span class="op">=</span> ncomp)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>pca.fit(Xcent)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>beta_pcs <span class="op">=</span> pca.fit_transform(Xcent)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>beta_eig  <span class="op">=</span> pca.components_</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>beta_pcs.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(59, 59)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>idx1 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>idx2 <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,13 +622,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Component </span><span class="sc">{</span>idx1 <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Component </span><span class="sc">{</span>idx2 <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="weighted_pca_delchambre_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<section id="simple-pca-using-svd" class="level1">
-<h1>Simple PCA using SVD</h1>
+<section id="simple-pca-using-svd" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Simple PCA using SVD</h1>
 <div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Xcent, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>svd_pcs <span class="op">=</span> U <span class="op">@</span> np.diag(S)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>svd_pc1 <span class="op">=</span> svd_pcs[:, idx1]</span>
@@ -622,23 +648,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Component </span><span class="sc">{</span>idx1<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Component </span><span class="sc">{</span>idx2<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="weighted_pca_delchambre_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="weighted-pca" class="level1">
-<h1>Weighted PCA</h1>
+<section id="weighted-pca" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Weighted PCA</h1>
 <div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>X.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>(59, 8403)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="12">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.array(prec_df[select_ids]).T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_mean(x, w<span class="op">=</span><span class="va">None</span>, axis<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute the weighted mean along the given axis</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -715,11 +750,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>            cWc <span class="op">+=</span> np.diag(regularization <span class="op">/</span> explained_variance)</span>
 <span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>        Y[i] <span class="op">=</span> np.linalg.solve(cWc, cWX)</span>
 <span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="46">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>weighted_pcs <span class="op">=</span> weighted_pca_components(X, W, n_components <span class="op">=</span> <span class="dv">20</span>, regularization <span class="op">=</span> <span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 <div class="cell" data-execution_count="47">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>idx1 <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>idx2 <span class="op">=</span> <span class="dv">11</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -737,11 +778,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Component </span><span class="sc">{</span>idx1<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Component </span><span class="sc">{</span>idx2<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <p><img src="weighted_pca_delchambre_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="181">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_pca_components(X, W, n_components <span class="op">=</span> <span class="va">None</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    weights <span class="op">=</span> weighted_mean(X, W, axis <span class="op">=</span> <span class="dv">0</span>).reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    _X <span class="op">=</span> (X <span class="op">-</span> weights) <span class="op">*</span>  weights</span>
@@ -753,12 +797,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    eigvals <span class="op">=</span> (_.shape[<span class="dv">1</span>] <span class="op">-</span> n_components, X.shape[<span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span>)</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        evals, evecs <span class="op">=</span> linalg.eigh(covar, eigvals<span class="op">=</span>eigvals)</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.components_ <span class="op">=</span> evecs[:, ::<span class="op">-</span><span class="dv">1</span>].T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="181">
 <pre><code>(1, 8403)</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="182">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>X.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="182">
 <pre><code>(59, 8403)</code></pre>
 </div>
@@ -847,6 +895,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -999,6 +1098,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/github\.com\/banskt\/npd-notes");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
 });
 </script>
 <nav class="page-navigation">
