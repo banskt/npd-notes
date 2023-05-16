@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/banskt/npd-notes/index.html</loc>
-    <lastmod>2023-05-16T18:42:27.879Z</lastmod>
+    <lastmod>2023-05-16T19:26:18.985Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/banskt/npd-notes/result/index.html</loc>
+    <lastmod>2023-05-16T19:26:19.849Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/index.html</loc>
-    <lastmod>2023-05-16T18:42:28.515Z</lastmod>
+    <lastmod>2023-05-16T19:26:20.565Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/preprocess_npd_gtex_pgc_ieu.html</loc>
-    <lastmod>2023-05-16T18:42:30.039Z</lastmod>
+    <lastmod>2023-05-16T19:26:22.341Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/weighted_pca_delchambre.html</loc>
-    <lastmod>2023-05-16T18:42:30.815Z</lastmod>
+    <lastmod>2023-05-16T19:26:23.253Z</lastmod>
   </url>
 </urlset>
