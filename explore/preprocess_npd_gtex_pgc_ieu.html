@@ -188,10 +188,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#read" id="toc-read" class="nav-link active" data-scroll-target="#read"><span class="header-section-number">1</span> Read</a></li>
-  <li><a href="#clean" id="toc-clean" class="nav-link" data-scroll-target="#clean"><span class="header-section-number">2</span> Clean</a></li>
-  <li><a href="#data-matrix" id="toc-data-matrix" class="nav-link" data-scroll-target="#data-matrix"><span class="header-section-number">3</span> Data Matrix</a></li>
-  <li><a href="#save-pickle" id="toc-save-pickle" class="nav-link" data-scroll-target="#save-pickle"><span class="header-section-number">4</span> Save Pickle</a></li>
+  <li><a href="#read" id="toc-read" class="nav-link active" data-scroll-target="#read">Read</a></li>
+  <li><a href="#clean" id="toc-clean" class="nav-link" data-scroll-target="#clean">Clean</a></li>
+  <li><a href="#data-matrix" id="toc-data-matrix" class="nav-link" data-scroll-target="#data-matrix">Data Matrix</a></li>
+  <li><a href="#save-pickle" id="toc-save-pickle" class="nav-link" data-scroll-target="#save-pickle">Save Pickle</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/explore/preprocess_npd_gtex_pgc_ieu.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="preprocess_npd_gtex_pgc_ieu.out.ipynb" download="preprocess_npd_gtex_pgc_ieu.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -240,8 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="read" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Read</h1>
+<section id="read" class="level1">
+<h1>Read</h1>
 <p>Summary statistics for association of selected SNPs with multiple diseases. SNPs which had significant association with at least one phenotype were selected in a previous preprocessing step, details in <a href="https://github.com/daklab/npd_sumstats">this repository</a>. Next, the summary statistics of those SNPs for all available phenotypes were included from the respective GWAS.</p>
 <div class="cell" data-execution_count="2">
 <details>
@@ -289,8 +289,8 @@ Read summary statistics for ieu</code></pre>
 </div>
 </div>
 </section>
-<section id="clean" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Clean</h1>
+<section id="clean" class="level1">
+<h1>Clean</h1>
 <section id="combine-all-summary-statistics-to-a-single-dataframe." class="level3">
 <h3 class="anchored" data-anchor-id="combine-all-summary-statistics-to-a-single-dataframe.">Combine all summary statistics to a single <code>DataFrame</code>.</h3>
 <div class="cell" data-execution_count="4">
@@ -869,8 +869,8 @@ memory usage: 57.8 MB</code></pre>
 </div>
 </section>
 </section>
-<section id="data-matrix" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Data Matrix</h1>
+<section id="data-matrix" class="level1">
+<h1>Data Matrix</h1>
 <div class="cell" data-execution_count="18">
 <details>
 <summary>Code</summary>
@@ -1024,8 +1024,8 @@ memory usage: 5.2 MB</code></pre>
 </div>
 </section>
 </section>
-<section id="save-pickle" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Save Pickle</h1>
+<section id="save-pickle" class="level1">
+<h1>Save Pickle</h1>
 <div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>beta_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>prec_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/prec_df.pkl"</span></span>
