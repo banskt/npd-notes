@@ -7,22 +7,29 @@ website:
     background: "#C8635A"
     search: true
     left:
-      - text: "Home"
-        file: index.qmd
       - text: "Explore"
         file: explore/index.qmd
+      - text: "Results"
+        file: result/index.qmd
 
   sidebar:
     - title: "Explore"
       style: "docked"
       search: true
       background: light
-      contents:
+      collapse-level: 1
+      contents: 
         - explore/index.qmd
-        - auto: explore/*
-
+        - section: "Notebooks"
+          contents:
+            - auto: explore/*.ipynb
+#
+    - title: "Results"
+      contents:
+        - result/index.qmd
+#
   page-navigation: true
-  repo-url: https://github.com/banskt/npd-notes
+  repo-url: https://github.com/banskt/nygc-notes
   repo-actions: [edit, issue]
 
 format:
