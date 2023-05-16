@@ -3,8 +3,8 @@ format:
     toc: true
     toc-depth: 1
     toc-title: "Contents"
-    number-sections: true
-    number-depth: 2
+    #number-sections: false
+    #number-depth: 2
     html-math-method: katex
     link-external-icon: true
     link-external-newwindow: true

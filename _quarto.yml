@@ -4,7 +4,7 @@ project:
 website:
   title: "NPD Network"
   navbar:
-    background: "#c8635a"
+    background: "#C8635A"
     search: true
     left:
       - text: "Home"
@@ -13,10 +13,10 @@ website:
         file: explore/index.qmd
 
   sidebar:
-    - style: "docked"
+    - title: "Explore"
+      style: "docked"
       search: true
       background: light
-      title: "Explore"
       contents:
         - explore/index.qmd
         - auto: explore/*
