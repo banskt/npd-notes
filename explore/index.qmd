@@ -1,0 +1,5 @@
+---
+title: "Explore"
+---
+
+The place for exploring data and methods, the daily workbench.

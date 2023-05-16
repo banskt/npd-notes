@@ -1,0 +1,81 @@
+ID,TRAIT,Label,Broad
+AD_sumstats_Jansenetal_2019sept.txt.gz,NA,AD 2019,Neurodegenerative
+anxiety.meta.full.cc.txt.gz,NA,Anxiety CC,Other psych
+anxiety.meta.full.fs.txt.gz,NA,Anxiety FS,Other psych
+CNCR_Insomnia_all,NA,CNCR Insomnia,Sleep
+daner_adhd_meta_filtered_NA_iPSYCH23_PGC11_sigPCs_woSEX_2ell6sd_EUR_Neff_70.txt.gz,NA,ADHD,ADHD
+daner_PGC_BIP32b_mds7a_0416a.txt.gz,NA,BD 2019,BD
+daner_PGC_BIP32b_mds7a_mds7a_BD1.0416a_INFO6_A5_NTOT.txt.gz,NA,BDI 2019,BD
+daner_PGC_BIP32b_mds7a_mds7a_BD2.0416a_INFO6_A5_NTOT.txt.gz,NA,BDII 2019,BD
+ENIGMA_Intracraneal_Volume,NA,Intracraneal vol,Volume
+ieu-a-1000,Depressive symptoms,Depressive symptoms,Depression
+ieu-a-1041,Intracranial vol,Intracranial vol,Volume
+ieu-a-1042,Nucleus accumbens vol,Nucleus accumbens vol,Volume
+ieu-a-1043,Amygdala vol,Amygdala vol,Volume
+ieu-a-1044,Caudate vol,Caudate vol,Volume
+ieu-a-1045,Hippocampus vol,Hippocampus vol,Volume
+ieu-a-1046,Pallidum vol,Pallidum vol,Volume
+ieu-a-1047,Putamen vol,Putamen vol,Volume
+ieu-a-1048,Thalamus vol,Thalamus vol,Volume
+ieu-a-1085,Amyotrophic lateral sclerosis,ALS,Neurodegenerative
+ieu-a-118,Neuroticism,Neuroticism,Other psych
+ieu-a-1183,ADHD,ADHD,ADHD
+ieu-a-1184,Autism Spectrum Disorder,ASD PGC2015,ASD
+ieu-a-1185,Autism Spectrum Disorder,ASD PGC2017,ASD
+ieu-a-1186,Anorexia Nervosa,AN PGC2017,Other psych
+ieu-a-1188,Major Depressive Disorder,MDD PGC2018,Depression
+ieu-a-1189,Obsessive Compulsive Disorder,OCD PGC2017,OCD
+ieu-a-22,Schizophrenia,SZ PGC2014,SZ
+ieu-a-297,Alzheimer's disease,AD IGAP2013,Neurodegenerative
+ieu-a-806,Autism,ASD PGC2015,ASD
+ieu-a-990,Bulimia nervosa,Bulimia nervosa,Other psych
+ieu-b-10,focal epilepsy,focal epilepsy,Epilepsy
+ieu-b-11,focal epilepsy,focal epilepsy,Epilepsy
+ieu-b-12,juvenile absence epilepsy,juvenile absence epilepsy,Epilepsy
+ieu-b-13,childhood absence epilepsy,childhood absence epilepsy,Epilepsy
+ieu-b-14,focal epilepsy,focal epilepsy,Epilepsy
+ieu-b-15,focal epilepsy,focal epilepsy,Epilepsy
+ieu-b-16,generalized epilepsy with tonic-clonic seizures,generalized epilepsy with TC seizures,Epilepsy
+ieu-b-17,juvenile myoclonic epilepsy,juvenile myoclonic epilepsy,Epilepsy
+ieu-b-18,multiple sclerosis,MS,Neurodegenerative
+ieu-b-2,Alzheimer's disease,AD ADGC2019,Neurodegenerative
+ieu-b-41,bipolar disorder,BD PGC2019,BD
+ieu-b-42,schizophrenia,SZ PGC2014,SZ
+ieu-b-7,Parkinson's disease,PD 2019,Neurodegenerative
+ieu-b-8,epilepsy,epilepsy,Epilepsy
+ieu-b-9,generalized epilepsy,generalized epilepsy,Epilepsy
+IGAP_Alzheimer,NA,AD IGAP,Neurodegenerative
+iPSYCH-PGC_ASD_Nov2017.txt.gz,NA,ASD,ASD
+Jones_et_al_2016_Chronotype,NA,Chronotype,Sleep
+Jones_et_al_2016_SleepDuration,NA, - Sleep Dur,Sleep
+MDD_MHQ_BIP_METACARPA_INFO6_A5_NTOT_no23andMe_noUKBB.txt.gz,NA,MDD BD meta,Depression
+MDD_MHQ_METACARPA_INFO6_A5_NTOT_no23andMe_noUKBB.txt.gz,NA,MDD,Depression
+MHQ_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz,NA,MDD UKB,Depression
+MHQ_Recurrent_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz,NA,Recurrent MDD,Depression
+MHQ_Single_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz,NA,Single MDD,Depression
+MHQ_Subthreshold_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz,NA,Subthreshold MDD,Depression
+ocd_aug2017.txt.gz,NA,OCD PGC2017,OCD
+PGC_ADHD_EUR_2017,NA,ADHD 2017,ADHD
+PGC_ASD_2017_CEU,NA,ASD 2017,ASD
+pgc-bip2021-all.vcf.txt.gz,NA,BD 2021,BD
+pgc-bip2021-BDI.vcf.txt.gz,NA,BDI 2021,BD
+pgc-bip2021-BDII.vcf.txt.gz,NA,BDII 2021,BD
+pgc.scz2,NA,SZ PGC2,SZ
+PGC3_SCZ_wave3_public.v2.txt.gz,NA,SZ PGC3,SZ
+pgcAN2.2019-07.vcf.txt.gz,NA,AN PGC2019,Other psych
+pts_all_freeze2_overall.txt.gz,NA,PTS,Other psych
+SSGAC_Depressive_Symptoms,NA,Depressive symptoms,Depression
+SSGAC_Education_Years_Pooled,NA,Education years,Intel/education
+UKB_1160_Sleep_duration,NA, - Sleep Dur UKB,Sleep
+UKB_1180_Morning_or_evening_person_chronotype,NA,Chronotype UKB,Sleep
+UKB_1200_Sleeplessness_or_insomnia,NA,Sleeplessness/Insomnia UKB,Sleep
+UKB_20002_1243_self_reported_psychological_or_psychiatric_problem,NA,Psychiatric UKB self,Other psych
+UKB_20002_1262_self_reported_parkinsons_disease,NA,PD UKB self,Neurodegenerative
+UKB_20002_1265_self_reported_migraine,NA,Migraine UKB self,Migraine
+UKB_20002_1289_self_reported_schizophrenia,NA,SZ UKB self,SZ
+UKB_20002_1616_self_reported_insomnia,NA,Insomnia UKB self,Sleep
+UKB_20016_Fluid_intelligence_score,NA,Fluid intel UKB,Intel/education
+UKB_20127_Neuroticism_score,NA,Neuroticism UKB,Other psych
+UKB_G40_Diagnoses_main_ICD10_G40_Epilepsy,NA,Epilepsy UKB,Epilepsy
+UKB_G43_Diagnoses_main_ICD10_G43_Migraine,NA,Migraine UKB (diag),Migraine
+ieu-b-5070,schizophrenia,SZ PGC-SB-2023,SZ

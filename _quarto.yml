@@ -9,6 +9,17 @@ website:
     left:
       - text: "Home"
         file: index.qmd
+      - text: "Explore"
+        file: explore/index.qmd
+
+  sidebar:
+    - style: "docked"
+      search: true
+      background: light
+      title: "Explore"
+      contents:
+        - explore/index.qmd
+        - auto: explore/*
 
   page-navigation: true
   repo-url: https://github.com/banskt/npd-notes
