@@ -4,3 +4,8 @@ title: "Network effects of neuropsychiatric disorders"
 
 The project aims to use convex optimization methods to understand 
 the network effects of neuropsychiatric disorders.
+
+My daily researach journal at the NYGC is also available 
+[online](https://banskt.github.io/nygc-notes/).
+To learn more about my work and research interests,
+please visit my main [portfolio website](https://saik.at).
