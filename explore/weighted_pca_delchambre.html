@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../explore/preprocess_npd_gtex_pgc_ieu.html" rel="prev">
+<link href="../explore/robust_pca_nuclear_norm.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -198,6 +198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../explore/robust_pca_nuclear_norm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust PCA for matrix completion</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../explore/weighted_pca_delchambre.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">PCA of NPD summary statistics</span></a>
   </div>
@@ -220,6 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
   <li><a href="#pca-using-svd" id="toc-pca-using-svd" class="nav-link" data-scroll-target="#pca-using-svd">PCA using SVD</a></li>
   <li><a href="#weighted-pca" id="toc-weighted-pca" class="nav-link" data-scroll-target="#weighted-pca">Weighted PCA</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/nygc-notes/blob/main/explore/weighted_pca_delchambre.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/nygc-notes/issues/new" class="toc-action">Report an issue</a></p></div></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="weighted_pca_delchambre.out.ipynb" download="weighted_pca_delchambre.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -271,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>, colors <span class="op">=</span> <span class="st">'kelly'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -635,7 +642,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="pca" class="level1">
 <h1>PCA</h1>
 <p>We use the z-score as the observation statistic for each phenotype and variant. For PCA, we center the columns of the X matrix.</p>
-<div class="cell" data-execution_count="33">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>se_df <span class="op">=</span> prec_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="dv">1</span> <span class="op">/</span> np.sqrt(x)).replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
@@ -655,7 +662,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>We have 69 samples (phenotypes) and 8403 features (variants)</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="34">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ncomp <span class="op">=</span> <span class="bu">min</span>(Xcent.shape)</span>
@@ -666,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <p>The variance explained by each principal component is shown in <a href="#fig-pca-variance-explained">Figure&nbsp;2</a></p>
-<div class="cell" data-execution_count="35">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">14</span>, <span class="dv">6</span>))</span>
@@ -695,7 +702,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We plot the first 6 principal components against each other in <a href="#fig-pca-compare-components">Figure&nbsp;3</a>. Each dot is a sample (phenotype) colored by their broad label of NPD.</p>
-<div class="cell" data-execution_count="36">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
@@ -764,7 +771,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="pca-using-svd" class="level1">
 <h1>PCA using SVD</h1>
 <p>Just to make sure that I understand things correctly, I am redoing the PCA using SVD. It must yield the same results as <code>sklearn PCA</code>. Indeed, it does as shown in <a href="#fig-pca-svd-check">Figure&nbsp;4</a>.</p>
-<div class="cell" data-execution_count="37">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Xcent, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
@@ -805,12 +812,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>the precision matrix (as suggested by David in the project proposal).</li>
 <li>square root of the precision (ad-hoc idea to reduce the weights on each observation)</li>
 </ul>
-<div class="cell" data-execution_count="89">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># W = np.ones(X.shape)</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># W = np.array(prec_df[select_ids]).T</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> np.sqrt(np.array(prec_df[select_ids]).T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="90">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_mean(x, w<span class="op">=</span><span class="va">None</span>, axis<span class="op">=</span><span class="va">None</span>):</span>
@@ -891,14 +898,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Y, explained_variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="91">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>weighted_pcs, explained_variance <span class="op">=</span> weighted_pca_delchambre(Xcent, W, n_components <span class="op">=</span> <span class="dv">20</span>, regularization <span class="op">=</span> <span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>As before, the variance explained by each principal component is shown in <a href="#fig-wpca-variance-explained">Figure&nbsp;5</a></p>
-<div class="cell" data-execution_count="92">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wpca_tot_explained_variance <span class="op">=</span> np.<span class="bu">sum</span>(explained_variance)</span>
@@ -929,7 +936,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We plot the first 6 principal components against each other in <a href="#fig-wpca-compare-components">Figure&nbsp;6</a>. Each dot is a sample (phenotype) colored by their broad label of NPD.</p>
-<div class="cell" data-execution_count="93">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
@@ -994,6 +1001,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="further-reading" class="level1">
+<h1>Further Reading</h1>
+<ul>
+<li><a href="http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/">Comments on PCA by Alex Williams</a></li>
+</ul>
 
 
 </section>
@@ -1301,8 +1314,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../explore/preprocess_npd_gtex_pgc_ieu.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preprocess NPD summary statistics</span>
+      <a href="../explore/robust_pca_nuclear_norm.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Robust PCA for matrix completion</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
