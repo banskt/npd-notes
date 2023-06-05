@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/banskt/npd-notes/index.html</loc>
-    <lastmod>2023-05-31T18:36:47.461Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/banskt/npd-notes/result/index.html</loc>
-    <lastmod>2023-05-31T18:36:48.181Z</lastmod>
-  </url>
-  <url>
-    <loc>https://github.com/banskt/npd-notes/explore/low_rank_approximation_franke_wolfe.html</loc>
-    <lastmod>2023-05-31T18:36:50.066Z</lastmod>
+    <loc>https://github.com/banskt/npd-notes/explore/weighted_pca_delchambre.html</loc>
+    <lastmod>2023-06-05T21:30:10.808Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/index.html</loc>
-    <lastmod>2023-05-31T18:36:50.430Z</lastmod>
+    <lastmod>2023-06-05T21:30:11.553Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/banskt/npd-notes/explore/compare_pc_score_weights_for_different_methods.html</loc>
+    <lastmod>2023-06-05T21:30:12.561Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/robust_pca_nuclear_norm.html</loc>
-    <lastmod>2023-05-31T18:36:51.290Z</lastmod>
+    <lastmod>2023-06-05T21:30:13.373Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/explore/preprocess_npd_gtex_pgc_ieu.html</loc>
-    <lastmod>2023-05-31T18:36:53.062Z</lastmod>
+    <lastmod>2023-06-05T21:30:15.133Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/banskt/npd-notes/explore/weighted_pca_delchambre.html</loc>
-    <lastmod>2023-05-31T18:36:54.982Z</lastmod>
+    <loc>https://github.com/banskt/npd-notes/explore/low_rank_approximation_franke_wolfe.html</loc>
+    <lastmod>2023-06-05T21:30:16.497Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/banskt/npd-notes/result/index.html</loc>
+    <lastmod>2023-06-05T21:30:17.205Z</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/banskt/npd-notes/index.html</loc>
+    <lastmod>2023-06-05T21:30:17.537Z</lastmod>
   </url>
 </urlset>
