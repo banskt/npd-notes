@@ -209,6 +209,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../explore/robust_pca_cross_validation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Robust Pca Cross Validation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../explore/robust_pca_nuclear_norm.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Robust PCA for matrix completion</span></a>
   </div>
@@ -279,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span> Then, the principal components are given by the columns of <span class="math inline">\mathbf{U}\mathbf{S}</span>. The traits are broadly classified into NPD phenotypes. For each “broad phenotype” <span class="math inline">T</span> and principal component <span class="math inline">k</span>, <strong>we define the trait-wise PC score as</strong>, <span class="math display">
 V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </span> Note, the total variance explained by the component is <span class="math inline">\sum_{i}(U_{ik}S_k)^2 = S_k^2</span>.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -299,7 +305,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <section id="data" class="level1">
 <h1>Data</h1>
 <p>Summary statistics data for NPD is collected from PGC, OpenGWAS and GTEx. <a href="https://banskt.github.io/npd-notes/explore/preprocess_npd_gtex_pgc_ieu.html">See previous work</a> for data cleaning and filtering. Our input is the Z-Score matrix for <span class="math inline">N</span> diseases and <span class="math inline">P</span> variants.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"../data"</span></span>
@@ -321,7 +327,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -350,7 +356,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </div>
 </div>
 <p>We perform PCA (using SVD) on the raw input data (mean centered). In <a href="#fig-input-pca-pve">Figure&nbsp;1</a>, we look at the proportion of variance explained by each principal component.</p>
-<div class="cell" data-execution_count="110">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Xcent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
@@ -375,7 +381,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <section id="trait-wise-pc-score" class="level1">
 <h1>Trait-wise PC score</h1>
 <p>We break down the total variance <span class="math inline">V_1</span> explained by the first principal component for each trait. In <a href="#fig-trait-wise-pve-pc1-input-data">Figure&nbsp;2</a>, we show $V_{t1} / <span class="math inline">V_1</span>, and note that the first component explains the variance in SZ and BD.</p>
-<div class="cell" data-execution_count="111">
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">6</span>))</span>
@@ -431,7 +437,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="94">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_traitwise_pc_scores(ax, U, S, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>,</span>
@@ -455,7 +461,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    bottom <span class="op">=</span> np.zeros(<span class="bu">len</span>(pcindices))</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trait, comp_weight <span class="kw">in</span> comp_weights.items():</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        ax.bar(pcindices, comp_weight, width, label<span class="op">=</span>trait, bottom<span class="op">=</span>bottom, color <span class="op">=</span> trait_colors[trait], alpha <span class="op">=</span> alpha)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        ax.bar(pcindices, comp_weight, bar_width, label<span class="op">=</span>trait, bottom<span class="op">=</span>bottom, color <span class="op">=</span> trait_colors[trait], alpha <span class="op">=</span> alpha)</span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        bottom <span class="op">+=</span> comp_weight</span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(pcindices)</span>
@@ -471,7 +477,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </details>
 </div>
 <p>We can do the same for each principal component and show the trait-wise PC-score for each component, as shown in the top panel of <a href="#fig-trait-wise-pca-score-input-data">Figure&nbsp;3</a>. In such representation, we lose the information of the total variance by the component, but it gives an idea of the ability of the component to distinguish different phenotypes. In the bottom panel, we retain the information of the total variance explained (by avoiding the scaling to 1.0) but it is difficult to see the utility of the components with lower variance.</p>
-<div class="cell" data-execution_count="112">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
@@ -499,14 +505,14 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <section id="experiment" class="level1">
 <h1>Experiment</h1>
 <p>Here, we perform the low-rank approximation using two methods: - Robust PCA - Nuclear Norm Matrix Factorization using Frank-Wolfe Algorithm</p>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> RobustPCA(lmb<span class="op">=</span><span class="fl">0.0085</span>, max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> RobustPCA(lmb<span class="op">=</span><span class="fl">0.01</span>, max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>L_rpca, M_rpca <span class="op">=</span> rpca.fit(Xcent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="97">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>r_opt <span class="op">=</span> <span class="fl">4096.</span></span>
@@ -514,7 +520,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>M_cvopt <span class="op">=</span> Xcent <span class="op">-</span> L_cvopt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="100">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>L_rpca_cent <span class="op">=</span> L_rpca <span class="op">-</span> np.mean(L_rpca, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
@@ -528,16 +534,16 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </details>
 </div>
 <p>In <a href="#fig-trait-wise-pca-score-low-rank">Figure&nbsp;4</a>, we compare the trait-wise PC scores obtained from the two methods. Note that, I am not showing the first component because the first component is very similar for the input data and the low-rank approximations. Neglecting the first component also allows me to look at the unscaled component-wise PC scores without losing too much information about the components with lower eigenvalues.</p>
-<div class="cell" data-execution_count="113">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">20</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">20</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
@@ -554,6 +560,36 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <figure class="figure">
 <p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-trait-wise-pca-score-low-rank-output-1.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Principal Components"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-trait-wise-pca-score-low-rank-proportion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-trait-wise-pca-score-low-rank-proportion-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
 </figure>
 </div>
 </div>
