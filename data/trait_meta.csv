@@ -79,3 +79,25 @@ UKB_20127_Neuroticism_score,NA,Neuroticism UKB,Other psych
 UKB_G40_Diagnoses_main_ICD10_G40_Epilepsy,NA,Epilepsy UKB,Epilepsy
 UKB_G43_Diagnoses_main_ICD10_G43_Migraine,NA,Migraine UKB (diag),Migraine
 ieu-b-5070,schizophrenia,SZ PGC-SB-2023,SZ
+GPC-NEO-NEUROTICISM,Neuroticism,Neuroticism,Other psych
+ieu-a-1009,Subjective well being,SSGAC Subjective Well Being,Other psych
+ieu-a-1018,Subjective well being,SSGAC Subjective Well Being,Other psych
+ieu-a-1019,Migraine in bipolar disorder,Migraine in bipolar disorder,BD
+ieu-a-1029,Internalizing problems,EAGLE Internalizing problems,Other psych
+ieu-a-1061,G speed factor,Luciano,Cognition
+ieu-a-1062,Symbol search,Luciano,Cognition
+ieu-a-1063,8-choice reaction time,Luciano,Cognition
+ieu-a-1064,2-choice reaction time,Luciano,Cognition
+ieu-a-1065,Inspection time,Luciano,Cognition
+ieu-a-1066,Simple reaction time,Luciano,Cognition
+ieu-a-1067,Digit symbol,Luciano,Cognition
+ieu-a-1068,4-choice reaction time,Luciano,Cognition
+ieu-a-45,Anorexia nervosa,Anorexia nervosa,Other psych
+ieu-a-298,Alzheimer's disease,Alzheimer's disease,Neurodegenerative
+ieu-a-808,Bipolar disorder,Bipolar disorder,BD
+ieu-a-810,Schizophrenia,Schizophrenia,SZ
+ieu-a-812,Parkinson's disease,Parkinson's disease,Neurodegenerative
+ieu-a-818,Parkinson's disease,Parkinson's disease,Neurodegenerative
+ieu-a-824,Alzheimer's disease,Alzheimer's disease,Neurodegenerative
+ieu-b-43,frontotemporal dementia (TDP subtype),frontotemporal dementia (TDP subtype),Other psych
+ILAE_Genetic_generalised_epilepsy,ILAE Epilepsy,ILAE Epilepsy,Epilepsy
