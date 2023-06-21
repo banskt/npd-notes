@@ -221,6 +221,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../explore/Untitled.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Untitled</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../explore/weighted_pca_delchambre.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PCA of NPD summary statistics</span></a>
   </div>
@@ -309,50 +315,37 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"../data"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta_df_filename  <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prec_df_filename  <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/prec_df.pkl"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trait_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/trait_meta.csv"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta_df_filename   <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>prec_df_filename   <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/prec_df.pkl"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>se_df_filename     <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/se_df.pkl"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>zscore_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/zscore_df.pkl"</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">Data Frames for beta, precision, standard error and zscore.</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>beta_df <span class="op">=</span> pd.read_pickle(beta_df_filename)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>prec_df <span class="op">=</span> pd.read_pickle(prec_df_filename)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>se_df <span class="op">=</span> prec_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="dv">1</span> <span class="op">/</span> np.sqrt(x)).replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> beta_df <span class="op">/</span> se_df</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> zscore_df.replace(np.nan, <span class="dv">0</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>beta_df   <span class="op">=</span> pd.read_pickle(beta_df_filename)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>prec_df   <span class="op">=</span> pd.read_pickle(prec_df_filename)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>se_df     <span class="op">=</span> pd.read_pickle(se_df_filename)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_pickle(zscore_df_filename)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(trait_df_filename)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/trait_meta.csv"</span>)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-execution_count="3">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">Filter samples using mean of SE and std of beta</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mean_se <span class="op">=</span> prec_df.<span class="bu">apply</span>(<span class="kw">lambda</span> x : <span class="dv">1</span> <span class="op">/</span> np.sqrt(x)).replace([np.inf, <span class="op">-</span>np.inf], np.nan).mean(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mean_se <span class="op">=</span> pd.DataFrame(mean_se).set_axis([<span class="st">"mean_se"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>beta_std <span class="op">=</span> beta_df.std(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>beta_std <span class="op">=</span> pd.DataFrame(beta_std).set_axis([<span class="st">"beta_std"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>error_df <span class="op">=</span> pd.concat([mean_se, beta_std], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> error_df.query(<span class="st">"mean_se &lt;= 0.2 and beta_std &lt;= 0.2"</span>).index</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df[select_ids]).T</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>colmeans <span class="op">=</span> np.mean(X, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Xcent <span class="op">=</span> X <span class="op">-</span> colmeans</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"After filtering, we have </span><span class="sc">{</span>Xcent<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> samples (phenotypes) and </span><span class="sc">{</span>Xcent<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> features (variants)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> beta_df.columns</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df.replace(np.nan, <span class="dv">0</span>)[select_ids]).T</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>colmeans <span class="op">=</span> np.mean(X, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Xcent <span class="op">=</span> X <span class="op">-</span> colmeans</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"We have </span><span class="sc">{</span>Xcent<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> samples (phenotypes) and </span><span class="sc">{</span>Xcent<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> features (variants)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>After filtering, we have 69 samples (phenotypes) and 8403 features (variants)</code></pre>
+<pre><code>We have 69 samples (phenotypes) and 10068 features (variants)</code></pre>
 </div>
 </div>
 <p>We perform PCA (using SVD) on the raw input data (mean centered). In <a href="#fig-input-pca-pve">Figure&nbsp;1</a>, we look at the proportion of variance explained by each principal component.</p>
@@ -396,7 +389,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> [np.array([i <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> label]) <span class="cf">for</span> label <span class="kw">in</span> unique_labels]</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>trait_pcomps  <span class="op">=</span> [np.square(pcomp[idx, pcidx]) <span class="op">/</span> tot_variance <span class="cf">for</span> idx <span class="kw">in</span> trait_indices]</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>trait_colors  <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(unique_labels, (mpl_stylesheet.banskt_colors() <span class="op">+</span> mpl_stylesheet.kelly_colors())[:ntrait])}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>trait_colors  <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(unique_labels, (mpl_stylesheet.kelly_colors())[:ntrait])}</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rand_jitter(n, d <span class="op">=</span> <span class="fl">0.1</span>):</span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.random.randn(n) <span class="op">*</span> d</span>
@@ -437,7 +430,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_traitwise_pc_scores(ax, U, S, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>,</span>
@@ -477,7 +470,7 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </details>
 </div>
 <p>We can do the same for each principal component and show the trait-wise PC-score for each component, as shown in the top panel of <a href="#fig-trait-wise-pca-score-input-data">Figure&nbsp;3</a>. In such representation, we lose the information of the total variance by the component, but it gives an idea of the ability of the component to distinguish different phenotypes. In the bottom panel, we retain the information of the total variance explained (by avoiding the scaling to 1.0) but it is difficult to see the utility of the components with lower variance.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
@@ -501,97 +494,350 @@ V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </div>
 </div>
 </div>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>idx1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>idx2 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>svd_pc1 <span class="op">=</span> pcomp[:, idx1]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>svd_pc2 <span class="op">=</span> pcomp[:, idx2]</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label <span class="kw">in</span> unique_labels:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> np.array([i <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> label])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(svd_pc1[idx], svd_pc2[idx], s <span class="op">=</span> <span class="dv">100</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, label <span class="op">=</span> label)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax1.legend(bbox_to_anchor<span class="op">=</span>(<span class="fl">1.04</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Component </span><span class="sc">{</span>idx1<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Component </span><span class="sc">{</span>idx2<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-data-pca-components" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-data-pca-components-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Comparison of the first two principal components of input matrix</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>subplot_h <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>nrow <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ncol <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>figw <span class="op">=</span> ncol <span class="op">*</span> subplot_h <span class="op">+</span> (ncol <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.2</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>figh <span class="op">=</span> nrow <span class="op">*</span> subplot_h <span class="op">+</span> (nrow <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.5</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>bgcolor <span class="op">=</span> <span class="st">'#F0F0F0'</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot_principal_components(ax, i, j, comp):</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    pc1 <span class="op">=</span> comp[:, j]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    pc2 <span class="op">=</span> comp[:, i]</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label <span class="kw">in</span> unique_labels:</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([k <span class="cf">for</span> k, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> label])</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        ax.scatter(pc1[idx], pc2[idx], s <span class="op">=</span> <span class="dv">50</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, label <span class="op">=</span> label)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (figw, figh))</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>axmain <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, nrow <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ncol):</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(nrow, ncol, ((i <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> ncol) <span class="op">+</span> j <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                       labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>: ax.set_ylabel(<span class="ss">f"PC</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> nrow: ax.set_xlabel(<span class="ss">f"PC</span><span class="sc">{</span>j <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> j:</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_facecolor(bgcolor)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.3</span>)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>            make_plot_principal_components(ax, i, j, pcomp)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>                border.set_color(bgcolor)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>                border.set_visible(<span class="va">False</span>)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>            mhandles, mlabels <span class="op">=</span> ax.get_legend_handles_labels()</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>axmain.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>                   labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side, border <span class="kw">in</span> axmain.spines.items():</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    border.set_visible(<span class="va">False</span>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>axmain.legend(handles <span class="op">=</span> mhandles, labels <span class="op">=</span> mlabels, loc <span class="op">=</span> <span class="st">'upper right'</span>, bbox_to_anchor <span class="op">=</span> (<span class="fl">0.9</span>, <span class="fl">0.9</span>))</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-multiple-pcs-input-data" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-multiple-pcs-input-data-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Comparison of the first 6 principal components of the input matrix</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="experiment" class="level1">
 <h1>Experiment</h1>
 <p>Here, we perform the low-rank approximation using two methods: - Robust PCA - Nuclear Norm Matrix Factorization using Frank-Wolfe Algorithm</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="54">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> RobustPCA(lmb<span class="op">=</span><span class="fl">0.01</span>, max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>L_rpca, M_rpca <span class="op">=</span> rpca.fit(Xcent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> RobustPCA(lmb<span class="op">=</span><span class="fl">0.0095</span>, max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>L_rpca, M_rpca <span class="op">=</span> rpca.fit(Xcent)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(L_rpca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre><code>24</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>r_opt <span class="op">=</span> <span class="fl">4096.</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>L_cvopt, _, _ <span class="op">=</span> frank_wolfe_minimize(Xcent, np.ones(Xcent.shape), r_opt)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>M_cvopt <span class="op">=</span> Xcent <span class="op">-</span> L_cvopt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="55">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>r_opt <span class="op">=</span> <span class="fl">4096.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>L_cvopt, _, _ <span class="op">=</span> frank_wolfe_minimize(Xcent, np.ones(Xcent.shape), r_opt, max_iter <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>M_cvopt <span class="op">=</span> Xcent <span class="op">-</span> L_cvopt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X_rpca <span class="op">=</span> L_rpca <span class="op">+</span> M_rpca</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>L_rpca_cent <span class="op">=</span> L_rpca <span class="op">-</span> np.mean(L_rpca, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>M_rpca_cent <span class="op">=</span> M_rpca <span class="op">-</span> np.mean(M_rpca, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>X_rpca_cent <span class="op">=</span> X_rpca <span class="op">-</span> np.mean(X_rpca, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(L_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>L_cvopt_cent <span class="op">=</span> L_cvopt <span class="op">-</span> np.mean(L_cvopt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>M_cvopt_cent <span class="op">=</span> M_cvopt <span class="op">-</span> np.mean(M_cvopt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>U_cvopt, S_cvopt, Vt_cvopt <span class="op">=</span> np.linalg.svd(L_cvopt_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>pc_cvopt <span class="op">=</span> U_cvopt <span class="op">@</span> np.diag(S_cvopt)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>pc_rpca  <span class="op">=</span> U_rpca  <span class="op">@</span> np.diag(S_rpca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>L_rpca_cent <span class="op">=</span> L_rpca <span class="op">-</span> np.mean(L_rpca, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(L_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>L_cvopt_cent <span class="op">=</span> L_cvopt <span class="op">-</span> np.mean(L_cvopt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>U_cvopt, S_cvopt, Vt_cvopt <span class="op">=</span> np.linalg.svd(L_cvopt_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>M_cvopt_cent <span class="op">=</span> M_cvopt <span class="op">-</span> np.mean(M_cvopt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>U_cvopt2, S_cvopt2, Vt_cvopt2 <span class="op">=</span> np.linalg.svd(M_cvopt_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>subplot_h <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>nrow <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ncol <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>figw <span class="op">=</span> ncol <span class="op">*</span> subplot_h <span class="op">+</span> (ncol <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.2</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>figh <span class="op">=</span> nrow <span class="op">*</span> subplot_h <span class="op">+</span> (nrow <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.5</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>bgcolor <span class="op">=</span> <span class="st">'#F0F0F0'</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_plot_principal_components(ax, i, j, comp):</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    pc1 <span class="op">=</span> comp[:, j]</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    pc2 <span class="op">=</span> comp[:, i]</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label <span class="kw">in</span> unique_labels:</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([k <span class="cf">for</span> k, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> label])</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        ax.scatter(pc1[idx], pc2[idx], s <span class="op">=</span> <span class="dv">50</span>, alpha <span class="op">=</span> <span class="fl">0.7</span>, label <span class="op">=</span> label)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (figw, figh))</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>axmain <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, nrow <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ncol):</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(nrow, ncol, ((i <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> ncol) <span class="op">+</span> j <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                       labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>: ax.set_ylabel(<span class="ss">f"PC</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> nrow: ax.set_xlabel(<span class="ss">f"PC</span><span class="sc">{</span>j <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> j:</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_facecolor(bgcolor)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.3</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>            make_plot_principal_components(ax, i, j, pc_cvopt)</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                border.set_color(bgcolor)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.</span>)</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>                border.set_visible(<span class="va">False</span>)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>            mhandles, mlabels <span class="op">=</span> ax.get_legend_handles_labels()</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>axmain.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>                   labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side, border <span class="kw">in</span> axmain.spines.items():</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    border.set_visible(<span class="va">False</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>axmain.legend(handles <span class="op">=</span> mhandles, labels <span class="op">=</span> mlabels, loc <span class="op">=</span> <span class="st">'upper right'</span>, bbox_to_anchor <span class="op">=</span> (<span class="fl">0.9</span>, <span class="fl">0.9</span>))</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-display">
+<div id="fig-multiple-pcs-low-rank-approx" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-multiple-pcs-low-rank-approx-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Comparison of the first 6 principal components of the low rank approximation</figcaption>
+</figure>
 </div>
-<p>In <a href="#fig-trait-wise-pca-score-low-rank">Figure&nbsp;4</a>, we compare the trait-wise PC scores obtained from the two methods. Note that, I am not showing the first component because the first component is very similar for the input data and the low-rank approximations. Neglecting the first component also allows me to look at the unscaled component-wise PC scores without losing too much information about the components with lower eigenvalues.</p>
-<div class="cell" data-execution_count="14">
+</div>
+</div>
+<div class="cell" data-execution_count="56">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Principal Components"</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>subplot_h <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>nrow <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ncol <span class="op">=</span> plot_ncomp <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>figw <span class="op">=</span> ncol <span class="op">*</span> subplot_h <span class="op">+</span> (ncol <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.2</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>figh <span class="op">=</span> nrow <span class="op">*</span> subplot_h <span class="op">+</span> (nrow <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">0.3</span> <span class="op">+</span> <span class="fl">1.5</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>bgcolor <span class="op">=</span> <span class="st">'#F0F0F0'</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (figw, figh))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>axmain <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, nrow <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ncol):</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> fig.add_subplot(nrow, ncol, ((i <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> ncol) <span class="op">+</span> j <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                       labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>: ax.set_ylabel(<span class="ss">f"PC</span><span class="sc">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> nrow: ax.set_xlabel(<span class="ss">f"PC</span><span class="sc">{</span>j <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">&gt;</span> j:</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_facecolor(bgcolor)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.3</span>)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>            make_plot_principal_components(ax, i, j, pc_rpca)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                border.set_color(bgcolor)</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>            ax.patch.set_alpha(<span class="fl">0.</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                border.set_visible(<span class="va">False</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">1</span> <span class="kw">and</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>            mhandles, mlabels <span class="op">=</span> ax.get_legend_handles_labels()</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>axmain.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>                   labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side, border <span class="kw">in</span> axmain.spines.items():</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    border.set_visible(<span class="va">False</span>)</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>axmain.legend(handles <span class="op">=</span> mhandles, labels <span class="op">=</span> mlabels, loc <span class="op">=</span> <span class="st">'upper right'</span>, bbox_to_anchor <span class="op">=</span> (<span class="fl">0.9</span>, <span class="fl">0.9</span>))</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-multiple-pcs-rpca-low-rank" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-multiple-pcs-rpca-low-rank-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: Comparison of the first 6 principal components of the Robust PCA low rank</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-trait-wise-pca-score-low-rank">Figure&nbsp;8</a>, we compare the trait-wise PC scores obtained from the two methods. Note that, I am not showing the first component because the first component is very similar for the input data and the low-rank approximations. Neglecting the first component also allows me to look at the unscaled component-wise PC scores without losing too much information about the components with lower eigenvalues.</p>
+<div class="cell" data-execution_count="57">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Principal Components"</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-trait-wise-pca-score-low-rank" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-trait-wise-pca-score-low-rank-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;8: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="58">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Principal Components"</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">211</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">212</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax1, U_cvopt, S_cvopt, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_traitwise_pc_scores(ax2, U_cvopt2, S_cvopt2, unique_labels, trait_colors, max_idx = 10, use_proportion = False)</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plot_traitwise_pc_scores(ax2, U_rpca, S_rpca, unique_labels, trait_colors, min_idx <span class="op">=</span> <span class="dv">1</span>, max_idx <span class="op">=</span> <span class="dv">9</span>, use_proportion <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNWMF"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Robust PCA"</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Principal Components"</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Trait-wise PC score"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-trait-wise-pca-score-low-rank-proportion" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="compare_pc_score_weights_for_different_methods_files/figure-html/fig-trait-wise-pca-score-low-rank-proportion-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;9: Trait-wise PC scores for the low rank approximation of the input matric</figcaption>
 </figure>
 </div>
+</div>
+</div>
+<div class="cell" data-execution_count="39">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(Xcent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>68</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(L_rpca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>18</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="41">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(L_cvopt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>66</code></pre>
 </div>
 </div>
 
