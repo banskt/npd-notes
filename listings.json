@@ -1,0 +1,28 @@
+[
+  {
+    "listing": "/notebooks/index.html",
+    "items": [
+      "/notebooks/explore/2023-07-05-simulation-setup.html",
+      "/notebooks/explore/2023-07-01-how-to-simulate.html",
+      "/notebooks/explore/2023-06-23-external-validation-metrics.html",
+      "/notebooks/explore/2023-06-05-broad-trait-clusters.html",
+      "/notebooks/explore/2023-05-23-frank-wolfe.html",
+      "/notebooks/explore/2023-05-16-pca-sumstat.html",
+      "/notebooks/explore/2023-05-16-robustpca.html",
+      "/notebooks/explore/2023-05-12-preprocess.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/explore/index.html",
+    "items": [
+      "/notebooks/explore/2023-07-05-simulation-setup.html",
+      "/notebooks/explore/2023-07-01-how-to-simulate.html",
+      "/notebooks/explore/2023-06-23-external-validation-metrics.html",
+      "/notebooks/explore/2023-06-05-broad-trait-clusters.html",
+      "/notebooks/explore/2023-05-23-frank-wolfe.html",
+      "/notebooks/explore/2023-05-16-pca-sumstat.html",
+      "/notebooks/explore/2023-05-16-robustpca.html",
+      "/notebooks/explore/2023-05-12-preprocess.html"
+    ]
+  }
+]
