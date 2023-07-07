@@ -2,11 +2,16 @@
 title: "Resources"
 ---
 
-# Documents
+## Documents
 
   - [GWAS on subphenotypes](https://docs.google.com/document/d/1xVYOUeYXgozYNj0GRURMMF_EZdJKBtXO0ZRjRvZOVS4/edit?usp=sharing), 
   curated by Shane Crinion and Niamh Mullins.
 
-# Github
+## Github
 
   - [Pilot NPD Sumstat Project](https://github.com/daklab/npd_sumstats) by David Knowles.
+
+## Online Articles
+
+  - [Tips for formatting GWAS summary statistics](https://huwenboshi.github.io/data%20management/2017/11/23/tips-for-formatting-gwas-summary-stats.html).
+  - [Matti Pirinen's course on GWAS](https://www.mv.helsinki.fi/home/mjxpirin/GWAS_course/).
