@@ -201,6 +201,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    We develop a generative model to create a feature matrix with realistic ground truth to benchmark different methods.
+  </div>
+</div>
 
 </header>
 
@@ -511,7 +517,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <h3 class="anchored" data-anchor-id="approximate-methods-to-obtain-loadings-decomposition">Approximate methods to obtain loadings decomposition</h3>
 <p>Enforcing orthogonality on the loading will naturally overshrink the similarity and enhance the distinctness. Still, we can reduce the dimension of <code>L_full</code> using truncated SVD and use the projection of <code>L_full</code> on the first <span class="math inline">K</span> components of the right singular vector.</p>
 <p>Another option is to use a QR decomposition to obtain orthogonal columns, scaled by some approximate eigenvalues: 1. Transpose <code>L_full</code> and use QR decomposition. 2. <span class="math inline">\mathbf{s}_{qr} \leftarrow</span> eigenvalues (diagonal of <span class="math inline">\mathbf{R}</span>). 3. Define <span class="math inline">\mathbf{s}'</span> such that <span class="math inline">s'_i = 1</span> if <span class="math inline">s_{qr} &gt; 0</span> and <span class="math inline">s'_i = -1</span> if <span class="math inline">s_{qr} &lt; 0</span>. 4. Choose K orthogonal vectors from <span class="math inline">\mathbf{Q}</span> multiplied by <span class="math inline">\mathrm{diag}(\mathbf{s}')</span>. This does not work numerically, as shown below in <a href="#fig-loadings-decomposition">Figure&nbsp;3</a></p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> orthogonalize_qr(X):</span>
@@ -601,7 +607,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </tr>
 </tbody>
 </table>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed noise for every SNP</span></span>
@@ -618,7 +624,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </details>
 </div>
 <p>We obtain the observed <span class="math inline">\mathbf{Y}</span> by adding noise and mean to <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span>. The covariance of <span class="math inline">\mathbf{Y}</span> is shown in the left panel of <strong>?@fig-Y-visual</strong>. In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}\mathbf{F}</span></p>
-<div class="cell" data-execution_count="45">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">16</span>, <span class="dv">8</span>))</span>
@@ -646,7 +652,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </section>
 <section id="plot-distribution-of-each-feature" class="level1">
 <h1>Plot distribution of each feature</h1>
-<div class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
@@ -655,8 +661,8 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(Y.shape[<span class="dv">1</span>]):</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> Y_std[:, i]</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    outlier_mask <span class="op">=</span> mpy_histogram.iqr_outlier(x, axis <span class="op">=</span> <span class="dv">0</span>, bar <span class="op">=</span> <span class="dv">5</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> np.square(x[<span class="op">~</span>outlier_mask])</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    xmin, xmax, bins, xbin <span class="op">=</span> mpy_histogram.get_bins(data, <span class="dv">100</span>, <span class="fl">1e-5</span>, <span class="va">None</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> x[<span class="op">~</span>outlier_mask]</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    xmin, xmax, bins, xbin <span class="op">=</span> mpy_histogram.get_bins(data, <span class="dv">100</span>, <span class="va">None</span>, <span class="va">None</span>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    curve <span class="op">=</span> mpy_histogram.get_density(xbin, data)</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    ax1.plot(xbin, curve)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -673,15 +679,15 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </section>
 <section id="can-svd-decomposition-capture-the-signal" class="level1">
 <h1>Can SVD decomposition capture the signal?</h1>
-<p>In <strong>?@fig-svd-components</strong>, we look at the separation of the underlying features using - projection of <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span> on <span class="math inline">\mathbf{F}</span> (left panel). - projection of <span class="math inline">\mathbf{Y}</span> on <span class="math inline">\mathbf{F}</span> (center panel). - principal components obtained from SVD of <span class="math inline">\mathbf{Y}</span> (right panel).</p>
-<div class="cell" data-execution_count="30">
+<p>In <a href="#fig-svd-components">Figure&nbsp;6</a>, we look at the separation of the underlying features using - projection of <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span> on <span class="math inline">\mathbf{F}</span> (left panel). - projection of <span class="math inline">\mathbf{Y}</span> on <span class="math inline">\mathbf{F}</span> (center panel). - principal components obtained from SVD of <span class="math inline">\mathbf{Y}</span> (right panel).</p>
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Y_std, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pcomps_svd <span class="op">=</span> U[:, :nfctr] <span class="op">@</span> np.diag(S[:nfctr])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="47">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">6</span>))</span>
@@ -707,15 +713,15 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-svd" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-svd-components" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-svd-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-svd-components-output-1.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;6: Separation of components in different spaces</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="36">
+<div class="cell" data-execution_count="18">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Ypred_svd <span class="op">=</span> pcomps_svd <span class="op">@</span> Vt[:nfctr, :]</span>
@@ -723,17 +729,8 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(np.<span class="bu">sum</span>(np.square(Ypred_svd <span class="op">-</span> Y_true) <span class="op">/</span> np.square(Y_true)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="36">
-<pre><code>618876.8766061774</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="42">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(np.<span class="bu">sum</span>(np.square(Y_true_std <span class="op">-</span> Y_true) <span class="op">/</span> np.square(Y_true)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="42">
-<pre><code>3872045.479113486</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>230973.68978816015</code></pre>
 </div>
 </div>
 

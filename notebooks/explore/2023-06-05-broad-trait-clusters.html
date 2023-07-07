@@ -9,7 +9,7 @@
 <meta name="author" content="Saikat Banerjee">
 <meta name="dcterms.date" content="2023-06-05">
 
-<title>NPD Network - Trait-wise principal components after dimensionality reduction</title>
+<title>NPD Network - Can the low rank approximation capture the distinct GWAS phenotypes?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -173,7 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Trait-wise principal components after dimensionality reduction</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Can the low rank approximation capture the distinct GWAS phenotypes?</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -197,15 +197,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    We label the GWAS phenotypes to visualize the separation of the principal components of the low rank approximation of the input matrix. For low rank approximation, we use RobustPCA and Nuclear Norm regularization, thus comparing the two methods.
+  </div>
+</div>
 
 </header>
 
 <section id="about" class="level1">
 <h1>About</h1>
-<p>Here, I try to qualitatively compare the different dimensionality reduction methods in terms of their ability to distinguish the different traits. Suppose <span class="math inline">\mathbf{X}</span> is the <span class="math inline">N \times P</span> input matrix, with <span class="math inline">N</span> traits and <span class="math inline">P</span> associated variants. The dimensionality reduction methods decompose the input matrix into a sparse low rank component, <span class="math inline">\mathbf{L}</span> and a background <span class="math inline">\mathbf{M}</span>, <span class="math display">
-\mathbf{X} \sim \mathbf{L} + \mathbf{M}
-</span> We perform PCA on the low rank matrix <span class="math inline">\mathbf{L}</span> using the SVD, <span class="math display">
-\mathbf{L} = \mathbf{U}\mathbf{S}\mathbf{V}^{\intercal}
+<p>Here, I try to qualitatively compare the different dimensionality reduction methods in terms of their ability to distinguish the different traits. Suppose <span class="math inline">\mathbf{X}</span> is the <span class="math inline">N \times P</span> input matrix, with <span class="math inline">N</span> traits and <span class="math inline">P</span> associated variants. The dimensionality reduction methods decompose the input matrix into a sparse low rank component, <span class="math inline">\mathbf{L}</span> and a background <span class="math inline">\mathbf{E}</span>, <span class="math display">
+\mathbf{Y} \sim \mathbf{X} + \mathbf{E}
+</span> We perform PCA on the low rank matrix <span class="math inline">\mathbf{X}</span> using the SVD, <span class="math display">
+\mathbf{X} = \mathbf{U}\mathbf{S}\mathbf{V}^{\intercal}
 </span> Then, the principal components are given by the columns of <span class="math inline">\mathbf{U}\mathbf{S}</span>. The traits are broadly classified into NPD phenotypes. For each “broad phenotype” <span class="math inline">T</span> and principal component <span class="math inline">k</span>, <strong>we define the trait-wise PC score as</strong>, <span class="math display">
 V_{tk} = \sum_{t \in T}(U_{tk}S_k)^2
 </span> Note, the total variance explained by the component is <span class="math inline">\sum_{i}(U_{ik}S_k)^2 = S_k^2</span>.</p>

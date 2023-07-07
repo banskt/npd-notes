@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    We read the summary statistics for association of variants with NPD phenotypes in many GWAS and perform some basic filtering to obtain the data matrix for exploring the different methods.
+  </div>
+</div>
 
 </header>
 
@@ -1659,7 +1665,7 @@ Phenotypes removed:
 <section id="remove-studies-with-unreliable-z-scores" class="level1">
 <h1>Remove studies with unreliable z-scores</h1>
 <p>To eliminate unreliable z-scores, we make sure that the median of z-scores is less than 0.2</p>
-<div class="cell" data-execution_count="67">
+<div class="cell" data-execution_count="34">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>median_zscore <span class="op">=</span> zscore_df_sub_lowse.median(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>).<span class="bu">abs</span>()</span>
@@ -1748,18 +1754,19 @@ Phenotypes removed:
 <span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> zscore_df_sub_lowse_zchi2[pid].values</span>
 <span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    x_dropna <span class="op">=</span> x[<span class="op">~</span>np.isnan(x)]</span>
 <span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    outlier_mask <span class="op">=</span> iqr_outlier(x_dropna, axis <span class="op">=</span> <span class="dv">0</span>, bar <span class="op">=</span> <span class="dv">5</span>)</span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> np.square(x_dropna[<span class="op">~</span>outlier_mask])</span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    xmin, xmax, bins, xbin <span class="op">=</span> get_bins(data, <span class="dv">100</span>, <span class="fl">1e-5</span>, <span class="va">None</span>)</span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    curve <span class="op">=</span> get_density(xbin, data)</span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print (pid, xmax)</span></span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xmax <span class="op">&gt;=</span> <span class="dv">1000</span>:</span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (pid, xmax)</span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>        remove_columns.append(pid)</span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>        ax1.plot(xbin, curve, label <span class="op">=</span> pid)</span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co">#ax1.legend()</span></span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data = np.square(x_dropna[~outlier_mask])</span></span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> x_dropna[<span class="op">~</span>outlier_mask]</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    xmin, xmax, bins, xbin <span class="op">=</span> get_bins(data, <span class="dv">100</span>, <span class="va">None</span>, <span class="va">None</span>)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    curve <span class="op">=</span> get_density(xbin, data)</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print (pid, xmax)</span></span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> xmax <span class="op">&gt;=</span> <span class="dv">1000</span>:</span>
+<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (pid, xmax)</span>
+<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>        remove_columns.append(pid)</span>
+<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>        ax1.plot(xbin, curve, label <span class="op">=</span> pid)</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="co">#ax1.legend()</span></span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-zscore-distribution" class="quarto-figure quarto-figure-center anchored">
@@ -1773,7 +1780,7 @@ Phenotypes removed:
 </section>
 <section id="flip-signs" class="level1">
 <h1>Flip Signs</h1>
-<div class="cell" data-execution_count="68">
+<div class="cell" data-execution_count="37">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>to_flip <span class="op">=</span> [</span>
@@ -1809,7 +1816,7 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </section>
 <section id="save-pickle" class="level1">
 <h1>Save Pickle</h1>
-<div class="cell" data-execution_count="69">
+<div class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>beta_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>prec_df_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/prec_df.pkl"</span></span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>se_df_filename   <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/se_df.pkl"</span></span>
@@ -1819,12 +1826,12 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 <span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>se_df_sub_lowse_zchi2.to_pickle(se_df_filename)</span>
 <span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>zscore_df_sub_lowse_zchi2.to_pickle(zscore_df_filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="60">
+<div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>zscore_df_sub_lowse_zchi2.columns.to_list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="60">
+<div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>['AD_sumstats_Jansenetal_2019sept.txt.gz',
  'CNCR_Insomnia_all',
  'GPC-NEO-NEUROTICISM',
