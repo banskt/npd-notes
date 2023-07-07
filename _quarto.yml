@@ -7,26 +7,28 @@ website:
     background: "#C8635A"
     search: true
     left:
-      - text: "Explore"
-        file: explore/index.qmd
-      - text: "Results"
-        file: result/index.qmd
+      - text: "Notebooks"
+        file: notebooks/index.qmd
+      - text: "Resources"
+        file: resources/index.qmd
+      - text: "Reference"
+        file: reference/index.qmd
 
   sidebar:
-    - title: "Explore"
+    - title: "Notebooks"
       style: "docked"
       search: true
       background: light
-      collapse-level: 1
+      collapse-level: 2
       contents: 
-        - explore/index.qmd
-        - section: "Notebooks"
+        - notebooks/index.qmd
+        - section: "Subcategory"
           contents:
-            - auto: explore/*.ipynb
+            - notebooks/explore/index.qmd
 #
-    - title: "Results"
+    - title: "Reference"
       contents:
-        - result/index.qmd
+        - reference/index.qmd
 #
   page-navigation: true
   repo-url: https://github.com/banskt/nygc-notes

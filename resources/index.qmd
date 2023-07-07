@@ -1,0 +1,12 @@
+---
+title: "Resources"
+---
+
+# Documents
+
+  - [GWAS on subphenotypes](https://docs.google.com/document/d/1xVYOUeYXgozYNj0GRURMMF_EZdJKBtXO0ZRjRvZOVS4/edit?usp=sharing), 
+  curated by Shane Crinion and Niamh Mullins.
+
+# Github
+
+  - [Pilot NPD Sumstat Project](https://github.com/daklab/npd_sumstats) by David Knowles.

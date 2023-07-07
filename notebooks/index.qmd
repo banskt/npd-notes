@@ -1,0 +1,12 @@
+---
+title: "Jupyter Notebooks"
+listing:
+    contents: "*/20[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-*.ipynb"
+    type: table
+    sort: "date desc"
+    fields: [date, title]
+    date-format: "YY-MM-DD"
+---
+
+This is a collection of all Jupyter notebooks for this project.
+It may be easier to navigate through the subcategories of the navigation.
