@@ -30,6 +30,11 @@ website:
       contents:
         - reference/index.qmd
 #
+    - title: "Meetings"
+      contents:
+        - meetings/index.qmd
+        - auto: meetings/*
+#
   page-navigation: true
   repo-url: https://github.com/banskt/nygc-notes
   repo-actions: [edit, issue]

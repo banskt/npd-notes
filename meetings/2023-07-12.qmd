@@ -1,0 +1,26 @@
+---
+title: 2023-07-12
+---
+
+I presented a high level summary of the methods we are developing. 
+
+Neuropsychiatric disorders (NPD) are complex, heterogeneous disorders. 
+Matrix factorization is a method that has been used to identify the shared and distinct factors of NPDs.
+Truncated SVD and genomic structural equation modeling (SEM) has been used earlier for multi-phenotype analysis.
+We are exploring different convex methods to obtain a low rank approximation of the input matrix before doing a PCA.
+Convex methods are reproducible.
+Currently, we are looking at 4 different methods for nuclear norm regularization to obtain the low rank approximation.
+We expect the low rank approximation will provide a more accurate estimate of the SNP's true effect on a phenotype, cell type or other biological trait.
+
+As of now, we hope to use the z-score and standard error for our model. 
+GWAS data does not have to be limited to only patients with a diagnosis of BD, MDD or SZ 
+as summary statistics from any phenotype will be modeled appropriately.
+
+Current main things to consider in regards to the model are:
+  - What is the normalisation method used in each of the GWAS summary statistics?
+  - Is there sample overlap between the studies?
+
+Shane will follow-up with:
+  - Researching the normalisation method used in the selected studies.
+  - Researching the cohorts used / sample overlap between studies.
+
