@@ -9,6 +9,8 @@ website:
     left:
       - text: "Notebooks"
         file: notebooks/index.qmd
+      - text: "Meetings"
+        file: meetings/index.qmd
       - text: "Resources"
         file: resources/index.qmd
       - text: "Reference"
@@ -25,10 +27,6 @@ website:
         - section: "Subcategory"
           contents:
             - notebooks/explore/index.qmd
-#
-    - title: "Reference"
-      contents:
-        - reference/index.qmd
 #
     - title: "Meetings"
       contents:

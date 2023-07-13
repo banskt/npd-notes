@@ -4,7 +4,8 @@ title: "Resources"
 
 ## Documents
 
-  - [GWAS on subphenotypes](https://docs.google.com/document/d/1xVYOUeYXgozYNj0GRURMMF_EZdJKBtXO0ZRjRvZOVS4/edit?usp=sharing), 
+  - [Convex optimization for matrix factorization](https://www.overleaf.com/project/646e654a71cd2e2659f69646), Overleaf document (restricted access).
+  - [Literature review of GWAS on subphenotypes](https://docs.google.com/document/d/1xVYOUeYXgozYNj0GRURMMF_EZdJKBtXO0ZRjRvZOVS4/edit?usp=sharing), 
   curated by Shane Crinion and Niamh Mullins.
 
 ## Github

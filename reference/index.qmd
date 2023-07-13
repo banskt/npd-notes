@@ -1,3 +1,18 @@
 ---
 title: "References"
+filters:
+  - citetools
+bibliography_methods_genetic: "methods-genetic-architecture.bib"
+nocite: |
+  @*
+
 ---
+
+## Methods
+
+### Genetic architecture of complex traits
+
+::: {#refs_methods_genetic}
+:::
+
+### Frank-Wolfe algorithm

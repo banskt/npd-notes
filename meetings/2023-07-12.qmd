@@ -17,10 +17,12 @@ GWAS data does not have to be limited to only patients with a diagnosis of BD, M
 as summary statistics from any phenotype will be modeled appropriately.
 
 Current main things to consider in regards to the model are:
+
   - What is the normalisation method used in each of the GWAS summary statistics?
   - Is there sample overlap between the studies?
 
 Shane will follow-up with:
+
   - Researching the normalisation method used in the selected studies.
   - Researching the cohorts used / sample overlap between studies.
 
