@@ -1,10 +1,24 @@
 [
   {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "References",
+    "section": "",
+    "text": "Grotzinger, Andrew D., Mijke Rhemtulla, Ronald de Vlaming, Stuart J. Ritchie, Travis T. Mallard, W. David Hill, Hill F. Ip, et al. 2019. “Genomic Structural Equation Modelling Provides Insights into the Multivariate Genetic Architecture of Complex Traits.” Nature Human Behaviour 3 (5): 513–25. https://doi.org/10.1038/s41562-019-0566-x.\n\n\nTanigawa, Yosuke, Jiehan Li, Johanne M. Justesen, Heiko Horn, Matthew Aguirre, Christopher DeBoever, Chris Chang, et al. 2019. “Components of Genetic Associations Across 2,138 Phenotypes in the UK Biobank Highlight Adipocyte Biology.” Nature Communications 10 (1): 4064. https://doi.org/10.1038/s41467-019-11953-9."
+  },
+  {
+    "objectID": "reference/index.html#methods",
+    "href": "reference/index.html#methods",
+    "title": "References",
+    "section": "",
+    "text": "Grotzinger, Andrew D., Mijke Rhemtulla, Ronald de Vlaming, Stuart J. Ritchie, Travis T. Mallard, W. David Hill, Hill F. Ip, et al. 2019. “Genomic Structural Equation Modelling Provides Insights into the Multivariate Genetic Architecture of Complex Traits.” Nature Human Behaviour 3 (5): 513–25. https://doi.org/10.1038/s41562-019-0566-x.\n\n\nTanigawa, Yosuke, Jiehan Li, Johanne M. Justesen, Heiko Horn, Matthew Aguirre, Christopher DeBoever, Chris Chang, et al. 2019. “Components of Genetic Associations Across 2,138 Phenotypes in the UK Biobank Highlight Adipocyte Biology.” Nature Communications 10 (1): 4064. https://doi.org/10.1038/s41467-019-11953-9."
+  },
+  {
     "objectID": "meetings/2023-07-12.html",
     "href": "meetings/2023-07-12.html",
     "title": "2023-07-12",
     "section": "",
-    "text": "I presented a high level summary of the methods we are developing.\nNeuropsychiatric disorders (NPD) are complex, heterogeneous disorders. Matrix factorization is a method that has been used to identify the shared and distinct factors of NPDs. Truncated SVD and genomic structural equation modeling (SEM) has been used earlier for multi-phenotype analysis. We are exploring different convex methods to obtain a low rank approximation of the input matrix before doing a PCA. Convex methods are reproducible. Currently, we are looking at 4 different methods for nuclear norm regularization to obtain the low rank approximation. We expect the low rank approximation will provide a more accurate estimate of the SNP’s true effect on a phenotype, cell type or other biological trait.\nAs of now, we hope to use the z-score and standard error for our model. GWAS data does not have to be limited to only patients with a diagnosis of BD, MDD or SZ as summary statistics from any phenotype will be modeled appropriately.\nCurrent main things to consider in regards to the model are: - What is the normalisation method used in each of the GWAS summary statistics? - Is there sample overlap between the studies?\nShane will follow-up with: - Researching the normalisation method used in the selected studies. - Researching the cohorts used / sample overlap between studies."
+    "text": "I presented a high level summary of the methods we are developing.\nNeuropsychiatric disorders (NPD) are complex, heterogeneous disorders. Matrix factorization is a method that has been used to identify the shared and distinct factors of NPDs. Truncated SVD and genomic structural equation modeling (SEM) has been used earlier for multi-phenotype analysis. We are exploring different convex methods to obtain a low rank approximation of the input matrix before doing a PCA. Convex methods are reproducible. Currently, we are looking at 4 different methods for nuclear norm regularization to obtain the low rank approximation. We expect the low rank approximation will provide a more accurate estimate of the SNP’s true effect on a phenotype, cell type or other biological trait.\nAs of now, we hope to use the z-score and standard error for our model. GWAS data does not have to be limited to only patients with a diagnosis of BD, MDD or SZ as summary statistics from any phenotype will be modeled appropriately.\nCurrent main things to consider in regards to the model are:\n\nWhat is the normalisation method used in each of the GWAS summary statistics?\nIs there sample overlap between the studies?\n\nShane will follow-up with:\n\nResearching the normalisation method used in the selected studies.\nResearching the cohorts used / sample overlap between studies."
   },
   {
     "objectID": "notebooks/explore/2023-05-23-frank-wolfe.html",
@@ -130,14 +144,14 @@
     "href": "resources/index.html",
     "title": "Resources",
     "section": "",
-    "text": "GWAS on subphenotypes, curated by Shane Crinion and Niamh Mullins."
+    "text": "Convex optimization for matrix factorization, Overleaf document (restricted access).\nLiterature review of GWAS on subphenotypes, curated by Shane Crinion and Niamh Mullins."
   },
   {
     "objectID": "resources/index.html#documents",
     "href": "resources/index.html#documents",
     "title": "Resources",
     "section": "",
-    "text": "GWAS on subphenotypes, curated by Shane Crinion and Niamh Mullins."
+    "text": "Convex optimization for matrix factorization, Overleaf document (restricted access).\nLiterature review of GWAS on subphenotypes, curated by Shane Crinion and Niamh Mullins."
   },
   {
     "objectID": "resources/index.html#github",
