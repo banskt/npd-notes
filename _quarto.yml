@@ -27,6 +27,7 @@ website:
         - section: "Subcategory"
           contents:
             - notebooks/explore/index.qmd
+            - notebooks/develop/index.qmd
 #
     - title: "Meetings"
       contents:

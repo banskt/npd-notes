@@ -8,29 +8,36 @@ def simulate(n, p, nclass, nfactor,
         rholist = None, sample_groups = None,
         do_shift_mean = True):
 
+    return_sample_groups = False
     if sample_groups is None:
         sample_dict = get_sample_indices(nclass, n, shuffle = False)
         sample_groups = [x for k, x in sample_dict.items()]
+        return_sample_groups = True
 
     if rholist is None:
         rholist = [np.random.uniform(0.7, 0.95) for _ in range(nclass)]
 
     F = spstats.ortho_group.rvs(p)[:, :nfactor]
-    L_full = get_blockdiag_features(1000, n, rholist, sample_groups, rho_bg = 0.0, seed = 2000).T
+
+    n_full = max(1000, nfactor)
+    L_full = get_blockdiag_features(n_full, n, rholist, sample_groups, rho_bg = 0.0, seed = 2000).T
     L = L_full[:, :nfactor]
 
     mean = np.zeros((1, p))
     if do_shift_mean:
         mean = np.random.normal(0, 10, size = (1, p))
 
-    noise_std = np.random.normal(0, std, p)
+    noise_var = np.square(np.random.normal(0, std, p))
     noise_mean = np.zeros(p)
-    noise = np.random.multivariate_normal(noise_mean, np.diag(np.square(noise_std)), size = n)
+    noise = np.random.multivariate_normal(noise_mean, np.diag(noise_var), size = n)
 
     Y_true = L @ F.T
     Y = Y_true + mean + noise
 
-    return Y, Y_true, L, F, mean, noise_std
+    if return_sample_groups:
+        return Y, Y_true, L, F, mean, noise_var, sample_groups
+    else:
+        return Y, Y_true, L, F, mean, noise_var
 
 
 def do_standardize(Z, axis = 0, center = True, scale = True):

@@ -6,16 +6,16 @@ from matplotlib import colormaps as mpl_cmaps
 import matplotlib.colors as mpl_colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-def plot_covariance_heatmap(ax, X):
-    return plot_heatmap(ax, np.cov(X))
+def plot_covariance_heatmap(ax, X, vmax = 1.0):
+    return plot_heatmap(ax, np.cov(X), vmax = vmax)
 
-def plot_heatmap(ax, X):
+def plot_heatmap(ax, X, vmax = 1.0):
     '''
     Helps to plot a heatmap
     '''
     cmap1 = mpl_cmaps.get_cmap("YlOrRd").copy()
     cmap1.set_bad("w")
-    norm1 = mpl_colors.TwoSlopeNorm(vmin=0., vcenter=0.5, vmax=1.)
+    norm1 = mpl_colors.TwoSlopeNorm(vmin = 0., vcenter = vmax / 2., vmax = vmax)
     im1 = ax.imshow(X.T, cmap = cmap1, norm = norm1, interpolation='nearest', origin = 'upper')
 
     ax.tick_params(bottom = False, top = True, left = True, right = False,
