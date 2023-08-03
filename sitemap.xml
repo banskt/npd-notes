@@ -2,102 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://github.com/banskt/npd-notes/meetings/2023-07-12.html</loc>
-    <lastmod>2023-08-03T18:08:00.516Z</lastmod>
+    <lastmod>2023-08-03T18:36:38.179Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/resources/index.html</loc>
-    <lastmod>2023-08-03T18:07:59.908Z</lastmod>
+    <lastmod>2023-08-03T18:36:37.483Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/develop/2023-07-19-weighted-nnm-python-class.html</loc>
-    <lastmod>2023-08-03T18:07:58.600Z</lastmod>
+    <lastmod>2023-08-03T18:36:35.983Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/develop/index.html</loc>
-    <lastmod>2023-08-03T18:07:56.816Z</lastmod>
+    <lastmod>2023-08-03T18:36:33.979Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-06-05-broad-trait-clusters.html</loc>
-    <lastmod>2023-08-03T18:07:55.808Z</lastmod>
+    <lastmod>2023-08-03T18:36:32.794Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-07-01-how-to-simulate.html</loc>
-    <lastmod>2023-08-03T18:07:53.704Z</lastmod>
+    <lastmod>2023-08-03T18:36:30.334Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-06-23-external-validation-metrics.html</loc>
-    <lastmod>2023-08-03T18:07:51.900Z</lastmod>
+    <lastmod>2023-08-03T18:36:28.218Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-05-16-robustpca.html</loc>
-    <lastmod>2023-08-03T18:07:50.720Z</lastmod>
+    <lastmod>2023-08-03T18:36:26.834Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/comparison-frankwolfe-models-nnm-sparse.html</loc>
-    <lastmod>2023-08-03T18:07:49.544Z</lastmod>
+    <lastmod>2023-08-03T18:36:25.482Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/index.html</loc>
-    <lastmod>2023-08-03T18:07:47.988Z</lastmod>
+    <lastmod>2023-08-03T18:36:23.650Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-05-12-preprocess.html</loc>
-    <lastmod>2023-08-03T18:07:46.984Z</lastmod>
+    <lastmod>2023-08-03T18:36:22.442Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-05-16-pca-sumstat.html</loc>
-    <lastmod>2023-08-03T18:07:43.312Z</lastmod>
+    <lastmod>2023-08-03T18:36:18.269Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/index.html</loc>
-    <lastmod>2023-08-03T18:07:40.576Z</lastmod>
+    <lastmod>2023-08-03T18:36:15.041Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/reference/index.html</loc>
-    <lastmod>2023-08-03T18:07:41.292Z</lastmod>
+    <lastmod>2023-08-03T18:36:15.885Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-08-02-comparison-of-noise-models.html</loc>
-    <lastmod>2023-08-03T18:07:44.480Z</lastmod>
+    <lastmod>2023-08-03T18:36:19.621Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/robust_pca_cross_validation.html</loc>
-    <lastmod>2023-08-03T18:07:47.344Z</lastmod>
+    <lastmod>2023-08-03T18:36:22.886Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-05-23-frank-wolfe.html</loc>
-    <lastmod>2023-08-03T18:07:49.184Z</lastmod>
+    <lastmod>2023-08-03T18:36:25.070Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/weighted_nuclear_norm_minimization.html</loc>
-    <lastmod>2023-08-03T18:07:49.980Z</lastmod>
+    <lastmod>2023-08-03T18:36:25.994Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/simplex-projection-methods.html</loc>
-    <lastmod>2023-08-03T18:07:51.096Z</lastmod>
+    <lastmod>2023-08-03T18:36:27.270Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-07-28-choosing-penalty-update-method.html</loc>
-    <lastmod>2023-08-03T18:07:52.632Z</lastmod>
+    <lastmod>2023-08-03T18:36:29.110Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/explore/2023-07-05-simulation-setup.html</loc>
-    <lastmod>2023-08-03T18:07:54.704Z</lastmod>
+    <lastmod>2023-08-03T18:36:31.486Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/index.html</loc>
-    <lastmod>2023-08-03T18:07:56.416Z</lastmod>
+    <lastmod>2023-08-03T18:36:33.511Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html</loc>
-    <lastmod>2023-08-03T18:07:57.664Z</lastmod>
+    <lastmod>2023-08-03T18:36:34.911Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html</loc>
-    <lastmod>2023-08-03T18:07:59.288Z</lastmod>
+    <lastmod>2023-08-03T18:36:36.763Z</lastmod>
   </url>
   <url>
     <loc>https://github.com/banskt/npd-notes/meetings/index.html</loc>
-    <lastmod>2023-08-03T18:08:00.192Z</lastmod>
+    <lastmod>2023-08-03T18:36:37.803Z</lastmod>
   </url>
 </urlset>

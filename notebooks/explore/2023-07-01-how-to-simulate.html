@@ -627,7 +627,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Y_std_proj <span class="op">=</span> Y_std <span class="op">@</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We obtain the observed <span class="math inline">\mathbf{Y}</span> by adding noise and mean to <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span>. The covariance of <span class="math inline">\mathbf{Y}</span> is shown in the left panel of <strong>?@fig-Y-visual</strong>. In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}\mathbf{F}</span></p>
+<p>We obtain the observed <span class="math inline">\mathbf{Y}</span> by adding noise and mean to <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span>. The covariance of <span class="math inline">\mathbf{Y}</span> is shown in the left panel of <strong>?@fig-Yobs-visual</strong>. In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}\mathbf{F}</span>.</p>
 <div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
@@ -645,9 +645,9 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-y-visual" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-yobs-visual" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-y-visual-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-yobs-visual-output-1.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Visualization of the observed input matrix</figcaption>
 </figure>
 </div>
