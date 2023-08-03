@@ -8,6 +8,7 @@ format:
     html-math-method: katex
     link-external-icon: true
     link-external-newwindow: true
+    link-external-filter: ^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/
     code-fold: true
     code-tools: true
     code-block-bg: true
