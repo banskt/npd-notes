@@ -35,7 +35,7 @@ website:
         - auto: meetings/*
 #
   page-navigation: true
-  repo-url: https://github.com/banskt/nygc-notes
+  repo-url: https://github.com/banskt/npd-notes
   repo-actions: [edit, issue]
 
 format:
