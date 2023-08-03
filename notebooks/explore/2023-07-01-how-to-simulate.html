@@ -488,7 +488,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </div>
 </div>
 </div>
-<p>The covariance of <span class="math inline">\mathbf{Y}_{\mathrm{true}} = \mathbf{L}\mathbf{F}^{\intercal}</span> is shown in the left panel of <strong>?@fig-Ytrue-visual</strong>. In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}_{\mathrm{true}}\mathbf{F}</span>.</p>
+<p>The covariance of <span class="math inline">\mathbf{Y}_{\mathrm{true}} = \mathbf{L}\mathbf{F}^{\intercal}</span> is shown in <a href="#fig-visualize-ytrue">Figure&nbsp;2</a> (left panel). In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}_{\mathrm{true}}\mathbf{F}</span>.</p>
 <div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
@@ -509,9 +509,9 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-ytrue-visual" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-visualize-ytrue" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-ytrue-visual-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-visualize-ytrue-output-1.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;2: Visualization of the true input matrix</figcaption>
 </figure>
 </div>
@@ -521,7 +521,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <h3 class="anchored" data-anchor-id="approximate-methods-to-obtain-loadings-decomposition">Approximate methods to obtain loadings decomposition</h3>
 <p>Enforcing orthogonality on the loading will naturally overshrink the similarity and enhance the distinctness. Still, we can reduce the dimension of <code>L_full</code> using truncated SVD and use the projection of <code>L_full</code> on the first <span class="math inline">K</span> components of the right singular vector.</p>
 <p>Another option is to use a QR decomposition to obtain orthogonal columns, scaled by some approximate eigenvalues: 1. Transpose <code>L_full</code> and use QR decomposition. 2. <span class="math inline">\mathbf{s}_{qr} \leftarrow</span> eigenvalues (diagonal of <span class="math inline">\mathbf{R}</span>). 3. Define <span class="math inline">\mathbf{s}'</span> such that <span class="math inline">s'_i = 1</span> if <span class="math inline">s_{qr} &gt; 0</span> and <span class="math inline">s'_i = -1</span> if <span class="math inline">s_{qr} &lt; 0</span>. 4. Choose K orthogonal vectors from <span class="math inline">\mathbf{Q}</span> multiplied by <span class="math inline">\mathrm{diag}(\mathbf{s}')</span>. This does not work numerically, as shown below in <a href="#fig-loadings-decomposition">Figure&nbsp;3</a></p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> orthogonalize_qr(X):</span>
@@ -611,7 +611,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </tr>
 </tbody>
 </table>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fixed noise for every SNP</span></span>
@@ -627,8 +627,8 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Y_std_proj <span class="op">=</span> Y_std <span class="op">@</span> F</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>We obtain the observed <span class="math inline">\mathbf{Y}</span> by adding noise and mean to <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span>. The covariance of <span class="math inline">\mathbf{Y}</span> is shown in the left panel of <strong>?@fig-Yobs-visual</strong>. In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}\mathbf{F}</span>.</p>
-<div class="cell" data-execution_count="12">
+<p>We obtain the observed <span class="math inline">\mathbf{Y}</span> by adding noise and mean to <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span>. The covariance of <span class="math inline">\mathbf{Y}</span> is shown in the left panel of (left panel). In the right panel, we show the covariance of <span class="math inline">\mathbf{Y}\mathbf{F}</span>.</p>
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">16</span>, <span class="dv">8</span>))</span>
@@ -645,9 +645,9 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-yobs-visual" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-visualize-yobs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-yobs-visual-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2023-07-01-how-to-simulate_files/figure-html/fig-visualize-yobs-output-1.png" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Visualization of the observed input matrix</figcaption>
 </figure>
 </div>
@@ -656,7 +656,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </section>
 <section id="plot-distribution-of-each-feature" class="level1">
 <h1>Plot distribution of each feature</h1>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
@@ -684,14 +684,14 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <section id="can-svd-decomposition-capture-the-signal" class="level1">
 <h1>Can SVD decomposition capture the signal?</h1>
 <p>In <a href="#fig-svd-components">Figure&nbsp;6</a>, we look at the separation of the underlying features using - projection of <span class="math inline">\mathbf{Y}_{\mathrm{true}}</span> on <span class="math inline">\mathbf{F}</span> (left panel). - projection of <span class="math inline">\mathbf{Y}</span> on <span class="math inline">\mathbf{F}</span> (center panel). - principal components obtained from SVD of <span class="math inline">\mathbf{Y}</span> (right panel).</p>
-<div class="cell" data-execution_count="14">
+<div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Y_std, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pcomps_svd <span class="op">=</span> U[:, :nfctr] <span class="op">@</span> np.diag(S[:nfctr])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">6</span>))</span>
@@ -725,7 +725,7 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Ypred_svd <span class="op">=</span> pcomps_svd <span class="op">@</span> Vt[:nfctr, :]</span>
@@ -733,8 +733,8 @@ y_{ij} = m_j + \sum_{k = 1}^K l_{ik}f_{jk} + e_j
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(np.<span class="bu">sum</span>(np.square(Ypred_svd <span class="op">-</span> Y_true) <span class="op">/</span> np.square(Y_true)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>230973.68978816015</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>190115.21364169012</code></pre>
 </div>
 </div>
 
