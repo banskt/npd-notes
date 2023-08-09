@@ -2,12 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Saikat Banerjee">
+<meta name="dcterms.date" content="2023-08-04">
 
-<title>NPD Network – comparison-frankwolfe-models-nnm-sparse</title>
+<title>NPD Network - Demonstration of the Frank-Wolfe methods</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -146,12 +148,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Demonstration of the Frank-Wolfe methods</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
 
 
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saikat Banerjee </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 4, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    Simple example of using the Frank-Wolfe methods on simulated data.
+  </div>
+</div>
+
+</header>
 
 <div class="cell" data-execution_count="1">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -178,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>nfctr  <span class="op">=</span> <span class="dv">40</span> <span class="co"># K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="3">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Y, Y_true, L, F, mean, noise_var, sample_indices <span class="op">=</span> mpy_simulate.simulate(ngwas, nsnp, ntrait, nfctr, std <span class="op">=</span> <span class="fl">0.5</span>, do_shift_mean <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Y_cent <span class="op">=</span> mpy_simulate.do_standardize(Y, scale <span class="op">=</span> <span class="va">False</span>)</span>
@@ -187,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 <div class="cell" data-execution_count="4">
-<details>
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unique_labels  <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(sample_indices)))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>class_labels <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(ngwas)]</span>
@@ -196,34 +231,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        class_labels[i] <span class="op">=</span> k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="6">
-<details>
+<div class="cell" data-execution_count="5">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nnm <span class="op">=</span> FrankWolfe(show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>, benchmark <span class="op">=</span> <span class="va">True</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, model <span class="op">=</span> <span class="st">'nnm'</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>nnm.fit(Y_cent, <span class="fl">64.0</span>, Ytrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-08-01 18:22:22,410 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 4483.21
-2023-08-01 18:22:22,637 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
-2023-08-01 18:22:22,741 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
-2023-08-01 18:22:22,764 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
-2023-08-01 18:22:22,828 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
-2023-08-01 18:22:22,851 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
-2023-08-01 18:22:22,873 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.</code></pre>
+<pre><code>2023-08-04 11:54:05,899 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 4832.89</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
-<details>
+<div class="cell" data-execution_count="8">
+<details open="">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse <span class="op">=</span> FrankWolfe(show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>, benchmark <span class="op">=</span> <span class="va">True</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, model <span class="op">=</span> <span class="st">'nnm-sparse'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>nnm_sparse.fit(Y_cent, (<span class="fl">64.0</span>, <span class="fl">20.0</span>), Ytrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, simplex_method <span class="op">=</span> <span class="st">'sort'</span>, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                        svd_max_iter <span class="op">=</span> <span class="dv">50</span>, tol <span class="op">=</span> <span class="fl">1e-3</span>, step_tol <span class="op">=</span> <span class="fl">1e-5</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                        show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>, benchmark <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>nnm_sparse.fit(Y_cent, (<span class="fl">64.0</span>, <span class="fl">0.2</span>), Ytrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-08-01 18:22:15,116 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 4606.81</code></pre>
+<pre><code>2023-08-04 11:56:43,131 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 657679
+2023-08-04 11:56:57,498 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 100. Step size 0.011. Duality Gap 16.3721
+2023-08-04 11:57:11,707 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 200. Step size 0.000. Duality Gap 1.55259
+2023-08-04 11:57:12,886 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
+2023-08-04 11:57:22,063 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
+2023-08-04 11:57:22,766 | nnwmf.optimize.frankwolfe                | WARNING | Step Size is less than 0. Using last valid step size.
+2023-08-04 11:57:25,841 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 300. Step size 0.002. Duality Gap 6.5173</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
-<details>
+<div class="cell" data-execution_count="9">
+<details open="">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">14</span>, <span class="dv">6</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
@@ -245,18 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="comparison-frankwolfe-models-nnm-sparse_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div class="cell" data-execution_count="16">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.cumsum(nnm.cpu_time_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>array([0.        , 0.36776924, 0.82912604, 1.1407996 , 1.44675399,
-       1.73415578, 2.01139777, 2.28452002, 2.56100667, 2.83585069,
-       3.11413158, 3.38283034, 3.65911238, 3.93231661, 4.2186038 ])</code></pre>
+<p><img src="2023-08-03-demonstration-frankwolfe-methods-simulation_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -567,4 +593,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/comparison-frankwolfe-models-nnm-sparse.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
