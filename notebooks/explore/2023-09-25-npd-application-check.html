@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="abstract">
     <div class="abstract-title">Abstract</div>
-    Our goal is to perform multi-trait analysis in GWAS. We obtain low rank approximation of the GWAS summary statistics data and manually label each GWAS with a broad phenotype. We perform PCA on the approximated low rank matrix We label the GWAS with broad phenotypes to visualize the separation of the principal components of the low rank approximation of the input matrix. For low rank approximation, we use the three methods we have developed till date.
+    Our goal is to perform multi-trait analysis in GWAS. We obtain low rank approximation of the GWAS summary statistics data using the three methods we have developed till date. We manually label each GWAS with a broad phenotype. We perform PCA on the approximated low rank matrix and analyze the clustering of the data by comparing with the curated phenotype labels.
   </div>
 </div>
 
@@ -215,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="getting-setup" class="level1">
 <h1>Getting Setup</h1>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="1">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -570,7 +570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="50">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df).T</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_nan_cent <span class="op">=</span> X_nan <span class="op">-</span> np.nanmean(X_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X_nan_mask <span class="op">=</span> np.isnan(X_nan)</span>
@@ -583,7 +583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> zscore_df.columns</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span>
@@ -594,7 +594,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>trait_colors  <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(unique_labels, (mpl_stylesheet.kelly_colors())[:ntrait])}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We perform PCA (using SVD) on the raw input data (mean centered). In <a href="#fig-input-pca-pve">Figure&nbsp;1</a>, we look at the proportion of variance explained by each principal component.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(X_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
@@ -616,7 +616,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
 <p>In <a href="#fig-trait-wise-pve-pc1-input-data">Figure&nbsp;2</a>, we look at the proportion of variance for each trait explained by the first principal component. Traits in the same “broad category” are combined together to show the histogram (boxplot).</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">6</span>))</span>
@@ -666,7 +666,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="44">
+<div class="cell" data-execution_count="8">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_stacked_bars(ax, data, xlabels, colors, bar_width <span class="op">=</span> <span class="fl">1.0</span>, alpha <span class="op">=</span> <span class="fl">1.0</span>):</span>
@@ -753,7 +753,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </details>
 </div>
 <p>In <a href="#fig-trait-wise-pca-score-input-data">Figure&nbsp;3</a>, we stack the variance score of each disease category for each principal component. Components explaining majority of the same disease are able to distinguish the corresponding disease.</p>
-<div class="cell" data-execution_count="51">
+<div class="cell" data-execution_count="9">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(X_cent, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -772,42 +772,42 @@ Fraction of Nan entries: 0.193</code></pre>
 <h1>Denoising methods</h1>
 <section id="ialm---rpca" class="level2">
 <h2 class="anchored" data-anchor-id="ialm---rpca">IALM - RPCA</h2>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> IALM(max_iter <span class="op">=</span> <span class="dv">1000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rpca.fit(X_cent, mask <span class="op">=</span> X_nan_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-08-08 23:52:50,980 | nnwmf.optimize.inexact_alm               | DEBUG   | Fit RPCA using IALM (mu update admm, lamba = 0.0100)
-2023-08-08 23:52:51,174 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 0. Primal residual 0.893741. Dual residual 0.000574896
-2023-08-08 23:52:58,800 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 100. Primal residual 6.36112e-05. Dual residual 2.55942e-05
-2023-08-08 23:53:06,396 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 200. Primal residual 2.26287e-05. Dual residual 2.64972e-06
-2023-08-08 23:53:13,952 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 300. Primal residual 6.03351e-06. Dual residual 1.69738e-06
-2023-08-08 23:53:21,531 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 400. Primal residual 4.08978e-06. Dual residual 8.33885e-07
-2023-08-08 23:53:29,124 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 500. Primal residual 3.12383e-06. Dual residual 5.16786e-07
-2023-08-08 23:53:36,784 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 600. Primal residual 2.50002e-06. Dual residual 3.39206e-07
-2023-08-08 23:53:44,356 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 700. Primal residual 2.03607e-06. Dual residual 3.14692e-07
-2023-08-08 23:53:51,946 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 800. Primal residual 8.29061e-07. Dual residual 5.20502e-07
-2023-08-08 23:53:59,570 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 900. Primal residual 4.70128e-07. Dual residual 2.64999e-07</code></pre>
+<pre><code>2023-09-25 14:36:21,729 | nnwmf.optimize.inexact_alm               | DEBUG   | Fit RPCA using IALM (mu update admm, lamba = 0.0100)
+2023-09-25 14:36:21,904 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 0. Primal residual 0.893741. Dual residual 0.000574896
+2023-09-25 14:36:29,620 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 100. Primal residual 6.36112e-05. Dual residual 2.55942e-05
+2023-09-25 14:36:37,295 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 200. Primal residual 2.26287e-05. Dual residual 2.64972e-06
+2023-09-25 14:36:44,963 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 300. Primal residual 6.03351e-06. Dual residual 1.69738e-06
+2023-09-25 14:36:52,645 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 400. Primal residual 4.08978e-06. Dual residual 8.33885e-07
+2023-09-25 14:37:00,403 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 500. Primal residual 3.12383e-06. Dual residual 5.16786e-07
+2023-09-25 14:37:08,104 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 600. Primal residual 2.50002e-06. Dual residual 3.39206e-07
+2023-09-25 14:37:15,875 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 700. Primal residual 2.03607e-06. Dual residual 3.14692e-07
+2023-09-25 14:37:23,599 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 800. Primal residual 8.29061e-07. Dual residual 5.20502e-07
+2023-09-25 14:37:31,333 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 900. Primal residual 4.70128e-07. Dual residual 2.64999e-07</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(rpca.L_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>50</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(rpca.L_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>50</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="52">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(rpca.L_, <span class="st">'nuc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="52">
-<pre><code>1351.8480150432197</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>1351.8480150432201</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="13">
@@ -816,7 +816,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(rpca.E_)) <span class="op">/</span> np.prod(X_cent.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>0.590626180741227</code></pre>
+<pre><code>0.5906261807412275</code></pre>
 </div>
 </div>
 </section>
@@ -930,32 +930,32 @@ Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="14">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(X_cent, <span class="st">'nuc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>7274.4182279699835</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="32">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nnm <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>nnm.fit(X_cent, <span class="fl">1024.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-08-09 10:37:56,367 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 0.459. Duality Gap 481580
-2023-08-09 10:38:52,567 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 100. Step size 0.007. Duality Gap 7151
-2023-08-09 10:39:49,462 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 200. Step size 0.007. Duality Gap 5557.79
-2023-08-09 10:40:46,524 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 300. Step size 0.002. Duality Gap 1879.71</code></pre>
+<pre><code>2023-09-25 14:38:29,678 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 0.459. Duality Gap 481580
+2023-09-25 14:39:02,342 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 100. Step size 0.011. Duality Gap 8251.95
+2023-09-25 14:39:35,146 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 200. Step size 0.006. Duality Gap 4536.94
+2023-09-25 14:40:07,834 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 300. Step size 0.005. Duality Gap 3466.49</code></pre>
 </div>
 </div>
 </section>
 <section id="nnmsparse---fw" class="level2">
 <h2 class="anchored" data-anchor-id="nnmsparse---fw">NNMSparse - FW</h2>
-<div class="cell" data-execution_count="41">
+<div class="cell" data-execution_count="16">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, </span>
@@ -964,25 +964,25 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>nnm_sparse.fit(X_cent, (<span class="fl">1024.0</span>, <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-08-09 11:18:55,842 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 1.13739e+07
-2023-08-09 11:20:58,655 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 100. Step size 0.004. Duality Gap 3961.77
-2023-08-09 11:23:02,637 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 200. Step size 0.002. Duality Gap 2424.21
-2023-08-09 11:25:05,620 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 300. Step size 0.002. Duality Gap 1759.04
-2023-08-09 11:27:09,644 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 400. Step size 0.001. Duality Gap 1295.86
-2023-08-09 11:29:13,135 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 500. Step size 0.001. Duality Gap 1060.19
-2023-08-09 11:31:17,120 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 600. Step size 0.001. Duality Gap 1058.08
-2023-08-09 11:33:20,274 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 700. Step size 0.002. Duality Gap 1046.78
-2023-08-09 11:35:24,039 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 800. Step size 0.001. Duality Gap 849.241
-2023-08-09 11:37:26,504 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 900. Step size 0.001. Duality Gap 944.618</code></pre>
+<pre><code>2023-09-25 14:42:38,163 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 1.13739e+07
+2023-09-25 14:43:53,562 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 100. Step size 0.006. Duality Gap 4150.16
+2023-09-25 14:45:09,194 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 200. Step size 0.003. Duality Gap 2535.3
+2023-09-25 14:46:24,688 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 300. Step size 0.002. Duality Gap 1744.43
+2023-09-25 14:47:40,052 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 400. Step size 0.001. Duality Gap 1384.91
+2023-09-25 14:48:55,430 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 500. Step size 0.001. Duality Gap 1103.54
+2023-09-25 14:50:10,812 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 600. Step size 0.001. Duality Gap 950.145
+2023-09-25 14:51:26,043 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 700. Step size 0.001. Duality Gap 972.654
+2023-09-25 14:52:41,695 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 800. Step size 0.001. Duality Gap 814.188
+2023-09-25 14:53:57,015 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 900. Step size 0.001. Duality Gap 696.726</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="65">
+<div class="cell" data-execution_count="17">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>loadings <span class="op">=</span> Vt.T <span class="op">@</span> np.diag(S)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>loadings[:, <span class="dv">0</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(10068,)</code></pre>
 </div>
 </div>
@@ -994,7 +994,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <h2 class="anchored" data-anchor-id="principal-components-biplots">Principal Components Biplots</h2>
 <p>Suppose, we decompose <span class="math inline">\mathbf{X} = \mathbf{U}\mathbf{S}\mathbf{V}^{\intercal}</span>. Columns of <span class="math inline">\mathbf{V}</span> are the principal axes (aka principal directions, aka eigenvectors). The principal components are the columns of <span class="math inline">\mathbf{U}\mathbf{S}</span> – the projections of the data on the the principal axes (note <span class="math inline">\mathbf{X}\mathbf{V} = \mathbf{U}\mathbf{S}</span>). We plot the principal components as a scatter plot and color each point based on their broad disease category. To show the directions, we plot the loadings, <span class="math inline">\mathbf{V}\mathbf{S}</span> as arrows. That is, the <span class="math inline">(x, y)</span> coordinates of an <span class="math inline">i-</span>th arrow endpoint are given by the <span class="math inline">i-</span>th value in the first and second column of <span class="math inline">\mathbf{V}\mathbf{S}</span>.</p>
 <p><a href="https://stats.stackexchange.com/a/141531">A comprehensive discussion of biplot on Stackoverflow</a></p>
-<div class="cell" data-execution_count="66">
+<div class="cell" data-execution_count="18">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
@@ -1010,7 +1010,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>loadings_nnm_sparse, pcomps_nnm_sparse <span class="op">=</span> get_principal_components(nnm_sparse.X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="67">
+<div class="cell" data-execution_count="19">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, labels, unique_labels)</span>
@@ -1020,7 +1020,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="68">
+<div class="cell" data-execution_count="20">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm, labels, unique_labels)</span>
@@ -1030,7 +1030,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="60">
+<div class="cell" data-execution_count="21">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm_sparse, labels, unique_labels)</span>
@@ -1040,7 +1040,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="22">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(nnm_sparse.X, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1049,7 +1049,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="47">
+<div class="cell" data-execution_count="23">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(nnm.X, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1058,7 +1058,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="48">
+<div class="cell" data-execution_count="24">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(rpca.L_, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1067,7 +1067,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p><img src="2023-09-25-npd-application-check_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="73">
+<div class="cell" data-execution_count="25">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quick_scale_plot_trait_pc_scores(ax, X, tindices, ulabels, tcolors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">20</span>):</span>
