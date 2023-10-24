@@ -1,17 +1,8 @@
 [
   {
-    "listing": "/notebooks/develop/index.html",
-    "items": [
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
-    ]
-  },
-  {
     "listing": "/notebooks/explore/index.html",
     "items": [
-      "/notebooks/explore/2023-10-16-structure-plot.html",
+      "/notebooks/explore/2023-10-23-structure-plot.html",
       "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
       "/notebooks/explore/2023-08-08-npd-application.html",
       "/notebooks/explore/2023-08-02-comparison-of-noise-models.html",
@@ -29,7 +20,7 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
-      "/notebooks/explore/2023-10-16-structure-plot.html",
+      "/notebooks/explore/2023-10-23-structure-plot.html",
       "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
       "/notebooks/explore/2023-08-08-npd-application.html",
       "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
@@ -46,6 +37,15 @@
       "/notebooks/explore/2023-05-16-pca-sumstat.html",
       "/notebooks/explore/2023-05-16-robustpca.html",
       "/notebooks/explore/2023-05-12-preprocess.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/develop/index.html",
+    "items": [
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
     ]
   }
 ]

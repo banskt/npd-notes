@@ -159,6 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#remove-studies-with-unreliable-z-scores" id="toc-remove-studies-with-unreliable-z-scores" class="nav-link" data-scroll-target="#remove-studies-with-unreliable-z-scores">Remove studies with unreliable z-scores</a></li>
   <li><a href="#flip-signs" id="toc-flip-signs" class="nav-link" data-scroll-target="#flip-signs">Flip Signs</a></li>
   <li><a href="#save-pickle" id="toc-save-pickle" class="nav-link" data-scroll-target="#save-pickle">Save Pickle</a></li>
+  <li><a href="#save-snp-information" id="toc-save-snp-information" class="nav-link" data-scroll-target="#save-snp-information">Save SNP information</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-05-12-preprocess.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -1906,6 +1907,305 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
  'pgcAN2.2019-07.vcf.txt.gz',
  'pts_all_freeze2_overall.txt.gz']</code></pre>
 </div>
+</div>
+</section>
+<section id="save-snp-information" class="level1">
+<h1>Save SNP information</h1>
+<div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp_nodup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SNP</th>
+<th data-quarto-table-cell-role="th">A1</th>
+<th data-quarto-table-cell-role="th">A2</th>
+<th data-quarto-table-cell-role="th">CHR</th>
+<th data-quarto-table-cell-role="th">BP</th>
+<th data-quarto-table-cell-role="th">Z</th>
+<th data-quarto-table-cell-role="th">P</th>
+<th data-quarto-table-cell-role="th">BETA</th>
+<th data-quarto-table-cell-role="th">SE</th>
+<th data-quarto-table-cell-role="th">ID</th>
+<th data-quarto-table-cell-role="th">TRAIT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>rs10486722</td>
+<td>C</td>
+<td>T</td>
+<td>chr7</td>
+<td>41772310</td>
+<td>0.881222</td>
+<td>0.378198</td>
+<td>0.001757</td>
+<td>0.001994</td>
+<td>UKB_1160_Sleep_duration</td>
+<td>UKB_1160_Sleep_duration</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>rs10486722</td>
+<td>C</td>
+<td>T</td>
+<td>chr7</td>
+<td>41772310</td>
+<td>1.369354</td>
+<td>0.170889</td>
+<td>0.003476</td>
+<td>0.002538</td>
+<td>UKB_1180_Morning_or_evening_person_chronotype</td>
+<td>UKB_1180_Morning_or_evening_person_chronotype</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>rs10486722</td>
+<td>C</td>
+<td>T</td>
+<td>chr7</td>
+<td>41772310</td>
+<td>-0.138782</td>
+<td>0.889622</td>
+<td>-0.000257</td>
+<td>0.001850</td>
+<td>UKB_1200_Sleeplessness_or_insomnia</td>
+<td>UKB_1200_Sleeplessness_or_insomnia</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>rs10486722</td>
+<td>C</td>
+<td>T</td>
+<td>chr7</td>
+<td>41772310</td>
+<td>0.442336</td>
+<td>0.658246</td>
+<td>0.000035</td>
+<td>0.000080</td>
+<td>UKB_20002_1243_self_reported_psychological_or_...</td>
+<td>UKB_20002_1243_self_reported_psychological_or_...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>rs10486722</td>
+<td>C</td>
+<td>T</td>
+<td>chr7</td>
+<td>41772310</td>
+<td>0.275442</td>
+<td>0.782977</td>
+<td>0.000030</td>
+<td>0.000110</td>
+<td>UKB_20002_1262_self_reported_parkinsons_disease</td>
+<td>UKB_20002_1262_self_reported_parkinsons_disease</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676256</td>
+<td>rs2322</td>
+<td>C</td>
+<td>G</td>
+<td>4</td>
+<td>9701603</td>
+<td>NaN</td>
+<td>0.396100</td>
+<td>-0.077600</td>
+<td>0.091500</td>
+<td>ieu-b-7</td>
+<td>Parkinson's disease</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">676257</td>
+<td>rs2322</td>
+<td>C</td>
+<td>G</td>
+<td>4</td>
+<td>9701603</td>
+<td>NaN</td>
+<td>0.107599</td>
+<td>0.024041</td>
+<td>0.014941</td>
+<td>MHQ_Depression_WG_MAF1_INFO4_HRC_Only_Filtered...</td>
+<td>MHQ_Depression_WG_MAF1_INFO4_HRC_Only_Filtered...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676258</td>
+<td>rs2322</td>
+<td>C</td>
+<td>G</td>
+<td>4</td>
+<td>9701603</td>
+<td>NaN</td>
+<td>0.430338</td>
+<td>0.016141</td>
+<td>0.020468</td>
+<td>MHQ_Recurrent_Depression_WG_MAF1_INFO4_HRC_Onl...</td>
+<td>MHQ_Recurrent_Depression_WG_MAF1_INFO4_HRC_Onl...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">676259</td>
+<td>rs2322</td>
+<td>C</td>
+<td>G</td>
+<td>4</td>
+<td>9701603</td>
+<td>NaN</td>
+<td>0.068770</td>
+<td>0.049301</td>
+<td>0.027090</td>
+<td>MHQ_Single_Depression_WG_MAF1_INFO4_HRC_Only_F...</td>
+<td>MHQ_Single_Depression_WG_MAF1_INFO4_HRC_Only_F...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676260</td>
+<td>rs2322</td>
+<td>C</td>
+<td>G</td>
+<td>4</td>
+<td>9701603</td>
+<td>NaN</td>
+<td>0.721340</td>
+<td>0.006329</td>
+<td>0.017746</td>
+<td>MHQ_Subthreshold_WG_MAF1_INFO4_HRC_Only_Filter...</td>
+<td>MHQ_Subthreshold_WG_MAF1_INFO4_HRC_Only_Filter...</td>
+</tr>
+</tbody>
+</table>
+
+<p>676229 rows × 11 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="72">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>all_snp_info <span class="op">=</span> assoc_df_fa_nsnp_nodup[[<span class="st">'SNP'</span>, <span class="st">'CHR'</span>, <span class="st">'BP'</span>]].copy()</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>all_snp_info_nona <span class="op">=</span> all_snp_info.dropna(axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>all_snp_info_nona.loc[:, <span class="st">'CHR'</span>] <span class="op">=</span> all_snp_info_nona.CHR.<span class="bu">str</span>.replace(<span class="st">'chr'</span>, <span class="st">''</span>)</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>all_snp_info_nodup <span class="op">=</span> all_snp_info_nona.drop_duplicates(subset<span class="op">=</span>[<span class="st">'SNP'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="73">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>all_snp_info_nodup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SNP</th>
+<th data-quarto-table-cell-role="th">CHR</th>
+<th data-quarto-table-cell-role="th">BP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>rs10486722</td>
+<td>7</td>
+<td>41772310</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">91</td>
+<td>rs2416745</td>
+<td>9</td>
+<td>120018976</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">182</td>
+<td>rs9287971</td>
+<td>2</td>
+<td>174067024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">273</td>
+<td>rs12660608</td>
+<td>6</td>
+<td>123017369</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">364</td>
+<td>rs1693523</td>
+<td>15</td>
+<td>52535142</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676161</td>
+<td>rs7199470</td>
+<td>16</td>
+<td>10137879</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">676181</td>
+<td>rs77337722</td>
+<td>18</td>
+<td>74935886</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676201</td>
+<td>rs183211079</td>
+<td>2</td>
+<td>151553344</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">676221</td>
+<td>rs78346960</td>
+<td>17</td>
+<td>9121155</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">676241</td>
+<td>rs2322</td>
+<td>4</td>
+<td>9701603</td>
+</tr>
+</tbody>
+</table>
+
+<p>10068 rows × 3 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="74">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>snp_info_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/snp_info.pkl"</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>all_snp_info_nodup.to_pickle(snp_info_filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 
