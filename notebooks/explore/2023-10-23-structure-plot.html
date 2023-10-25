@@ -737,49 +737,160 @@ Fraction of Nan entries: 0.193</code></pre>
 </details>
 </div>
 <p>In <a href="#fig-pcomp-contribution-to-phenotype">Figure&nbsp;2</a>, we look at the contribution of the <strong>top 10</strong> principal components to the disease phenotypes.</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="25">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">Number of components to plot</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>npcomp <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">Sort the traits / phenotypes</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>trait_indices_sorted <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx <span class="kw">in</span> trait_indices:</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    trait_indices_sorted <span class="op">+=</span> <span class="bu">list</span>(idx)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>trait_labels_sorted <span class="op">=</span> [labels[i] <span class="cf">for</span> i <span class="kw">in</span> trait_indices_sorted]</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>pcomp_colors  <span class="op">=</span> {<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>: color <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">enumerate</span>(mpl_stylesheet.kelly_colors() <span class="op">+</span> mpl_stylesheet.banskt_colors())}</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">18</span>))</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> GridSpec(nrows <span class="op">=</span> <span class="bu">len</span>(plot_methods) <span class="op">+</span> <span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figure<span class="op">=</span>fig, height_ratios<span class="op">=</span>[<span class="fl">0.3</span>] <span class="op">+</span> [<span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> plot_methods])</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(plot_methods) <span class="op">+</span> <span class="dv">1</span>)]</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>] <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(plot_methods):</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    iplot <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    showxlabels <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> iplot <span class="op">==</span> <span class="bu">len</span>(plot_methods) <span class="cf">else</span> <span class="va">False</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    ax[iplot] <span class="op">=</span> fig.add_subplot(gs[iplot, <span class="dv">0</span>])</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    structure_plot(ax[iplot], pcomps[m][trait_indices_sorted,:], trait_labels_sorted, pcomp_colors, npcomp, showxlabels <span class="op">=</span> showxlabels)</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    ax[iplot].set_title(plot_methods_names[m])</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>plt_handles, plt_labels <span class="op">=</span> ax[i].get_legend_handles_labels()</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(plt_handles, plt_labels, </span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>             loc <span class="op">=</span> <span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), title <span class="op">=</span> <span class="st">"Principal Components"</span>,</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>             frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">8</span>, ncol <span class="op">=</span> <span class="dv">5</span>)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side, border <span class="kw">in</span> ax[<span class="dv">0</span>].spines.items():</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    border.set_visible(<span class="va">False</span>)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>                   labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co">#legend(bbox_to_anchor=(1.04, 1), loc="upper left")</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>phenotype_dict_readable <span class="op">=</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'AD_sumstats_Jansenetal_2019sept.txt.gz'</span> : <span class="st">'AD_Jansen_2019'</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'anxiety.meta.full.cc.txt.gz'</span> : <span class="st">'anxiety'</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'anxiety.meta.full.fs.txt.gz'</span> : <span class="st">'anxiety'</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CNCR_Insomnia_all'</span> : <span class="st">'Insomnia'</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'daner_adhd_meta_filtered_NA_iPSYCH23_PGC11_sigPCs_woSEX_2ell6sd_EUR_Neff_70.txt.gz'</span> : <span class="st">'ADHD_Daner'</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'daner_PGC_BIP32b_mds7a_0416a.txt.gz'</span> : <span class="st">'BD_Daner_PGC'</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'daner_PGC_BIP32b_mds7a_mds7a_BD1.0416a_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'BD1_Daner_PGC'</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'daner_PGC_BIP32b_mds7a_mds7a_BD2.0416a_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'BD2_Daner_PGC'</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ENIGMA_Intracraneal_Volume'</span> : <span class="st">'Intracraneal_Volume'</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1000'</span> : <span class="st">'Neuroticism'</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1041'</span> : <span class="st">'Intracranial volume'</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1042'</span> : <span class="st">'Nucleus accumbens volume'</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1043'</span> : <span class="st">'Amygdala volume'</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1044'</span> : <span class="st">'Caudate volume'</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1045'</span> : <span class="st">'Hippocampus volume'</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1046'</span> : <span class="st">'Pallidum volume'</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1047'</span> : <span class="st">'Putamen volume'</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1048'</span> : <span class="st">'Thalamus volume'</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1085'</span> : <span class="st">'Amyotrophic lateral sclerosis'</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-118'</span> : <span class="st">'Neuroticism'</span>,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1183'</span> : <span class="st">'ADHD'</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1184'</span> : <span class="st">'Autism Spectrum Disorder'</span>,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1185'</span> : <span class="st">'Autism Spectrum Disorder'</span>,</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1186'</span> : <span class="st">'Anorexia Nervosa'</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1188'</span> : <span class="st">'Major Depressive Disorder'</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1189'</span> : <span class="st">'Obsessive Compulsive Disorder'</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-22'</span> : <span class="st">'Schizophrenia'</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-297'</span> : <span class="st">'Alzheimers disease'</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-806'</span> : <span class="st">'Autism'</span>,</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-990'</span> : <span class="st">'Bulimia nervosa'</span>,</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-10'</span> : <span class="st">'Focal epilepsy'</span>,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-11'</span> : <span class="st">'Focal epilepsy'</span>,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-12'</span> : <span class="st">'Juvenile absence epilepsy'</span>,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-13'</span> : <span class="st">'Childhood absence epilepsy'</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-14'</span> : <span class="st">'Focal epilepsy'</span>,</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-15'</span> : <span class="st">'Focal epilepsy'</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-16'</span> : <span class="st">'Generalized epilepsy'</span>,</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-17'</span> : <span class="st">'Juvenile myoclonic epilepsy'</span>,</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-18'</span> : <span class="st">'Multiple sclerosis'</span>,</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-2'</span> : <span class="st">'Alzheimers disease'</span>,</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-41'</span> : <span class="st">'Bipolar Disorder'</span>,</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-42'</span> : <span class="st">'Schizophrenia'</span>,</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-7'</span> : <span class="st">'Parkinsons'</span>,</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-8'</span> : <span class="st">'Epilepsy'</span>,</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-9'</span> : <span class="st">'Generalized epilepsy'</span>,</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">'IGAP_Alzheimer'</span> : <span class="st">'IGAP_Alzheimer'</span>,</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">'iPSYCH-PGC_ASD_Nov2017.txt.gz'</span> : <span class="st">'ASD_PGC_Nov2017'</span>,</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Jones_et_al_2016_Chronotype'</span> : <span class="st">'Chronotype_Jones_2016'</span>,</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Jones_et_al_2016_SleepDuration'</span> : <span class="st">'Sleep_duration_Jones_2016'</span>,</span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MDD_MHQ_BIP_METACARPA_INFO6_A5_NTOT_no23andMe_noUKBB.txt.gz'</span> : <span class="st">'MDD_BIP_no23andMe_noUKBB'</span>,</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MDD_MHQ_METACARPA_INFO6_A5_NTOT_no23andMe_noUKBB.txt.gz'</span> : <span class="st">'MDD_METACARPA_no23andMe_noUKBB'</span>,</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MHQ_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'Depression'</span>,</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MHQ_Recurrent_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'Recurrent_Depression'</span>,</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MHQ_Single_Depression_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'Single_Depression'</span>,</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MHQ_Subthreshold_WG_MAF1_INFO4_HRC_Only_Filtered_Dups_FOR_METACARPA_INFO6_A5_NTOT.txt.gz'</span> : <span class="st">'Subthreshold_WG'</span>,</span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ocd_aug2017.txt.gz'</span> : <span class="st">'OCD_aug2017'</span>,</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>    <span class="st">'PGC_ADHD_EUR_2017'</span> : <span class="st">'ADHD_PGC_EUR_2017'</span>,</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    <span class="st">'PGC_ASD_2017_CEU'</span> : <span class="st">'ASD_PGC_2017_CEU'</span>,</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pgc-bip2021-all.vcf.txt.gz'</span> : <span class="st">'BD_PGC_all_2021'</span>,</span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pgc-bip2021-BDI.vcf.txt.gz'</span> : <span class="st">'BDI_PGC_2021'</span>,</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pgc-bip2021-BDII.vcf.txt.gz'</span> : <span class="st">'BDII_PGC_2021'</span>,</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pgc.scz2'</span> : <span class="st">'Schizophrenia_PGC_2'</span>,</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">'PGC3_SCZ_wave3_public.v2.txt.gz'</span> : <span class="st">'Schizophrenia_PGC_3'</span>,</span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pgcAN2.2019-07.vcf.txt.gz'</span> : <span class="st">'pgcAN2.2019-07.vcf.txt.gz'</span>,</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">'pts_all_freeze2_overall.txt.gz'</span> : <span class="st">'pts_all_freeze2'</span>,</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SSGAC_Depressive_Symptoms'</span> : <span class="st">'SSGAC_Depressive_Symptoms'</span>,</span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">'SSGAC_Education_Years_Pooled'</span> : <span class="st">'SSGAC_Education_Years_Pooled'</span>,</span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_1160_Sleep_duration'</span> : <span class="st">'UKB_1160_Sleep_duration'</span>,</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_1180_Morning_or_evening_person_chronotype'</span> : <span class="st">'UKB_1180_Morning_or_evening_person_chronotype'</span>,</span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_1200_Sleeplessness_or_insomnia'</span> : <span class="st">'UKB_1200_Sleeplessness_or_insomnia'</span>,</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20002_1243_self_reported_psychological_or_psychiatric_problem'</span> : <span class="st">'UKB_20002_1243_self_reported_psychological_or_psychiatric_problem'</span>,</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20002_1262_self_reported_parkinsons_disease'</span> : <span class="st">'UKB_20002_1262_self_reported_parkinsons_disease'</span>,</span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20002_1265_self_reported_migraine'</span> : <span class="st">'UKB_20002_1265_self_reported_migraine'</span>,</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20002_1289_self_reported_schizophrenia'</span> : <span class="st">'UKB_20002_1289_self_reported_schizophrenia'</span>,</span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20002_1616_self_reported_insomnia'</span> : <span class="st">'UKB_20002_1616_self_reported_insomnia'</span>,</span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20016_Fluid_intelligence_score'</span> : <span class="st">'UKB_20016_Fluid_intelligence_score'</span>,</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_20127_Neuroticism_score'</span> : <span class="st">'UKB_20127_Neuroticism_score'</span>,</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_G40_Diagnoses_main_ICD10_G40_Epilepsy'</span> : <span class="st">'UKB_G40_Diagnoses_main_ICD10_G40_Epilepsy'</span>,</span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>    <span class="st">'UKB_G43_Diagnoses_main_ICD10_G43_Migraine'</span> : <span class="st">'UKB_G43_Diagnoses_main_ICD10_G43_Migraine'</span>,</span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-5070'</span> : <span class="st">'Schizophrenia'</span>,</span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>    <span class="st">'GPC-NEO-NEUROTICISM'</span> : <span class="st">'GPC-NEO-NEUROTICISM'</span>,</span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1009'</span> : <span class="st">'Subjective well being'</span>,</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1018'</span> : <span class="st">'Subjective well being'</span>,</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1019'</span> : <span class="st">'Migraine in bipolar disorder'</span>,</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1029'</span> : <span class="st">'Internalizing problems'</span>,</span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1061'</span> : <span class="st">'G speed factor'</span>,</span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1062'</span> : <span class="st">'Symbol search'</span>,</span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1063'</span> : <span class="st">'8-choice reaction time'</span>,</span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1064'</span> : <span class="st">'2-choice reaction time'</span>,</span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1065'</span> : <span class="st">'Inspection time'</span>,</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1066'</span> : <span class="st">'Simple reaction time'</span>,</span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1067'</span> : <span class="st">'Digit symbol'</span>,</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-1068'</span> : <span class="st">'4-choice reaction time'</span>,</span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-45'</span> : <span class="st">'Anorexia nervosa'</span>,</span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-298'</span> : <span class="st">'Alzheimers Disease'</span>,</span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-808'</span> : <span class="st">'Bipolar Disorder'</span>,</span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-810'</span> : <span class="st">'Schizophrenia'</span>,</span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-812'</span> : <span class="st">'Parkinsons'</span>,</span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-818'</span> : <span class="st">'Parkinsons'</span>,</span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-a-824'</span> : <span class="st">'Alzheimers Disease'</span>,</span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ieu-b-43'</span> : <span class="st">'frontotemporal dementia'</span>,</span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ILAE_Genetic_generalised_epilepsy'</span> : <span class="st">'ILAE_Genetic_generalised_epilepsy'</span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>labels_readable <span class="op">=</span> [phenotype_dict_readable[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">Number of components to plot</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>npcomp <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">Sort the traits / phenotypes</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>trait_indices_sorted <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> idx <span class="kw">in</span> trait_indices:</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    trait_indices_sorted <span class="op">+=</span> <span class="bu">list</span>(idx)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>trait_labels_sorted <span class="op">=</span> [labels_readable[i] <span class="cf">for</span> i <span class="kw">in</span> trait_indices_sorted]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>pcomp_colors  <span class="op">=</span> {<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>: color <span class="cf">for</span> i, color <span class="kw">in</span> <span class="bu">enumerate</span>(mpl_stylesheet.kelly_colors() <span class="op">+</span> mpl_stylesheet.banskt_colors())}</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">18</span>))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> GridSpec(nrows <span class="op">=</span> <span class="bu">len</span>(plot_methods) <span class="op">+</span> <span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">1</span>, figure<span class="op">=</span>fig, height_ratios<span class="op">=</span>[<span class="fl">0.3</span>] <span class="op">+</span> [<span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> plot_methods])</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(plot_methods) <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>] <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(plot_methods):</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    iplot <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    showxlabels <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> iplot <span class="op">==</span> <span class="bu">len</span>(plot_methods) <span class="cf">else</span> <span class="va">False</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    ax[iplot] <span class="op">=</span> fig.add_subplot(gs[iplot, <span class="dv">0</span>])</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    structure_plot(ax[iplot], pcomps[m][trait_indices_sorted,:], trait_labels_sorted, pcomp_colors, npcomp, showxlabels <span class="op">=</span> showxlabels)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    ax[iplot].set_title(plot_methods_names[m])</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>plt_handles, plt_labels <span class="op">=</span> ax[i].get_legend_handles_labels()</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].legend(plt_handles, plt_labels, </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>             loc <span class="op">=</span> <span class="st">'lower center'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="dv">0</span>), title <span class="op">=</span> <span class="st">"Principal Components"</span>,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>             frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">8</span>, ncol <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side, border <span class="kw">in</span> ax[<span class="dv">0</span>].spines.items():</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    border.set_visible(<span class="va">False</span>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>                   labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#legend(bbox_to_anchor=(1.04, 1), loc="upper left")</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-pcomp-contribution-to-phenotype" class="quarto-figure quarto-figure-center anchored">
@@ -796,135 +907,141 @@ Fraction of Nan entries: 0.193</code></pre>
 <div class="cell" data-execution_count="11">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_corrmat(pcomps, x, ncomp <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ncomp <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        ncomp <span class="op">=</span> pcomps.shape[<span class="dv">1</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    nvar  <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    corr  <span class="op">=</span> np.zeros((nvar, ncomp))</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    pval  <span class="op">=</span> np.zeros((nvar, ncomp))</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ivar <span class="kw">in</span> <span class="bu">range</span>(nvar):</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        d1 <span class="op">=</span> x[:, ivar]</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> icomp <span class="kw">in</span> <span class="bu">range</span>(ncomp):</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>            d2 <span class="op">=</span> pcomps[:, icomp]</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>            corr[ivar, icomp], pval[ivar, icomp] <span class="op">=</span> pearsonr(d1, d2)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> corr, pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_corrmat(pcomps, x, ncomp <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ncomp <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        ncomp <span class="op">=</span> pcomps.shape[<span class="dv">1</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    nvar  <span class="op">=</span> x.shape[<span class="dv">1</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    corr  <span class="op">=</span> np.zeros((nvar, ncomp))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    pval  <span class="op">=</span> np.zeros((nvar, ncomp))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ivar <span class="kw">in</span> <span class="bu">range</span>(nvar):</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        d1 <span class="op">=</span> x[:, ivar]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> icomp <span class="kw">in</span> <span class="bu">range</span>(ncomp):</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>            d2 <span class="op">=</span> pcomps[:, icomp]</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>            corr[ivar, icomp], pval[ivar, icomp] <span class="op">=</span> pearsonr(d1, d2)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> corr, pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-execution_count="12">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">Calculate the correlations and pvals, if required.</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">This takes time, so the pre-computed results can also be loaded from saved files</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>corrs <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>pvals <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for m in plot_methods:</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     corrs[m], pvals[m] = get_corrmat(pcomps[m], X_cent, ncomp = 20)</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     with open (f"{data_dir}/loading_corr_{m}.pkl", 'wb') as handle:</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co">#         pickle.dump(corrs[m], handle, protocol=pickle.HIGHEST_PROTOCOL)</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     with open (f"{data_dir}/loading_corr_pval_{m}.pkl", 'wb') as handle:</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#         pickle.dump(pvals[m], handle, protocol=pickle.HIGHEST_PROTOCOL)</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> plot_methods:</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/loading_corr_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        corrs[m] <span class="op">=</span> pickle.load(handle)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/loading_corr_pval_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        pvals[m] <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">Calculate the correlations and pvals, if required.</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">This takes time, so the pre-computed results can also be loaded from saved files</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>corrs <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>pvals <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># for m in plot_methods:</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     corrs[m], pvals[m] = get_corrmat(pcomps[m], X_cent, ncomp = 20)</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     with open (f"{data_dir}/loading_corr_{m}.pkl", 'wb') as handle:</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#         pickle.dump(corrs[m], handle, protocol=pickle.HIGHEST_PROTOCOL)</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     with open (f"{data_dir}/loading_corr_pval_{m}.pkl", 'wb') as handle:</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#         pickle.dump(pvals[m], handle, protocol=pickle.HIGHEST_PROTOCOL)</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> plot_methods:</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/loading_corr_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        corrs[m] <span class="op">=</span> pickle.load(handle)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/loading_corr_pval_</span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        pvals[m] <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-execution_count="13">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_total_snps(sdict):</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    stot <span class="op">=</span> {i <span class="op">+</span> <span class="dv">1</span> : <span class="dv">0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> snp, info <span class="kw">in</span> sdict.items():</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(info[<span class="st">'CHR'</span>])</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> info[<span class="st">'BP'</span>]</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bppos <span class="op">&gt;</span> stot[chrm]:</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            stot[chrm] <span class="op">=</span> bppos</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> stot</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>rsid_list <span class="op">=</span> zscore_df.index</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>snp_info_dict <span class="op">=</span> snp_info.set_index(<span class="st">'SNP'</span>).to_dict(orient <span class="op">=</span> <span class="st">'index'</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>snp_tot <span class="op">=</span> get_total_snps(snp_info_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="14">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corr_to_manhattan_data(corr_data, pcidx):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {i<span class="op">+</span><span class="dv">1</span>: <span class="bu">dict</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(corr_data[:, pcidx]):</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        rsid <span class="op">=</span> rsid_list[i]</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(snp_info_dict[rsid][<span class="st">'CHR'</span>])</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> snp_info_dict[rsid][<span class="st">'BP'</span>]</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        data[chrm][bppos] <span class="op">=</span> np.square(val)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_total_snps(sdict):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    stot <span class="op">=</span> {i <span class="op">+</span> <span class="dv">1</span> : <span class="dv">0</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> snp, info <span class="kw">in</span> sdict.items():</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(info[<span class="st">'CHR'</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> info[<span class="st">'BP'</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bppos <span class="op">&gt;</span> stot[chrm]:</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            stot[chrm] <span class="op">=</span> bppos</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> stot</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pval_to_manhattan_data(pval_data, pcidx):</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {i<span class="op">+</span><span class="dv">1</span>: <span class="bu">dict</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(pval_data[:, pcidx]):</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        rsid <span class="op">=</span> rsid_list[i]</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(snp_info_dict[rsid][<span class="st">'CHR'</span>])</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> snp_info_dict[rsid][<span class="st">'BP'</span>]</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        data[chrm][bppos] <span class="op">=</span> <span class="op">-</span> np.log10(val)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_manhattan(ax, data, ylabel, showx <span class="op">=</span> <span class="va">True</span>):</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    xtickposlist <span class="op">=</span> <span class="bu">list</span>()</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    offcolors <span class="op">=</span> [<span class="st">'darkorange'</span>, <span class="st">'firebrick'</span>]</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> chrm, cvals <span class="kw">in</span> data.items():</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> start <span class="op">+</span> snp_tot[chrm]</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>        xtickposlist.append(<span class="bu">int</span>((start <span class="op">+</span> end) <span class="op">/</span> <span class="dv">2</span>))</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> [ start <span class="op">+</span> bp <span class="cf">for</span> bp <span class="kw">in</span> <span class="bu">list</span>(cvals.keys())]</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> <span class="bu">list</span>(cvals.values())</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>        ax.scatter(x, y, color<span class="op">=</span>offcolors[chrm<span class="op">%</span><span class="dv">2</span>], s <span class="op">=</span> <span class="dv">3</span>, alpha <span class="op">=</span> <span class="fl">0.8</span>)  </span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> end</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="dv">0</span>, end)</span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.set_ylim(0, 1)</span></span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.plot([0, lastbp], [log10cutoff, log10cutoff], ls = 'dashed', color='gainsboro', lw = 2)</span></span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.text(0.05, 1.0, tname, transform=ax.transAxes, ha='left', va='top')</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> side <span class="op">==</span> <span class="st">'top'</span>:</span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>            border.set_visible(<span class="va">False</span>)</span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(xtickposlist)</span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, labelsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> showx:</span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels([<span class="st">"</span><span class="sc">{:d}</span><span class="st">"</span>.<span class="bu">format</span>(x) <span class="cf">for</span> x <span class="kw">in</span> data.keys()], rotation <span class="op">=</span> <span class="dv">90</span>)</span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels([<span class="st">""</span> <span class="cf">for</span> x <span class="kw">in</span> data.keys()])</span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>rsid_list <span class="op">=</span> zscore_df.index</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>snp_info_dict <span class="op">=</span> snp_info.set_index(<span class="st">'SNP'</span>).to_dict(orient <span class="op">=</span> <span class="st">'index'</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>snp_tot <span class="op">=</span> get_total_snps(snp_info_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="28">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">2</span> <span class="op">*</span> npcomp <span class="op">+</span> (npcomp <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">1</span>))</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>whichmethod <span class="op">=</span> <span class="st">'nnm_sparse'</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> icomp <span class="kw">in</span> <span class="bu">range</span>(npcomp):</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(npcomp, <span class="dv">1</span>, icomp<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    pval_data <span class="op">=</span> pval_to_manhattan_data(pvals[whichmethod], icomp)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    showx <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> icomp <span class="op">==</span> npcomp <span class="op">-</span> <span class="dv">1</span> <span class="cf">else</span> <span class="va">False</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    plot_manhattan(ax, pval_data, <span class="ss">f"PC</span><span class="sc">{</span>icomp <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>, showx <span class="op">=</span> showx)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    label_rect <span class="op">=</span> ax.add_artist(mpatches.Rectangle((<span class="fl">0.01</span>, <span class="fl">0.9</span>), <span class="fl">0.1</span>, <span class="fl">0.1</span>, edgecolor <span class="op">=</span> <span class="st">'none'</span>, facecolor <span class="op">=</span> pcomp_colors[<span class="ss">f"</span><span class="sc">{</span>icomp <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>], transform <span class="op">=</span> ax.transAxes))</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corr_to_manhattan_data(corr_data, pcidx):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {i<span class="op">+</span><span class="dv">1</span>: <span class="bu">dict</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(corr_data[:, pcidx]):</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        rsid <span class="op">=</span> rsid_list[i]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(snp_info_dict[rsid][<span class="st">'CHR'</span>])</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> snp_info_dict[rsid][<span class="st">'BP'</span>]</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        data[chrm][bppos] <span class="op">=</span> np.square(val)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pval_to_manhattan_data(pval_data, pcidx):</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {i<span class="op">+</span><span class="dv">1</span>: <span class="bu">dict</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">22</span>)}</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(pval_data[:, pcidx]):</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        rsid <span class="op">=</span> rsid_list[i]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        chrm <span class="op">=</span> <span class="bu">int</span>(snp_info_dict[rsid][<span class="st">'CHR'</span>])</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        bppos <span class="op">=</span> snp_info_dict[rsid][<span class="st">'BP'</span>]</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        data[chrm][bppos] <span class="op">=</span> <span class="op">-</span> np.log10(val)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_manhattan(ax, data, ylabel, showx <span class="op">=</span> <span class="va">True</span>):</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    end <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>    xtickposlist <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    offcolors <span class="op">=</span> [<span class="st">'darkorange'</span>, <span class="st">'firebrick'</span>]</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> chrm, cvals <span class="kw">in</span> data.items():</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>        end <span class="op">=</span> start <span class="op">+</span> snp_tot[chrm]</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        xtickposlist.append(<span class="bu">int</span>((start <span class="op">+</span> end) <span class="op">/</span> <span class="dv">2</span>))</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> [ start <span class="op">+</span> bp <span class="cf">for</span> bp <span class="kw">in</span> <span class="bu">list</span>(cvals.keys())]</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> <span class="bu">list</span>(cvals.values())</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        ax.scatter(x, y, color<span class="op">=</span>offcolors[chrm<span class="op">%</span><span class="dv">2</span>], s <span class="op">=</span> <span class="dv">3</span>, alpha <span class="op">=</span> <span class="fl">0.8</span>)  </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        start <span class="op">=</span> end</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="dv">0</span>, end)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.set_ylim(0, 1)</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.plot([0, lastbp], [log10cutoff, log10cutoff], ls = 'dashed', color='gainsboro', lw = 2)</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax.text(0.05, 1.0, tname, transform=ax.transAxes, ha='left', va='top')</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> side, border <span class="kw">in</span> ax.spines.items():</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> side <span class="op">==</span> <span class="st">'top'</span>:</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>            border.set_visible(<span class="va">False</span>)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(xtickposlist)</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, labelsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> showx:</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels([<span class="st">"</span><span class="sc">{:d}</span><span class="st">"</span>.<span class="bu">format</span>(x) <span class="cf">for</span> x <span class="kw">in</span> data.keys()], rotation <span class="op">=</span> <span class="dv">90</span>)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels([<span class="st">""</span> <span class="cf">for</span> x <span class="kw">in</span> data.keys()])</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>In <a href="#fig-assoc-variants-to-pcomps">Figure&nbsp;3</a>, we show the Manhattan plot for the association of each variant with the principal components. We calculate the Pearson’s coefficient of correlation between the variants’ z-scores and the principal components and use the <span class="math inline">-\log_{10}(p)</span> value as the significance of the correlation.</p>
+<div class="cell" data-execution_count="29">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">2</span> <span class="op">*</span> npcomp <span class="op">+</span> (npcomp <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="dv">1</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>whichmethod <span class="op">=</span> <span class="st">'nnm_sparse'</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> icomp <span class="kw">in</span> <span class="bu">range</span>(npcomp):</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(npcomp, <span class="dv">1</span>, icomp<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    pval_data <span class="op">=</span> pval_to_manhattan_data(pvals[whichmethod], icomp)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    showx <span class="op">=</span> <span class="va">True</span> <span class="cf">if</span> icomp <span class="op">==</span> npcomp <span class="op">-</span> <span class="dv">1</span> <span class="cf">else</span> <span class="va">False</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    plot_manhattan(ax, pval_data, <span class="ss">f"PC</span><span class="sc">{</span>icomp <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>, showx <span class="op">=</span> showx)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    label_rect <span class="op">=</span> ax.add_artist(mpatches.Rectangle((<span class="fl">0.01</span>, <span class="fl">0.9</span>), <span class="fl">0.1</span>, <span class="fl">0.1</span>, edgecolor <span class="op">=</span> <span class="st">'none'</span>, facecolor <span class="op">=</span> pcomp_colors[<span class="ss">f"</span><span class="sc">{</span>icomp <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>], transform <span class="op">=</span> ax.transAxes))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-10-23-structure-plot_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+<div id="fig-assoc-variants-to-pcomps" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2023-10-23-structure-plot_files/figure-html/fig-assoc-variants-to-pcomps-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Association of variants with principal components (hidden factors)</figcaption>
+</figure>
+</div>
 </div>
 </div>
 
