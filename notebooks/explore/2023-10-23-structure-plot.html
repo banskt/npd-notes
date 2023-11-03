@@ -217,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="getting-setup" class="level1">
 <h1>Getting Setup</h1>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="30">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loading-data" class="level1">
 <h1>Loading data</h1>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="31">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"../data"</span></span>
@@ -269,12 +269,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="32">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>zscore_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 
 
@@ -577,7 +577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df).T</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_nan_cent <span class="op">=</span> X_nan <span class="op">-</span> np.nanmean(X_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X_nan_mask <span class="op">=</span> np.isnan(X_nan)</span>
@@ -590,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> zscore_df.columns</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span>
@@ -605,7 +605,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <section id="low-rank-matrices" class="level1">
 <h1>Low rank matrices</h1>
 <p>We have run 3 different methods to obtain low rank matrices, namely IALM, NNM and NNM-Sparse. Here, we load the results from those methods.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="35">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mf_methods <span class="op">=</span> [<span class="st">'ialm'</span>, <span class="st">'nnm'</span>, <span class="st">'nnm_sparse'</span>]</span>
@@ -620,7 +620,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <section id="principal-components" class="level1">
 <h1>Principal components</h1>
 <p>Suppose, we decompose <span class="math inline">\mathbf{X} = \mathbf{U}\mathbf{S}\mathbf{V}^{\intercal}</span>. Columns of <span class="math inline">\mathbf{V}</span> are the principal axes (aka principal directions, aka eigenvectors). The principal components are the columns of <span class="math inline">\mathbf{U}\mathbf{S}</span> – the projections of the data on the the principal axes (note <span class="math inline">\mathbf{X}\mathbf{V} = \mathbf{U}\mathbf{S}</span>).</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="36">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
@@ -641,7 +641,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </details>
 </div>
 <p>In <a href="#fig-scree-plots">Figure&nbsp;1</a>, we look at the eigenvalues obtained from PCA of the low rank matrices. The first plot on the left shows the PCA on the raw data, without noise removal. It is evident that a truncated SVD (as shown below) will not be able to capture the variance in the data.</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="37">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plot_methods <span class="op">=</span> [<span class="st">'tsvd'</span>] <span class="op">+</span> mf_methods</span>
@@ -681,7 +681,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <p>Suppose, the principal components are <span class="math inline">\mathbf{F} = \mathbf{U}\mathbf{S}</span>. Then, the squared cosine shows the importance of a component for a given observation. <span class="math display">\cos_{i, l}^2 = \frac{f_{i,l}^2}{\sum_{l}f_{i,l}^2}</span></p>
 <p>Intuitively, the above factor corresponds to the square of the cosine of the angle from the right triangle made with the origin, the observation and its projection on the component.</p>
 <p><a href="https://personal.utdallas.edu/~herve/abdi-awPCA2010.pdf">See better explanation</a></p>
-<div class="cell" data-execution_count="9">
+<div class="cell" data-execution_count="38">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_cos2_scores(pcomps):</span>
@@ -737,7 +737,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </details>
 </div>
 <p>In <a href="#fig-pcomp-contribution-to-phenotype">Figure&nbsp;2</a>, we look at the contribution of the <strong>top 10</strong> principal components to the disease phenotypes.</p>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="39">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>phenotype_dict_readable <span class="op">=</span> {</span>
@@ -848,7 +848,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a>labels_readable <span class="op">=</span> [phenotype_dict_readable[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="26">
+<div class="cell" data-execution_count="40">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
@@ -904,7 +904,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </section>
 <section id="which-snps-are-associated-with-the-principal-components-hidden-factors" class="level1">
 <h1>Which SNPs are associated with the principal components (hidden factors)?</h1>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="41">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_corrmat(pcomps, x, ncomp <span class="op">=</span> <span class="va">None</span>):</span>
@@ -921,7 +921,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> corr, pval</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="42">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">'''</span></span>
@@ -945,7 +945,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        pvals[m] <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="43">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_total_snps(sdict):</span>
@@ -962,7 +962,7 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>snp_tot <span class="op">=</span> get_total_snps(snp_info_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="28">
+<div class="cell" data-execution_count="44">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corr_to_manhattan_data(corr_data, pcidx):</span>
@@ -1017,7 +1017,7 @@ Fraction of Nan entries: 0.193</code></pre>
 </details>
 </div>
 <p>In <a href="#fig-assoc-variants-to-pcomps">Figure&nbsp;3</a>, we show the Manhattan plot for the association of each variant with the principal components. We calculate the Pearson’s coefficient of correlation between the variants’ z-scores and the principal components and use the <span class="math inline">-\log_{10}(p)</span> value as the significance of the correlation.</p>
-<div class="cell" data-execution_count="29">
+<div class="cell" data-execution_count="45">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>

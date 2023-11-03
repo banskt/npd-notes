@@ -2099,21 +2099,21 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="72">
+<div class="cell" data-execution_count="41">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>all_snp_info <span class="op">=</span> assoc_df_fa_nsnp_nodup[[<span class="st">'SNP'</span>, <span class="st">'CHR'</span>, <span class="st">'BP'</span>]].copy()</span>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>all_snp_info <span class="op">=</span> assoc_df_fa_nsnp_nodup[[<span class="st">'SNP'</span>, <span class="st">'CHR'</span>, <span class="st">'BP'</span>, <span class="st">'A1'</span>, <span class="st">'A2'</span>]].copy()</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>all_snp_info_nona <span class="op">=</span> all_snp_info.dropna(axis <span class="op">=</span> <span class="dv">0</span>)</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>all_snp_info_nona.loc[:, <span class="st">'CHR'</span>] <span class="op">=</span> all_snp_info_nona.CHR.<span class="bu">str</span>.replace(<span class="st">'chr'</span>, <span class="st">''</span>)</span>
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>all_snp_info_nodup <span class="op">=</span> all_snp_info_nona.drop_duplicates(subset<span class="op">=</span>[<span class="st">'SNP'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="73">
+<div class="cell" data-execution_count="42">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>all_snp_info_nodup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="73">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <div>
 
 
@@ -2124,6 +2124,8 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 <th data-quarto-table-cell-role="th">SNP</th>
 <th data-quarto-table-cell-role="th">CHR</th>
 <th data-quarto-table-cell-role="th">BP</th>
+<th data-quarto-table-cell-role="th">A1</th>
+<th data-quarto-table-cell-role="th">A2</th>
 </tr>
 </thead>
 <tbody>
@@ -2132,33 +2134,45 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 <td>rs10486722</td>
 <td>7</td>
 <td>41772310</td>
+<td>C</td>
+<td>T</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">91</td>
 <td>rs2416745</td>
 <td>9</td>
 <td>120018976</td>
+<td>T</td>
+<td>G</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">182</td>
 <td>rs9287971</td>
 <td>2</td>
 <td>174067024</td>
+<td>G</td>
+<td>A</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">273</td>
 <td>rs12660608</td>
 <td>6</td>
 <td>123017369</td>
+<td>T</td>
+<td>C</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">364</td>
 <td>rs1693523</td>
 <td>15</td>
 <td>52535142</td>
+<td>C</td>
+<td>T</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -2168,39 +2182,49 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 <td>rs7199470</td>
 <td>16</td>
 <td>10137879</td>
+<td>T</td>
+<td>G</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">676181</td>
 <td>rs77337722</td>
 <td>18</td>
 <td>74935886</td>
+<td>T</td>
+<td>C</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">676201</td>
 <td>rs183211079</td>
 <td>2</td>
 <td>151553344</td>
+<td>G</td>
+<td>A</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">676221</td>
 <td>rs78346960</td>
 <td>17</td>
 <td>9121155</td>
+<td>A</td>
+<td>C</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">676241</td>
 <td>rs2322</td>
 <td>4</td>
 <td>9701603</td>
+<td>C</td>
+<td>G</td>
 </tr>
 </tbody>
 </table>
 
-<p>10068 rows × 3 columns</p>
+<p>10068 rows × 5 columns</p>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="74">
+<div class="cell" data-execution_count="43">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>snp_info_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/snp_info.pkl"</span></span>
