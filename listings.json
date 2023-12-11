@@ -1,5 +1,15 @@
 [
   {
+    "listing": "/notebooks/ukbb/index.html",
+    "items": [
+      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
+      "/notebooks/ukbb/2023-10-30-rpca-ialm.html",
+      "/notebooks/ukbb/2023-11-25-weighted-nnm.html",
+      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
+      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html"
+    ]
+  },
+  {
     "listing": "/notebooks/explore/index.html",
     "items": [
       "/notebooks/explore/2023-10-23-structure-plot.html",
@@ -22,6 +32,9 @@
     "items": [
       "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
       "/notebooks/ukbb/2023-10-30-rpca-ialm.html",
+      "/notebooks/ukbb/2023-11-25-weighted-nnm.html",
+      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
+      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
       "/notebooks/explore/2023-10-23-structure-plot.html",
       "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
       "/notebooks/explore/2023-08-08-npd-application.html",
@@ -48,13 +61,6 @@
       "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
       "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
       "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
-    ]
-  },
-  {
-    "listing": "/notebooks/ukbb/index.html",
-    "items": [
-      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
-      "/notebooks/ukbb/2023-10-30-rpca-ialm.html"
     ]
   }
 ]

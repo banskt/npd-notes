@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>NPD Network – snp-position-filter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">NPD Network</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../notebooks/index.html" rel="" target="">
+ <span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../meetings/index.html" rel="" target="">
+ <span class="menu-text">Meetings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../reference/index.html" rel="" target="">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+
+
+
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sc_stats</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> collections</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_stylesheet</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_utils</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>phenotype_metafile <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/UKBB/npd_phenotypes.tsv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>variants_metafile <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/UKBB/metadata/significant_variants.tsv"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/npddata/ukbb.imputed_v3.neale/3_all_assoc"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>phenotype_df <span class="op">=</span> pd.read_csv(phenotype_metafile, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>phenotype_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">phenotype</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">variable_type</th>
+<th data-quarto-table-cell-role="th">source</th>
+<th data-quarto-table-cell-role="th">n_non_missing</th>
+<th data-quarto-table-cell-role="th">n_missing</th>
+<th data-quarto-table-cell-role="th">n_controls</th>
+<th data-quarto-table-cell-role="th">n_cases</th>
+<th data-quarto-table-cell-role="th">PHESANT_transformation</th>
+<th data-quarto-table-cell-role="th">notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1160</td>
+<td>Sleep duration</td>
+<td>ordinal</td>
+<td>phesant</td>
+<td>359020</td>
+<td>2174</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1160_0|| INTEGER || reassignments: -1=NA|-3=NA...</td>
+<td>ACE touchscreen question "About how many hours...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1200</td>
+<td>Sleeplessness / insomnia</td>
+<td>ordinal</td>
+<td>phesant</td>
+<td>360738</td>
+<td>456</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1200_0|| CAT-SINGLE || Inc(&gt;=10): 3(102157) ||...</td>
+<td>ACE touchscreen question "Do you have trouble ...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1220</td>
+<td>Daytime dozing / sleeping (narcolepsy)</td>
+<td>ordinal</td>
+<td>phesant</td>
+<td>359752</td>
+<td>1442</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>1220_0|| CAT-SINGLE || reassignments: 3=2 || I...</td>
+<td>ACE touchscreen question "How likely are you t...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1920</td>
+<td>Mood swings</td>
+<td>binary</td>
+<td>phesant</td>
+<td>352604</td>
+<td>8590</td>
+<td>193622.0</td>
+<td>158982.0</td>
+<td>1920_0|| CAT-SINGLE || Inc(&gt;=10): 0(193622) ||...</td>
+<td>ACE touchscreen question "Does your mood often...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1970</td>
+<td>Nervous feelings</td>
+<td>binary</td>
+<td>phesant</td>
+<td>351829</td>
+<td>9365</td>
+<td>268709.0</td>
+<td>83120.0</td>
+<td>1970_0|| CAT-SINGLE || Inc(&gt;=10): 0(268709) ||...</td>
+<td>ACE touchscreen question "Would you call yours...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">312</td>
+<td>T79</td>
+<td>Diagnoses - main ICD10: T79 Certain early comp...</td>
+<td>binary</td>
+<td>icd10</td>
+<td>361194</td>
+<td>0</td>
+<td>360989.0</td>
+<td>205.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">313</td>
+<td>TRAUMBRAIN_NONCONCUS</td>
+<td>severe traumatic brain injury, does not includ...</td>
+<td>binary</td>
+<td>finngen</td>
+<td>361194</td>
+<td>0</td>
+<td>360631.0</td>
+<td>563.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">314</td>
+<td>VI_NERVOUS</td>
+<td>Diseases of the nervous system</td>
+<td>binary</td>
+<td>finngen</td>
+<td>361194</td>
+<td>0</td>
+<td>339871.0</td>
+<td>21323.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">315</td>
+<td>V_MENTAL_BEHAV</td>
+<td>Mental and behavioural disorders</td>
+<td>binary</td>
+<td>finngen</td>
+<td>361194</td>
+<td>0</td>
+<td>356892.0</td>
+<td>4302.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">316</td>
+<td>Z43</td>
+<td>Diagnoses - main ICD10: Z43 Attention to artif...</td>
+<td>binary</td>
+<td>icd10</td>
+<td>361194</td>
+<td>0</td>
+<td>359838.0</td>
+<td>1356.0</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>317 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phenotype_ids <span class="op">=</span> phenotype_df[<span class="st">'phenotype'</span>].to_list()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>assoc_file <span class="op">=</span> {}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s <span class="kw">in</span> phenotype_ids:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    assoc_file[s] <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">.tsv"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>assoc_df <span class="op">=</span> pd.read_pickle(<span class="st">"../data/ukbb_assoc.pkl"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>assoc_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Index: 13311781 entries, 0 to 41992
+Data columns (total 7 columns):
+ #   Column          Dtype  
+---  ------          -----  
+ 0   variant         object 
+ 1   low_confidence  bool   
+ 2   beta            float64
+ 3   se              float64
+ 4   tstat           float64
+ 5   pval            float64
+ 6   phenotype_id    object 
+dtypes: bool(1), float64(4), object(2)
+memory usage: 723.6+ MB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Number of unique SNPs: </span><span class="sc">{</span><span class="bu">len</span>(assoc_df[<span class="st">'variant'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Number of unique studies: </span><span class="sc">{</span><span class="bu">len</span>(assoc_df[<span class="st">'phenotype_id'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of unique SNPs: 41993
+Number of unique studies: 317</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>variant_colnames <span class="op">=</span> [<span class="st">'variant'</span>, <span class="st">'chr'</span>, <span class="st">'pos'</span>, <span class="st">'ref'</span>, <span class="st">'alt'</span>, <span class="st">'rsid'</span>, <span class="st">'varid'</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'consequence'</span>, <span class="st">'consequence_category'</span>, <span class="st">'info'</span>, <span class="st">'call_rate'</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'AC'</span>, <span class="st">'AF'</span>, <span class="st">'minor_allele'</span>, <span class="st">'minor_AF'</span>, <span class="st">'p_hwe'</span>, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'n_called'</span>, <span class="st">'n_not_called'</span>, <span class="st">'n_hom_ref'</span>, <span class="st">'n_het'</span>, <span class="st">'n_hom_var'</span>, <span class="st">'n_non_ref'</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'r_heterozygosity'</span>, <span class="st">'r_het_hom_var'</span>, <span class="st">'r_expected_het_frequency'</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>variant_df <span class="op">=</span> pd.read_csv(variants_metafile, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>, names <span class="op">=</span> variant_colnames)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count_nucleotides(row):</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(row[<span class="st">'ref'</span>]) <span class="op">+</span> <span class="bu">len</span>(row[<span class="st">'alt'</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>variant_df[<span class="st">'ntcount'</span>] <span class="op">=</span> variant_df.<span class="bu">apply</span>(count_nucleotides, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>variant_df_filtered <span class="op">=</span> variant_df[(variant_df[<span class="st">'ntcount'</span>] <span class="op">==</span> <span class="dv">2</span>) </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                               <span class="op">&amp;</span> (variant_df[<span class="st">'minor_AF'</span>] <span class="op">&gt;=</span> <span class="fl">0.05</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                               <span class="op">&amp;</span> (variant_df[<span class="st">'info'</span>] <span class="op">&gt;=</span> <span class="fl">0.8</span>)].drop(columns <span class="op">=</span> [<span class="st">'ntcount'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="66">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>variant_df_filtered.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+Index: 37395 entries, 9 to 41991
+Data columns (total 25 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   variant                   37395 non-null  object 
+ 1   chr                       37395 non-null  int64  
+ 2   pos                       37395 non-null  int64  
+ 3   ref                       37395 non-null  object 
+ 4   alt                       37395 non-null  object 
+ 5   rsid                      37395 non-null  object 
+ 6   varid                     37395 non-null  object 
+ 7   consequence               37395 non-null  object 
+ 8   consequence_category      37395 non-null  object 
+ 9   info                      37395 non-null  float64
+ 10  call_rate                 37395 non-null  float64
+ 11  AC                        37395 non-null  int64  
+ 12  AF                        37395 non-null  float64
+ 13  minor_allele              37395 non-null  object 
+ 14  minor_AF                  37395 non-null  float64
+ 15  p_hwe                     37395 non-null  float64
+ 16  n_called                  37395 non-null  int64  
+ 17  n_not_called              37395 non-null  int64  
+ 18  n_hom_ref                 37395 non-null  int64  
+ 19  n_het                     37395 non-null  int64  
+ 20  n_hom_var                 37395 non-null  int64  
+ 21  n_non_ref                 37395 non-null  int64  
+ 22  r_heterozygosity          37395 non-null  float64
+ 23  r_het_hom_var             37395 non-null  float64
+ 24  r_expected_het_frequency  37395 non-null  float64
+dtypes: float64(8), int64(9), object(8)
+memory usage: 7.4+ MB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="67">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ldclump_snppos(xarr, pos_cutoff<span class="op">=</span><span class="dv">100000</span>):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    xclump <span class="op">=</span> <span class="bu">list</span>()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    xsorted <span class="op">=</span> np.sort(xarr)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    xlast <span class="op">=</span> xsorted[<span class="dv">0</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    xclump.append(xlast)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> xsorted[<span class="dv">1</span>:]:</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (x <span class="op">-</span> xlast <span class="op">&gt;</span> pos_cutoff):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            xclump.append(x)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            xlast <span class="op">=</span> x</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(xclump)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="76">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ldfilter_dict <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> chrm <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">23</span>):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    chr_snppos <span class="op">=</span> variant_df_filtered[variant_df_filtered[<span class="st">'chr'</span>] <span class="op">==</span> chrm][<span class="st">'pos'</span>].values</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    chr_snppos_filtered <span class="op">=</span> ldclump_snppos(chr_snppos, pos_cutoff <span class="op">=</span> <span class="dv">10000</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ldfilter_dict <span class="op">+=</span> [{<span class="st">'chr'</span>:chrm, <span class="st">'pos'</span>:x} <span class="cf">for</span> x <span class="kw">in</span> chr_snppos_filtered]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="77">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(ldfilter_dict)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>3386</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="84">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_ldfilter <span class="op">=</span> pd.DataFrame.from_dict(ldfilter_dict)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>variant_df_ldfiltered <span class="op">=</span> df_ldfilter.merge(variant_df_filtered, on<span class="op">=</span>[<span class="st">'chr'</span>, <span class="st">'pos'</span>], how<span class="op">=</span><span class="st">'inner'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="85">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>variant_df_ldfiltered.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 3387 entries, 0 to 3386
+Data columns (total 25 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   chr                       3387 non-null   int64  
+ 1   pos                       3387 non-null   int64  
+ 2   variant                   3387 non-null   object 
+ 3   ref                       3387 non-null   object 
+ 4   alt                       3387 non-null   object 
+ 5   rsid                      3387 non-null   object 
+ 6   varid                     3387 non-null   object 
+ 7   consequence               3387 non-null   object 
+ 8   consequence_category      3387 non-null   object 
+ 9   info                      3387 non-null   float64
+ 10  call_rate                 3387 non-null   float64
+ 11  AC                        3387 non-null   int64  
+ 12  AF                        3387 non-null   float64
+ 13  minor_allele              3387 non-null   object 
+ 14  minor_AF                  3387 non-null   float64
+ 15  p_hwe                     3387 non-null   float64
+ 16  n_called                  3387 non-null   int64  
+ 17  n_not_called              3387 non-null   int64  
+ 18  n_hom_ref                 3387 non-null   int64  
+ 19  n_het                     3387 non-null   int64  
+ 20  n_hom_var                 3387 non-null   int64  
+ 21  n_non_ref                 3387 non-null   int64  
+ 22  r_heterozygosity          3387 non-null   float64
+ 23  r_het_hom_var             3387 non-null   float64
+ 24  r_expected_het_frequency  3387 non-null   float64
+dtypes: float64(8), int64(9), object(8)
+memory usage: 661.7+ KB</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="86">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fvar <span class="op">=</span> variant_df_ldfiltered[[<span class="st">'variant'</span>, <span class="st">'rsid'</span>]].merge(assoc_df, on <span class="op">=</span> [<span class="st">'variant'</span>], how <span class="op">=</span> <span class="st">'inner'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="87">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Number of unique SNPs: </span><span class="sc">{</span><span class="bu">len</span>(assoc_df_fvar[<span class="st">'variant'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Number of unique studies: </span><span class="sc">{</span><span class="bu">len</span>(assoc_df_fvar[<span class="st">'phenotype_id'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of unique SNPs: 3387
+Number of unique studies: 317</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="88">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> assoc_df_fvar[[<span class="st">'variant'</span>, <span class="st">'phenotype_id'</span>, <span class="st">'tstat'</span>]].pivot(index <span class="op">=</span> <span class="st">'variant'</span>, columns <span class="op">=</span> <span class="st">'phenotype_id'</span>, values <span class="op">=</span> <span class="st">'tstat'</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">0</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>beta_df   <span class="op">=</span> assoc_df_fvar[[<span class="st">'variant'</span>, <span class="st">'phenotype_id'</span>, <span class="st">'beta'</span>]].pivot(index <span class="op">=</span> <span class="st">'variant'</span>, columns <span class="op">=</span> <span class="st">'phenotype_id'</span>, values <span class="op">=</span> <span class="st">'beta'</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">0</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>se_df     <span class="op">=</span> assoc_df_fvar[[<span class="st">'variant'</span>, <span class="st">'phenotype_id'</span>, <span class="st">'se'</span>]].pivot(index <span class="op">=</span> <span class="st">'variant'</span>, columns <span class="op">=</span> <span class="st">'phenotype_id'</span>, values <span class="op">=</span> <span class="st">'se'</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">0</span>).rename_axis(<span class="va">None</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="89">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>zscore_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">1160</th>
+<th data-quarto-table-cell-role="th">1200</th>
+<th data-quarto-table-cell-role="th">1220</th>
+<th data-quarto-table-cell-role="th">1920</th>
+<th data-quarto-table-cell-role="th">1970</th>
+<th data-quarto-table-cell-role="th">1980</th>
+<th data-quarto-table-cell-role="th">20002_1123</th>
+<th data-quarto-table-cell-role="th">20002_1240</th>
+<th data-quarto-table-cell-role="th">20002_1243</th>
+<th data-quarto-table-cell-role="th">20002_1246</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">R53</th>
+<th data-quarto-table-cell-role="th">R56</th>
+<th data-quarto-table-cell-role="th">R90</th>
+<th data-quarto-table-cell-role="th">SFN</th>
+<th data-quarto-table-cell-role="th">SLEEP</th>
+<th data-quarto-table-cell-role="th">T79</th>
+<th data-quarto-table-cell-role="th">TRAUMBRAIN_NONCONCUS</th>
+<th data-quarto-table-cell-role="th">VI_NERVOUS</th>
+<th data-quarto-table-cell-role="th">V_MENTAL_BEHAV</th>
+<th data-quarto-table-cell-role="th">Z43</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10:100010186:A:G</td>
+<td>-0.501456</td>
+<td>0.468240</td>
+<td>-1.401350</td>
+<td>-2.319730</td>
+<td>-4.101760</td>
+<td>-2.469050</td>
+<td>1.373340</td>
+<td>0.807527</td>
+<td>-1.483770</td>
+<td>-0.983242</td>
+<td>...</td>
+<td>-1.047450</td>
+<td>-0.541606</td>
+<td>-1.559310</td>
+<td>0.746273</td>
+<td>0.644985</td>
+<td>-0.028021</td>
+<td>-0.159701</td>
+<td>3.711700</td>
+<td>-1.380550</td>
+<td>-0.903030</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10:100020572:T:G</td>
+<td>0.687418</td>
+<td>-0.769290</td>
+<td>0.041449</td>
+<td>-2.215650</td>
+<td>-1.051370</td>
+<td>-0.254845</td>
+<td>0.022909</td>
+<td>-0.961978</td>
+<td>-0.344766</td>
+<td>-1.693950</td>
+<td>...</td>
+<td>-0.750566</td>
+<td>0.989090</td>
+<td>0.516234</td>
+<td>-0.152721</td>
+<td>-0.266356</td>
+<td>1.091550</td>
+<td>-0.054509</td>
+<td>3.134090</td>
+<td>-1.631720</td>
+<td>-0.641998</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10:100602545:C:G</td>
+<td>0.197858</td>
+<td>0.137792</td>
+<td>0.064242</td>
+<td>-1.027020</td>
+<td>-0.967476</td>
+<td>-0.528904</td>
+<td>1.598920</td>
+<td>-0.491628</td>
+<td>-0.103273</td>
+<td>-0.099966</td>
+<td>...</td>
+<td>1.198700</td>
+<td>0.925530</td>
+<td>-0.146606</td>
+<td>1.605810</td>
+<td>0.764948</td>
+<td>2.064470</td>
+<td>1.832110</td>
+<td>1.723660</td>
+<td>-0.391214</td>
+<td>0.789003</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10:100612750:G:C</td>
+<td>0.243301</td>
+<td>0.144469</td>
+<td>0.043636</td>
+<td>-0.979825</td>
+<td>-0.982524</td>
+<td>-0.524519</td>
+<td>1.652070</td>
+<td>-0.498177</td>
+<td>0.032667</td>
+<td>-0.131171</td>
+<td>...</td>
+<td>1.208040</td>
+<td>1.012120</td>
+<td>-0.168484</td>
+<td>1.617130</td>
+<td>0.776149</td>
+<td>2.232480</td>
+<td>1.825990</td>
+<td>1.762370</td>
+<td>-0.351120</td>
+<td>0.801818</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10:100627302:G:C</td>
+<td>0.303313</td>
+<td>0.288102</td>
+<td>-0.243662</td>
+<td>-1.241620</td>
+<td>-0.917032</td>
+<td>-0.624787</td>
+<td>1.616470</td>
+<td>-0.359382</td>
+<td>0.038058</td>
+<td>-0.138088</td>
+<td>...</td>
+<td>0.959963</td>
+<td>1.038140</td>
+<td>-0.187544</td>
+<td>1.637230</td>
+<td>0.858652</td>
+<td>1.866400</td>
+<td>1.898110</td>
+<td>1.759880</td>
+<td>-0.374304</td>
+<td>0.609954</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9:98225056:G:T</td>
+<td>-0.609864</td>
+<td>0.191835</td>
+<td>2.357520</td>
+<td>3.899610</td>
+<td>3.187290</td>
+<td>5.256400</td>
+<td>0.402311</td>
+<td>1.592520</td>
+<td>-0.382107</td>
+<td>1.365880</td>
+<td>...</td>
+<td>1.017950</td>
+<td>1.900860</td>
+<td>2.127600</td>
+<td>0.056486</td>
+<td>0.692330</td>
+<td>-0.307143</td>
+<td>-0.591845</td>
+<td>0.056605</td>
+<td>-0.247403</td>
+<td>-1.640570</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9:98235310:T:C</td>
+<td>-0.731896</td>
+<td>-0.239943</td>
+<td>1.869780</td>
+<td>3.750520</td>
+<td>3.260280</td>
+<td>5.254040</td>
+<td>-0.255022</td>
+<td>0.183105</td>
+<td>0.344827</td>
+<td>1.237990</td>
+<td>...</td>
+<td>0.913732</td>
+<td>1.789060</td>
+<td>1.465640</td>
+<td>0.407725</td>
+<td>0.614795</td>
+<td>-0.168933</td>
+<td>-0.381017</td>
+<td>0.452154</td>
+<td>0.714727</td>
+<td>-1.272540</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9:98247204:C:T</td>
+<td>-0.627788</td>
+<td>0.057694</td>
+<td>2.106230</td>
+<td>4.309430</td>
+<td>3.180430</td>
+<td>4.965740</td>
+<td>0.358445</td>
+<td>0.787971</td>
+<td>-0.052250</td>
+<td>1.509800</td>
+<td>...</td>
+<td>0.796777</td>
+<td>1.726200</td>
+<td>1.235950</td>
+<td>-0.052887</td>
+<td>1.313870</td>
+<td>-0.505464</td>
+<td>-0.119510</td>
+<td>-0.124091</td>
+<td>1.065030</td>
+<td>-1.160720</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9:98262178:G:A</td>
+<td>-0.619834</td>
+<td>-0.240170</td>
+<td>2.556200</td>
+<td>4.230840</td>
+<td>3.632350</td>
+<td>4.855730</td>
+<td>0.002387</td>
+<td>0.601861</td>
+<td>0.154543</td>
+<td>1.272620</td>
+<td>...</td>
+<td>0.684594</td>
+<td>1.329930</td>
+<td>1.257680</td>
+<td>0.055839</td>
+<td>0.996216</td>
+<td>-0.217356</td>
+<td>-0.178359</td>
+<td>-0.336342</td>
+<td>1.148090</td>
+<td>-1.059110</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">9:98273305:T:G</td>
+<td>-0.846092</td>
+<td>0.070976</td>
+<td>2.650630</td>
+<td>4.323630</td>
+<td>3.354090</td>
+<td>5.113290</td>
+<td>-0.051482</td>
+<td>0.623136</td>
+<td>0.203378</td>
+<td>1.743840</td>
+<td>...</td>
+<td>0.865338</td>
+<td>1.432780</td>
+<td>1.166460</td>
+<td>0.018348</td>
+<td>0.479160</td>
+<td>-0.233870</td>
+<td>-0.179549</td>
+<td>-0.483875</td>
+<td>0.839336</td>
+<td>-0.996326</td>
+</tr>
+</tbody>
+</table>
+
+<p>3387 rows × 317 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="90">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mean_se  <span class="op">=</span> se_df.median(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mean_se  <span class="op">=</span> pd.DataFrame(mean_se).set_axis([<span class="st">"mean_se"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>beta_std <span class="op">=</span> beta_df.std(axis <span class="op">=</span> <span class="dv">0</span>, skipna <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>beta_std <span class="op">=</span> pd.DataFrame(beta_std).set_axis([<span class="st">"beta_std"</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>error_df <span class="op">=</span> pd.concat([mean_se, beta_std], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>ax1.scatter(np.log10(error_df[<span class="st">'beta_std'</span>]), np.log10(error_df[<span class="st">'mean_se'</span>]), alpha <span class="op">=</span> <span class="fl">0.5</span>, s <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>mpl_utils.set_xticks(ax1, scale <span class="op">=</span> <span class="st">'log10'</span>, spacing <span class="op">=</span> <span class="st">'log10'</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>mpl_utils.set_yticks(ax1, scale <span class="op">=</span> <span class="st">'log10'</span>, spacing <span class="op">=</span> <span class="st">'log10'</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>mpl_utils.plot_diag(ax1)</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>keep_columns <span class="op">=</span> error_df.query(<span class="st">"mean_se &lt;= 0.2"</span>).index</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pid <span class="kw">in</span> error_df.index.to_list():</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> pid <span class="kw">not</span> <span class="kw">in</span> keep_columns:</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>        pid_text <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>pid<span class="sc">}</span><span class="ss"> / </span><span class="sc">{</span>phenotype_dict[pid]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>        xval <span class="op">=</span> np.log10(error_df.loc[pid][<span class="st">'beta_std'</span>])</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>        yval <span class="op">=</span> np.log10(error_df.loc[pid][<span class="st">'mean_se'</span>])</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>        ax1.annotate(pid_text, (xval, yval))</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="vs">r"Standard Deviation of mean $\beta$"</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="vs">r"Median of SE"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-se-vs-beta-std" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2023-11-27-snp-position-filter_files/figure-html/fig-se-vs-beta-std-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Calibration of SE against std of beta</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="92">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>zscore_df.to_pickle(<span class="st">"../data/ukbb_zscore_df2.pkl"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>beta_df.to_pickle(<span class="st">"../data/ukbb_beta_df2.pkl"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>se_df.to_pickle(<span class="st">"../data/ukbb_se_df2.pkl"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2023-11-27-snp-position-filter.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
