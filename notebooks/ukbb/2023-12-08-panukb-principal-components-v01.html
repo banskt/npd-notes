@@ -156,6 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#convergence-of-low-rank-approximations" id="toc-convergence-of-low-rank-approximations" class="nav-link" data-scroll-target="#convergence-of-low-rank-approximations">Convergence of low rank approximations</a></li>
   <li><a href="#pca-of-low-rank-matrix" id="toc-pca-of-low-rank-matrix" class="nav-link" data-scroll-target="#pca-of-low-rank-matrix">PCA of Low Rank Matrix</a></li>
   <li><a href="#nuclear-norm-of-low-rank-matrix" id="toc-nuclear-norm-of-low-rank-matrix" class="nav-link" data-scroll-target="#nuclear-norm-of-low-rank-matrix">Nuclear Norm of Low Rank Matrix</a></li>
+  <li><a href="#l0-norm-of-error-matrix" id="toc-l0-norm-of-error-matrix" class="nav-link" data-scroll-target="#l0-norm-of-error-matrix">L0 norm of error matrix</a></li>
   <li><a href="#plots-for-principal-components-hidden-factors" id="toc-plots-for-principal-components-hidden-factors" class="nav-link" data-scroll-target="#plots-for-principal-components-hidden-factors">Plots for Principal Components (Hidden Factors)</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -701,115 +702,53 @@ Raw Data: 495872</code></pre>
 </div>
 </div>
 </section>
+<section id="l0-norm-of-error-matrix" class="level1">
+<h1>L0 norm of error matrix</h1>
+<div class="cell" data-execution_count="131">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lowrank_E <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">!=</span> <span class="st">'tsvd'</span>:</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>result_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method_prefix[m]<span class="sc">}</span><span class="ss">_lowrank_E.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            lowrank_E[m] <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="136">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">!=</span> <span class="st">'tsvd'</span>:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>method_names[m]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(lowrank_E[m], <span class="bu">ord</span> <span class="op">=</span> <span class="dv">1</span>)<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>method_names[m]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(lowrank_X[m], <span class="bu">ord</span> <span class="op">=</span> <span class="dv">1</span>)<span class="sc">:g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>RPCA-IALM: 2003.58
+NNM-Sparse-FW: 3491.56
+Raw Data: 4527.88</code></pre>
+</div>
+</div>
+</section>
 <section id="plots-for-principal-components-hidden-factors" class="level1">
 <h1>Plots for Principal Components (Hidden Factors)</h1>
 <p>In the following figures, we look at the first few principal components (hidden factors) obtained by applying PCA on the predicted low-rank matrices. The samples are colored using the six trait types for the <a href="https://pan-dev.ukbb.broadinstitute.org/docs/per-phenotype-files/index.html">Pan-UKB project</a>. They are: - <strong>continuous</strong>: Quantitative traits obtained from questionnaires and assessment centers, e.g.&nbsp;standing height, distance between home and job workplace, etc. - <strong>biomarkers</strong>: Obtained from biological samples, e.g.&nbsp;cholesterol, triglycerides. - <strong>prescriptions</strong>: Varied treatment/medication/prescriptions, e.g.&nbsp;amoxicillin, corticosteroids, etc. - <strong>icd10</strong>: Set of ICD10 codes - <strong>phecode</strong>: PHESANT software? Manually curated by FinnGen? - <strong>categorical</strong>: Categorical traits obtained from questionnaires and assessment centers, e.g.&nbsp;different self-reported illness, COVID-19, self-reported treatment/medication, etc.</p>
 <div class="cell" data-execution_count="121">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>trait_types  <span class="op">=</span> trait_df_mod[<span class="st">'trait_type'</span>].unique().tolist()</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>trait_colors <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(trait_types, mpl_stylesheet.kelly_colors()[:<span class="bu">len</span>(trait_types)])}</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>trait_types.reverse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>trait_types  <span class="op">=</span> trait_df_mod[<span class="st">'trait_type'</span>].unique().tolist()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>trait_colors <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(trait_types, mpl_stylesheet.kelly_colors()[:<span class="bu">len</span>(trait_types)])}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>trait_types.reverse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell" data-execution_count="122">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div id="fig-pcomps-0-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-0-1-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: PC1 vs PC2</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="123">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div id="fig-pcomps-1-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-1-2-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: PC2 vs PC3</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="124">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div id="fig-pcomps-2-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-2-3-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: PC3 vs PC4</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-execution_count="125">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -824,22 +763,22 @@ Raw Data: 495872</code></pre>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pcomps-3-4" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-pcomps-0-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-3-4-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: PC4 vs PC5</figcaption>
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-0-1-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: PC1 vs PC2</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="126">
+<div class="cell" data-execution_count="123">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -854,22 +793,22 @@ Raw Data: 495872</code></pre>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pcomps-4-5" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-pcomps-1-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-4-5-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: PC5 vs PC6</figcaption>
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-1-2-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: PC2 vs PC3</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="127">
+<div class="cell" data-execution_count="124">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -884,22 +823,22 @@ Raw Data: 495872</code></pre>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pcomps-5-6" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-pcomps-2-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-5-6-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;8: PC6 vs PC7</figcaption>
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-2-3-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: PC3 vs PC4</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="128">
+<div class="cell" data-execution_count="125">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -914,22 +853,22 @@ Raw Data: 495872</code></pre>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pcomps-6-7" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-pcomps-3-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-6-7-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: PC7 vs PC8</figcaption>
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-3-4-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: PC4 vs PC5</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="129">
+<div class="cell" data-execution_count="126">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">7</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -944,22 +883,22 @@ Raw Data: 495872</code></pre>
 <span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pcomps-7-8" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-pcomps-4-5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-7-8-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;10: PC8 vs PC9</figcaption>
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-4-5-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: PC5 vs PC6</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="130">
+<div class="cell" data-execution_count="127">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
@@ -972,6 +911,96 @@ Raw Data: 495872</code></pre>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pcomps-5-6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-5-6-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;8: PC6 vs PC7</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="128">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pcomps-6-7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-6-7-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;9: PC7 vs PC8</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="129">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-pcomps-7-8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="2023-12-08-panukb-principal-components-v01_files/figure-html/fig-pcomps-7-8-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;10: PC8 vs PC9</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="130">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> m <span class="kw">in</span> mf_methods]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, m <span class="kw">in</span> <span class="bu">enumerate</span>(mf_methods):</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    ax[i] <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> trait_types:</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        tidx <span class="op">=</span> np.array(trait_df_mod[trait_df_mod[<span class="st">'trait_type'</span>] <span class="op">==</span> t].index)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        ax[i].scatter(pcomps[m][tidx, ipc1], pcomps[m][tidx, ipc2], alpha <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> trait_colors[t], label <span class="op">=</span> t)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(method_names[m])</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        ax[i].legend()</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-pcomps-8-9" class="quarto-figure quarto-figure-center anchored">

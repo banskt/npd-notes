@@ -1,0 +1,3363 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saikat Banerjee">
+<meta name="dcterms.date" content="2023-12-11">
+
+<title>NPD Network - Pan-UKB Pleitropy of Diseases v01</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">NPD Network</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../notebooks/index.html" rel="" target="">
+ <span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../meetings/index.html" rel="" target="">
+ <span class="menu-text">Meetings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html" rel="" target="">
+ <span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../reference/index.html" rel="" target="">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#getting-setup" id="toc-getting-setup" class="nav-link active" data-scroll-target="#getting-setup">Getting Setup</a></li>
+  <li><a href="#load-data-and-results" id="toc-load-data-and-results" class="nav-link" data-scroll-target="#load-data-and-results">Load data and results</a></li>
+  <li><a href="#pleiotropy" id="toc-pleiotropy" class="nav-link" data-scroll-target="#pleiotropy">Pleiotropy</a></li>
+  <li><a href="#neuropsychiatric-disorders" id="toc-neuropsychiatric-disorders" class="nav-link" data-scroll-target="#neuropsychiatric-disorders">Neuropsychiatric Disorders</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Pan-UKB Pleitropy of Diseases v01</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saikat Banerjee </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 11, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    We look at the pleiotropy of some common diseases from the Pan-UKB data.
+  </div>
+</div>
+
+</header>
+
+<section id="getting-setup" class="level1">
+<h1>Getting Setup</h1>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_stylesheet</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_utils</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>, colors <span class="op">=</span> <span class="st">'kelly'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.gridspec <span class="im">import</span> GridSpec</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nnwmf.optimize <span class="im">import</span> IALM</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nnwmf.optimize <span class="im">import</span> FrankWolfe, FrankWolfe_CV</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nnwmf.utils <span class="im">import</span> model_errors <span class="im">as</span> merr</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../utils/"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="load-data-and-results" class="level1">
+<h1>Load data and results</h1>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/nnwmf"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>zscore_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/GWAS_Zscore.tsv"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trait_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/trait_manifest_TableS6_no_readme.tsv"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_csv(zscore_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(trait_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># remove extra columns from trait_df</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>colnames <span class="op">=</span> trait_df.columns.tolist()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>colnames[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"zindex"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>trait_df.columns <span class="op">=</span> colnames</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>trait_df_mod <span class="op">=</span> trait_df.drop(labels <span class="op">=</span> [<span class="st">'coding'</span>, <span class="st">'modifier'</span>, <span class="st">'coding_description'</span>, <span class="st">'filename'</span>, <span class="st">'aws_link'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>trait_df_mod[<span class="st">'trait_name'</span>] <span class="op">=</span> trait_df_mod[<span class="st">'description'</span>]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>trait_df_mod[<span class="st">'trait_name'</span>] <span class="op">=</span> trait_df_mod[<span class="st">'trait_name'</span>].fillna(trait_df_mod[<span class="st">'phenocode'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df.loc[:, zscore_df.columns<span class="op">!=</span><span class="st">'rsid'</span>]).T</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_nan_cent <span class="op">=</span> X_nan <span class="op">-</span> np.nanmean(X_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_nan_mask <span class="op">=</span> np.isnan(X_nan)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_cent <span class="op">=</span> np.nan_to_num(X_nan_cent, copy <span class="op">=</span> <span class="va">True</span>, nan <span class="op">=</span> <span class="fl">0.0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"We have </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> samples (phenotypes) and </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> features (variants)"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Fraction of Nan entries: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(X_nan_mask) <span class="op">/</span> np<span class="sc">.</span>prod(X_cent.shape)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>We have 2483 samples (phenotypes) and 51399 features (variants)
+Fraction of Nan entries: 0.000</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mf_methods <span class="op">=</span> [<span class="st">'ialm'</span>, <span class="st">'nnm_sparse'</span>, <span class="st">'tsvd'</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>method_prefix <span class="op">=</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ialm'</span> : <span class="st">'ialm_maxiter10000_admm'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nnm_sparse'</span> : <span class="st">'nnm_sparse_maxiter1000'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>method_names <span class="op">=</span> {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'tsvd'</span> : <span class="st">'Raw Data'</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ialm'</span> : <span class="st">'RPCA-IALM'</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nnm'</span>  : <span class="st">'NNM-FW'</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nnm_weighted'</span> : <span class="st">'NNM-Weighted'</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'nnm_sparse'</span> : <span class="st">'NNM-Sparse-FW'</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>result_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method_prefix[<span class="st">'ialm'</span>]<span class="sc">}</span><span class="ss">_progress.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    ialm <span class="op">=</span> pickle.load(handle)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>result_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method_prefix[<span class="st">'nnm_sparse'</span>]<span class="sc">}</span><span class="ss">_progress.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    nnm_sparse <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">=</span> mpy_simulate.do_standardize(X, scale <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">/=</span> np.sqrt(np.prod(X_cent.shape))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    U, S, Vt <span class="op">=</span> np.linalg.svd(X_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    pcomps <span class="op">=</span> U <span class="op">@</span> np.diag(S)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    loadings <span class="op">=</span> Vt.T <span class="op">@</span> np.diag(S)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loadings, pcomps, S</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>lowrank_X <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>loadings  <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>pcomps    <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>eigenvals <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> m <span class="op">!=</span> <span class="st">'tsvd'</span>:</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>result_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method_prefix[m]<span class="sc">}</span><span class="ss">_lowrank_X.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            lowrank_X[m] <span class="op">=</span> pickle.load(handle)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>lowrank_X[<span class="st">'tsvd'</span>] <span class="op">=</span> X_cent.copy()</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    loadings[m], pcomps[m], eigenvals[m] <span class="op">=</span> get_principal_components(lowrank_X[m])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_cos2_scores(pcomps):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ntrait, npcomp <span class="op">=</span> pcomps.shape</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros((ntrait, npcomp))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ntrait):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        cos2_trait <span class="op">=</span> np.array([np.square(std_pcomps[i, pcidx]) <span class="cf">for</span> pcidx <span class="kw">in</span> <span class="bu">range</span>(npcomp)])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        x[i, :] <span class="op">=</span> cos2_trait <span class="op">/</span> np.<span class="bu">sum</span>(cos2_trait)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_contribution_scores(pcomps):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    ntrait, npcomp <span class="op">=</span> pcomps.shape</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros((ntrait, npcomp))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>)).reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(npcomp):</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        trait_contr <span class="op">=</span> np.array([np.square(std_pcomps[j, i]) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ntrait)])</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        x[:, i] <span class="op">=</span> trait_contr <span class="op">/</span> np.<span class="bu">sum</span>(trait_contr)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>npcomp <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>cos2_scores <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    cos2_scores[m] <span class="op">=</span> get_cos2_scores(pcomps[m][:,:npcomp])</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>trait_contributions <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    trait_contributions[m] <span class="op">=</span> get_contribution_scores(pcomps[m][:,:npcomp])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="pleiotropy" class="level1">
+<h1>Pleiotropy</h1>
+<p>In the following, we look at the pleiotropy of different diseases reported in the UKB project. Given a phenotype (focal trait), we find the hidden factor with the highest contribution to the focal trait. We then report the other phenotypes which contribute to that hidden factor.</p>
+<p><em>Function</em> <code>pan_ukb_pleiotropy(trait_index)</code></p>
+<p><strong>Input</strong>: - Index of the focal trait as found in the <a href="https://docs.google.com/spreadsheets/d/16OqNQf8cSk2szlmQWYlNOj30NHMjojyf">manifest file</a>. - Number of pleiotropic traits to be reported (optional, default 15).</p>
+<p><strong>Output</strong>: - Index of the top hidden factor. - Contribution of the hidden factor on the focal trait. - List of pleiotropic traits, and their contributions to the hidden factor.</p>
+<p><strong>Global Variables</strong>: <code>trait_df_mod</code>, <code>mf_methods</code>, <code>cos2_scores</code>, <code>trait_contributions</code>, <code>method_names</code></p>
+<div class="cell" data-execution_count="52">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> titlecase(s):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> re.sub(<span class="vs">r"[A-Za-z]+('[A-Za-z]+)?"</span>, <span class="kw">lambda</span> mo: mo.group(<span class="dv">0</span>).capitalize(),s)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> printmd(string, color <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    colorstr <span class="op">=</span> <span class="st">"&lt;span style='color:</span><span class="sc">{}</span><span class="st">'&gt;</span><span class="sc">{}</span><span class="st">&lt;/span&gt;"</span>.<span class="bu">format</span>(color, string)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    display(Markdown(colorstr))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> printheader(string):</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    headerstr<span class="op">=</span><span class="ss">f"&lt;h2&gt;</span><span class="sc">{</span>string<span class="sc">}</span><span class="ss">&lt;/h2&gt;"</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    display(Markdown(headerstr))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pan_ukb_pleiotropy(znum, num_trait <span class="op">=</span> <span class="dv">15</span>):</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    zindex <span class="op">=</span> znum <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    focal_trait_name <span class="op">=</span> trait_df_mod.loc[zindex, <span class="st">'trait_name'</span>]</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    printheader(titlecase(focal_trait_name))</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        printmd (<span class="ss">f"**</span><span class="sc">{</span>method_names[m]<span class="sc">}</span><span class="ss">**"</span>, color <span class="op">=</span> <span class="st">"#c8635a"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        top_factor <span class="op">=</span> np.argsort(cos2_scores[m][zindex,:])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        printmd(<span class="ss">f"Top Factor: </span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> (Contribution: </span><span class="sc">{</span>cos2_scores[m][zindex,top_factor]<span class="sc">:.4f}</span><span class="ss">)"</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>        top_traits <span class="op">=</span> np.argsort(trait_contributions[m][:,top_factor])[::<span class="op">-</span><span class="dv">1</span>][:num_trait]</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        trait_names <span class="op">=</span> trait_df_mod.loc[top_traits][<span class="st">'trait_name'</span>].tolist()</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">zip</span>(top_traits, trait_names):</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"    </span><span class="sc">{</span>trait_contributions[m][i, top_factor]<span class="sc">:.4f}</span><span class="ss">   </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell" data-execution_count="43">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">930</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored" data-anchor-id="pleiotropy">
+Rheumatoid Arthritis
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 47 (Contribution: 0.1697)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0236   methotrexate
+    0.0236   anti-metabolite
+    0.0167   folic acid supplement|Food Supplement
+    0.0167   folic acid
+    0.0146   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0141   Forced expiratory volume in 1-second (FEV1)
+    0.0131   Forced vital capacity (FVC), Best measure
+    0.0126   Forced vital capacity (FVC)
+    0.0113   anti-inflammatory
+    0.0113   sulfasalazine
+    0.0104   Rheumatoid arthritis
+    0.0097   Neutrophill percentage
+    0.0097   Rheumatoid arthritis and other inflammatory polyarthropathies
+    0.0095   Corneal resistance factor (left)
+    0.0093   Corneal resistance factor (right)
+
+    0.0319   Whole body fat-free mass
+    0.0251   Leg fat percentage (right)
+    0.0194   Hand grip strength (left)
+    0.0120   Leg predicted mass (right)
+    0.0118   Forced vital capacity (FVC), Best measure
+    0.0110   codine/paracetamol
+    0.0103   Arm fat-free mass (right)
+    0.0099   Mean arterial pressure, automated reading
+    0.0096   Trunk fat-free mass
+    0.0096   Peak expiratory flow (PEF)
+    0.0092   Trunk predicted mass
+    0.0090   Basal metabolic rate
+    0.0089   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0071   Arm fat mass (left)
+    0.0069   Age completed full time education
+
+    0.0213   I35 Nonrheumatic aortic valve disorders
+    0.0211   Nonrheumatic aortic valve disorders
+    0.0173   Congenital anomalies of great vessels
+    0.0157   Cardiac congenital anomalies
+    0.0147   Cardiac and circulatory congenital anomalies
+    0.0137   Albumin
+    0.0128   anti-metabolite
+    0.0128   methotrexate
+    0.0126   Heart valve disorders
+    0.0094   Aortic valve disease
+    0.0093   Rheumatoid arthritis
+    0.0090   Rheumatoid arthritis and other inflammatory polyarthropathies
+    0.0080   Osteoporosis
+    0.0080   Osteoporosis NOS
+    0.0080   Treatment/medication code
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 88 (Contribution: 0.0664)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 73 (Contribution: 0.1319)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="47">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">420</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Cancer Of Prostate
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 78 (Contribution: 0.0875)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0272   Contracture of palmar fascia [Dupuytren's disease]
+    0.0262   Disorders of muscle, ligament, and fascia
+    0.0243   Fasciitis
+    0.0186   Malignant neoplasm of bladder
+    0.0182   C67 Malignant neoplasm of bladder
+    0.0157   Cancer of bladder
+    0.0156   M72 Fibroblastic disorders
+    0.0131   K76 Other diseases of liver
+    0.0130   Other disorders of liver
+    0.0127   Sebaceous cyst
+    0.0125   Diseases of sebaceous glands
+    0.0114   Prostatitis
+    0.0112   Chronic liver disease and cirrhosis
+    0.0110   L72 Follicular cysts of skin and subcutaneous tissue
+    0.0107   Cancer of urinary organs (incl. kidney and bladder)
+
+    0.0247   Weight
+    0.0190   Whole body water mass
+    0.0134   Trunk fat mass
+    0.0132   Age at first live birth
+    0.0128   Weight
+    0.0123   Arm fat-free mass (left)
+    0.0119   Overweight, obesity and other hyperalimentation
+    0.0112   Body mass index (BMI)
+    0.0108   Leg fat percentage (right)
+    0.0089   Hip circumference
+    0.0088   Leg fat-free mass (right)
+    0.0081   Trunk predicted mass
+    0.0064   aspirin
+    0.0064   Leg fat-free mass (left)
+    0.0063   sodium alginate / potassium bicarbonate
+
+    0.0277   Albumin
+    0.0221   IGF-1
+    0.0168   Calcium
+    0.0163   Alkaline phosphatase
+    0.0114   Corneal resistance factor (left)
+    0.0106   Corneal resistance factor (right)
+    0.0098   Total protein
+    0.0089   Corneal hysteresis (left)
+    0.0079   Corneal hysteresis (right)
+    0.0065   Phosphate
+    0.0065   Home location - east co-ordinate (rounded)
+    0.0063   Urate
+    0.0062   Home location at assessment - east co-ordinate (rounded)
+    0.0060   Other disorders of bladder
+    0.0056   Albumin/Globulin ratio
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 48 (Contribution: 0.0815)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 54 (Contribution: 0.0663)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="72">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">410</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Breast Cancer
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 25 (Contribution: 0.1298)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0221   Breast cancer [female]
+    0.0215   Breast cancer
+    0.0210   Malignant neoplasm of female breast
+    0.0200   C50 Malignant neoplasm of breast
+    0.0167   Arthropathy NOS
+    0.0167   Other arthropathies
+    0.0129   M17 Gonarthrosis [arthrosis of knee]
+    0.0110   Osteoarthrosis
+    0.0108   Unspecified monoarthritis
+    0.0098   Diseases of esophagus
+    0.0095   Diaphragmatic hernia
+    0.0093   Osteoarthritis; localized
+    0.0091   K44 Diaphragmatic hernia
+    0.0090   Esophagitis, GERD and related diseases
+    0.0088   Malignant neoplasm, other
+
+    0.0300   Leg fat-free mass (right)
+    0.0273   Whole body fat-free mass
+    0.0264   Sitting height
+    0.0208   Arm fat-free mass (left)
+    0.0128   Impedance of leg (left)
+    0.0128   Body mass index (BMI)
+    0.0120   Arm predicted mass (right)
+    0.0109   Whole body water mass
+    0.0098   Type 2 diabetes
+    0.0097   Waist circumference
+    0.0097   Arm predicted mass (left)
+    0.0085   Arm fat-free mass (right)
+    0.0081   E66 Obesity
+    0.0078   Impedance of leg (right)
+    0.0074   lansoprazole
+
+    0.0133   Urate
+    0.0109   Past tobacco smoking
+    0.0108   Breast cancer
+    0.0108   Breast cancer [female]
+    0.0101   Malignant neoplasm of female breast
+    0.0099   C50 Malignant neoplasm of breast
+    0.0099   Smoking status, ever vs never
+    0.0090   Age first had sexual intercourse
+    0.0086   Alkaline phosphatase
+    0.0075   Diseases of esophagus
+    0.0072   Gamma glutamyltransferase
+    0.0071   Aspartate aminotransferase
+    0.0070   Esophagitis, GERD and related diseases
+    0.0067   Duration to first press of snap-button in each round
+    0.0062   Estimated glomerular filtration rate, serum creatinine + cystain C
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 66 (Contribution: 0.0840)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 48 (Contribution: 0.0812)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="49">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">458</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Diabetes Mellitus
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 19 (Contribution: 0.1403)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0364   Red blood cell (erythrocyte) count
+    0.0189   Glycated haemoglobin (HbA1c)
+    0.0178   Mean corpuscular volume
+    0.0159   Lymphocyte count
+    0.0150   Mean sphered cell volume
+    0.0146   Haemoglobin concentration
+    0.0137   Platelet count
+    0.0136   Haematocrit percentage
+    0.0132   Mean corpuscular haemoglobin
+    0.0128   Type 2 diabetes
+    0.0127   Non-albumin protein
+    0.0124   E11 Non-insulin-dependent diabetes mellitus
+    0.0119   Diabetes mellitus
+    0.0108   Platelet crit
+    0.0106   Neutrophill percentage
+
+    0.0178   Arm fat-free mass (left)
+    0.0162   Trunk fat mass
+    0.0144   Body mass index (BMI)
+    0.0140   codine/paracetamol
+    0.0135   Type 2 diabetes
+    0.0131   Comparative height size at age 10
+    0.0107   tetracycline antibiotic|antibiotic
+    0.0095   Impedance of arm (right)
+    0.0092   Hip circumference
+    0.0092   Diabetes mellitus
+    0.0089   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0082   ACE inhibitor|anti-hypertensive
+    0.0077   Trunk fat-free mass
+    0.0069   trimethoprim
+    0.0069   Weight
+
+    0.1042   HDL cholesterol
+    0.0898   Apolipoprotein A
+    0.0473   Glycated haemoglobin (HbA1c)
+    0.0273   Albumin/Globulin ratio
+    0.0231   Non-albumin protein
+    0.0208   Platelet crit
+    0.0192   Neutrophill percentage
+    0.0175   Neutrophill count
+    0.0154   Lymphocyte percentage
+    0.0138   IGF-1
+    0.0131   Gamma glutamyltransferase
+    0.0112   Type 2 diabetes
+    0.0111   Diabetes mellitus
+    0.0111   E11 Non-insulin-dependent diabetes mellitus
+    0.0109   Mean platelet (thrombocyte) volume
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 57 (Contribution: 0.0559)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 26 (Contribution: 0.1503)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="53">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">529</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Parkinson’s Disease
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 97 (Contribution: 0.0888)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0441   Psoriasis
+    0.0425   L40 Psoriasis
+    0.0403   Psoriasis and related disorders
+    0.0187   Cardiac arrest
+    0.0184   Cardiac arrest and ventricular fibrillation
+    0.0181   I46 Cardiac arrest
+    0.0117   K90 Intestinal malabsorption
+    0.0114   Intestinal malabsorption (non-celiac)
+    0.0109   Obesity
+    0.0108   E66 Obesity
+    0.0097   Overweight, obesity and other hyperalimentation
+    0.0095   Aortic aneurysm
+    0.0094   I71 Aortic aneurysm and dissection
+    0.0090   Celiac disease
+    0.0085   Noninflammatory disorders of ovary, fallopian tube, and broad ligament
+
+    0.0262   Trunk fat percentage
+    0.0240   Whole body fat-free mass
+    0.0207   Leg predicted mass (left)
+    0.0201   Arm fat-free mass (left)
+    0.0172   Leg fat percentage (left)
+    0.0147   Leg fat mass (right)
+    0.0105   Leg fat mass (left)
+    0.0083   NSAID|non-steroidal anti-inflammatory drug
+    0.0079   Usual walking pace
+    0.0078   proton pump inhibitor|PPI
+    0.0073   Impedance of leg (left)
+    0.0071   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0065   Arm fat mass (right)
+    0.0061   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0059   codine/paracetamol
+
+    0.0149   Urinary calculus
+    0.0149   N20 Calculus of kidney and ureter
+    0.0147   Maximum heart rate during fitness test
+    0.0146   ECG, load
+    0.0146   Maximum workload during fitness test
+    0.0139   Pulse rate, automated reading
+    0.0138   ECG, heart rate
+    0.0130   ECG, number of stages in a phase
+    0.0126   Number of trend entries
+    0.0117   ECG, phase time
+    0.0110   Calculus of ureter
+    0.0102   Processed meat intake
+    0.0101   Calculus of kidney
+    0.0088   Beef intake
+    0.0080   Lamb/mutton intake
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 70 (Contribution: 0.0852)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 92 (Contribution: 0.1208)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="55">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">504</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Dementias
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 99 (Contribution: 0.1643)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0148   Cardiac arrest
+    0.0146   Cardiac arrest and ventricular fibrillation
+    0.0144   I46 Cardiac arrest
+    0.0130   Other disorders of pancreatic internal secretion
+    0.0125   Hypoglycemia
+    0.0122   E16 Other disorders of pancreatic internal secretion
+    0.0112   Obesity
+    0.0111   E66 Obesity
+    0.0104   E21 Hyperparathyroidism and other disorders of parathyroid gland
+    0.0104   G47 Sleep disorders
+    0.0103   Hyperparathyroidism
+    0.0101   Sleep disorders
+    0.0101   Overweight, obesity and other hyperalimentation
+    0.0090   Varicose veins of lower extremity
+    0.0088   Disorders of parathyroid gland
+
+    0.0203   Number of self-reported non-cancer illnesses
+    0.0169   Leg predicted mass (left)
+    0.0162   Waist circumference
+    0.0160   Hip circumference
+    0.0139   Mean arterial pressure, combined automated + manual reading
+    0.0136   Arm fat mass (left)
+    0.0130   Diastolic blood pressure, combined automated + manual reading
+    0.0129   NSAID|non-steroidal anti-inflammatory drug
+    0.0129   Arm fat-free mass (left)
+    0.0128   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0128   Impedance of arm (left)
+    0.0109   Essential hypertension
+    0.0106   Body mass index (BMI)
+    0.0098   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0092   Peak expiratory flow (PEF)
+
+    0.0324   Heel bone mineral density (BMD)
+    0.0322   Heel bone mineral density (BMD) T-score, automated
+    0.0322   Heel quantitative ultrasound index (QUI), direct entry
+    0.0258   Heel Broadband ultrasound attenuation, direct entry
+    0.0139   Urate
+    0.0119   Heel bone mineral density (BMD) T-score, automated (left)
+    0.0119   Heel quantitative ultrasound index (QUI), direct entry (left)
+    0.0119   Heel broadband ultrasound attenuation (left)
+    0.0116   Heel bone mineral density (BMD) (left)
+    0.0115   Heel bone mineral density (BMD) T-score, automated (right)
+    0.0115   Heel quantitative ultrasound index (QUI), direct entry (right)
+    0.0115   Heel broadband ultrasound attenuation (right)
+    0.0114   Heel bone mineral density (BMD) (right)
+    0.0103   Cerebrovascular disease
+    0.0102   Creatinine
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 74 (Contribution: 0.0601)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 61 (Contribution: 0.0862)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="59">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">61</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+G47 Sleep Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 86 (Contribution: 0.1228)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0469   Acquired foot deformities
+    0.0468   M20 Acquired deformities of fingers and toes
+    0.0290   Hemoptysis
+    0.0286   R04 Haemorrhage from respiratory passages
+    0.0275   Obesity
+    0.0272   E66 Obesity
+    0.0272   Hallux valgus (Bunion)
+    0.0253   Acquired toe deformities
+    0.0248   Abnormal sputum
+    0.0247   Overweight, obesity and other hyperalimentation
+    0.0123   G47 Sleep disorders
+    0.0119   Sleep disorders
+    0.0111   Hammer toe (acquired)
+    0.0110   Epistaxis or throat hemorrhage
+    0.0095   Prostatitis
+
+    0.0234   ACE inhibitor|anti-hypertensive
+    0.0141   High light scatter reticulocyte count
+    0.0133   Usual walking pace
+    0.0121   Weight
+    0.0119   Leg predicted mass (left)
+    0.0109   Trunk fat-free mass
+    0.0104   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0100   Reticulocyte count
+    0.0092   Trunk fat percentage
+    0.0091   Waist circumference
+    0.0081   Age first had sexual intercourse
+    0.0077   Seated height
+    0.0066   Treatment/medication code
+    0.0064   Other arthropathies
+    0.0061   Ankle spacing width (right)
+
+    0.0136   Aspartate aminotransferase
+    0.0125   Platelet distribution width
+    0.0112   Alanine aminotransferase
+    0.0084   Inflammatory bowel disease and other gastroenteritis and colitis
+    0.0074   Spherical power (right)
+    0.0070   Genital prolapse
+    0.0070   Prolapse of vaginal walls
+    0.0069   Spherical power (left)
+    0.0068   N81 Female genital prolapse
+    0.0068   Open wounds of head; neck; and trunk
+    0.0063   C79 Secondary malignant neoplasm of other sites
+    0.0061   E87 Other disorders of fluid, electrolyte and acid-base balance
+    0.0061   Ulcerative colitis
+    0.0061   Electrolyte imbalance
+    0.0061   I77 Other disorders of arteries and arterioles
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 43 (Contribution: 0.0683)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 91 (Contribution: 0.1037)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="61">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+G43 Migraine
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 80 (Contribution: 0.0792)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0312   Appendicitis
+    0.0307   Acute appendicitis
+    0.0287   Appendiceal conditions
+    0.0284   K35 Acute appendicitis
+    0.0208   Sebaceous cyst
+    0.0203   Diseases of sebaceous glands
+    0.0186   L72 Follicular cysts of skin and subcutaneous tissue
+    0.0140   Contracture of palmar fascia [Dupuytren's disease]
+    0.0134   Disorders of muscle, ligament, and fascia
+    0.0133   Iron deficiency anemias, unspecified or not due to blood loss
+    0.0133   Iron deficiency anemias
+    0.0121   Fasciitis
+    0.0118   D50 Iron deficiency anaemia
+    0.0115   Home location - north co-ordinate (rounded)
+    0.0113   Home location at assessment - north co-ordinate (rounded)
+
+    0.0320   Leg predicted mass (right)
+    0.0257   Whole body fat-free mass
+    0.0243   Leg fat-free mass (right)
+    0.0192   Body mass index (BMI)
+    0.0167   Leg fat mass (left)
+    0.0144   NSAID|non-steroidal anti-inflammatory drug
+    0.0120   simvastatin
+    0.0112   thiazide diuretic|diuretic
+    0.0109   aspirin
+    0.0092   lansoprazole
+    0.0091   ACE inhibitor|anti-hypertensive
+    0.0089   Diastolic blood pressure, automated reading
+    0.0085   Non-cancer illness code, self-reported
+    0.0070   bendroflumethiazide
+    0.0070   amoxicillin
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 46 (Contribution: 0.0576)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.0733)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="63">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">591</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Hypertension
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 2 (Contribution: 0.0982)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0595   Standing height
+    0.0290   Sitting height
+    0.0227   Seated height
+    0.0197   Forced vital capacity (FVC)
+    0.0193   Forced vital capacity (FVC), Best measure
+    0.0169   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0163   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0157   Comparative height size at age 10
+    0.0157   Forced expiratory volume in 1-second (FEV1)
+    0.0156   Mean arterial pressure, automated reading, adjusted by medication
+    0.0152   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0150   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0149   Systolic blood pressure, automated reading, adjusted by medication
+    0.0138   Trunk fat-free mass
+    0.0138   Trunk predicted mass
+
+    0.0670   Essential hypertension
+    0.0596   Hypertension
+    0.0278   E78 Disorders of lipoprotein metabolism and other lipidaemias
+    0.0271   Disorders of lipoid metabolism
+    0.0265   Hypercholesterolemia
+    0.0256   Hyperlipidemia
+    0.0252   Ischemic Heart Disease
+    0.0197   Other chronic ischemic heart disease, unspecified
+    0.0174   I25 Chronic ischaemic heart disease
+    0.0138   antipyretic
+    0.0138   paracetamol
+    0.0134   opioid analgesic|antipyretic
+    0.0130   Angina pectoris
+    0.0111   E11 Non-insulin-dependent diabetes mellitus
+    0.0100   Leg fat mass (left)
+
+    0.0461   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0425   Systolic blood pressure, automated reading, adjusted by medication
+    0.0405   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0373   Mean arterial pressure, automated reading, adjusted by medication
+    0.0353   Systolic blood pressure, combined automated + manual reading
+    0.0334   Systolic blood pressure, automated reading
+    0.0304   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0288   Mean arterial pressure, combined automated + manual reading
+    0.0282   Pulse pressure, automated reading, adjusted by medication
+    0.0277   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0274   Mean arterial pressure, automated reading
+    0.0261   Diastolic blood pressure, automated reading, adjusted by medication
+    0.0246   Pulse pressure, combined automated + manual reading
+    0.0235   Pulse pressure, automated reading
+    0.0180   Diastolic blood pressure, combined automated + manual reading
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 15 (Contribution: 0.1904)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 3 (Contribution: 0.1210)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="65">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">2350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Standing Height
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 7 (Contribution: 0.2952)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0748   Impedance of whole body
+    0.0676   Standing height
+    0.0580   Impedance of arm (left)
+    0.0572   Impedance of arm (right)
+    0.0569   Impedance of leg (left)
+    0.0559   Impedance of leg (right)
+    0.0233   Sitting height
+    0.0217   Seated height
+    0.0181   Comparative height size at age 10
+    0.0144   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0132   Trunk fat percentage
+    0.0101   Body mass index (BMI)
+    0.0098   Body mass index (BMI)
+    0.0095   Reticulocyte count
+    0.0094   Heel quantitative ultrasound index (QUI), direct entry (right)
+
+    0.1274   Standing height
+    0.0721   Sitting height
+    0.0263   Seated height
+    0.0192   Comparative height size at age 10
+    0.0190   Trunk fat-free mass
+    0.0189   Trunk predicted mass
+    0.0134   Whole body fat-free mass
+    0.0117   Whole body water mass
+    0.0114   Waist circumference
+    0.0112   Leg fat mass (left)
+    0.0112   Arm fat mass (right)
+    0.0107   Leg fat mass (right)
+    0.0101   Arm fat mass (left)
+    0.0099   E66 Obesity
+    0.0099   Obesity
+
+    0.0640   Standing height
+    0.0351   Sitting height
+    0.0250   Seated height
+    0.0206   Forced vital capacity (FVC)
+    0.0197   Forced vital capacity (FVC), Best measure
+    0.0186   Comparative height size at age 10
+    0.0170   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0161   Forced expiratory volume in 1-second (FEV1)
+    0.0152   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0132   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0126   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0121   Mean arterial pressure, automated reading, adjusted by medication
+    0.0120   Leg fat percentage (left)
+    0.0120   Leg fat percentage (right)
+    0.0118   Trunk fat-free mass
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 4 (Contribution: 0.1740)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 2 (Contribution: 0.2623)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="69">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1747</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Intake Of Sugar Added To Coffee
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 52 (Contribution: 0.1127)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0152   Saturated fat
+    0.0138   Albumin
+    0.0124   Fat
+    0.0108   Osteoporosis
+    0.0108   Osteoporosis NOS
+    0.0093   Vitamin C
+    0.0086   Home location - north co-ordinate (rounded)
+    0.0084   methotrexate
+    0.0084   anti-metabolite
+    0.0081   Retinol
+    0.0079   Home location at assessment - north co-ordinate (rounded)
+    0.0072   Carotene
+    0.0071   Osteoporosis, osteopenia and pathological fracture
+    0.0069   xanthine oxidase inhibitor|anti-gout agent
+    0.0069   allopurinol
+
+    0.0427   Whole body fat-free mass
+    0.0224   NSAID|non-steroidal anti-inflammatory drug
+    0.0193   Leg fat mass (right)
+    0.0167   Usual walking pace
+    0.0119   Z86 Personal history of certain other diseases
+    0.0118   Weight
+    0.0100   clarithromycin
+    0.0099   Arm predicted mass (left)
+    0.0085   Whole body fat mass
+    0.0071   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0066   Leg fat mass (left)
+    0.0065   lansoprazole
+    0.0063   aspirin
+    0.0063   diclofenac
+    0.0061   Other mental disorder
+
+    0.0341   SHBG
+    0.0298   Pulse rate, automated reading
+    0.0129   Pulse rate
+    0.0122   Testosterone
+    0.0118   COVID-19 positive (controls include untested)
+    0.0118   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0113   COVID-19 positive (controls include untested)
+    0.0112   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0099   COVID-19 positive (controls only COVID-19 negative)
+    0.0097   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0096   COVID-19 positive (controls only COVID-19 negative)
+    0.0090   Cystatin C
+    0.0090   Fasciitis
+    0.0089   Contracture of palmar fascia [Dupuytren's disease]
+    0.0088   Disorders of muscle, ligament, and fascia
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 54 (Contribution: 0.0723)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 75 (Contribution: 0.0839)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="70">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1677</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Covid-19 Positive (Controls Only Covid-19 Negative)
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 42 (Contribution: 0.4360)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0801   COVID-19 positive (controls include untested)
+    0.0800   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0792   COVID-19 positive (controls include untested)
+    0.0791   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0557   COVID-19 positive (controls only COVID-19 negative)
+    0.0498   COVID-19 positive (controls only COVID-19 negative)
+    0.0135   Cholelithiasis
+    0.0132   Cholelithiasis and cholecystitis
+    0.0130   K80 Cholelithiasis
+    0.0094   Chronic dermatitis due to solar radiation
+    0.0093   L57 Skin changes due to chronic exposure to nonionising radiation
+    0.0082   Dermatitis due to solar radiation
+    0.0069   Actinic keratosis
+    0.0068   Breast cancer [female]
+    0.0066   Breast cancer
+
+    0.0245   Age first had sexual intercourse
+    0.0170   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0135   ACE inhibitor|anti-hypertensive
+    0.0126   beta-lactam antibiotic|antibiotic
+    0.0115   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0115   Whole body fat-free mass
+    0.0112   Arm fat-free mass (left)
+    0.0096   Trunk fat percentage
+    0.0093   Waist circumference
+    0.0087   Leg predicted mass (left)
+    0.0085   Impedance of leg (right)
+    0.0081   Leg fat-free mass (left)
+    0.0070   Ankle spacing width
+    0.0069   Body fat percentage
+    0.0059   Cholesterol
+
+    0.0846   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0846   COVID-19 positive (controls include untested)
+    0.0844   COVID-19 positive (controls include untested), only patients from centers in England
+    0.0843   COVID-19 positive (controls include untested)
+    0.0765   COVID-19 positive (controls only COVID-19 negative)
+    0.0720   COVID-19 positive (controls only COVID-19 negative)
+    0.0317   IGF-1
+    0.0114   Platelet distribution width
+    0.0088   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0069   Cystatin C
+    0.0047   Systolic blood pressure, manual reading
+    0.0044   Systolic blood pressure, manual reading, adjusted by medication
+    0.0040   Mean arterial pressure, manual reading
+    0.0038   Estimated glomerular filtration rate, serum creatinine
+    0.0037   Creatinine
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 47 (Contribution: 0.0847)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 67 (Contribution: 0.5227)</span></p>
+</div>
+</div>
+</section>
+<section id="neuropsychiatric-disorders" class="level1">
+<h1>Neuropsychiatric Disorders</h1>
+<div class="cell" data-execution_count="71">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">52</span>,<span class="dv">58</span>):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored" data-anchor-id="neuropsychiatric-disorders">
+F05 Delirium, Not Induced By Alcohol And Other Psychoactive Substances
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 99 (Contribution: 0.1305)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0148   Cardiac arrest
+    0.0146   Cardiac arrest and ventricular fibrillation
+    0.0144   I46 Cardiac arrest
+    0.0130   Other disorders of pancreatic internal secretion
+    0.0125   Hypoglycemia
+    0.0122   E16 Other disorders of pancreatic internal secretion
+    0.0112   Obesity
+    0.0111   E66 Obesity
+    0.0104   E21 Hyperparathyroidism and other disorders of parathyroid gland
+    0.0104   G47 Sleep disorders
+    0.0103   Hyperparathyroidism
+    0.0101   Sleep disorders
+    0.0101   Overweight, obesity and other hyperalimentation
+    0.0090   Varicose veins of lower extremity
+    0.0088   Disorders of parathyroid gland
+
+    0.0267   Waist circumference
+    0.0242   Body fat percentage
+    0.0220   E66 Obesity
+    0.0212   Obesity
+    0.0160   Arm fat mass (left)
+    0.0151   Trunk fat percentage
+    0.0128   Leg fat percentage (left)
+    0.0121   Leg fat percentage (right)
+    0.0117   pheno 48 / pheno 49
+    0.0112   Disorders of lipoid metabolism
+    0.0108   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0107   ACE inhibitor|anti-hypertensive
+    0.0104   Triglycerides
+    0.0092   Overweight, obesity and other hyperalimentation
+    0.0091   Leg fat-free mass (right)
+
+    0.1299   Monocyte percentage
+    0.0755   Monocyte count
+    0.0237   Lymphocyte count
+    0.0195   Eosinophill count
+    0.0162   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0155   Eosinophill percentage
+    0.0154   Forced expiratory volume in 1-second (FEV1)
+    0.0152   Lymphocyte percentage
+    0.0132   HDL cholesterol
+    0.0119   Forced expiratory volume in 1-second (FEV1), predicted percentage
+    0.0116   Apolipoprotein A
+    0.0102   Forced vital capacity (FVC), Best measure
+    0.0099   Forced vital capacity (FVC)
+    0.0082   Non-cancer illness code, self-reported
+    0.0075   FEV1/FVC ratio
+
+    0.0258   Intra-ocular pressure, corneal-compensated (right)
+    0.0234   Intra-ocular pressure, corneal-compensated (left)
+    0.0195   Hypotension NOS
+    0.0195   I95 Hypotension
+    0.0191   H40 Glaucoma
+    0.0180   Glaucoma
+    0.0178   Open-angle glaucoma
+    0.0176   Primary open angle glaucoma
+    0.0155   Hypotension
+    0.0132   Corneal hysteresis (right)
+    0.0124   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0124   Corneal hysteresis (left)
+    0.0111   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0110   Inguinal hernia
+    0.0102   K40 Inguinal hernia
+
+    0.0387   Trunk fat mass
+    0.0221   Trunk fat-free mass
+    0.0160   Whole body fat mass
+    0.0147   NSAID|non-steroidal anti-inflammatory drug
+    0.0113   Ankle spacing width
+    0.0108   I25 Chronic ischaemic heart disease
+    0.0106   Multi-site chronic pain
+    0.0102   Comparative height size at age 10
+    0.0098   Leg predicted mass (right)
+    0.0094   Drive faster than motorway speed limit
+    0.0092   Hand grip strength (left)
+    0.0089   ibuprofen
+    0.0087   Impedance of leg (right)
+    0.0078   Hip circumference
+    0.0078   Diastolic blood pressure, combined automated + manual reading
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0368   Albumin/Globulin ratio
+    0.0319   Non-albumin protein
+    0.0142   Lymphocyte count
+    0.0085   Total protein
+    0.0073   Lymphocyte percentage
+    0.0072   Albumin
+    0.0069   Neutrophill percentage
+    0.0067   Platelet count
+    0.0063   Past tobacco smoking
+    0.0062   Smoking status, ever vs never
+    0.0062   Forced expiratory volume in 1-second (FEV1)
+    0.0057   Cystitis
+    0.0055   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0053   Acute pulmonary heart disease
+    0.0053   Pulmonary embolism and infarction, acute
+
+    0.0297   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0277   Mean arterial pressure, automated reading, adjusted by medication
+    0.0277   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0263   Systolic blood pressure, automated reading, adjusted by medication
+    0.0218   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0211   Diastolic blood pressure, automated reading, adjusted by medication
+    0.0198   Mean arterial pressure, combined automated + manual reading
+    0.0194   Systolic blood pressure, combined automated + manual reading
+    0.0187   Mean arterial pressure, automated reading
+    0.0183   Systolic blood pressure, automated reading
+    0.0139   Diastolic blood pressure, combined automated + manual reading
+    0.0137   Non-cancer illness code, self-reported
+    0.0127   Diastolic blood pressure, automated reading
+    0.0116   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0109   Pulse pressure, automated reading, adjusted by medication
+
+    0.0276   Corneal resistance factor (right)
+    0.0261   Corneal resistance factor (left)
+    0.0205   Urate
+    0.0165   Lipoprotein A
+    0.0159   Red blood cell (erythrocyte) distribution width
+    0.0155   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0151   Alkaline phosphatase
+    0.0150   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0148   Corneal hysteresis (right)
+    0.0137   Corneal hysteresis (left)
+    0.0133   Non-cancer illness code, self-reported
+    0.0112   Hypothyroidism NOS
+    0.0111   Hypothyroidism
+    0.0110   E03 Other hypothyroidism
+    0.0106   SHBG
+
+    0.0288   Varicose veins of lower extremity
+    0.0265   Varicose veins
+    0.0247   I83 Varicose veins of lower extremities
+    0.0180   Acquired foot deformities
+    0.0176   M20 Acquired deformities of fingers and toes
+    0.0154   Other non-epithelial cancer of skin
+    0.0148   C44 Other malignant neoplasms of skin
+    0.0143   Skin cancer
+    0.0118   Aortic aneurysm
+    0.0117   I71 Aortic aneurysm and dissection
+    0.0105   R06 Abnormalities of breathing
+    0.0103   Hallux valgus (Bunion)
+    0.0102   Respiratory abnormalities
+    0.0091   Macular degeneration (senile) of retina NOS
+    0.0090   Degeneration of macula and posterior pole of retina
+
+    0.0272   E66 Obesity
+    0.0271   Obesity
+    0.0186   Overweight, obesity and other hyperalimentation
+    0.0160   Body mass index (BMI)
+    0.0137   Ankle spacing width (right)
+    0.0113   Standing height
+    0.0086   Leg fat percentage (right)
+    0.0085   Ankle spacing width (left)
+    0.0075   Weight
+    0.0074   Pulse pressure, automated reading, adjusted by medication
+    0.0074   Pulse pressure, automated reading
+    0.0074   Pulse pressure, combined automated + manual reading
+    0.0065   proton pump inhibitor|PPI
+    0.0063   Weight
+    0.0062   calcium channel blocker|dihydropyridine|anti-hypertensive
+
+    0.0188   Mean carotid IMT (intima-medial thickness) at 210 degrees
+    0.0180   Mean carotid IMT (intima-medial thickness) at 240 degrees
+    0.0177   Lipoprotein A
+    0.0166   Mean carotid IMT (intima-medial thickness) at 120 degrees
+    0.0164   Mean carotid IMT (intima-medial thickness) at 150 degrees
+    0.0164   Maximum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0158   Maximum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0155   Minimum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0145   Minimum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0138   Minimum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0138   Maximum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0136   Maximum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0132   Minimum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0076   Urate
+    0.0068   Disorders of menstruation and other abnormal bleeding from female genital tract
+
+    0.0225   I35 Nonrheumatic aortic valve disorders
+    0.0224   Nonrheumatic aortic valve disorders
+    0.0149   Late effects of cerebrovascular disease
+    0.0145   I69 Sequelae of cerebrovascular disease
+    0.0142   Cerebrovascular disease
+    0.0142   Congenital anomalies of great vessels
+    0.0131   Cardiac congenital anomalies
+    0.0123   Suicide or self-inflicted injury
+    0.0119   Heart valve disorders
+    0.0117   X61 Intentional self-poisoning by and exposure to antiepileptic, sedative-hypnotic, anti-Parkinsonism and psychotropic drugs, not elsewhere classified
+    0.0117   Hemiplegia
+    0.0115   G81 Hemiplegia
+    0.0114   Suicidal ideation or attempt
+    0.0114   T51 Toxic effect of alcohol
+    0.0114   Toxic effect of (non-ethyl) alcohol and petroleum and other solvents
+
+    0.0297   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0277   Mean arterial pressure, automated reading, adjusted by medication
+    0.0277   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0263   Systolic blood pressure, automated reading, adjusted by medication
+    0.0218   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0211   Diastolic blood pressure, automated reading, adjusted by medication
+    0.0198   Mean arterial pressure, combined automated + manual reading
+    0.0194   Systolic blood pressure, combined automated + manual reading
+    0.0187   Mean arterial pressure, automated reading
+    0.0183   Systolic blood pressure, automated reading
+    0.0139   Diastolic blood pressure, combined automated + manual reading
+    0.0137   Non-cancer illness code, self-reported
+    0.0127   Diastolic blood pressure, automated reading
+    0.0116   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0109   Pulse pressure, automated reading, adjusted by medication
+
+    0.0188   Mean carotid IMT (intima-medial thickness) at 210 degrees
+    0.0180   Mean carotid IMT (intima-medial thickness) at 240 degrees
+    0.0177   Lipoprotein A
+    0.0166   Mean carotid IMT (intima-medial thickness) at 120 degrees
+    0.0164   Mean carotid IMT (intima-medial thickness) at 150 degrees
+    0.0164   Maximum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0158   Maximum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0155   Minimum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0145   Minimum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0138   Minimum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0138   Maximum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0136   Maximum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0132   Minimum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0076   Urate
+    0.0068   Disorders of menstruation and other abnormal bleeding from female genital tract
+
+    0.0203   Varicose veins of lower extremity
+    0.0185   Varicose veins
+    0.0172   I83 Varicose veins of lower extremities
+    0.0169   Indirect bilirubin
+    0.0165   Total bilirubin
+    0.0130   Direct bilirubin
+    0.0102   Bacterial pneumonia
+    0.0102   Psoriasis
+    0.0099   Pneumococcal pneumonia
+    0.0097   Monocyte percentage
+    0.0096   L40 Psoriasis
+    0.0095   Pneumonia
+    0.0092   J18 Pneumonia, organism unspecified
+    0.0092   Psoriasis and related disorders
+    0.0078   Cardiac arrest
+
+    0.0244   Impedance of arm (right)
+    0.0191   Trunk fat mass
+    0.0179   E11 Non-insulin-dependent diabetes mellitus
+    0.0148   Impedance of leg (right)
+    0.0123   Type 2 diabetes
+    0.0104   Leg fat-free mass (left)
+    0.0102   Leg fat mass (left)
+    0.0100   Leg fat mass (right)
+    0.0100   doxycycline
+    0.0100   Whole body water mass
+    0.0090   Body mass index (BMI)
+    0.0087   Trunk fat percentage
+    0.0086   tetracycline antibiotic|antibiotic
+    0.0081   ramipril
+    0.0077   Cystatin C
+
+    0.0102   Corneal resistance factor (right)
+    0.0096   X61 Intentional self-poisoning by and exposure to antiepileptic, sedative-hypnotic, anti-Parkinsonism and psychotropic drugs, not elsewhere classified
+    0.0091   Corneal resistance factor (left)
+    0.0090   Poisoning by psychotropic agents
+    0.0085   SHBG
+    0.0083   T43 Poisoning by psychotropic drugs, not elsewhere classified
+    0.0083   Suicide or self-inflicted injury
+    0.0080   Suicidal ideation or attempt
+    0.0075   Home location - north co-ordinate (rounded)
+    0.0075   Home location at assessment - north co-ordinate (rounded)
+    0.0074   Toxic effect of (non-ethyl) alcohol and petroleum and other solvents
+    0.0073   T51 Toxic effect of alcohol
+    0.0073   T39 Poisoning by nonopioid analgesics, antipyretics and antirheumatics
+    0.0073   Corneal hysteresis (right)
+    0.0072   X60 Intentional self-poisoning by and exposure to nonopioid analgesics, antipyretics and antirheumatics
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 28 (Contribution: 0.0542)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 33 (Contribution: 0.0945)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+F10 Mental And Behavioural Disorders Due To Use Of Alcohol
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 94 (Contribution: 0.0704)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 32 (Contribution: 0.1297)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.1128)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+F17 Mental And Behavioural Disorders Due To Use Of Tobacco
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 51 (Contribution: 0.0921)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 5 (Contribution: 0.0615)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 38 (Contribution: 0.0717)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+F31 Bipolar Affective Disorder
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 92 (Contribution: 0.1087)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 23 (Contribution: 0.0730)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 45 (Contribution: 0.0787)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+F32 Depressive Episode
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 50 (Contribution: 0.1116)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 5 (Contribution: 0.0612)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 45 (Contribution: 0.0855)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+F41 Other Anxiety Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 100 (Contribution: 0.0925)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 93 (Contribution: 0.0847)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 53 (Contribution: 0.0682)</span></p>
+</div>
+</div>
+<div class="cell" data-execution_count="73">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">520</span>,<span class="dv">538</span>):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Other Mental Disorder
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 6 (Contribution: 0.1623)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    0.0290   Trunk fat percentage
+    0.0231   Body fat percentage
+    0.0229   Impedance of whole body
+    0.0226   Impedance of arm (right)
+    0.0224   Impedance of arm (left)
+    0.0194   Trunk fat mass
+    0.0155   Arm fat percentage (left)
+    0.0154   Whole body fat mass
+    0.0153   Arm fat percentage (right)
+    0.0139   Leg fat percentage (right)
+    0.0133   Leg fat percentage (left)
+    0.0132   Impedance of leg (left)
+    0.0129   Impedance of leg (right)
+    0.0090   Leg fat mass (right)
+    0.0088   Arm fat mass (left)
+
+    0.0312   Body mass index (BMI)
+    0.0297   Leg predicted mass (left)
+    0.0226   Leg fat percentage (left)
+    0.0159   Arm fat mass (left)
+    0.0128   Body mass index (BMI)
+    0.0097   Whole body fat mass
+    0.0094   Diastolic blood pressure, automated reading, adjusted by medication
+    0.0088   Hand grip strength (left)
+    0.0082   aspirin
+    0.0082   Arm fat-free mass (left)
+    0.0081   SHBG
+    0.0073   Treatment/medication code
+    0.0072   I25 Chronic ischaemic heart disease
+    0.0069   corticosteroid
+    0.0068   C-reactive protein
+
+    0.0384   High light scatter reticulocyte percentage
+    0.0375   Mean corpuscular haemoglobin
+    0.0339   Mean corpuscular volume
+    0.0326   High light scatter reticulocyte count
+    0.0324   Reticulocyte percentage
+    0.0254   Reticulocyte count
+    0.0235   Impedance of whole body
+    0.0212   Impedance of arm (right)
+    0.0203   Impedance of arm (left)
+    0.0188   Immature reticulocyte fraction
+    0.0176   Impedance of leg (left)
+    0.0172   Impedance of leg (right)
+    0.0145   Trunk fat percentage
+    0.0140   Red blood cell (erythrocyte) distribution width
+    0.0121   Standing height
+
+    0.0258   Intra-ocular pressure, corneal-compensated (right)
+    0.0234   Intra-ocular pressure, corneal-compensated (left)
+    0.0195   Hypotension NOS
+    0.0195   I95 Hypotension
+    0.0191   H40 Glaucoma
+    0.0180   Glaucoma
+    0.0178   Open-angle glaucoma
+    0.0176   Primary open angle glaucoma
+    0.0155   Hypotension
+    0.0132   Corneal hysteresis (right)
+    0.0124   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0124   Corneal hysteresis (left)
+    0.0111   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0110   Inguinal hernia
+    0.0102   K40 Inguinal hernia
+
+    0.0387   Trunk fat mass
+    0.0221   Trunk fat-free mass
+    0.0160   Whole body fat mass
+    0.0147   NSAID|non-steroidal anti-inflammatory drug
+    0.0113   Ankle spacing width
+    0.0108   I25 Chronic ischaemic heart disease
+    0.0106   Multi-site chronic pain
+    0.0102   Comparative height size at age 10
+    0.0098   Leg predicted mass (right)
+    0.0094   Drive faster than motorway speed limit
+    0.0092   Hand grip strength (left)
+    0.0089   ibuprofen
+    0.0087   Impedance of leg (right)
+    0.0078   Hip circumference
+    0.0078   Diastolic blood pressure, combined automated + manual reading
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0175   J44 Other chronic obstructive pulmonary disease
+    0.0170   Obstructive chronic bronchitis
+    0.0160   Chronic bronchitis
+    0.0132   Pulmonary embolism and infarction, acute
+    0.0132   Acute pulmonary heart disease
+    0.0130   Chronic airway obstruction
+    0.0121   I26 Pulmonary embolism
+    0.0113   HDL cholesterol
+    0.0105   Apolipoprotein A
+    0.0093   Total thigh muscle volume
+    0.0082   Pulmonary heart disease
+    0.0075   Alcohol intake frequency.
+    0.0073   Posterior thigh lean muscle volume (right)
+    0.0072   Posterior thigh lean muscle volume (left)
+    0.0068   K57 Diverticular disease of intestine
+
+    0.0297   Mean arterial pressure, combined automated + manual reading, adjusted by medication
+    0.0277   Mean arterial pressure, automated reading, adjusted by medication
+    0.0277   Systolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0263   Systolic blood pressure, automated reading, adjusted by medication
+    0.0218   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0211   Diastolic blood pressure, automated reading, adjusted by medication
+    0.0198   Mean arterial pressure, combined automated + manual reading
+    0.0194   Systolic blood pressure, combined automated + manual reading
+    0.0187   Mean arterial pressure, automated reading
+    0.0183   Systolic blood pressure, automated reading
+    0.0139   Diastolic blood pressure, combined automated + manual reading
+    0.0137   Non-cancer illness code, self-reported
+    0.0127   Diastolic blood pressure, automated reading
+    0.0116   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0109   Pulse pressure, automated reading, adjusted by medication
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0258   Intra-ocular pressure, corneal-compensated (right)
+    0.0234   Intra-ocular pressure, corneal-compensated (left)
+    0.0195   Hypotension NOS
+    0.0195   I95 Hypotension
+    0.0191   H40 Glaucoma
+    0.0180   Glaucoma
+    0.0178   Open-angle glaucoma
+    0.0176   Primary open angle glaucoma
+    0.0155   Hypotension
+    0.0132   Corneal hysteresis (right)
+    0.0124   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0124   Corneal hysteresis (left)
+    0.0111   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0110   Inguinal hernia
+    0.0102   K40 Inguinal hernia
+
+    0.0670   Essential hypertension
+    0.0596   Hypertension
+    0.0278   E78 Disorders of lipoprotein metabolism and other lipidaemias
+    0.0271   Disorders of lipoid metabolism
+    0.0265   Hypercholesterolemia
+    0.0256   Hyperlipidemia
+    0.0252   Ischemic Heart Disease
+    0.0197   Other chronic ischemic heart disease, unspecified
+    0.0174   I25 Chronic ischaemic heart disease
+    0.0138   antipyretic
+    0.0138   paracetamol
+    0.0134   opioid analgesic|antipyretic
+    0.0130   Angina pectoris
+    0.0111   E11 Non-insulin-dependent diabetes mellitus
+    0.0100   Leg fat mass (left)
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0258   Intra-ocular pressure, corneal-compensated (right)
+    0.0234   Intra-ocular pressure, corneal-compensated (left)
+    0.0195   Hypotension NOS
+    0.0195   I95 Hypotension
+    0.0191   H40 Glaucoma
+    0.0180   Glaucoma
+    0.0178   Open-angle glaucoma
+    0.0176   Primary open angle glaucoma
+    0.0155   Hypotension
+    0.0132   Corneal hysteresis (right)
+    0.0124   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0124   Corneal hysteresis (left)
+    0.0111   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0110   Inguinal hernia
+    0.0102   K40 Inguinal hernia
+
+    0.0319   Whole body fat-free mass
+    0.0251   Leg fat percentage (right)
+    0.0194   Hand grip strength (left)
+    0.0120   Leg predicted mass (right)
+    0.0118   Forced vital capacity (FVC), Best measure
+    0.0110   codine/paracetamol
+    0.0103   Arm fat-free mass (right)
+    0.0099   Mean arterial pressure, automated reading
+    0.0096   Trunk fat-free mass
+    0.0096   Peak expiratory flow (PEF)
+    0.0092   Trunk predicted mass
+    0.0090   Basal metabolic rate
+    0.0089   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0071   Arm fat mass (left)
+    0.0069   Age completed full time education
+
+    0.0327   Genital prolapse
+    0.0325   Prolapse of vaginal walls
+    0.0322   N81 Female genital prolapse
+    0.0185   Uterine/Uterovaginal prolapse
+    0.0143   Pulse rate, automated reading
+    0.0115   C-reactive protein
+    0.0084   Other vitamin B12 deficiency anemia
+    0.0084   Megaloblastic anemia
+    0.0084   Other deficiency anemia
+    0.0084   D51 Vitamin B12 deficiency anaemia
+    0.0077   Chronic liver disease and cirrhosis
+    0.0076   Pulse rate
+    0.0074   Gamma glutamyltransferase
+    0.0073   K76 Other diseases of liver
+    0.0072   Other disorders of liver
+
+    0.0368   Albumin/Globulin ratio
+    0.0319   Non-albumin protein
+    0.0142   Lymphocyte count
+    0.0085   Total protein
+    0.0073   Lymphocyte percentage
+    0.0072   Albumin
+    0.0069   Neutrophill percentage
+    0.0067   Platelet count
+    0.0063   Past tobacco smoking
+    0.0062   Smoking status, ever vs never
+    0.0062   Forced expiratory volume in 1-second (FEV1)
+    0.0057   Cystitis
+    0.0055   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0053   Acute pulmonary heart disease
+    0.0053   Pulmonary embolism and infarction, acute
+
+    0.0228   Leg fat mass (right)
+    0.0227   Arm predicted mass (left)
+    0.0162   Ankle spacing width (right)
+    0.0147   Hip circumference
+    0.0114   selective serotonin re-uptake inhibitor|SSRI
+    0.0110   Body mass index (BMI)
+    0.0108   Trunk predicted mass
+    0.0094   proton pump inhibitor|PPI
+    0.0091   beta-lactam antibiotic|antibiotic
+    0.0087   Impedance of leg (left)
+    0.0085   Sitting height
+    0.0073   Heel bone mineral density (BMD) T-score, automated (left)
+    0.0073   Heel quantitative ultrasound index (QUI), direct entry (left)
+    0.0071   Hypertension
+    0.0071   Body fat percentage
+
+    0.0276   Corneal resistance factor (right)
+    0.0261   Corneal resistance factor (left)
+    0.0205   Urate
+    0.0165   Lipoprotein A
+    0.0159   Red blood cell (erythrocyte) distribution width
+    0.0155   Intra-ocular pressure, Goldmann-correlated (left)
+    0.0151   Alkaline phosphatase
+    0.0150   Intra-ocular pressure, Goldmann-correlated (right)
+    0.0148   Corneal hysteresis (right)
+    0.0137   Corneal hysteresis (left)
+    0.0133   Non-cancer illness code, self-reported
+    0.0112   Hypothyroidism NOS
+    0.0111   Hypothyroidism
+    0.0110   E03 Other hypothyroidism
+    0.0106   SHBG
+
+    0.0469   Acquired foot deformities
+    0.0468   M20 Acquired deformities of fingers and toes
+    0.0290   Hemoptysis
+    0.0286   R04 Haemorrhage from respiratory passages
+    0.0275   Obesity
+    0.0272   E66 Obesity
+    0.0272   Hallux valgus (Bunion)
+    0.0253   Acquired toe deformities
+    0.0248   Abnormal sputum
+    0.0247   Overweight, obesity and other hyperalimentation
+    0.0123   G47 Sleep disorders
+    0.0119   Sleep disorders
+    0.0111   Hammer toe (acquired)
+    0.0110   Epistaxis or throat hemorrhage
+    0.0095   Prostatitis
+
+    0.1274   Standing height
+    0.0721   Sitting height
+    0.0263   Seated height
+    0.0192   Comparative height size at age 10
+    0.0190   Trunk fat-free mass
+    0.0189   Trunk predicted mass
+    0.0134   Whole body fat-free mass
+    0.0117   Whole body water mass
+    0.0114   Waist circumference
+    0.0112   Leg fat mass (left)
+    0.0112   Arm fat mass (right)
+    0.0107   Leg fat mass (right)
+    0.0101   Arm fat mass (left)
+    0.0099   E66 Obesity
+    0.0099   Obesity
+
+    0.0136   Aspartate aminotransferase
+    0.0125   Platelet distribution width
+    0.0112   Alanine aminotransferase
+    0.0084   Inflammatory bowel disease and other gastroenteritis and colitis
+    0.0074   Spherical power (right)
+    0.0070   Genital prolapse
+    0.0070   Prolapse of vaginal walls
+    0.0069   Spherical power (left)
+    0.0068   N81 Female genital prolapse
+    0.0068   Open wounds of head; neck; and trunk
+    0.0063   C79 Secondary malignant neoplasm of other sites
+    0.0061   E87 Other disorders of fluid, electrolyte and acid-base balance
+    0.0061   Ulcerative colitis
+    0.0061   Electrolyte imbalance
+    0.0061   I77 Other disorders of arteries and arterioles
+
+    0.0469   Acquired foot deformities
+    0.0468   M20 Acquired deformities of fingers and toes
+    0.0290   Hemoptysis
+    0.0286   R04 Haemorrhage from respiratory passages
+    0.0275   Obesity
+    0.0272   E66 Obesity
+    0.0272   Hallux valgus (Bunion)
+    0.0253   Acquired toe deformities
+    0.0248   Abnormal sputum
+    0.0247   Overweight, obesity and other hyperalimentation
+    0.0123   G47 Sleep disorders
+    0.0119   Sleep disorders
+    0.0111   Hammer toe (acquired)
+    0.0110   Epistaxis or throat hemorrhage
+    0.0095   Prostatitis
+
+    0.0275   Impedance of arm (right)
+    0.0160   proton pump inhibitor|PPI
+    0.0146   Whole body fat-free mass
+    0.0119   NSAID|non-steroidal anti-inflammatory drug
+    0.0113   Leg fat percentage (left)
+    0.0110   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0089   corticosteroid
+    0.0087   anti-fungal
+    0.0078   Impedance of whole body
+    0.0077   Renal failure
+    0.0076   Ankle spacing width
+    0.0075   Waist circumference
+    0.0073   Hand grip strength (right)
+    0.0072   Mean arterial pressure, combined automated + manual reading
+    0.0069   doxycycline
+
+    0.0136   Aspartate aminotransferase
+    0.0125   Platelet distribution width
+    0.0112   Alanine aminotransferase
+    0.0084   Inflammatory bowel disease and other gastroenteritis and colitis
+    0.0074   Spherical power (right)
+    0.0070   Genital prolapse
+    0.0070   Prolapse of vaginal walls
+    0.0069   Spherical power (left)
+    0.0068   N81 Female genital prolapse
+    0.0068   Open wounds of head; neck; and trunk
+    0.0063   C79 Secondary malignant neoplasm of other sites
+    0.0061   E87 Other disorders of fluid, electrolyte and acid-base balance
+    0.0061   Ulcerative colitis
+    0.0061   Electrolyte imbalance
+    0.0061   I77 Other disorders of arteries and arterioles
+
+    0.0219   Mean carotid IMT (intima-medial thickness) at 210 degrees
+    0.0207   Mean carotid IMT (intima-medial thickness) at 240 degrees
+    0.0195   Mean carotid IMT (intima-medial thickness) at 120 degrees
+    0.0187   Mean carotid IMT (intima-medial thickness) at 150 degrees
+    0.0165   Maximum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0158   Maximum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0151   Minimum carotid IMT (intima-medial thickness) at 210 degrees
+    0.0139   Minimum carotid IMT (intima-medial thickness) at 240 degrees
+    0.0138   Maximum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0138   Minimum carotid IMT (intima-medial thickness) at 120 degrees
+    0.0133   Minimum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0132   Maximum carotid IMT (intima-medial thickness) at 150 degrees
+    0.0097   Heart valve disorders
+    0.0093   Neutrophill percentage
+    0.0088   Nonrheumatic aortic valve disorders
+
+    0.0407   Arm fat-free mass (right)
+    0.0200   corticosteroid
+    0.0140   Arm fat-free mass (left)
+    0.0105   Ankle spacing width (left)
+    0.0103   Whole body fat-free mass
+    0.0098   Coronary atherosclerosis
+    0.0097   Body fat percentage
+    0.0096   clotrimazole
+    0.0096   Arm predicted mass (right)
+    0.0093   Leg predicted mass (right)
+    0.0080   Trunk fat mass
+    0.0079   Body mass index (BMI)
+    0.0072   Forced vital capacity (FVC), Best measure
+    0.0068   Whole body water mass
+    0.0067   Arm fat percentage (left)
+
+    0.0324   Heel bone mineral density (BMD)
+    0.0322   Heel bone mineral density (BMD) T-score, automated
+    0.0322   Heel quantitative ultrasound index (QUI), direct entry
+    0.0258   Heel Broadband ultrasound attenuation, direct entry
+    0.0139   Urate
+    0.0119   Heel bone mineral density (BMD) T-score, automated (left)
+    0.0119   Heel quantitative ultrasound index (QUI), direct entry (left)
+    0.0119   Heel broadband ultrasound attenuation (left)
+    0.0116   Heel bone mineral density (BMD) (left)
+    0.0115   Heel bone mineral density (BMD) T-score, automated (right)
+    0.0115   Heel quantitative ultrasound index (QUI), direct entry (right)
+    0.0115   Heel broadband ultrasound attenuation (right)
+    0.0114   Heel bone mineral density (BMD) (right)
+    0.0103   Cerebrovascular disease
+    0.0102   Creatinine
+
+    0.0441   Psoriasis
+    0.0425   L40 Psoriasis
+    0.0403   Psoriasis and related disorders
+    0.0187   Cardiac arrest
+    0.0184   Cardiac arrest and ventricular fibrillation
+    0.0181   I46 Cardiac arrest
+    0.0117   K90 Intestinal malabsorption
+    0.0114   Intestinal malabsorption (non-celiac)
+    0.0109   Obesity
+    0.0108   E66 Obesity
+    0.0097   Overweight, obesity and other hyperalimentation
+    0.0095   Aortic aneurysm
+    0.0094   I71 Aortic aneurysm and dissection
+    0.0090   Celiac disease
+    0.0085   Noninflammatory disorders of ovary, fallopian tube, and broad ligament
+
+    0.0262   Trunk fat percentage
+    0.0240   Whole body fat-free mass
+    0.0207   Leg predicted mass (left)
+    0.0201   Arm fat-free mass (left)
+    0.0172   Leg fat percentage (left)
+    0.0147   Leg fat mass (right)
+    0.0105   Leg fat mass (left)
+    0.0083   NSAID|non-steroidal anti-inflammatory drug
+    0.0079   Usual walking pace
+    0.0078   proton pump inhibitor|PPI
+    0.0073   Impedance of leg (left)
+    0.0071   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0065   Arm fat mass (right)
+    0.0061   Diastolic blood pressure, combined automated + manual reading, adjusted by medication
+    0.0059   codine/paracetamol
+
+    0.0149   Urinary calculus
+    0.0149   N20 Calculus of kidney and ureter
+    0.0147   Maximum heart rate during fitness test
+    0.0146   ECG, load
+    0.0146   Maximum workload during fitness test
+    0.0139   Pulse rate, automated reading
+    0.0138   ECG, heart rate
+    0.0130   ECG, number of stages in a phase
+    0.0126   Number of trend entries
+    0.0117   ECG, phase time
+    0.0110   Calculus of ureter
+    0.0102   Processed meat intake
+    0.0101   Calculus of kidney
+    0.0088   Beef intake
+    0.0080   Lamb/mutton intake
+
+    0.0221   Prolapse of vaginal walls
+    0.0212   Genital prolapse
+    0.0210   N81 Female genital prolapse
+    0.0119   Platelet count
+    0.0116   Albumin
+    0.0114   Primary/intrinsic cardiomyopathies
+    0.0114   I42 Cardiomyopathy
+    0.0106   Cardiomyopathy
+    0.0097   Saturated fat
+    0.0097   Lymphocyte count
+    0.0096   Eosinophill percentage
+    0.0089   Fat
+    0.0085   Polyp of corpus uteri
+    0.0085   Total thigh muscle volume
+    0.0084   N84 Polyp of female genital tract
+
+    0.0408   Trunk fat-free mass
+    0.0198   Trunk predicted mass
+    0.0149   Leg fat mass (right)
+    0.0139   Leg fat-free mass (right)
+    0.0126   tetracycline antibiotic|antibiotic
+    0.0112   E66 Obesity
+    0.0111   Impedance of leg (left)
+    0.0093   Reticulocyte percentage
+    0.0091   Body mass index (BMI)
+    0.0090   Arm predicted mass (right)
+    0.0087   selective serotonin re-uptake inhibitor|SSRI
+    0.0086   Non-cancer illness code, self-reported
+    0.0084   simvastatin
+    0.0078   Impedance of whole body
+    0.0072   High light scatter reticulocyte count
+
+    0.0487   Sebaceous cyst
+    0.0484   Diseases of sebaceous glands
+    0.0473   L72 Follicular cysts of skin and subcutaneous tissue
+    0.0373   Diseases of hair and hair follicles
+    0.0088   IGF-1
+    0.0086   Acquired foot deformities
+    0.0084   M20 Acquired deformities of fingers and toes
+    0.0078   Sodium in urine
+    0.0071   Acquired toe deformities
+    0.0068   FEV1/FVC ratio
+    0.0067   Urea
+    0.0067   Cancer of bladder
+    0.0065   C67 Malignant neoplasm of bladder
+    0.0065   Malignant neoplasm of bladder
+    0.0064   Cystitis
+
+    0.0405   Other vitamin B12 deficiency anemia
+    0.0405   D51 Vitamin B12 deficiency anaemia
+    0.0340   Megaloblastic anemia
+    0.0315   Other deficiency anemia
+    0.0202   Intervertebral disc disorders
+    0.0195   G55 Nerve root and plexus compressions in diseases classified elsewhere
+    0.0189   Other and unspecified disc disorder
+    0.0181   Nerve root and plexus disorders
+    0.0163   Contracture of palmar fascia [Dupuytren's disease]
+    0.0157   Disorders of muscle, ligament, and fascia
+    0.0146   Fasciitis
+    0.0117   M51 Other intervertebral disk disorders
+    0.0103   M72 Fibroblastic disorders
+    0.0097   Non-albumin protein
+    0.0084   Eosinophill percentage
+
+    0.0240   Leg predicted mass (right)
+    0.0211   Arm fat percentage (right)
+    0.0197   Waist circumference
+    0.0146   Impedance of leg (left)
+    0.0115   Leg fat-free mass (left)
+    0.0113   Arm fat-free mass (left)
+    0.0112   Overall health rating
+    0.0108   opioid analgesic|antipyretic
+    0.0105   Leg fat mass (right)
+    0.0101   Arm fat percentage (left)
+    0.0089   antispasmodic
+    0.0088   Hip circumference
+    0.0085   Trunk predicted mass
+    0.0084   Arm predicted mass (left)
+    0.0082   Whole body fat-free mass
+
+    0.0098   Corneal hysteresis (right)
+    0.0095   Corneal hysteresis (left)
+    0.0094   Intra-ocular pressure, corneal-compensated (left)
+    0.0092   I35 Nonrheumatic aortic valve disorders
+    0.0092   Intra-ocular pressure, corneal-compensated (right)
+    0.0091   Nonrheumatic aortic valve disorders
+    0.0079   Alkaline phosphatase
+    0.0075   Congenital anomalies of great vessels
+    0.0075   Intervertebral disc disorders
+    0.0072   3mm strong meridian angle (left)
+    0.0072   Osteoporosis
+    0.0072   Osteoporosis NOS
+    0.0071   Aortic aneurysm
+    0.0070   I71 Aortic aneurysm and dissection
+    0.0070   Other and unspecified disc disorder
+
+    0.0203   Inflammatory bowel disease and other gastroenteritis and colitis
+    0.0168   Ulcerative colitis
+    0.0164   K51 Ulcerative colitis
+    0.0120   Albumin
+    0.0119   Dental caries
+    0.0117   Total protein
+    0.0113   K02 Dental caries
+    0.0112   Diseases of hard tissues of teeth
+    0.0107   Aortic aneurysm
+    0.0103   I71 Aortic aneurysm and dissection
+    0.0096   Appendicitis
+    0.0095   Acute appendicitis
+    0.0093   Regional enteritis
+    0.0092   K50 Crohn's disease [regional enteritis]
+    0.0090   Platelet count
+
+    0.0205   Leg fat mass (left)
+    0.0158   Forced expiratory volume in 1-second (FEV1), predicted
+    0.0104   Impedance of whole body
+    0.0095   flucloxacillin
+    0.0082   Arm predicted mass (right)
+    0.0077   Arm fat percentage (left)
+    0.0076   Essential hypertension
+    0.0073   Overweight, obesity and other hyperalimentation
+    0.0073   Basal metabolic rate
+    0.0073   Sitting height
+    0.0073   bendroflumethiazide
+    0.0070   Forced expiratory volume in 1-second (FEV1), Best measure
+    0.0067   Trunk fat mass
+    0.0067   Leg fat-free mass (left)
+    0.0065   atorvastatin
+
+    0.0424   Contracture of palmar fascia [Dupuytren's disease]
+    0.0416   Disorders of muscle, ligament, and fascia
+    0.0413   Fasciitis
+    0.0344   M72 Fibroblastic disorders
+    0.0276   ECG, number of stages in a phase
+    0.0267   ECG, load
+    0.0264   Maximum workload during fitness test
+    0.0229   Number of trend entries
+    0.0226   ECG, phase time
+    0.0129   Corneal hysteresis (left)
+    0.0129   Corneal hysteresis (right)
+    0.0118   Duration of fitness test
+    0.0077   Getting up in morning
+    0.0075   Corneal resistance factor (left)
+    0.0073   Corneal resistance factor (right)
+
+    0.0288   Varicose veins of lower extremity
+    0.0265   Varicose veins
+    0.0247   I83 Varicose veins of lower extremities
+    0.0180   Acquired foot deformities
+    0.0176   M20 Acquired deformities of fingers and toes
+    0.0154   Other non-epithelial cancer of skin
+    0.0148   C44 Other malignant neoplasms of skin
+    0.0143   Skin cancer
+    0.0118   Aortic aneurysm
+    0.0117   I71 Aortic aneurysm and dissection
+    0.0105   R06 Abnormalities of breathing
+    0.0103   Hallux valgus (Bunion)
+    0.0102   Respiratory abnormalities
+    0.0091   Macular degeneration (senile) of retina NOS
+    0.0090   Degeneration of macula and posterior pole of retina
+
+    0.0247   Weight
+    0.0190   Whole body water mass
+    0.0134   Trunk fat mass
+    0.0132   Age at first live birth
+    0.0128   Weight
+    0.0123   Arm fat-free mass (left)
+    0.0119   Overweight, obesity and other hyperalimentation
+    0.0112   Body mass index (BMI)
+    0.0108   Leg fat percentage (right)
+    0.0089   Hip circumference
+    0.0088   Leg fat-free mass (right)
+    0.0081   Trunk predicted mass
+    0.0064   aspirin
+    0.0064   Leg fat-free mass (left)
+    0.0063   sodium alginate / potassium bicarbonate
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0312   Appendicitis
+    0.0307   Acute appendicitis
+    0.0287   Appendiceal conditions
+    0.0284   K35 Acute appendicitis
+    0.0208   Sebaceous cyst
+    0.0203   Diseases of sebaceous glands
+    0.0186   L72 Follicular cysts of skin and subcutaneous tissue
+    0.0140   Contracture of palmar fascia [Dupuytren's disease]
+    0.0134   Disorders of muscle, ligament, and fascia
+    0.0133   Iron deficiency anemias, unspecified or not due to blood loss
+    0.0133   Iron deficiency anemias
+    0.0121   Fasciitis
+    0.0118   D50 Iron deficiency anaemia
+    0.0115   Home location - north co-ordinate (rounded)
+    0.0113   Home location at assessment - north co-ordinate (rounded)
+
+    0.0150   Impedance of arm (left)
+    0.0145   Apolipoprotein A
+    0.0134   Overweight, obesity and other hyperalimentation
+    0.0119   Hand grip strength (right)
+    0.0117   Weight
+    0.0108   corticosteroid
+    0.0107   Impedance of leg (left)
+    0.0102   Leg predicted mass (right)
+    0.0096   Basal metabolic rate
+    0.0096   Maximum workload during fitness test
+    0.0094   Forced vital capacity (FVC)
+    0.0077   Ankle spacing width
+    0.0075   antispasmodic
+    0.0070   Peak expiratory flow (PEF)
+    0.0064   Renal failure
+
+    0.0227   Alkaline phosphatase
+    0.0134   Red blood cell (erythrocyte) distribution width
+    0.0104   Albumin
+    0.0079   Alanine aminotransferase
+    0.0077   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0072   Other disorders of bladder
+    0.0071   Aspartate aminotransferase
+    0.0071   Other retinal disorders
+    0.0065   Cystatin C
+    0.0064   N32 Other disorders of bladder
+    0.0062   Calcium
+    0.0061   Gamma glutamyltransferase
+    0.0057   Diabetic retinopathy
+    0.0057   Hereditary retinal dystrophies
+    0.0057   H36 Retinal disorders in diseases classified elsewhere
+
+    0.0225   I35 Nonrheumatic aortic valve disorders
+    0.0224   Nonrheumatic aortic valve disorders
+    0.0149   Late effects of cerebrovascular disease
+    0.0145   I69 Sequelae of cerebrovascular disease
+    0.0142   Cerebrovascular disease
+    0.0142   Congenital anomalies of great vessels
+    0.0131   Cardiac congenital anomalies
+    0.0123   Suicide or self-inflicted injury
+    0.0119   Heart valve disorders
+    0.0117   X61 Intentional self-poisoning by and exposure to antiepileptic, sedative-hypnotic, anti-Parkinsonism and psychotropic drugs, not elsewhere classified
+    0.0117   Hemiplegia
+    0.0115   G81 Hemiplegia
+    0.0114   Suicidal ideation or attempt
+    0.0114   T51 Toxic effect of alcohol
+    0.0114   Toxic effect of (non-ethyl) alcohol and petroleum and other solvents
+
+    0.0297   Obesity
+    0.0293   E66 Obesity
+    0.0172   Overweight, obesity and other hyperalimentation
+    0.0159   Leg fat mass (left)
+    0.0155   Pulse pressure, automated reading, adjusted by medication
+    0.0134   Estimated glomerular filtration rate, serum creatinine + cystain C
+    0.0128   Seating box height
+    0.0127   Pulse pressure, combined automated + manual reading, adjusted by medication
+    0.0127   Coronary atherosclerosis
+    0.0118   Pulse pressure, combined automated + manual reading
+    0.0106   Sitting height
+    0.0105   HMG CoA reductase inhibitor|statin
+    0.0102   lansoprazole
+    0.0099   Trunk fat percentage
+    0.0095   Whole body fat mass
+
+    0.0165   Cerebrovascular disease
+    0.0127   SHBG
+    0.0124   Acute pulmonary heart disease
+    0.0124   Pulmonary embolism and infarction, acute
+    0.0123   I26 Pulmonary embolism
+    0.0113   Pulmonary heart disease
+    0.0104   Breast cancer [female]
+    0.0103   Late effects of cerebrovascular disease
+    0.0103   Breast cancer
+    0.0100   I69 Sequelae of cerebrovascular disease
+    0.0099   Cerebral ischemia
+    0.0097   Malignant neoplasm of female breast
+    0.0095   C50 Malignant neoplasm of breast
+    0.0093   Hemiplegia
+    0.0092   Occlusion of cerebral arteries
+
+    0.0171   Platelet count
+    0.0121   Eosinophill count
+    0.0101   Polyp of corpus uteri
+    0.0099   R06 Abnormalities of breathing
+    0.0098   N84 Polyp of female genital tract
+    0.0097   Respiratory abnormalities
+    0.0093   Polyp of female genital organs
+    0.0091   I71 Aortic aneurysm and dissection
+    0.0089   Aortic aneurysm
+    0.0083   Platelet crit
+    0.0083   Eosinophill percentage
+    0.0074   Bundle branch block
+    0.0071   Purpura and other hemorrhagic conditions
+    0.0070   Cardiac conduction disorders
+    0.0070   D69 Purpura and other haemorrhagic conditions
+
+    0.0249   Ankle spacing width (right)
+    0.0187   Impedance of leg (left)
+    0.0154   proton pump inhibitor|PPI
+    0.0153   Angina pectoris
+    0.0143   Whole body fat-free mass
+    0.0134   Non-cancer illness code, self-reported
+    0.0127   benzodiazepine|sedative|anxiety
+    0.0115   Ischemic Heart Disease
+    0.0111   Sitting height
+    0.0088   Leg predicted mass (left)
+    0.0088   Seated height
+    0.0085   Leg fat mass (left)
+    0.0084   Peak expiratory flow (PEF)
+    0.0072   Arm predicted mass (right)
+    0.0070   Age at first live birth
+
+    0.0165   Cerebrovascular disease
+    0.0127   SHBG
+    0.0124   Acute pulmonary heart disease
+    0.0124   Pulmonary embolism and infarction, acute
+    0.0123   I26 Pulmonary embolism
+    0.0113   Pulmonary heart disease
+    0.0104   Breast cancer [female]
+    0.0103   Late effects of cerebrovascular disease
+    0.0103   Breast cancer
+    0.0100   I69 Sequelae of cerebrovascular disease
+    0.0099   Cerebral ischemia
+    0.0097   Malignant neoplasm of female breast
+    0.0095   C50 Malignant neoplasm of breast
+    0.0093   Hemiplegia
+    0.0092   Occlusion of cerebral arteries
+
+    0.0171   Platelet count
+    0.0121   Eosinophill count
+    0.0101   Polyp of corpus uteri
+    0.0099   R06 Abnormalities of breathing
+    0.0098   N84 Polyp of female genital tract
+    0.0097   Respiratory abnormalities
+    0.0093   Polyp of female genital organs
+    0.0091   I71 Aortic aneurysm and dissection
+    0.0089   Aortic aneurysm
+    0.0083   Platelet crit
+    0.0083   Eosinophill percentage
+    0.0074   Bundle branch block
+    0.0071   Purpura and other hemorrhagic conditions
+    0.0070   Cardiac conduction disorders
+    0.0070   D69 Purpura and other haemorrhagic conditions
+
+    0.0249   Ankle spacing width (right)
+    0.0187   Impedance of leg (left)
+    0.0154   proton pump inhibitor|PPI
+    0.0153   Angina pectoris
+    0.0143   Whole body fat-free mass
+    0.0134   Non-cancer illness code, self-reported
+    0.0127   benzodiazepine|sedative|anxiety
+    0.0115   Ischemic Heart Disease
+    0.0111   Sitting height
+    0.0088   Leg predicted mass (left)
+    0.0088   Seated height
+    0.0085   Leg fat mass (left)
+    0.0084   Peak expiratory flow (PEF)
+    0.0072   Arm predicted mass (right)
+    0.0070   Age at first live birth
+
+    0.0324   Heel bone mineral density (BMD)
+    0.0322   Heel bone mineral density (BMD) T-score, automated
+    0.0322   Heel quantitative ultrasound index (QUI), direct entry
+    0.0258   Heel Broadband ultrasound attenuation, direct entry
+    0.0139   Urate
+    0.0119   Heel bone mineral density (BMD) T-score, automated (left)
+    0.0119   Heel quantitative ultrasound index (QUI), direct entry (left)
+    0.0119   Heel broadband ultrasound attenuation (left)
+    0.0116   Heel bone mineral density (BMD) (left)
+    0.0115   Heel bone mineral density (BMD) T-score, automated (right)
+    0.0115   Heel quantitative ultrasound index (QUI), direct entry (right)
+    0.0115   Heel broadband ultrasound attenuation (right)
+    0.0114   Heel bone mineral density (BMD) (right)
+    0.0103   Cerebrovascular disease
+    0.0102   Creatinine
+</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 82 (Contribution: 0.0722)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 10 (Contribution: 0.1058)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Substance Addiction And Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 94 (Contribution: 0.0746)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 32 (Contribution: 0.0623)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.1156)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Alcohol-Related Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 57 (Contribution: 0.0858)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 5 (Contribution: 0.0513)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.1049)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Alcoholism
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 94 (Contribution: 0.0867)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 15 (Contribution: 0.0573)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.0766)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Alcoholic Liver Damage
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 94 (Contribution: 0.0981)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 88 (Contribution: 0.0513)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 89 (Contribution: 0.1356)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Tobacco Use Disorder
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 51 (Contribution: 0.0944)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 42 (Contribution: 0.0911)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 38 (Contribution: 0.0719)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Sleep Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 86 (Contribution: 0.1209)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 4 (Contribution: 0.0595)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 91 (Contribution: 0.1044)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Sleep Apnea
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 86 (Contribution: 0.1234)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 99 (Contribution: 0.0651)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 91 (Contribution: 0.1055)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Other Cerebral Degenerations
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 32 (Contribution: 0.0892)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 76 (Contribution: 0.1215)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 61 (Contribution: 0.1172)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Parkinson’s Disease
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 97 (Contribution: 0.0888)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 70 (Contribution: 0.0852)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 92 (Contribution: 0.1208)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Extrapyramidal Disease And Abnormal Movement Disorders
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 68 (Contribution: 0.0752)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 95 (Contribution: 0.0865)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 95 (Contribution: 0.0773)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Degenerative Disease Of The Spinal Cord
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 62 (Contribution: 0.0881)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 98 (Contribution: 0.0866)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 68 (Contribution: 0.0984)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Multiple Sclerosis
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 74 (Contribution: 0.0911)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 65 (Contribution: 0.0684)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 77 (Contribution: 0.0818)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Other Headache Syndromes
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 92 (Contribution: 0.0529)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 48 (Contribution: 0.0612)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.1011)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Migraine
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 80 (Contribution: 0.0772)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 100 (Contribution: 0.0520)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 56 (Contribution: 0.0774)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Hemiplegia
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 50 (Contribution: 0.1700)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 25 (Contribution: 0.0582)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 64 (Contribution: 0.2000)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Epilepsy, Recurrent Seizures, Convulsions
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 98 (Contribution: 0.0502)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 96 (Contribution: 0.1166)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 64 (Contribution: 0.1090)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<h2 class="anchored">
+Epilepsy
+</h2>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>RPCA-IALM</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 98 (Contribution: 0.0738)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>NNM-Sparse-FW</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 96 (Contribution: 0.1300)</span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:#c8635a"><strong>Raw Data</strong></span></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><span style="color:None">Top Factor: 61 (Contribution: 0.0849)</span></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
