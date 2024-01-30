@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -113,6 +120,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -120,9 +154,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">NPD Network</span>
     </a>
@@ -134,25 +168,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../notebooks/index.html" rel="" target="">
- <span class="menu-text">Notebooks</span></a>
+    <a class="nav-link" href="../../notebooks/index.html"> 
+<span class="menu-text">Notebooks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../meetings/index.html" rel="" target="">
- <span class="menu-text">Meetings</span></a>
+    <a class="nav-link" href="../../meetings/index.html"> 
+<span class="menu-text">Meetings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../resources/index.html" rel="" target="">
- <span class="menu-text">Resources</span></a>
+    <a class="nav-link" href="../../resources/index.html"> 
+<span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -173,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#experiment-2-matrix-completion" id="toc-experiment-2-matrix-completion" class="nav-link" data-scroll-target="#experiment-2-matrix-completion">Experiment 2: Matrix completion</a></li>
   <li><a href="#experiment-3-cross-validation-to-find-the-best-nuclear-norm" id="toc-experiment-3-cross-validation-to-find-the-best-nuclear-norm" class="nav-link" data-scroll-target="#experiment-3-cross-validation-to-find-the-best-nuclear-norm">Experiment 3: Cross-Validation to find the best nuclear norm</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-05-23-frank-wolfe.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-05-23-frank-wolfe.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -206,20 +240,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
+    <div class="block-title">Abstract</div>
     We implement the Frank-Wolfe algorithm for nuclear norm regularization. We compare it with an algorithm proposed by Duchi et al for projection on nuclear norm ball.
   </div>
 </div>
 
+
 </header>
+
 
 <section id="about" class="level1">
 <h1>About</h1>
 <p>David proposed a convex optimization algorithm for nuclear norm minimization of weighted matrix factorization. This is a pilot implementation of the algorithm, following his implementation <a href="https://github.com/daklab/npd_sumstats">see here</a>. I was not sure if the weighted matrix factorization was working. Therefore, I implemented the matrix completion to make sure that the algorithm is working to find the missing data.</p>
 <p>In this proof-of-concept, we show that the NNWMF (we need a better acronym) indeed can find the missing data despite the noise in real data using an unit weight matrix.</p>
 <p>Here are some references I used for the Frank-Wolfe algorithm: - <a href="https://proceedings.mlr.press/v28/jaggi13.html">Martin Jaggi, “Revisiting Frank-Wolfe: Projection-Free Sparse Convex Optimization”, PMLR 28(1):427-435, 2013</a> - <a href="https://icml.cc/Conferences/2010/papers/196.pdf">Martin Jaggi and Marek Sulovská, “A Simple Algorithm for Nuclear Norm Regularized Problems”, ICML 2010</a> - <a href="https://fa.bianp.net/blog/2018/notes-on-the-frank-wolfe-algorithm-part-i/">Fabian Pedregosa, “Notes on the Frank-Wolfe Algorithm, Part I”, Personal Blog, 2018</a> - <a href="https://ee227c.github.io/code/lecture5.html">Moritz Hardt, Lecture Notes on “Convex Optimization and Approximation”, 2018</a></p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="640fa4f2-66f8-46ec-b483-686431c4733d" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -238,8 +274,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level1">
 <h1>Data</h1>
 <p>Summary statistics data for NPD is collected from PGC, OpenGWAS and GTEx. <a href="https://banskt.github.io/npd-notes/explore/preprocess_npd_gtex_pgc_ieu.html">See previous work</a> for data cleaning and filtering. Our input is the Z-Score matrix for <span class="math inline">N</span> diseases and <span class="math inline">P</span> variants.</p>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="a8f5941b-dfe9-4341-b8ba-7da4418ab5b6" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"../data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta_df_filename   <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
@@ -260,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="3">
+<div id="c4863955-abca-44e0-9010-532a765edcb9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> beta_df.columns</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df.replace(np.nan, <span class="dv">0</span>)[select_ids]).T</span>
@@ -275,8 +311,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>We have 69 samples (phenotypes) and 10068 features (variants)</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
-<details>
+<div id="47b98c75-0a40-4065-b020-dfbe720c3659" class="cell" data-execution_count="4">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(Xcent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Nuclear Norm of input matrix: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(S)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -289,9 +325,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">
 \mathbf{X} = \mathbf{U} \mathbf{S} \mathbf{V}^{\intercal}
 </span></p>
-<p>In <a href="#fig-input-eigenvalues">Figure&nbsp;1</a> we plot the eigenvalues of the input matrix.</p>
-<div class="cell" data-execution_count="5">
-<details>
+<p>In <a href="#fig-input-eigenvalues" class="quarto-xref">Figure&nbsp;1</a> we plot the eigenvalues of the input matrix.</p>
+<div id="cell-fig-input-eigenvalues" class="cell" data-execution_count="5">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -301,10 +337,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-eigenvalues" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-eigenvalues-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Eigenvalues obtained using SVD of the input matrix</figcaption>
+<div id="fig-input-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-input-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-eigenvalues-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-input-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Eigenvalues obtained using SVD of the input matrix
+</figcaption>
 </figure>
 </div>
 </div>
@@ -313,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="weights" class="level1">
 <h1>Weights</h1>
 <p>The idea is to use the precision matrix for the weights of the Z-scores. However, this is still under development. For now, we use equal weights for all Z-scores to compare NNWMF against classical SVD.</p>
-<div class="cell" data-execution_count="6">
+<div id="1f72a8fe-0639-4bbc-a1b1-4789702b9979" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># weight = np.array(prec_df[select_ids]).T * np.array(mean_se.loc[select_ids]) * np.array(mean_se.loc[select_ids])</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># weight = np.array(prec_df[select_ids]).T</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> np.ones(X.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -323,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Frank-Wolfe optimization</h1>
 <p>In the following, we implement the Frank-Wolfe optimization. The implementation currently uses a sequential value for the step size.</p>
 <p>To-do: Use line search for the step size.</p>
-<div class="cell" data-execution_count="7">
+<div id="c9cea960-d176-42ac-b80d-5c3e3162d860" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f_objective(X, Y, mask <span class="op">=</span> <span class="va">None</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Objective function</span></span>
@@ -575,8 +615,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="simplex-projection" class="level2">
 <h2 class="anchored" data-anchor-id="simplex-projection">Simplex projection</h2>
 <p>Project the input matrix on nuclear norm ball, using an algorithm proposed by Duchi et. al.&nbsp;in “Efficient projections onto the l1-ball for learning in high dimensions”, <a href="https://doi.org/10.1145/1390156.1390191">Proc. 25th ICML, pages 272–279. ACM, 2008</a>. This is computationally expensive but will help to compare the results from Frank-Wolfe algorithm.</p>
-<div class="cell" data-execution_count="8">
-<details>
+<div id="ff2bf385-99f7-4224-9769-0ef7ca3548ec" class="cell" data-execution_count="8">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Xproj <span class="op">=</span> nuclear_projection(Xcent, r <span class="op">=</span> <span class="dv">1000</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Xproj <span class="op">=</span> Xproj <span class="op">-</span> np.mean(Xproj, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
@@ -590,15 +630,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="frank-wolfe" class="level2">
 <h2 class="anchored" data-anchor-id="frank-wolfe">Frank-Wolfe</h2>
-<div class="cell" data-tags="[]" data-execution_count="9">
-<details>
+<div id="40130afb-a3d3-4f01-b10c-89cc4ac0e22f" class="cell" data-tags="[]" data-execution_count="9">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X_opt, gs, fx <span class="op">=</span> frank_wolfe_minimize(Xcent, weight, <span class="fl">1000.0</span>, max_iter <span class="op">=</span> <span class="dv">500</span>, debug <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In <a href="#fig-fw-descent">Figure&nbsp;2</a>, we show the progress of the optimization. On the left hand side, we show the duality gap and on the right hand side, we show the objective function.</p>
-<div class="cell" data-jp-markdownheadingcollapsed="true" data-tags="[]" data-execution_count="10">
-<details>
+<p>In <a href="#fig-fw-descent" class="quarto-xref">Figure&nbsp;2</a>, we show the progress of the optimization. On the left hand side, we show the duality gap and on the right hand side, we show the objective function.</p>
+<div id="cell-fig-fw-descent" class="cell" data-jp-markdownheadingcollapsed="true" data-tags="[]" data-execution_count="10">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">14</span>, <span class="dv">6</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
@@ -616,24 +656,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Frank-Wolfe optimization statistic</figcaption>
+<div id="fig-fw-descent" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fw-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fw-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Frank-Wolfe optimization statistic
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="11">
-<details>
+<div id="f951e859-de4d-4aee-ae08-0dafe97286af" class="cell" data-execution_count="11">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>X_opt_cent <span class="op">=</span> X_opt <span class="op">-</span> np.mean(X_opt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>U_fw, S_fw, Vt_fw <span class="op">=</span> np.linalg.svd(X_opt_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In <a href="#fig-input-proj-eigenvalues">Figure&nbsp;3</a>, we compare the singular values of the output signal from the nuclear norm projection and the Frank-Wolfe algorithm. This gives us confidence with the implementation.</p>
-<div class="cell" data-execution_count="12">
-<details>
+<p>In <a href="#fig-input-proj-eigenvalues" class="quarto-xref">Figure&nbsp;3</a>, we compare the singular values of the output signal from the nuclear norm projection and the Frank-Wolfe algorithm. This gives us confidence with the implementation.</p>
+<div id="cell-fig-input-proj-eigenvalues" class="cell" data-execution_count="12">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -648,10 +692,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-proj-eigenvalues" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-proj-eigenvalues-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: Eigenvalues obtained using SVD of the projected input matrix</figcaption>
+<div id="fig-input-proj-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-input-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-proj-eigenvalues-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-input-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Eigenvalues obtained using SVD of the projected input matrix
+</figcaption>
 </figure>
 </div>
 </div>
@@ -660,9 +708,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="experiment-2-matrix-completion" class="level1">
 <h1>Experiment 2: Matrix completion</h1>
-<p>In this numerical experiment, we plant missing onto the input matrix and then obtain the nuclear norm projection, which can approximate the missing data. We compare the singular values obtained from the simplex projection and Frank-Wolfe method in <a href="#fig-input-missing-proj-eigenvalues">Figure&nbsp;5</a></p>
-<div class="cell" data-execution_count="13">
-<details>
+<p>In this numerical experiment, we plant missing onto the input matrix and then obtain the nuclear norm projection, which can approximate the missing data. We compare the singular values obtained from the simplex projection and Frank-Wolfe method in <a href="#fig-input-missing-proj-eigenvalues" class="quarto-xref">Figure&nbsp;5</a></p>
+<div id="27d867b4-404e-4f44-ad2c-3295ccad92d1" class="cell" data-execution_count="13">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate missing data</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -677,8 +725,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>Xmiss <span class="op">=</span> X <span class="op">*</span> O</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="14">
-<details>
+<div id="77b0e63f-27e6-4cf3-8319-8fd6b6c91ab1" class="cell" data-execution_count="14">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Xmiss_proj <span class="op">=</span> nuclear_projection(Xmiss, r <span class="op">=</span> <span class="dv">1000</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Um, Sm, Vtm <span class="op">=</span> np.linalg.svd(Xmiss_proj)</span>
@@ -692,14 +740,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 RMSE on test data = 0.6567133713958933</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="15">
-<details>
+<div id="e403c988-e4db-4712-983e-2b5236d18a13" class="cell" data-execution_count="15">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Xmiss_opt, gs_mc, fx_mc <span class="op">=</span> frank_wolfe_minimize(Xmiss, weight, <span class="fl">1000.0</span>, max_iter <span class="op">=</span> <span class="dv">100</span>, debug <span class="op">=</span> <span class="va">False</span>, mask <span class="op">=</span> O)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="16">
-<details>
+<div id="cell-fig-fw-descent-missing" class="cell" data-execution_count="16">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">14</span>, <span class="dv">6</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
@@ -717,23 +765,27 @@ RMSE on test data = 0.6567133713958933</code></pre>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent-missing" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-missing-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Frank-Wolfe optimization statistic for missing data</figcaption>
+<div id="fig-fw-descent-missing" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fw-descent-missing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-missing-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fw-descent-missing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Frank-Wolfe optimization statistic for missing data
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
-<details>
+<div id="5cff78b1-a96f-40c4-9f09-1adfb0a51337" class="cell" data-execution_count="17">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Xmiss_opt_cent <span class="op">=</span> Xmiss_opt <span class="op">-</span> np.mean(Xmiss_opt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>Um_fw, Sm_fw, Vtm_fw <span class="op">=</span> np.linalg.svd(Xmiss_opt_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="18">
-<details>
+<div id="cell-fig-input-missing-proj-eigenvalues" class="cell" data-execution_count="18">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -750,10 +802,14 @@ RMSE on test data = 0.6567133713958933</code></pre>
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-missing-proj-eigenvalues" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-missing-proj-eigenvalues-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Eigenvalues obtained using SVD of the projected input matrix with missing data</figcaption>
+<div id="fig-input-missing-proj-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-input-missing-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-missing-proj-eigenvalues-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-input-missing-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Eigenvalues obtained using SVD of the projected input matrix with missing data
+</figcaption>
 </figure>
 </div>
 </div>
@@ -762,8 +818,8 @@ RMSE on test data = 0.6567133713958933</code></pre>
 <section id="experiment-3-cross-validation-to-find-the-best-nuclear-norm" class="level1">
 <h1>Experiment 3: Cross-Validation to find the best nuclear norm</h1>
 <p>Here, we only use the Frank-Wolfe method.</p>
-<div class="cell" data-execution_count="37">
-<details>
+<div id="ee2ca2ec-de86-4a47-8dfc-95d49806815e" class="cell" data-execution_count="37">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nseq <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>r_seq <span class="op">=</span> np.hstack((np.logspace(<span class="dv">3</span>, <span class="dv">12</span>, num <span class="op">=</span> nseq, base <span class="op">=</span> <span class="fl">2.0</span>), np.linspace(<span class="dv">5000</span>, <span class="dv">8000</span>, <span class="dv">4</span>)))</span>
@@ -774,8 +830,8 @@ RMSE on test data = 0.6567133713958933</code></pre>
  7000. 8000.]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="40">
-<details>
+<div id="c706bd4e-c499-4ca1-a9d3-ef0c97454ccc" class="cell" data-execution_count="40">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! code-fold: false</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -801,9 +857,9 @@ CV sequence 13, r = 7000.0, training error = 0.39743960536609935, test_error = 0
 CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0.6992722149861493</code></pre>
 </div>
 </div>
-<p>In <a href="#fig-cv-training-error">Figure&nbsp;6</a>, we show the training error for different values of the regularization parameter. Finally, we run the Frank-Wolfe optimization on the full data at the optimum value of the regularization parameter.</p>
-<div class="cell" data-execution_count="41">
-<details>
+<p>In <a href="#fig-cv-training-error" class="quarto-xref">Figure&nbsp;6</a>, we show the training error for different values of the regularization parameter. Finally, we run the Frank-Wolfe optimization on the full data at the optimum value of the regularization parameter.</p>
+<div id="cell-fig-cv-training-error" class="cell" data-execution_count="41">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -820,20 +876,24 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-cv-training-error" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-cv-training-error-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;6: CV training error</figcaption>
+<div id="fig-cv-training-error" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cv-training-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-cv-training-error-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cv-training-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: CV training error
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="42">
+<div id="80ecbab3-13bf-4d47-ba50-5ab0c10ed780" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>r_opt <span class="op">=</span> <span class="bu">min</span>(train_error, key<span class="op">=</span>train_error.get)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>X_cvopt, dg_cvopt, fx_cvopt <span class="op">=</span> frank_wolfe_minimize(Xcent, weight, r_opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="50">
-<details>
+<div id="cell-fig-fw-descent-cvopt" class="cell" data-execution_count="50">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">14</span>, <span class="dv">6</span>))</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
@@ -851,33 +911,37 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent-cvopt" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-cvopt-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;7: Frank-Wolfe minimization at optimum regularization parameter</figcaption>
+<div id="fig-fw-descent-cvopt" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fw-descent-cvopt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-cvopt-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fw-descent-cvopt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Frank-Wolfe minimization at optimum regularization parameter
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <section id="compare-the-principal-components-of-the-recovered-matrix" class="level2">
 <h2 class="anchored" data-anchor-id="compare-the-principal-components-of-the-recovered-matrix">Compare the principal components of the recovered matrix</h2>
-<div class="cell" data-execution_count="44">
-<details>
+<div id="9d7e42a3-2378-43f5-b871-d69c713750ee" class="cell" data-execution_count="44">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>U_input, S_input, Vt_input <span class="op">=</span> np.linalg.svd(Xcent, full_matrices<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pca_input <span class="op">=</span> U_input <span class="op">@</span> np.diag(S_input)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="45">
-<details>
+<div id="8b84704e-f913-4500-afda-25860e9aa100" class="cell" data-execution_count="45">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>X_cvopt_cent <span class="op">=</span> X_cvopt <span class="op">-</span> np.mean(X_cvopt, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>U_cvopt, S_cvopt, Vt_cvopt <span class="op">=</span> np.linalg.svd(X_cvopt_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>pca_cvopt <span class="op">=</span> U_cvopt <span class="op">@</span> np.diag(S_cvopt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="47">
-<details>
+<div id="cell-fig-pca-low-rank-approx" class="cell" data-execution_count="47">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>idx1 <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>idx2 <span class="op">=</span> <span class="dv">1</span></span>
@@ -908,16 +972,20 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
 <span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pca-low-rank-approx" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-pca-low-rank-approx-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;8: Comparison of the first two principal components of input matrix and low rank approximation</figcaption>
+<div id="fig-pca-low-rank-approx" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pca-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-pca-low-rank-approx-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Comparison of the first two principal components of input matrix and low rank approximation
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="48">
-<details>
+<div id="cell-fig-multiple-pcs-low-rank-approx" class="cell" data-execution_count="48">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plot_ncomp <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>subplot_h <span class="op">=</span> <span class="fl">2.0</span></span>
@@ -973,16 +1041,20 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
 <span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-multiple-pcs-low-rank-approx" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-05-23-frank-wolfe_files/figure-html/fig-multiple-pcs-low-rank-approx-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;9: Comparison of the first 6 principal components of the low rank approximation</figcaption>
+<div id="fig-multiple-pcs-low-rank-approx" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-multiple-pcs-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-05-23-frank-wolfe_files/figure-html/fig-multiple-pcs-low-rank-approx-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multiple-pcs-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Comparison of the first 6 principal components of the low rank approximation
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="52">
-<details>
+<div id="e9f5fd1f-86b9-4b25-a713-69f573e55fbc" class="cell" data-execution_count="52">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>train_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1003,8 +1075,8 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
  8000.0: 0.46060258805130466}</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="53">
-<details>
+<div id="b22f005d-24c7-4138-a8fb-3aa012b9e7d8" class="cell" data-execution_count="53">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>test_error</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -1161,10 +1233,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1174,8 +1265,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1188,6 +1288,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1231,6 +1450,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1256,6 +1476,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1313,26 +1559,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-05-23-frank-wolfe.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

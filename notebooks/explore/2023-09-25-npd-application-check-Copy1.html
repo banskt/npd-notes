@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,13 +96,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
@@ -116,6 +123,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -123,9 +157,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">NPD Network</span>
     </a>
@@ -137,25 +171,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../notebooks/index.html" rel="" target="">
- <span class="menu-text">Notebooks</span></a>
+    <a class="nav-link" href="../../notebooks/index.html"> 
+<span class="menu-text">Notebooks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../meetings/index.html" rel="" target="">
- <span class="menu-text">Meetings</span></a>
+    <a class="nav-link" href="../../meetings/index.html"> 
+<span class="menu-text">Meetings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../resources/index.html" rel="" target="">
- <span class="menu-text">Resources</span></a>
+    <a class="nav-link" href="../../resources/index.html"> 
+<span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -173,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#denoising-methods" id="toc-denoising-methods" class="nav-link" data-scroll-target="#denoising-methods">Denoising methods</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-09-25-npd-application-check-Copy1.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-09-25-npd-application-check-Copy1.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -206,17 +240,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
+    <div class="block-title">Abstract</div>
     Our goal is to perform multi-trait analysis in GWAS. We obtain low rank approximation of the GWAS summary statistics data using the three methods we have developed till date. We manually label each GWAS with a broad phenotype. We perform PCA on the approximated low rank matrix and analyze the clustering of the data by comparing with the curated phenotype labels.
   </div>
 </div>
 
+
 </header>
+
 
 <section id="getting-setup" class="level1">
 <h1>Getting Setup</h1>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="238296c8-a3e2-42e9-96be-f539dda8de8e" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -240,8 +276,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loading-data" class="level1">
 <h1>Loading data</h1>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="6e7b6049-9cc4-4ab5-a882-e56073016853" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"../data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta_df_filename   <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/beta_df.pkl"</span></span>
@@ -262,8 +298,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>phenotype_dict <span class="op">=</span> trait_df.set_index(<span class="st">'ID'</span>)[<span class="st">'Broad'</span>].to_dict()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="3">
-<details>
+<div id="90679343-d0ee-4c43-b515-0f6c7b2a06f3" class="cell" data-execution_count="3">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>zscore_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -570,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
+<div id="786c1a2e-5830-49a9-9c30-0cffee2d940b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df).T</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X_nan_cent <span class="op">=</span> X_nan <span class="op">-</span> np.nanmean(X_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X_nan_mask <span class="op">=</span> np.isnan(X_nan)</span>
@@ -583,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Fraction of Nan entries: 0.193</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
+<div id="e4256751-202c-4974-9c5a-3c1ec20fabe5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>select_ids <span class="op">=</span> zscore_df.columns</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [phenotype_dict[x] <span class="cf">for</span> x <span class="kw">in</span> select_ids]</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>unique_labels <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(labels))</span>
@@ -593,9 +629,9 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> [np.array([i <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">enumerate</span>(labels) <span class="cf">if</span> x <span class="op">==</span> label]) <span class="cf">for</span> label <span class="kw">in</span> unique_labels]</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>trait_colors  <span class="op">=</span> {trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(unique_labels, (mpl_stylesheet.kelly_colors())[:ntrait])}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We perform PCA (using SVD) on the raw input data (mean centered). In <a href="#fig-input-pca-pve">Figure&nbsp;1</a>, we look at the proportion of variance explained by each principal component.</p>
-<div class="cell" data-execution_count="6">
-<details>
+<p>We perform PCA (using SVD) on the raw input data (mean centered). In <a href="#fig-input-pca-pve" class="quarto-xref">Figure&nbsp;1</a>, we look at the proportion of variance explained by each principal component.</p>
+<div id="cell-fig-input-pca-pve" class="cell" data-execution_count="6">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>U, S, Vt <span class="op">=</span> np.linalg.svd(X_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>S2 <span class="op">=</span> np.square(S)</span>
@@ -607,17 +643,21 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-pca-pve" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-input-pca-pve-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Proportion of variance explained by the principal components of the input matrix</figcaption>
+<div id="fig-input-pca-pve" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-input-pca-pve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-input-pca-pve-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-input-pca-pve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Proportion of variance explained by the principal components of the input matrix
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In <a href="#fig-trait-wise-pve-pc1-input-data">Figure&nbsp;2</a>, we look at the proportion of variance for each trait explained by the first principal component. Traits in the same “broad category” are combined together to show the histogram (boxplot).</p>
-<div class="cell" data-execution_count="7">
-<details>
+<p>In <a href="#fig-trait-wise-pve-pc1-input-data" class="quarto-xref">Figure&nbsp;2</a>, we look at the proportion of variance for each trait explained by the first principal component. Traits in the same “broad category” are combined together to show the histogram (boxplot).</p>
+<div id="cell-fig-trait-wise-pve-pc1-input-data" class="cell" data-execution_count="7">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">6</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -658,16 +698,20 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-trait-wise-pve-pc1-input-data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-trait-wise-pve-pc1-input-data-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Trait-wise PVE by the first principal component of the input matrix</figcaption>
+<div id="fig-trait-wise-pve-pc1-input-data" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trait-wise-pve-pc1-input-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-trait-wise-pve-pc1-input-data-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trait-wise-pve-pc1-input-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Trait-wise PVE by the first principal component of the input matrix
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
-<details>
+<div id="82f42691-ad76-460e-a81b-c00edac09688" class="cell" data-execution_count="8">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_stacked_bars(ax, data, xlabels, colors, bar_width <span class="op">=</span> <span class="fl">1.0</span>, alpha <span class="op">=</span> <span class="fl">1.0</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
@@ -752,17 +796,21 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In <a href="#fig-trait-wise-pca-score-input-data">Figure&nbsp;3</a>, we stack the variance score of each disease category for each principal component. Components explaining majority of the same disease are able to distinguish the corresponding disease.</p>
-<div class="cell" data-execution_count="9">
-<details>
+<p>In <a href="#fig-trait-wise-pca-score-input-data" class="quarto-xref">Figure&nbsp;3</a>, we stack the variance score of each disease category for each principal component. Components explaining majority of the same disease are able to distinguish the corresponding disease.</p>
+<div id="cell-fig-trait-wise-pca-score-input-data" class="cell" data-execution_count="9">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(X_cent, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-trait-wise-pca-score-input-data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-trait-wise-pca-score-input-data-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: Trait-wise PVE for the first 20 principal components of the input matrix</figcaption>
+<div id="fig-trait-wise-pca-score-input-data" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trait-wise-pca-score-input-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-trait-wise-pca-score-input-data-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trait-wise-pca-score-input-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Trait-wise PVE for the first 20 principal components of the input matrix
+</figcaption>
 </figure>
 </div>
 </div>
@@ -772,8 +820,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <h1>Denoising methods</h1>
 <section id="ialm---rpca" class="level2">
 <h2 class="anchored" data-anchor-id="ialm---rpca">IALM - RPCA</h2>
-<div class="cell" data-execution_count="10">
-<details>
+<div id="ff67a0d9-1d62-4841-97d9-2456e347555e" class="cell" data-execution_count="10">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> IALM(max_iter <span class="op">=</span> <span class="dv">1000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rpca.fit(X_cent, mask <span class="op">=</span> X_nan_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -792,8 +840,8 @@ Fraction of Nan entries: 0.193</code></pre>
 2023-09-25 14:37:31,333 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 900. Primal residual 4.70128e-07. Dual residual 2.64999e-07</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="11">
-<details>
+<div id="1db1de7c-1844-4d8f-9e71-a20170a308a0" class="cell" data-execution_count="11">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(rpca.L_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -801,8 +849,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <pre><code>50</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="12">
-<details>
+<div id="729ec32b-a500-4e6c-83dc-152fba049839" class="cell" data-execution_count="12">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(rpca.L_, <span class="st">'nuc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -810,8 +858,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <pre><code>1351.8480150432201</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
-<details>
+<div id="aedd8c1b-e027-4970-9781-27d85333ec9b" class="cell" data-execution_count="13">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(rpca.E_)) <span class="op">/</span> np.prod(X_cent.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -823,8 +871,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <section id="fw---nnm" class="level2">
 <h2 class="anchored" data-anchor-id="fw---nnm">FW - NNM</h2>
 <p>Also check how the cross-validation works</p>
-<div class="cell" data-execution_count="14">
-<details>
+<div id="3298357d-db09-4516-b6b2-41a5c32d4aab" class="cell" data-execution_count="14">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nnmcv <span class="op">=</span> FrankWolfe_CV(chain_init <span class="op">=</span> <span class="va">True</span>, reverse_path <span class="op">=</span> <span class="va">False</span>, debug <span class="op">=</span> <span class="va">True</span>, kfolds <span class="op">=</span> <span class="dv">5</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>nnmcv.fit(X_nan_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -908,9 +956,9 @@ Fraction of Nan entries: 0.193</code></pre>
 2023-08-09 01:27:29,020 | nnwmf.optimize.frankwolfe_cv             | DEBUG   | Rank 8192.0000</code></pre>
 </div>
 </div>
-<p>We do a 5-fold cross-validation. We randomly mask a part of the data and apply our method to recover the masked data. The test error is the RMSE between the receovered data and input masked data. In <a href="#fig-nnm-cv">Figure&nbsp;4</a>, we plot the RMSE of the test data for each CV fold.</p>
-<div class="cell" data-execution_count="53">
-<details>
+<p>We do a 5-fold cross-validation. We randomly mask a part of the data and apply our method to recover the masked data. The test error is the RMSE between the receovered data and input masked data. In <a href="#fig-nnm-cv" class="quarto-xref">Figure&nbsp;4</a>, we plot the RMSE of the test data for each CV fold.</p>
+<div id="cell-fig-nnm-cv" class="cell" data-execution_count="53">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -922,16 +970,20 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-nnm-cv" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-nnm-cv-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Error on held out test data for each of the 5-fold cross-validation sets to find the best rank constraint for NNM</figcaption>
+<div id="fig-nnm-cv" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nnm-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-09-25-npd-application-check-Copy1_files/figure-html/fig-nnm-cv-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nnm-cv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Error on held out test data for each of the 5-fold cross-validation sets to find the best rank constraint for NNM
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="14">
-<details>
+<div id="94ebf47a-f5c3-4522-9c41-ce304c953755" class="cell" data-execution_count="14">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.linalg.norm(X_cent, <span class="st">'nuc'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -939,8 +991,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <pre><code>7274.4182279699835</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="15">
-<details>
+<div id="365c7b7b-31fb-4f66-a863-cbbd435f1948" class="cell" data-execution_count="15">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>nnm <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>nnm.fit(X_cent, <span class="fl">1024.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -955,8 +1007,8 @@ Fraction of Nan entries: 0.193</code></pre>
 </section>
 <section id="nnmsparse---fw" class="level2">
 <h2 class="anchored" data-anchor-id="nnmsparse---fw">NNMSparse - FW</h2>
-<div class="cell" data-execution_count="16">
-<details>
+<div id="e422c56a-85a0-4876-84fe-b812fac0d252" class="cell" data-execution_count="16">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        tol <span class="op">=</span> <span class="fl">1e-3</span>, step_tol <span class="op">=</span> <span class="fl">1e-5</span>, simplex_method <span class="op">=</span> <span class="st">'sort'</span>,</span>
@@ -976,8 +1028,8 @@ Fraction of Nan entries: 0.193</code></pre>
 2023-09-25 14:53:57,015 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 900. Step size 0.001. Duality Gap 696.726</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="17">
-<details>
+<div id="8ab13e17-a2d7-46c0-b62c-c784757214e1" class="cell" data-execution_count="17">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>loadings <span class="op">=</span> Vt.T <span class="op">@</span> np.diag(S)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>loadings[:, <span class="dv">0</span>].shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -994,8 +1046,8 @@ Fraction of Nan entries: 0.193</code></pre>
 <h2 class="anchored" data-anchor-id="principal-components-biplots">Principal Components Biplots</h2>
 <p>Suppose, we decompose <span class="math inline">\mathbf{X} = \mathbf{U}\mathbf{S}\mathbf{V}^{\intercal}</span>. Columns of <span class="math inline">\mathbf{V}</span> are the principal axes (aka principal directions, aka eigenvectors). The principal components are the columns of <span class="math inline">\mathbf{U}\mathbf{S}</span> – the projections of the data on the the principal axes (note <span class="math inline">\mathbf{X}\mathbf{V} = \mathbf{U}\mathbf{S}</span>). We plot the principal components as a scatter plot and color each point based on their broad disease category. To show the directions, we plot the loadings, <span class="math inline">\mathbf{V}\mathbf{S}</span> as arrows. That is, the <span class="math inline">(x, y)</span> coordinates of an <span class="math inline">i-</span>th arrow endpoint are given by the <span class="math inline">i-</span>th value in the first and second column of <span class="math inline">\mathbf{V}\mathbf{S}</span>.</p>
 <p><a href="https://stats.stackexchange.com/a/141531">A comprehensive discussion of biplot on Stackoverflow</a></p>
-<div class="cell" data-execution_count="18">
-<details>
+<div id="07a809eb-e5ff-4f23-b81a-e51fb5ceb826" class="cell" data-execution_count="18">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">=</span> mpy_simulate.do_standardize(X, scale <span class="op">=</span> <span class="va">False</span>)</span>
@@ -1010,65 +1062,89 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>loadings_nnm_sparse, pcomps_nnm_sparse <span class="op">=</span> get_principal_components(nnm_sparse.X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="19">
-<details>
+<div id="58474c98-e789-4a71-88ee-ed9b0f0ef49e" class="cell" data-execution_count="19">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, labels, unique_labels)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="20">
-<details>
+</div>
+<div id="1cead9d6-e6ca-4592-8136-28eceb479a71" class="cell" data-execution_count="20">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm, labels, unique_labels)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="21">
-<details>
+</div>
+<div id="60076f5e-bce7-4252-9041-b889fdb28223" class="cell" data-execution_count="21">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm_sparse, labels, unique_labels)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
-<details>
+</div>
+<div id="27d6d7d4-19fb-4d1b-9239-bf2c1dc9b065" class="cell" data-execution_count="22">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(nnm_sparse.X, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
-<details>
+</div>
+<div id="d94d8475-30a3-4b18-a34a-ab96c3881b8b" class="cell" data-execution_count="23">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(nnm.X, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="24">
-<details>
+</div>
+<div id="135590f2-6d1d-4630-8305-0126bb151357" class="cell" data-execution_count="24">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>quick_plot_trait_pc_scores(rpca.L_, trait_indices, unique_labels, trait_colors)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-27-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-execution_count="25">
-<details>
+</div>
+<div id="08da9a6b-d4db-47a1-a1bb-1ae9fa8290c3" class="cell" data-execution_count="25">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quick_scale_plot_trait_pc_scores(ax, X, tindices, ulabels, tcolors, min_idx <span class="op">=</span> <span class="dv">0</span>, max_idx <span class="op">=</span> <span class="dv">20</span>):</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
@@ -1104,7 +1180,11 @@ Fraction of Nan entries: 0.193</code></pre>
 <span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-28-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="2023-09-25-npd-application-check-Copy1_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -1243,10 +1323,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1256,8 +1355,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1270,6 +1378,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1313,6 +1540,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1338,6 +1566,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1395,26 +1649,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-09-25-npd-application-check-Copy1.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

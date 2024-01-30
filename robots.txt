@@ -1,1 +1,1 @@
-Sitemap: https://github.com/banskt/npd-notes/sitemap.xml
+Sitemap: https://banskt.github.io/npd-notes/sitemap.xml

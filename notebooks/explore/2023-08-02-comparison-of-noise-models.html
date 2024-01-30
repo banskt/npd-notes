@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -113,6 +120,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
@@ -120,9 +154,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">NPD Network</span>
     </a>
@@ -134,25 +168,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../notebooks/index.html" rel="" target="">
- <span class="menu-text">Notebooks</span></a>
+    <a class="nav-link" href="../../notebooks/index.html"> 
+<span class="menu-text">Notebooks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../meetings/index.html" rel="" target="">
- <span class="menu-text">Meetings</span></a>
+    <a class="nav-link" href="../../meetings/index.html"> 
+<span class="menu-text">Meetings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../resources/index.html" rel="" target="">
- <span class="menu-text">Resources</span></a>
+    <a class="nav-link" href="../../resources/index.html"> 
+<span class="menu-text">Resources</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../reference/index.html" rel="" target="">
- <span class="menu-text">Reference</span></a>
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -171,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#denoising-methods" id="toc-denoising-methods" class="nav-link" data-scroll-target="#denoising-methods">Denoising Methods</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-08-02-comparison-of-noise-models.ipynb" class="toc-action">Edit this page</a></p><p><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-08-02-comparison-of-noise-models.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -204,12 +238,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
+    <div class="block-title">Abstract</div>
     Denoising can be done either using Gaussian noise or sparse noise or both. Here, I compare the three noise models.
   </div>
 </div>
 
+
 </header>
+
 
 <section id="about" class="level1">
 <h1>About</h1>
@@ -230,8 +266,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-setup" class="level1">
 <h1>Getting setup</h1>
 <p>We have now implemented a Python software to call the different methods with flexibility to choose different input options.</p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="e3bcd6ef-96ee-4d4a-8827-ceec6837b5f7" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -271,14 +307,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="simulation" class="level1">
 <h1>Simulation</h1>
-<div class="cell" data-execution_count="2">
+<div id="5df27d38-b44e-4ea2-8737-244b2f0d10c6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ntrait <span class="op">=</span> <span class="dv">4</span> <span class="co"># categories / class</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ngwas  <span class="op">=</span> <span class="dv">500</span> <span class="co"># N</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>nsnp   <span class="op">=</span> <span class="dv">1000</span> <span class="co"># P</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>nfctr  <span class="op">=</span> <span class="dv">40</span> <span class="co"># K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="29">
-<details>
+<div id="25a53d10-e6cb-4521-8eb8-5542e0d0e0a6" class="cell" data-execution_count="29">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Y, Y_true, L, F, mean, noise_var, sample_indices <span class="op">=</span> mpy_simulate.simulate(ngwas, nsnp, ntrait, nfctr, std <span class="op">=</span> <span class="fl">1.5</span>, do_shift_mean <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Y_cent <span class="op">=</span> mpy_simulate.do_standardize(Y, scale <span class="op">=</span> <span class="va">False</span>)</span>
@@ -286,8 +322,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Y_true_cent <span class="op">=</span> mpy_simulate.do_standardize(Y_true, scale <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="30">
-<details>
+<div id="fd559398-446d-4893-858a-6c479d9dbd8a" class="cell" data-execution_count="30">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unique_labels  <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(sample_indices)))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>class_labels <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(ngwas)]</span>
@@ -296,9 +332,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        class_labels[i] <span class="op">=</span> k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>In <a href="#fig-loadings-covariance-simulation">Figure&nbsp;1</a>, we show the underlying structure of our simulated data. On the left panel, we show the covariance of the true loadings and on the right panel, we show the covariance of the observed data (strong noise removes the underlying correlation)</p>
-<div class="cell" data-execution_count="48">
-<details>
+<p>In <a href="#fig-loadings-covariance-simulation" class="quarto-xref">Figure&nbsp;1</a>, we show the underlying structure of our simulated data. On the left panel, we show the covariance of the true loadings and on the right panel, we show the covariance of the observed data (strong noise removes the underlying correlation)</p>
+<div id="cell-fig-loadings-covariance-simulation" class="cell" data-execution_count="48">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">8</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
@@ -311,10 +347,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-loadings-covariance-simulation" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-loadings-covariance-simulation-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Covariance structure of the true loadings in the simulation</figcaption>
+<div id="fig-loadings-covariance-simulation" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loadings-covariance-simulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-loadings-covariance-simulation-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loadings-covariance-simulation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Covariance structure of the true loadings in the simulation
+</figcaption>
 </figure>
 </div>
 </div>
@@ -325,8 +365,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We then apply the three methods.</p>
 <section id="ialm---rpca" class="level2">
 <h2 class="anchored" data-anchor-id="ialm---rpca">IALM - RPCA</h2>
-<div class="cell" data-execution_count="32">
-<details>
+<div id="03465197-0f66-4772-aa4b-32d06b5dd6e0" class="cell" data-execution_count="32">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> IALM(benchmark <span class="op">=</span> <span class="va">True</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>rpca.fit(Y_cent, Xtrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -340,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fw---nnm" class="level2">
 <h2 class="anchored" data-anchor-id="fw---nnm">FW - NNM</h2>
 <p>We do a little cheating here. Instead of cross-validation, we directly use the known rank of the underlying true data. However, based on my previous work, I know that cross-validation does provide the correct rank.</p>
-<div class="cell" data-execution_count="33">
-<details>
+<div id="4e9359d9-f7f3-4349-b2f0-d484f5d461df" class="cell" data-execution_count="33">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nnm <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                 show_progress <span class="op">=</span> <span class="va">True</span>, debug <span class="op">=</span> <span class="va">True</span>, benchmark <span class="op">=</span> <span class="va">True</span>)</span>
@@ -355,14 +395,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fw---nnml1" class="level2">
 <h2 class="anchored" data-anchor-id="fw---nnml1">FW - NNML1</h2>
 <p>For the third model, we use the sparse noise threshold from the RPCA result and the rank from the true data. I have not checked cross-validation results for this method yet.</p>
-<div class="cell" data-execution_count="49">
+<div id="f78fa42d-6112-4864-80d3-cd5b62521552" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(rpca.E_)) <span class="op">/</span> (ngwas <span class="op">*</span> nsnp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>0.7012888342395619</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="37">
-<details>
+<div id="54af5882-fe34-4296-be6f-bbe40cc99a34" class="cell" data-execution_count="37">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, </span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                        tol <span class="op">=</span> <span class="fl">1e-3</span>, step_tol <span class="op">=</span> <span class="fl">1e-5</span>, simplex_method <span class="op">=</span> <span class="st">'sort'</span>,</span>
@@ -380,9 +420,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Results</h1>
 <section id="cpu-time-and-accuracy" class="level2">
 <h2 class="anchored" data-anchor-id="cpu-time-and-accuracy">CPU time and accuracy</h2>
-<p>In <a href="#fig-rmse-vs-time">Figure&nbsp;2</a>, we look at the RMSE (w.r.t the observed input data) and CPU time.</p>
-<div class="cell" data-execution_count="38">
-<details>
+<p>In <a href="#fig-rmse-vs-time" class="quarto-xref">Figure&nbsp;2</a>, we look at the RMSE (w.r.t the observed input data) and CPU time.</p>
+<div id="cell-fig-rmse-vs-time" class="cell" data-execution_count="38">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
@@ -400,10 +440,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-rmse-vs-time" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-rmse-vs-time-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Comparison of time and accuracy of different methods</figcaption>
+<div id="fig-rmse-vs-time" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rmse-vs-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-rmse-vs-time-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rmse-vs-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Comparison of time and accuracy of different methods
+</figcaption>
 </figure>
 </div>
 </div>
@@ -412,8 +456,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="principal-components" class="level2">
 <h2 class="anchored" data-anchor-id="principal-components">Principal Components</h2>
 <p>Can the principal components of the low rank matrix help in classification?</p>
-<div class="cell" data-execution_count="39">
-<details>
+<div id="d197323a-7f52-457a-86d9-d0fa15dedd9a" class="cell" data-execution_count="39">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">=</span> mpy_simulate.do_standardize(X, scale <span class="op">=</span> <span class="va">False</span>)</span>
@@ -426,47 +470,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>pcomps_nnm_sparse <span class="op">=</span> get_principal_components(nnm_sparse.X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell" data-execution_count="50">
-<details>
+<div id="cell-fig-principal-components-nnm" class="cell" data-execution_count="50">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm, class_labels, unique_labels)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-principal-components-nnm" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-nnm-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: First 6 principal components compared against each other (FW-NNM).</figcaption>
+<div id="fig-principal-components-nnm" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-principal-components-nnm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-nnm-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-principal-components-nnm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: First 6 principal components compared against each other (FW-NNM).
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="51">
-<details>
+<div id="cell-fig-principal-components-rpca" class="cell" data-execution_count="51">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, class_labels, unique_labels)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-principal-components-rpca" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-rpca-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: First 6 principal components compared against each other (IALM - RPCA).</figcaption>
+<div id="fig-principal-components-rpca" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-principal-components-rpca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-rpca-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-principal-components-rpca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: First 6 principal components compared against each other (IALM - RPCA).
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="52">
-<details>
+<div id="cell-fig-principal-components-nnm-sparse" class="cell" data-execution_count="52">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_nnm_sparse, class_labels, unique_labels)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-principal-components-nnm-sparse" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-nnm-sparse-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: First 6 principal components compared against each other (FW-NNML1).</figcaption>
+<div id="fig-principal-components-nnm-sparse" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-principal-components-nnm-sparse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2023-08-02-comparison-of-noise-models_files/figure-html/fig-principal-components-nnm-sparse-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-principal-components-nnm-sparse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: First 6 principal components compared against each other (FW-NNML1).
+</figcaption>
 </figure>
 </div>
 </div>
@@ -480,8 +536,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>PSNR</strong> (peak signal-to-noise-ratio) with respect to the ground truth (frequently used in image denoising literature)</li>
 <li><strong>Adjusted MI score</strong> measures how good the methods are in the classification task.</li>
 </ol>
-<div class="cell" data-execution_count="53">
-<details>
+<div id="deb69bc4-4dff-46ad-87c1-ff2865bf6eb9" class="cell" data-execution_count="53">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Y_true_cent <span class="op">=</span> mpy_simulate.do_standardize(Y_true, scale <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(rpca.L_, scale <span class="op">=</span> <span class="va">False</span>)</span>
@@ -492,8 +548,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="rmse" class="level2">
 <h2 class="anchored" data-anchor-id="rmse">RMSE</h2>
-<div class="cell" data-execution_count="54">
-<details>
+<div id="a553116d-6b17-44a8-a10f-a3566371671e" class="cell" data-execution_count="54">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rmse_rpca <span class="op">=</span> merr.get(Y_true_cent, Y_rpca_cent, method <span class="op">=</span> <span class="st">'rmse'</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>rmse_nnm <span class="op">=</span> merr.get(Y_true_cent, Y_nnm_cent, method <span class="op">=</span> <span class="st">'rmse'</span>)</span>
@@ -512,8 +568,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="psnr" class="level2">
 <h2 class="anchored" data-anchor-id="psnr">PSNR</h2>
-<div class="cell" data-execution_count="55">
-<details>
+<div id="974ad549-302a-4fea-8871-9b844068ac73" class="cell" data-execution_count="55">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>psnr_rpca <span class="op">=</span> merr.get(Y_true_cent, Y_rpca_cent, method <span class="op">=</span> <span class="st">'psnr'</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>psnr_nnm <span class="op">=</span> merr.get(Y_true_cent, Y_nnm_cent, method <span class="op">=</span> <span class="st">'psnr'</span>)</span>
@@ -532,8 +588,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="adjusted-mi-score" class="level2">
 <h2 class="anchored" data-anchor-id="adjusted-mi-score">Adjusted MI Score</h2>
-<div class="cell" data-execution_count="46">
-<details>
+<div id="b20c0c91-3f48-429c-bddd-5b57c2022213" class="cell" data-execution_count="46">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics <span class="im">as</span> skmetrics</span>
@@ -694,10 +750,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -707,8 +782,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -721,6 +805,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -764,6 +967,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -789,6 +993,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -846,26 +1076,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-08-02-comparison-of-noise-models.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

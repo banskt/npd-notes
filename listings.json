@@ -1,21 +1,36 @@
 [
   {
-    "listing": "/notebooks/develop/index.html",
+    "listing": "/notebooks/ukbb/index.html",
     "items": [
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
+      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
+      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
+      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
+      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
+      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
+      "/notebooks/ukbb/2023-10-30-rpca-ialm.html"
     ]
   },
   {
-    "listing": "/notebooks/explore/index.html",
+    "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/explore/2024-01-20-matrix-reconstruction-ukbb.html",
+      "/notebooks/explore/2024-01-29-simulation-comparisons.html",
+      "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
+      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
+      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
+      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
+      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
+      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
+      "/notebooks/ukbb/2023-10-30-rpca-ialm.html",
       "/notebooks/explore/2023-10-23-structure-plot.html",
       "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
       "/notebooks/explore/2023-08-08-npd-application.html",
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
       "/notebooks/explore/2023-08-02-comparison-of-noise-models.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
       "/notebooks/explore/2023-07-28-choosing-penalty-update-method.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html",
       "/notebooks/explore/2023-07-05-simulation-setup.html",
       "/notebooks/explore/2023-07-01-how-to-simulate.html",
       "/notebooks/explore/2023-06-23-external-validation-metrics.html",
@@ -27,36 +42,25 @@
     ]
   },
   {
-    "listing": "/notebooks/ukbb/index.html",
+    "listing": "/notebooks/develop/index.html",
     "items": [
-      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
-      "/notebooks/ukbb/2023-10-30-rpca-ialm.html",
-      "/notebooks/ukbb/2023-11-25-weighted-nnm.html",
-      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
-      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
-      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
-      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html"
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
     ]
   },
   {
-    "listing": "/notebooks/index.html",
+    "listing": "/notebooks/explore/index.html",
     "items": [
-      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
-      "/notebooks/ukbb/2023-10-30-rpca-ialm.html",
-      "/notebooks/ukbb/2023-11-25-weighted-nnm.html",
-      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
-      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
-      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
-      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
+      "/notebooks/explore/2024-01-20-matrix-reconstruction-ukbb.html",
+      "/notebooks/explore/2024-01-29-simulation-comparisons.html",
+      "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
       "/notebooks/explore/2023-10-23-structure-plot.html",
       "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
       "/notebooks/explore/2023-08-08-npd-application.html",
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
       "/notebooks/explore/2023-08-02-comparison-of-noise-models.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
       "/notebooks/explore/2023-07-28-choosing-penalty-update-method.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html",
       "/notebooks/explore/2023-07-05-simulation-setup.html",
       "/notebooks/explore/2023-07-01-how-to-simulate.html",
       "/notebooks/explore/2023-06-23-external-validation-metrics.html",
