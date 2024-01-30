@@ -120,13 +120,21 @@ def get_blockdiag_features(n, p, rholist, groups, rho_bg = 0.0, seed = None, sta
     return x
 
 
-def get_blockdiag_matrix(n, rholist, groups):
-    R = np.ones((n, n))
+def get_blockdiag_matrix(n, rholist, idx_groups, bg = 1.0):
+    '''
+    Generate a block diagonal matrix of size n x n.
+    S_ij = 1, if i = j
+         = rholist[q],  if i,j \in idx_groups[q]
+         = bg, otherwise
+    '''
+    R = np.ones((n, n)) * bg
 
-    for i, (idx, rho) in enumerate(zip(groups, rholist)):
+    for i, (idx, rho) in enumerate(zip(idx_groups, rholist)):
         nblock = idx.shape[0]
         xblock = np.ones((nblock, nblock)) * rho
         R[np.ix_(idx, idx)] = xblock
+
+    R[np.diag_indices_from(R)] = 1.0
         
     return R
 
