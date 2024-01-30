@@ -9,10 +9,11 @@ title: "Resources"
   curated by Shane Crinion and Niamh Mullins.
 
 ## Github
-
+  - [Software for low rank matrix approximation](https://github.com/banskt/weighted-pca-frank-wolfe) by Saikat Banerjee
+  - [DSC for numerical experiments](https://github.com/banskt/lrma-dsc) by Saikat Banerjee
+  - [NPD phenotypes from UK Biobank](https://github.com/banskt/ukbb-npd-analyses) by Saikat Banerjee
   - [Pilot NPD Sumstat Project](https://github.com/daklab/npd_sumstats) by David Knowles.
 
 ## Online Articles
-
   - [Tips for formatting GWAS summary statistics](https://huwenboshi.github.io/data%20management/2017/11/23/tips-for-formatting-gwas-summary-stats.html).
   - [Matti Pirinen's course on GWAS](https://www.mv.helsinki.fi/home/mjxpirin/GWAS_course/).
