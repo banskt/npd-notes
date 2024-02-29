@@ -202,6 +202,7 @@ window.Quarto = {
   <li><a href="#read-masked-data" id="toc-read-masked-data" class="nav-link active" data-scroll-target="#read-masked-data">Read masked data</a></li>
   <li><a href="#read-rpca-results" id="toc-read-rpca-results" class="nav-link" data-scroll-target="#read-rpca-results">Read RPCA results</a></li>
   <li><a href="#read-nnm-results" id="toc-read-nnm-results" class="nav-link" data-scroll-target="#read-nnm-results">Read NNM results</a></li>
+  <li><a href="#read-nnm-sparse-results" id="toc-read-nnm-sparse-results" class="nav-link" data-scroll-target="#read-nnm-sparse-results">Read NNM Sparse results</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -446,6 +447,51 @@ Figure&nbsp;2: RMSE of recovered values of masked entries in the PanUKB data
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nnm-cv-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: RMSE for recovery of hold-out test data
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="read-nnm-sparse-results" class="level1">
+<h1>Read NNM Sparse results</h1>
+<div id="d52870ee-e7de-4e1b-ae0d-56d14d897931" class="cell" data-execution_count="87">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rank_seq <span class="op">=</span> [<span class="fl">128.0</span>, <span class="fl">256.0</span>, <span class="fl">512.0</span>, <span class="fl">1024.0</span>, <span class="fl">2048.0</span>, <span class="fl">4096.0</span>, <span class="fl">8192.0</span>, <span class="fl">16384.0</span>, <span class="fl">32768.0</span>, <span class="fl">65536.0</span>]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nnm_sparse_res <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r <span class="kw">in</span> rank_seq:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    out_filename <span class="op">=</span> os.path.join(dscout_dir, <span class="ss">f"nnm_sparse/ukbb_1_nnm_sparse_</span><span class="sc">{</span>r<span class="sc">}</span><span class="ss">.pkl"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> os.path.isfile(out_filename):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(out_filename, <span class="st">'rb'</span>) <span class="im">as</span> fh:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>            nnm_sparse_res[r] <span class="op">=</span> pickle.load(fh)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>nnm_sparse_cvres <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rank, model <span class="kw">in</span> nnm_sparse_res.items():</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    nnm_sparse_cvres[rank] <span class="op">=</span> get_masked_rmse(X_cent, model[<span class="st">'X_'</span>], mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>For the NNM Sparse model, we looked at the RMSE of the masked data predicted by NNM in <a href="#fig-nnm-sparse-cv-rank" class="quarto-xref">Figure&nbsp;4</a>.</p>
+<div id="cell-fig-nnm-sparse-cv-rank" class="cell" data-execution_count="88">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>ax1.plot(nnm_sparse_cvres.keys(), nnm_sparse_cvres.values(), marker <span class="op">=</span> <span class="st">'o'</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ax1.plot(nnm_cvres.keys(), [np.mean(x) * 1.11 for x in nnm_cvres.values()], marker = 'o')</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Rank"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"RMSE"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-nnm-sparse-cv-rank" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nnm-sparse-cv-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2024-02-28-matrix-reconstruction-panukb_files/figure-html/fig-nnm-sparse-cv-rank-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nnm-sparse-cv-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: RMSE for masked data in the UK Biobank decreases with increasing rank.
 </figcaption>
 </figure>
 </div>

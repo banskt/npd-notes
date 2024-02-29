@@ -159,7 +159,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#hierarchical-clustering-of-covariance-matrix" id="toc-hierarchical-clustering-of-covariance-matrix" class="nav-link active" data-scroll-target="#hierarchical-clustering-of-covariance-matrix">Hierarchical clustering of covariance matrix</a></li>
+  <li><a href="#selection-for-matrix-completion-benchmark" id="toc-selection-for-matrix-completion-benchmark" class="nav-link active" data-scroll-target="#selection-for-matrix-completion-benchmark">Selection for matrix completion benchmark</a></li>
+  <li><a href="#hierarchical-clustering-of-covariance-matrix" id="toc-hierarchical-clustering-of-covariance-matrix" class="nav-link" data-scroll-target="#hierarchical-clustering-of-covariance-matrix">Hierarchical clustering of covariance matrix</a></li>
   <li><a href="#save-the-dataframes" id="toc-save-the-dataframes" class="nav-link" data-scroll-target="#save-the-dataframes">Save the dataframes</a></li>
   <li><a href="#rpca---ialm" id="toc-rpca---ialm" class="nav-link" data-scroll-target="#rpca---ialm">RPCA - IALM</a></li>
   <li><a href="#nnm" id="toc-nnm" class="nav-link" data-scroll-target="#nnm">NNM</a></li>
@@ -207,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="6c819d42-dd9d-4b57-b466-399d674567d7" class="cell" data-execution_count="53">
+<div id="6c819d42-dd9d-4b57-b466-399d674567d7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -233,31 +234,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot_functions <span class="im">as</span> mpy_plotfn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6baa9bbc-bfbd-4a4e-b556-c9f4059ea1c8" class="cell" data-execution_count="45">
+<div id="6baa9bbc-bfbd-4a4e-b556-c9f4059ea1c8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/nnwmf"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>zscore_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/GWAS_Zscore.tsv"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trait_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/trait_manifest_TableS6_no_readme.tsv"</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_csv(zscore_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(trait_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># remove extra columns from trait_df</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>variant_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/allvar.pruned.closesttss.hugo"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_csv(zscore_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>trait_df <span class="op">=</span> pd.read_csv(trait_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>variant_df <span class="op">=</span> pd.read_csv(variant_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>colnames <span class="op">=</span> trait_df.columns.tolist()</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>colnames[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"zindex"</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>trait_df.columns <span class="op">=</span> colnames</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>trait_df_mod <span class="op">=</span> trait_df.drop(labels <span class="op">=</span> [<span class="st">'coding'</span>, <span class="st">'modifier'</span>, <span class="st">'coding_description'</span>, <span class="st">'filename'</span>, <span class="st">'aws_link'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#trait_df_mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># remove extra columns from trait_df</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>colnames <span class="op">=</span> trait_df.columns.tolist()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>colnames[<span class="dv">0</span>] <span class="op">=</span> <span class="st">"zindex"</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>trait_df.columns <span class="op">=</span> colnames</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>trait_df_mod <span class="op">=</span> trait_df.drop(labels <span class="op">=</span> [<span class="st">'coding'</span>, <span class="st">'modifier'</span>, <span class="st">'coding_description'</span>, <span class="st">'filename'</span>, <span class="st">'aws_link'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#trait_df_mod</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="b6b1d24e-147d-4915-80d4-2b9491beaa0f" class="cell" data-execution_count="46">
+<div id="b6b1d24e-147d-4915-80d4-2b9491beaa0f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trait_df_mod</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="46">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div>
 
@@ -466,9 +469,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8738e50d-aeca-42cc-92c2-d3659e63a2c8" class="cell" data-execution_count="47">
+<div id="8738e50d-aeca-42cc-92c2-d3659e63a2c8" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>zscore_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="47">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div>
 
@@ -773,7 +776,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b573272b-e635-4fb0-981b-0ee513c68b1f" class="cell" data-execution_count="48">
+<section id="selection-for-matrix-completion-benchmark" class="level1">
+<h1>Selection for matrix completion benchmark</h1>
+<div id="b573272b-e635-4fb0-981b-0ee513c68b1f" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>h2_cut <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -792,7 +797,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>zscore_df_selected <span class="op">=</span> zscore_df_selected.iloc[rsid_idx_selected, :].drop(labels <span class="op">=</span> [<span class="st">'rsid'</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="e7402b24-4b91-4103-8ddd-67fcd40b446d" class="cell" data-execution_count="49">
+<div id="e7402b24-4b91-4103-8ddd-67fcd40b446d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df_selected.values.T)</span>
@@ -806,7 +811,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Fraction of Nan entries: 0.000</code></pre>
 </div>
 </div>
-<div id="581e098e-b932-438d-8099-d5f224d20af5" class="cell" data-execution_count="50">
+<div id="581e098e-b932-438d-8099-d5f224d20af5" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sc_stats</span>
@@ -842,9 +847,10 @@ Fraction of Nan entries: 0.000</code></pre>
 </div>
 </div>
 </div>
+</section>
 <section id="hierarchical-clustering-of-covariance-matrix" class="level1">
 <h1>Hierarchical clustering of covariance matrix</h1>
-<div id="37b49d9c-1c3c-43d9-aedc-a03308f798f6" class="cell" data-execution_count="51">
+<div id="37b49d9c-1c3c-43d9-aedc-a03308f798f6" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster <span class="im">import</span> hierarchy <span class="im">as</span> sp_hierarchy</span>
@@ -878,47 +884,399 @@ Fraction of Nan entries: 0.000</code></pre>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>zscore_df_selected_filename <span class="op">=</span> os.path.join(data_dir, <span class="ss">f"modselect/zscore_h2</span><span class="sc">{</span>h2_cut<span class="sc">}</span><span class="ss">_pval</span><span class="sc">{</span>pval_cut<span class="sc">}</span><span class="ss">.pkl"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>trait_df_selected_filename  <span class="op">=</span> os.path.join(data_dir, <span class="ss">f"modselect/traits_h2</span><span class="sc">{</span>h2_cut<span class="sc">}</span><span class="ss">.pkl"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>zscore_df_selected.to_pickle(zscore_df_selected_filename)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>trait_df_selected.to_pickle(trait_df_selected_filename)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># zscore_df_selected.to_pickle(zscore_df_selected_filename)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># trait_df_selected.to_pickle(trait_df_selected_filename)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+</div>
+<div id="e5478a62-27c9-4a11-87a3-784384507ed2" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>zscore_df_selected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">z1415</th>
+<th data-quarto-table-cell-role="th">z1678</th>
+<th data-quarto-table-cell-role="th">z1679</th>
+<th data-quarto-table-cell-role="th">z1680</th>
+<th data-quarto-table-cell-role="th">z1681</th>
+<th data-quarto-table-cell-role="th">z1682</th>
+<th data-quarto-table-cell-role="th">z1683</th>
+<th data-quarto-table-cell-role="th">z1685</th>
+<th data-quarto-table-cell-role="th">z1686</th>
+<th data-quarto-table-cell-role="th">z1687</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">z2473</th>
+<th data-quarto-table-cell-role="th">z2474</th>
+<th data-quarto-table-cell-role="th">z2475</th>
+<th data-quarto-table-cell-role="th">z2476</th>
+<th data-quarto-table-cell-role="th">z2477</th>
+<th data-quarto-table-cell-role="th">z2479</th>
+<th data-quarto-table-cell-role="th">z2480</th>
+<th data-quarto-table-cell-role="th">z2481</th>
+<th data-quarto-table-cell-role="th">z2482</th>
+<th data-quarto-table-cell-role="th">z2483</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>3.591973</td>
+<td>-0.038545</td>
+<td>4.356103</td>
+<td>-0.030974</td>
+<td>-2.625193</td>
+<td>-0.082182</td>
+<td>-1.513514</td>
+<td>2.927977</td>
+<td>1.145769</td>
+<td>-0.924589</td>
+<td>...</td>
+<td>-0.964337</td>
+<td>1.521092</td>
+<td>0.612532</td>
+<td>1.405428</td>
+<td>0.018029</td>
+<td>-0.008761</td>
+<td>-2.069432</td>
+<td>-4.292948</td>
+<td>-4.701711</td>
+<td>2.952899</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2.690253</td>
+<td>2.060959</td>
+<td>5.074098</td>
+<td>2.131896</td>
+<td>-2.200532</td>
+<td>0.203585</td>
+<td>0.053289</td>
+<td>2.081926</td>
+<td>1.606040</td>
+<td>-0.265317</td>
+<td>...</td>
+<td>-0.158982</td>
+<td>-0.296537</td>
+<td>-0.734266</td>
+<td>-0.093081</td>
+<td>0.412077</td>
+<td>0.716049</td>
+<td>-2.171984</td>
+<td>-5.314085</td>
+<td>-6.612137</td>
+<td>3.817518</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4.672697</td>
+<td>1.966395</td>
+<td>6.363325</td>
+<td>1.017074</td>
+<td>-3.506709</td>
+<td>-0.985765</td>
+<td>-0.432902</td>
+<td>2.834796</td>
+<td>3.055340</td>
+<td>-2.151471</td>
+<td>...</td>
+<td>0.716255</td>
+<td>2.222433</td>
+<td>1.092969</td>
+<td>2.328233</td>
+<td>1.160767</td>
+<td>-1.467249</td>
+<td>-0.135785</td>
+<td>-2.187241</td>
+<td>-3.223529</td>
+<td>4.508578</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>3.628734</td>
+<td>0.377612</td>
+<td>1.851399</td>
+<td>-1.249221</td>
+<td>-1.881565</td>
+<td>-0.479096</td>
+<td>-1.015920</td>
+<td>0.498607</td>
+<td>-0.294269</td>
+<td>-1.046150</td>
+<td>...</td>
+<td>-1.404276</td>
+<td>3.356354</td>
+<td>1.990588</td>
+<td>3.092179</td>
+<td>-0.133810</td>
+<td>-1.376310</td>
+<td>1.317044</td>
+<td>0.913491</td>
+<td>0.535188</td>
+<td>2.245657</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-0.858911</td>
+<td>-0.623239</td>
+<td>-1.686601</td>
+<td>-3.003435</td>
+<td>0.532031</td>
+<td>-0.341693</td>
+<td>-3.777505</td>
+<td>0.254496</td>
+<td>0.226082</td>
+<td>-0.322407</td>
+<td>...</td>
+<td>-0.536635</td>
+<td>-0.320075</td>
+<td>-0.128047</td>
+<td>-0.524757</td>
+<td>-0.232900</td>
+<td>-0.483644</td>
+<td>2.026508</td>
+<td>4.400092</td>
+<td>5.407316</td>
+<td>1.125536</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51394</td>
+<td>1.342127</td>
+<td>1.797208</td>
+<td>-0.979370</td>
+<td>-1.867291</td>
+<td>0.037906</td>
+<td>-1.162637</td>
+<td>-3.256483</td>
+<td>2.176569</td>
+<td>-1.732998</td>
+<td>-0.328859</td>
+<td>...</td>
+<td>0.482023</td>
+<td>0.714167</td>
+<td>0.354347</td>
+<td>0.611158</td>
+<td>-0.354725</td>
+<td>-0.831737</td>
+<td>0.870924</td>
+<td>1.432076</td>
+<td>2.228501</td>
+<td>0.536104</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51395</td>
+<td>-1.244520</td>
+<td>-1.527636</td>
+<td>1.849772</td>
+<td>2.144946</td>
+<td>-0.031816</td>
+<td>2.274951</td>
+<td>2.456148</td>
+<td>-2.560491</td>
+<td>-0.212461</td>
+<td>0.982478</td>
+<td>...</td>
+<td>-0.110369</td>
+<td>1.107098</td>
+<td>1.482684</td>
+<td>1.512723</td>
+<td>0.322355</td>
+<td>1.320194</td>
+<td>-0.700092</td>
+<td>-1.395039</td>
+<td>-2.270186</td>
+<td>0.360025</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51396</td>
+<td>-0.253862</td>
+<td>0.812630</td>
+<td>-0.711050</td>
+<td>1.179577</td>
+<td>-2.862653</td>
+<td>-2.013295</td>
+<td>2.833169</td>
+<td>0.153290</td>
+<td>2.138158</td>
+<td>-2.653582</td>
+<td>...</td>
+<td>-0.088946</td>
+<td>-0.562063</td>
+<td>-1.148515</td>
+<td>-0.994185</td>
+<td>-0.268232</td>
+<td>0.013256</td>
+<td>-0.777667</td>
+<td>-1.544760</td>
+<td>-1.406344</td>
+<td>2.205817</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51397</td>
+<td>-0.915597</td>
+<td>1.668377</td>
+<td>-0.823597</td>
+<td>0.163447</td>
+<td>-0.061726</td>
+<td>0.319698</td>
+<td>0.922030</td>
+<td>2.559199</td>
+<td>0.215736</td>
+<td>0.468609</td>
+<td>...</td>
+<td>0.098326</td>
+<td>-1.185702</td>
+<td>-0.624073</td>
+<td>-0.859522</td>
+<td>0.549669</td>
+<td>0.268733</td>
+<td>0.947441</td>
+<td>1.533302</td>
+<td>1.658537</td>
+<td>2.218653</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">51398</td>
+<td>1.047521</td>
+<td>-0.022502</td>
+<td>2.343549</td>
+<td>-0.933287</td>
+<td>1.285805</td>
+<td>-1.105163</td>
+<td>0.234492</td>
+<td>-0.452837</td>
+<td>-0.142916</td>
+<td>-0.777741</td>
+<td>...</td>
+<td>0.713318</td>
+<td>0.308486</td>
+<td>0.612102</td>
+<td>0.492977</td>
+<td>-0.621278</td>
+<td>-0.732402</td>
+<td>-0.106474</td>
+<td>-0.029006</td>
+<td>0.070647</td>
+<td>-0.805253</td>
+</tr>
+</tbody>
+</table>
+
+<p>48212 rows × 216 columns</p>
+</div>
+</div>
+</div>
+</div>
+<p><strong>MHC region</strong> (hg38)</p>
+<p>Chromosome 6: 28510120 - 33480577</p>
+<div id="d2544299-82d7-4ed8-ab01-c6b347a4477a" class="cell" data-execution_count="34">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>variant_df.query(<span class="st">'chr == 6 and 28510120 &lt; pos &lt; 33480577'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">SNP</th>
+<th data-quarto-table-cell-role="th">chr</th>
+<th data-quarto-table-cell-role="th">pos</th>
+<th data-quarto-table-cell-role="th">ref</th>
+<th data-quarto-table-cell-role="th">alt</th>
+<th data-quarto-table-cell-role="th">rsid</th>
+<th data-quarto-table-cell-role="th">varid</th>
+<th data-quarto-table-cell-role="th">maf_EUR</th>
+<th data-quarto-table-cell-role="th">name_1kg</th>
+<th data-quarto-table-cell-role="th">tie</th>
+<th data-quarto-table-cell-role="th">Gene_name</th>
+<th data-quarto-table-cell-role="th">hgnc_id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">omim_id</th>
+<th data-quarto-table-cell-role="th">notfound</th>
+<th data-quarto-table-cell-role="th">ensembl_gene_id</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </div>
 <section id="generate-a-masked-input" class="level2">
 <h2 class="anchored" data-anchor-id="generate-a-masked-input">Generate a masked input</h2>
 <div id="4218b877-148c-49b2-bbd9-23c2b28b9a50" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_masked_input(Y, mask):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan <span class="op">=</span> Y.copy()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan[mask] <span class="op">=</span> np.nan</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan_cent <span class="op">=</span> Ymiss_nan <span class="op">-</span> np.nanmean(Ymiss_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan_cent[mask] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Ymiss_nan_cent</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_mask(n, p, ratio):</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> np.ones(n <span class="op">*</span> p)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    nzero <span class="op">=</span> <span class="bu">int</span>(ratio <span class="op">*</span> n <span class="op">*</span> p)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    mask[:nzero] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    np.random.shuffle(mask)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mask.reshape(n,p) <span class="op">==</span> <span class="fl">0.</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>Z_mask <span class="op">=</span> generate_mask(X.shape[<span class="dv">0</span>], X.shape[<span class="dv">1</span>], <span class="fl">0.2</span>)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>Z_cent <span class="op">=</span> generate_masked_input(X_cent, Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_masked_input(Y, mask):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan <span class="op">=</span> Y.copy()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan[mask] <span class="op">=</span> np.nan</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan_cent <span class="op">=</span> Ymiss_nan <span class="op">-</span> np.nanmean(Ymiss_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    Ymiss_nan_cent[mask] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Ymiss_nan_cent</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_mask(n, p, ratio):</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    mask <span class="op">=</span> np.ones(n <span class="op">*</span> p)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    nzero <span class="op">=</span> <span class="bu">int</span>(ratio <span class="op">*</span> n <span class="op">*</span> p)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    mask[:nzero] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    np.random.shuffle(mask)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mask.reshape(n,p) <span class="op">==</span> <span class="fl">0.</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>Z_mask <span class="op">=</span> generate_mask(X.shape[<span class="dv">0</span>], X.shape[<span class="dv">1</span>], <span class="fl">0.2</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>Z_cent <span class="op">=</span> generate_masked_input(X_cent, Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="2ba1aebf-49f8-4c26-b58a-15499291c198" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> root_mean_squared_error(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> root_mean_squared_error(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="ec4cfe8d-d7a9-40ce-ab7e-a7345ca5f049" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, Z_cent, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, Z_cent, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>1.99756722409535</code></pre>
@@ -927,9 +1285,9 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="ef269314-194c-432e-b232-9ecfe2956ad2" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>oracle_pred <span class="op">=</span> X_cent.copy()</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>oracle_pred[<span class="op">~</span>Z_mask] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, oracle_pred, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>oracle_pred <span class="op">=</span> X_cent.copy()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>oracle_pred[<span class="op">~</span>Z_mask] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, oracle_pred, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>0.0</code></pre>
@@ -942,8 +1300,8 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="faa18eed-e236-4bea-aabc-4509fc359583" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rpca_model <span class="op">=</span> IALM(max_iter <span class="op">=</span> <span class="dv">10000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rpca_model.fit(Z_cent, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rpca_model <span class="op">=</span> IALM(max_iter <span class="op">=</span> <span class="dv">10000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rpca_model.fit(Z_cent, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>2024-02-23 13:13:17,128 | nnwmf.optimize.inexact_alm               | DEBUG   | Fit RPCA using IALM (mu update admm, lamba = 0.0046)
@@ -956,11 +1314,11 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="f80ff1cc-e49c-46f2-bbeb-b3370b2ab6e6" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Nuclear Norms"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Original matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Original matrix centered: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X_cent, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Masked matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(Z_cent, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(rpca_model.L_, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Nuclear Norms"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Original matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Original matrix centered: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X_cent, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Masked matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(Z_cent, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(rpca_model.L_, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nuclear Norms
@@ -973,7 +1331,7 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="8c06586e-7db6-4312-92b2-5b9984d77f80" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, rpca_model.L_, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, rpca_model.L_, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>1.9975672115686012</code></pre>
@@ -985,9 +1343,9 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="c14e485f-5983-41a7-bf45-d69391a9c586" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>rank_opt <span class="op">=</span> <span class="fl">4096.</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nnm_model <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>nnm_model.fit(Z_cent, rank_opt, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>rank_opt <span class="op">=</span> <span class="fl">4096.</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>nnm_model <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>nnm_model.fit(Z_cent, rank_opt, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>2024-02-13 10:41:55,467 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 0.429. Duality Gap 7.1954e+06
@@ -999,7 +1357,7 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="11d87813-946b-48ff-b053-fcb315d826b2" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, nnm_model.X, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>root_mean_squared_error(X_cent, nnm_model.X, mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>1.8754185985095613</code></pre>
@@ -1008,9 +1366,9 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="2b14bbe2-048e-47d6-81cb-d6dce90e7bfd" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nseq  <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log2(rmax)) <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rseq <span class="op">=</span> np.logspace(<span class="dv">9</span>, nseq <span class="op">-</span> <span class="dv">1</span>, num <span class="op">=</span> nseq <span class="op">-</span> <span class="dv">9</span>, base <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>rseq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nseq  <span class="op">=</span> <span class="bu">int</span>(np.floor(np.log2(rmax)) <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>rseq <span class="op">=</span> np.logspace(<span class="dv">9</span>, nseq <span class="op">-</span> <span class="dv">1</span>, num <span class="op">=</span> nseq <span class="op">-</span> <span class="dv">9</span>, base <span class="op">=</span> <span class="fl">2.0</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>rseq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>array([  512.,  1024.,  2048.,  4096.,  8192., 16384.])</code></pre>
@@ -1019,19 +1377,19 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="5cb6e40a-0293-4e68-8208-b74fcf7342ee" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nnm_model <span class="op">=</span> {</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    x: FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                  svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>) <span class="cf">for</span> x <span class="kw">in</span> rseq}</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>nnm_model[<span class="dv">512</span>] <span class="op">=</span> nnm_model_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nnm_model <span class="op">=</span> {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    x: FrankWolfe(model <span class="op">=</span> <span class="st">'nnm'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                  svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>, print_skip <span class="op">=</span> <span class="dv">100</span>) <span class="cf">for</span> x <span class="kw">in</span> rseq}</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>nnm_model[<span class="dv">512</span>] <span class="op">=</span> nnm_model_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="f844ed56-6ddf-478d-abb1-719165553952" class="cell" data-execution_count="44">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, rank <span class="kw">in</span> <span class="bu">enumerate</span>(rseq):</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        prev_rank <span class="op">=</span> rseq[i<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        nnm_model[rank].fit(Z_cent, rank, mask <span class="op">=</span> Z_mask, X0 <span class="op">=</span> nnm_model[prev_rank].X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, rank <span class="kw">in</span> <span class="bu">enumerate</span>(rseq):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        prev_rank <span class="op">=</span> rseq[i<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        nnm_model[rank].fit(Z_cent, rank, mask <span class="op">=</span> Z_mask, X0 <span class="op">=</span> nnm_model[prev_rank].X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>2024-01-31 14:25:22,378 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 1.000. Duality Gap 945157
@@ -1061,9 +1419,9 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="4f376408-e0d0-4908-9b4e-152a3ab96d20" class="cell" data-execution_count="47">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, rank <span class="kw">in</span> <span class="bu">enumerate</span>(rseq[:<span class="dv">4</span>]):</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    nnm_rmse <span class="op">=</span> root_mean_squared_error(X_cent, nnm_model[rank].X, mask <span class="op">=</span> Z_mask)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (rank, nnm_rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, rank <span class="kw">in</span> <span class="bu">enumerate</span>(rseq[:<span class="dv">4</span>]):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    nnm_rmse <span class="op">=</span> root_mean_squared_error(X_cent, nnm_model[rank].X, mask <span class="op">=</span> Z_mask)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (rank, nnm_rmse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>512.0 1.9266675901879784
@@ -1075,17 +1433,17 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="7d44d8bd-ce50-4e71-b13a-639fb42976df" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot()</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> rseq[:<span class="dv">4</span>]</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> [root_mean_squared_error(X_cent, nnm_model[x].X, mask <span class="op">=</span> Z_mask) <span class="cf">for</span> x <span class="kw">in</span> xvals]</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>ax1.plot(xvals, yvals, marker <span class="op">=</span> <span class="st">'o'</span>)</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> rseq[:<span class="dv">4</span>]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> [root_mean_squared_error(X_cent, nnm_model[x].X, mask <span class="op">=</span> Z_mask) <span class="cf">for</span> x <span class="kw">in</span> xvals]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>ax1.plot(xvals, yvals, marker <span class="op">=</span> <span class="st">'o'</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2024-01-20-panukb-data-filtering-for-masked-input_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2024-01-20-panukb-data-filtering-for-masked-input_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1096,8 +1454,8 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="4a286e8a-517d-4871-9749-b8d027284e39" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse_model <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>nnm_sparse_model.fit(Z_cent, (rank_opt, <span class="fl">0.5</span>), mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>nnm_sparse_model <span class="op">=</span> FrankWolfe(model <span class="op">=</span> <span class="st">'nnm-sparse'</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, svd_max_iter <span class="op">=</span> <span class="dv">50</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>nnm_sparse_model.fit(Z_cent, (rank_opt, <span class="fl">0.5</span>), mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>2024-01-25 11:22:28,201 | nnwmf.optimize.frankwolfe                | INFO    | Iteration 0. Step size 0.468. Duality Gap 491221</code></pre>
@@ -1106,9 +1464,9 @@ Recovered matrix: 18790.550737035624</code></pre>
 <div id="b9625309-692a-4fa3-88dc-dec2c46a4fe3" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Nuclear Norms"</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix (NNM): </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(nnm_model.X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix (NNM-Sparse): </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(nnm_sparse_model.X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Nuclear Norms"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix (NNM): </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(nnm_model.X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Recovered matrix (NNM-Sparse): </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(nnm_sparse_model.X, <span class="st">'nuc'</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nuclear Norms
@@ -1119,46 +1477,46 @@ Recovered matrix (NNM-Sparse): 1014.317846484247</code></pre>
 <div id="c7930ee0-2f54-4e65-a32c-6ead5b36fbe1" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> procrustes</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_squared_error(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mse</span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> peak_signal_to_noise_ratio(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    omax <span class="op">=</span> np.<span class="bu">max</span>(original[mask <span class="op">==</span> <span class="dv">1</span>])</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    omin <span class="op">=</span> np.<span class="bu">min</span>(original[mask <span class="op">==</span> <span class="dv">1</span>])</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    maxsig2 <span class="op">=</span> np.square(omax <span class="op">-</span> omin)</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> mean_squared_error(original, recovered, mask)</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> np.log10(maxsig2 <span class="op">/</span> mse)</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span>
-<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_dissimilarity_scores(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
-<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Procrustes analysis returns the square of the Frobenius norm.</span></span>
-<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="co">    Use the rotated matrix to obtain the peak signal-to-noise ratio (PSNR).</span></span>
-<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
-<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="bu">min</span>(original.shape[<span class="dv">1</span>], recovered.shape[<span class="dv">1</span>])</span>
-<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    R_orig, R_recv, m2 <span class="op">=</span> procrustes(original[:, <span class="dv">0</span>:k], recovered[:, <span class="dv">0</span>:k])</span>
-<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>    psnr <span class="op">=</span> peak_signal_to_noise_ratio(R_orig, R_recv, mask)</span>
-<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>    rmse <span class="op">=</span> np.sqrt(mean_squared_error(R_orig, R_recv, mask))</span>
-<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rmse, psnr</span>
-<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"RMSE"</span>)</span>
-<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>orig_rmse, orig_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, Z_cent, Z_mask)</span>
-<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>rpca_rmse, rpca_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, rpca_model.L_, Z_mask)</span>
-<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>nnm_rmse, nnm_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, nnm_model[<span class="dv">4096</span>].X, Z_mask)</span>
-<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a><span class="co">#nnm_sparse_rmse, nnm_sparse_psnr = matrix_dissimilarity_scores(X_cent, nnm_sparse_model.X, Z_mask)</span></span>
-<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero: </span><span class="sc">{</span>orig_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> procrustes</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mean_squared_error(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mse</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> peak_signal_to_noise_ratio(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    omax <span class="op">=</span> np.<span class="bu">max</span>(original[mask <span class="op">==</span> <span class="dv">1</span>])</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    omin <span class="op">=</span> np.<span class="bu">min</span>(original[mask <span class="op">==</span> <span class="dv">1</span>])</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    maxsig2 <span class="op">=</span> np.square(omax <span class="op">-</span> omin)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> mean_squared_error(original, recovered, mask)</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> np.log10(maxsig2 <span class="op">/</span> mse)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> matrix_dissimilarity_scores(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="co">    Procrustes analysis returns the square of the Frobenius norm.</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a><span class="co">    Use the rotated matrix to obtain the peak signal-to-noise ratio (PSNR).</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co">    '''</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="bu">min</span>(original.shape[<span class="dv">1</span>], recovered.shape[<span class="dv">1</span>])</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>    R_orig, R_recv, m2 <span class="op">=</span> procrustes(original[:, <span class="dv">0</span>:k], recovered[:, <span class="dv">0</span>:k])</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>    psnr <span class="op">=</span> peak_signal_to_noise_ratio(R_orig, R_recv, mask)</span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>    rmse <span class="op">=</span> np.sqrt(mean_squared_error(R_orig, R_recv, mask))</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rmse, psnr</span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"RMSE"</span>)</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>orig_rmse, orig_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, Z_cent, Z_mask)</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>rpca_rmse, rpca_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, rpca_model.L_, Z_mask)</span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>nnm_rmse, nnm_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, nnm_model[<span class="dv">4096</span>].X, Z_mask)</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a><span class="co">#nnm_sparse_rmse, nnm_sparse_psnr = matrix_dissimilarity_scores(X_cent, nnm_sparse_model.X, Z_mask)</span></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero: </span><span class="sc">{</span>orig_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE</code></pre>
@@ -1167,17 +1525,17 @@ Recovered matrix (NNM-Sparse): 1014.317846484247</code></pre>
 <div id="9dd36a8e-6255-449f-9277-3d3ae8448c96" class="cell" data-execution_count="52">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"RMSE"</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero prediction: </span><span class="sc">{</span>orig_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">""</span>)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"PSNR"</span>)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero prediction: </span><span class="sc">{</span>orig_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"RMSE"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero prediction: </span><span class="sc">{</span>orig_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_rmse<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">""</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"PSNR"</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Zero prediction: </span><span class="sc">{</span>orig_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RPCA: </span><span class="sc">{</span>rpca_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM: </span><span class="sc">{</span>nnm_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"NNM-Sparse: </span><span class="sc">{</span>nnm_sparse_psnr<span class="sc">:g}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE
@@ -1196,7 +1554,7 @@ NNM-Sparse: 43.7439</code></pre>
 <div id="75688c5f-369d-4cbf-807e-1f45e3133942" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>zero_rmse, zero_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, X, Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>zero_rmse, zero_psnr <span class="op">=</span> matrix_dissimilarity_scores(X_cent, X, Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE</code></pre>
@@ -1205,7 +1563,7 @@ NNM-Sparse: 43.7439</code></pre>
 <div id="2a4f26bf-0fa7-4549-ac46-eea768aa6b41" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>zero_rmse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>zero_rmse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>3.859249487545338e-15</code></pre>
@@ -1214,7 +1572,7 @@ NNM-Sparse: 43.7439</code></pre>
 <div id="86ebe086-97fa-480a-8738-b439f1ae94d8" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>zero_psnr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>zero_psnr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="51">
 <pre><code>264.2087877109133</code></pre>
