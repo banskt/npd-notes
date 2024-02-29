@@ -2,6 +2,8 @@
   {
     "listing": "/notebooks/ukbb/index.html",
     "items": [
+      "/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html",
+      "/notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html",
       "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
       "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
       "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
@@ -11,9 +13,19 @@
     ]
   },
   {
+    "listing": "/notebooks/develop/index.html",
+    "items": [
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
+    ]
+  },
+  {
     "listing": "/notebooks/index.html",
     "items": [
-      "/notebooks/explore/2024-01-20-matrix-reconstruction-ukbb.html",
+      "/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html",
+      "/notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html",
       "/notebooks/explore/2024-01-29-simulation-comparisons.html",
       "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
       "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
@@ -42,18 +54,8 @@
     ]
   },
   {
-    "listing": "/notebooks/develop/index.html",
-    "items": [
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
-    ]
-  },
-  {
     "listing": "/notebooks/explore/index.html",
     "items": [
-      "/notebooks/explore/2024-01-20-matrix-reconstruction-ukbb.html",
       "/notebooks/explore/2024-01-29-simulation-comparisons.html",
       "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
       "/notebooks/explore/2023-10-23-structure-plot.html",

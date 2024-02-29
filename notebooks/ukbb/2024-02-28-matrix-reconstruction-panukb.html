@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Saikat Banerjee">
-<meta name="dcterms.date" content="2023-07-28">
+<meta name="dcterms.date" content="2024-02-28">
 
-<title>NPD Network - Choosing step size for Inexact ALM algorithm</title>
+<title>NPD Network - Missing data imputation for UK Biobank</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -199,22 +199,18 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
-  <li><a href="#getting-setup" id="toc-getting-setup" class="nav-link" data-scroll-target="#getting-setup">Getting setup</a></li>
-  <li><a href="#simulate-some-toy-data" id="toc-simulate-some-toy-data" class="nav-link" data-scroll-target="#simulate-some-toy-data">Simulate some toy data</a></li>
-  <li><a href="#ialm-with-default-update-of-step-size" id="toc-ialm-with-default-update-of-step-size" class="nav-link" data-scroll-target="#ialm-with-default-update-of-step-size">IALM with default update of step size</a></li>
-  <li><a href="#ialm-with-admm-update-of-step-size" id="toc-ialm-with-admm-update-of-step-size" class="nav-link" data-scroll-target="#ialm-with-admm-update-of-step-size">IALM with ADMM update of step size</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#principal-components-for-the-low-rank-matrix" id="toc-principal-components-for-the-low-rank-matrix" class="nav-link" data-scroll-target="#principal-components-for-the-low-rank-matrix">Principal Components for the low rank matrix</a></li>
+  <li><a href="#read-masked-data" id="toc-read-masked-data" class="nav-link active" data-scroll-target="#read-masked-data">Read masked data</a></li>
+  <li><a href="#read-rpca-results" id="toc-read-rpca-results" class="nav-link" data-scroll-target="#read-rpca-results">Read RPCA results</a></li>
+  <li><a href="#read-nnm-results" id="toc-read-nnm-results" class="nav-link" data-scroll-target="#read-nnm-results">Read NNM results</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-07-28-choosing-penalty-update-method.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Choosing step size for Inexact ALM algorithm</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Missing data imputation for UK Biobank</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
@@ -231,7 +227,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 28, 2023</p>
+      <p class="date">February 28, 2024</p>
     </div>
   </div>
   
@@ -241,7 +237,7 @@ window.Quarto = {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    Try two different methods proposed for updating the penalty, which is equivalent to the step size. (1) Lin et. al.&nbsp;proposed a monotonically increasing step size. (2) Boyd proposed to dial the step size based on the primal and dual residuals
+    We hold out (mask) some of the data points, and then apply the methods to obtain estimates of the missing values.
   </div>
 </div>
 
@@ -249,182 +245,214 @@ window.Quarto = {
 </header>
 
 
-<section id="about" class="level1">
-<h1>About</h1>
-<p>There are two alternate proposed methods for updating the penalty <span class="math inline">\mu</span> on the residual. The penalty is equivalent to the step size. Here, we compare the two methods on a simulated dataset. The proposed methods are:</p>
-<ul>
-<li>Eq. 25 of <a href="https://arxiv.org/abs/1009.5055">Lin et. al.</a></li>
-<li>Eq. 3.13 of <a href="https://stanford.edu/~boyd/papers/pdf/admm_distr_stats.pdf">Boyd et. al.</a></li>
-</ul>
-<p>To-Do: Check stopping criterion of Boyd et. al.&nbsp;using Eq. 3.12.</p>
-</section>
-<section id="getting-setup" class="level1">
-<h1>Getting setup</h1>
-<div id="9012b378-412b-482c-b1cf-27f3e428e6fd" class="cell" data-execution_count="1">
+<div id="ca0f2fb7-46ff-49a8-8bc1-8afc61ab7d3a" class="cell" data-execution_count="64">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_stylesheet</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_utils</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>, colors <span class="op">=</span> <span class="st">'kelly'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../utils/"</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> histogram <span class="im">as</span> mpy_histogram</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot_functions <span class="im">as</span> mpy_plotfn</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nnwmf.optimize <span class="im">import</span> IALM</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_stylesheet</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_utils</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>, colors <span class="op">=</span> <span class="st">'kelly'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster <span class="im">import</span> hierarchy <span class="im">as</span> sp_hierarchy</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../utils/"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot_functions <span class="im">as</span> mpy_plotfn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="simulate-some-toy-data" class="level1">
-<h1>Simulate some toy data</h1>
-<div id="91af0558-e2ed-4565-8733-098eac2234a7" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ntrait <span class="op">=</span> <span class="dv">4</span> <span class="co"># categories / class</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ngwas  <span class="op">=</span> <span class="dv">500</span> <span class="co"># N</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>nsnp   <span class="op">=</span> <span class="dv">1000</span> <span class="co"># P</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>nfctr  <span class="op">=</span> <span class="dv">40</span> <span class="co"># K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="0d992d0b-ac06-4608-b6fc-dac35b9a94c4" class="cell" data-execution_count="3">
+<div id="fb807bab-35cf-424a-9d8a-2731a98794ef" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Y, Y_true, L, F, mean, noise_var, sample_indices <span class="op">=</span> mpy_simulate.simulate(ngwas, nsnp, ntrait, nfctr, std <span class="op">=</span> <span class="fl">0.5</span>, do_shift_mean <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Y_cent <span class="op">=</span> mpy_simulate.do_standardize(Y, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Y_std  <span class="op">=</span> mpy_simulate.do_standardize(Y)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Y_true_cent <span class="op">=</span> mpy_simulate.do_standardize(Y_true, scale <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_masked_rmse(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>: mask <span class="op">=</span> np.ones_like(original)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> np.<span class="bu">sum</span>(mask)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(mse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="09f2b729-12c5-4244-b81f-9da3bf9d609c" class="cell" data-execution_count="4">
+<div id="356ca0f3-eb20-485d-8c6f-f5f2954680b3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unique_labels  <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="bu">len</span>(sample_indices)))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>class_labels <span class="op">=</span> [<span class="va">None</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(ngwas)]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, idxs <span class="kw">in</span> <span class="bu">enumerate</span>(sample_indices):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> idxs:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        class_labels[i] <span class="op">=</span> k</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>h2_cut <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pval_cut <span class="op">=</span> <span class="fl">5e-8</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_pickle(os.path.join(data_dir, <span class="ss">f"modselect/zscore_h2</span><span class="sc">{</span>h2_cut<span class="sc">}</span><span class="ss">_pval</span><span class="sc">{</span>pval_cut<span class="sc">}</span><span class="ss">.pkl"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>trait_df  <span class="op">=</span> pd.read_pickle(os.path.join(data_dir, <span class="ss">f"modselect/traits_h2</span><span class="sc">{</span>h2_cut<span class="sc">}</span><span class="ss">.pkl"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-<section id="ialm-with-default-update-of-step-size" class="level1">
-<h1>IALM with default update of step size</h1>
-<div id="03e1c116-045a-4605-9d7d-a3aa315e19b3" class="cell" data-execution_count="5">
+<section id="read-masked-data" class="level1">
+<h1>Read masked data</h1>
+<div id="115855ac-cc9c-44da-b582-a9759d172e29" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rpca <span class="op">=</span> IALM(benchmark <span class="op">=</span> <span class="va">True</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>rpca.fit(Y_cent, Xtrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dscout_dir <span class="op">=</span> <span class="st">"/gpfs/commons/groups/knowles_lab/sbanerjee/low_rank_matrix_approximation_numerical_experiments/panukb"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data_filename <span class="op">=</span> os.path.join(dscout_dir, <span class="ss">f"ukbb/ukbb_1.pkl"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> (<span class="bu">open</span>(data_filename, <span class="st">"rb"</span>)) <span class="im">as</span> fh:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> pickle.load(fh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>2023-07-28 13:24:39,445 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 0. Primal residual 0.892391. Dual residual 0.00374201
-2023-07-28 13:24:55,941 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 100. Primal residual 0.0031319. Dual residual 1.12454e-05
-2023-07-28 13:25:11,945 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 200. Primal residual 2.69409e-06. Dual residual 1.09007e-05</code></pre>
 </div>
-</div>
-</section>
-<section id="ialm-with-admm-update-of-step-size" class="level1">
-<h1>IALM with ADMM update of step size</h1>
-<div id="5089af28-0fd7-49b4-b740-e00d3ca39e06" class="cell" data-execution_count="6">
+<div id="55f07f7e-bd3e-42ba-9bbc-b8c8e4fd2f87" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rpca_admm <span class="op">=</span> IALM(benchmark <span class="op">=</span> <span class="va">True</span>, max_iter <span class="op">=</span> <span class="dv">1000</span>, mu_update_method<span class="op">=</span><span class="st">'admm'</span>, show_progress <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rpca_admm.fit(Y_cent, Xtrue <span class="op">=</span> Y_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df.values.T)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#X_cent = X - np.mean(X, axis = 0, keepdims = True)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>X_cent <span class="op">=</span> data[<span class="st">'Ztrue'</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Z_cent <span class="op">=</span> data[<span class="st">'Z'</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Z_mask <span class="op">=</span> data[<span class="st">'Zmask'</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"We have </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> samples (phenotypes) and </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> features (variants)"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Fraction of Nan entries: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(np.isnan(X)) <span class="op">/</span> np<span class="sc">.</span>prod(X_cent.shape)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Fraction of masked entries: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(Z_mask) <span class="op">/</span> np<span class="sc">.</span>prod(X_cent.shape)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>zero_rmse <span class="op">=</span> get_masked_rmse(X_cent, np.zeros_like(X_cent), mask <span class="op">=</span> Z_mask)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"RMSE of zero prediction: </span><span class="sc">{</span>zero_rmse<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2023-07-28 13:25:22,352 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 0. Primal residual 0.892391. Dual residual 0.00374201
-2023-07-28 13:25:38,124 | nnwmf.optimize.inexact_alm               | INFO    | Iteration 100. Primal residual 1.33026e-06. Dual residual 1.61284e-06</code></pre>
+<pre><code>We have 216 samples (phenotypes) and 48212 features (variants)
+Fraction of Nan entries: 0.000
+Fraction of masked entries: 0.200
+RMSE of zero prediction: 1.9950481725240365</code></pre>
 </div>
 </div>
-</section>
-<section id="results" class="level1">
-<h1>Results</h1>
-<div id="e4392ab7-6d95-4d33-85b7-42e13e775d1b" class="cell" data-execution_count="14">
+<p>In <a href="#fig-panukb-zscore-covariance" class="quarto-xref">Figure&nbsp;1</a> we plot a heatmap from the covariance matrix of the Z-scores.</p>
+<div id="cell-fig-panukb-zscore-covariance" class="cell" data-execution_count="65">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">20</span>, <span class="dv">6</span>))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">131</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">132</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax3 <span class="op">=</span> fig.add_subplot(<span class="dv">133</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ax1.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca.mu_list_)), rpca.mu_list_, <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Default'</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ax1.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca_admm.mu_list_)), rpca_admm.mu_list_, <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'ADMM'</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax1.legend()</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Iteration"</span>)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Step size"</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ax2.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca.primal_res_)), np.log10(rpca.primal_res_), <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Primal Residual - Default'</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax2.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca.dual_res_) <span class="op">-</span> <span class="dv">1</span>), np.log10(rpca.dual_res_[<span class="dv">1</span>:]), <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Dual Residual - Default'</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ax2.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca_admm.primal_res_)), np.log10(rpca_admm.primal_res_), <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Primal Residual - ADMM'</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>ax2.plot(<span class="bu">range</span>(<span class="bu">len</span>(rpca_admm.dual_res_) <span class="op">-</span> <span class="dv">1</span>), np.log10(rpca_admm.dual_res_[<span class="dv">1</span>:]), <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Dual Residual - ADMM'</span>)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"Iteration"</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"Primal and Dual Residuals (log10 scale)"</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>ax3.plot(np.log10(np.cumsum(rpca.cpu_time_[<span class="dv">1</span>:])), rpca.rmse_[<span class="dv">1</span>:], <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'Default'</span>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>ax3.plot(np.log10(np.cumsum(rpca_admm.cpu_time_[<span class="dv">1</span>:])), rpca_admm.rmse_[<span class="dv">1</span>:], <span class="st">'o-'</span>, label <span class="op">=</span> <span class="st">'ADMM'</span>)</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>ax3.legend()</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>ax3.set_xlabel(<span class="st">"CPU Time"</span>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>ax3.set_ylabel(<span class="st">"RMSE from input matrix"</span>)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(w_pad <span class="op">=</span> <span class="fl">2.0</span>)</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>o1 <span class="op">=</span> sp_hierarchy.leaves_list(sp_hierarchy.linkage(np.cov(X_cent), method <span class="op">=</span> <span class="st">'centroid'</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>mpy_plotfn.plot_covariance_heatmap(ax1, X_cent[o1, :])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2023-07-28-choosing-penalty-update-method_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+<div id="fig-panukb-zscore-covariance" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-panukb-zscore-covariance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2024-02-28-matrix-reconstruction-panukb_files/figure-html/fig-panukb-zscore-covariance-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-panukb-zscore-covariance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Covariance of Z-scores in PanUKB data
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="4366f0b9-9fe4-45c9-91ff-740c56a431dc" class="cell" data-execution_count="25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>method_labels <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rpca"</span> : <span class="st">"RPCA-IALM"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nnm"</span> : <span class="st">"NN-FW"</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nnm_sparse"</span> : <span class="st">"NN-Sparse-FW"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"truncated_svd"</span>: <span class="st">"tSVD"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"factorgo"</span>: <span class="st">"FactorGO"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>method_colors <span class="op">=</span> {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rpca"</span> : <span class="st">'#FF6800'</span>, <span class="co"># Vivid Orange</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nnm"</span> : <span class="st">'#C10020'</span>, <span class="co"># Vivid Red</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nnm_sparse"</span> : <span class="st">'#803E75'</span>, <span class="co"># Strong Purple</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"truncated_svd"</span> : <span class="st">'#535154'</span>, <span class="co"># gray</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"factorgo"</span> : <span class="st">'#A6BDD7'</span>, <span class="co"># Very Light Blue</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>optimum_rmse <span class="op">=</span> <span class="bu">dict</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="read-rpca-results" class="level1">
+<h1>Read RPCA results</h1>
+<div id="27f67a01-c63d-4200-9c3d-d35cc17369b0" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rpca_filename <span class="op">=</span> os.path.join(dscout_dir, <span class="ss">f"rpca/ukbb_1_rpca_1.pkl"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> (<span class="bu">open</span>(rpca_filename, <span class="st">"rb"</span>)) <span class="im">as</span> fh:</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    rpca_res <span class="op">=</span> pickle.load(fh)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>optimum_rmse[<span class="st">'rpca'</span>] <span class="op">=</span> get_masked_rmse(X_cent, rpca_res[<span class="st">'X'</span>], mask <span class="op">=</span> Z_mask)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>To find the best possible lambda, we apply Robust PCA on the masked data with different values of <span class="math inline">\lambda</span>. The RMSE of the recovered values is shown in <a href="#fig-rpca-cv-lambda" class="quarto-xref">Figure&nbsp;2</a>. As currently implemented, Robust PCA fails to recover the masked data and the RMSE is comparable to that from zero entries.</p>
+<div id="cell-fig-rpca-cv-lambda" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>_optlmb <span class="op">=</span> rpca_res[<span class="st">'cvlmb'</span>][np.argmin(rpca_res[<span class="st">'cvrmse'</span>])]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax1.plot(rpca_res[<span class="st">'cvlmb'</span>], rpca_res[<span class="st">'cvrmse'</span>], marker <span class="op">=</span> <span class="st">'o'</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax1.axvline(x <span class="op">=</span> _optlmb, ls <span class="op">=</span> <span class="st">'dotted'</span>, color <span class="op">=</span> <span class="st">'grey'</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Lambda"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"RMSE for masked entries"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-rpca-cv-lambda" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rpca-cv-lambda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2024-02-28-matrix-reconstruction-panukb_files/figure-html/fig-rpca-cv-lambda-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rpca-cv-lambda-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: RMSE of recovered values of masked entries in the PanUKB data
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="principal-components-for-the-low-rank-matrix" class="level1">
-<h1>Principal Components for the low rank matrix</h1>
-<section id="default" class="level2">
-<h2 class="anchored" data-anchor-id="default">Default</h2>
-<div id="57a09bf2-8350-46b7-8872-41588058cfc8" class="cell" data-execution_count="8">
+<section id="read-nnm-results" class="level1">
+<h1>Read NNM results</h1>
+<div id="ad252a9b-a6ac-4f6f-a278-7cfff9ba5cf8" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(rpca.L_, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(Y_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pcomps_rpca <span class="op">=</span> U_rpca <span class="op">@</span> np.diag(S_rpca)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, class_labels, unique_labels)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nnm_filename <span class="op">=</span> os.path.join(dscout_dir, <span class="ss">f"nnm/ukbb_1_nnm_1.pkl"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> (<span class="bu">open</span>(nnm_filename, <span class="st">"rb"</span>)) <span class="im">as</span> fh:</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    nnm_res <span class="op">=</span> pickle.load(fh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2023-07-28-choosing-penalty-update-method_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
-</div>
-</div>
-</section>
-<section id="admm" class="level2">
-<h2 class="anchored" data-anchor-id="admm">ADMM</h2>
-<div id="023353b3-1e50-49a7-aa93-649212af1f95" class="cell" data-execution_count="9">
+<p>For NNM, we consider the input as an incomplete data matrix. We perform a 2-fold cross-validation on the incomplete input data and show the RMSE for the CV and the RMSE for the cross-validation is shown in <a href="#fig-nnm-cv-rank" class="quarto-xref">Figure&nbsp;3</a>.</p>
+<div id="cell-fig-nnm-cv-rank" class="cell" data-execution_count="63">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(rpca_admm.L_, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(Y_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pcomps_rpca <span class="op">=</span> U_rpca <span class="op">@</span> np.diag(S_rpca)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, class_labels, unique_labels)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>nnm_cvres <span class="op">=</span> nnm_res[<span class="st">'model'</span>][<span class="st">'test_error'</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax1.plot(nnm_cvres.keys(), [np.mean(x) <span class="cf">for</span> x <span class="kw">in</span> nnm_cvres.values()], marker <span class="op">=</span> <span class="st">'o'</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"Rank"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"Cross validation RMSE"</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2023-07-28-choosing-penalty-update-method_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+<div id="fig-nnm-cv-rank" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nnm-cv-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2024-02-28-matrix-reconstruction-panukb_files/figure-html/fig-nnm-cv-rank-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nnm-cv-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: RMSE for recovery of hold-out test data
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -891,4 +919,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/explore/2023-07-28-choosing-penalty-update-method.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
