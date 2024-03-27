@@ -2,6 +2,7 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/ukbb/2024-03-27-panukb-interactive-umap.html",
       "/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html",
       "/notebooks/ukbb/2024-03-18-panukb-biology.html",
       "/notebooks/ukbb/2024-03-07-panukb-principal-components.html",
@@ -37,6 +38,7 @@
   {
     "listing": "/notebooks/ukbb/index.html",
     "items": [
+      "/notebooks/ukbb/2024-03-27-panukb-interactive-umap.html",
       "/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html",
       "/notebooks/ukbb/2024-03-18-panukb-biology.html",
       "/notebooks/ukbb/2024-03-07-panukb-principal-components.html",
@@ -48,6 +50,15 @@
       "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
       "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
       "/notebooks/ukbb/2023-10-30-rpca-ialm.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/develop/index.html",
+    "items": [
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
     ]
   },
   {
@@ -68,15 +79,6 @@
       "/notebooks/explore/2023-05-16-pca-sumstat.html",
       "/notebooks/explore/2023-05-16-robustpca.html",
       "/notebooks/explore/2023-05-12-preprocess.html"
-    ]
-  },
-  {
-    "listing": "/notebooks/develop/index.html",
-    "items": [
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
     ]
   }
 ]
