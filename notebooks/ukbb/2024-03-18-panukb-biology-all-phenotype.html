@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.552">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Saikat Banerjee">
+<meta name="dcterms.date" content="2024-03-18">
+
+<title>NPD Network - Understanding the biology of diseases</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">NPD Network</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../notebooks/index.html"> 
+<span class="menu-text">Notebooks</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../meetings/index.html"> 
+<span class="menu-text">Meetings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../reference/index.html"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#list-of-phenotypes" id="toc-list-of-phenotypes" class="nav-link active" data-scroll-target="#list-of-phenotypes">List of phenotypes</a></li>
+  <li><a href="#contribution-of-traits-to-factors" id="toc-contribution-of-traits-to-factors" class="nav-link" data-scroll-target="#contribution-of-traits-to-factors">Contribution of traits to factors</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Understanding the biology of diseases</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saikat Banerjee </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 18, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    We attempt to characterize the biology of diseases from the low dimensional representation of the PanUKB summary statistics.
+  </div>
+</div>
+
+
+</header>
+
+
+<div id="d9c42227-3538-4d73-8217-f8cf853bfb6c" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> adjustText <span class="im">import</span> adjust_text</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> textalloc</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> umap</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster <span class="im">import</span> hierarchy <span class="im">as</span> sp_hierarchy</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial <span class="im">import</span> procrustes <span class="im">as</span> sp_procrustes</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_stylesheet</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymir <span class="im">import</span> mpl_utils</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>, colors <span class="op">=</span> <span class="st">'kelly'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.gridspec <span class="im">import</span> GridSpec</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../utils/"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot_functions <span class="im">as</span> mpy_plotfn</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> figure <span class="im">as</span> bokeh_figure</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.plotting <span class="im">import</span> show <span class="im">as</span> bokeh_show</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.io <span class="im">import</span> output_notebook</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bokeh.models <span class="im">import</span> ColumnDataSource</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>output_notebook()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+    <style>
+        .bk-notebook-logo {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAOkSURBVDiNjZRtaJVlGMd/1/08zzln5zjP1LWcU9N0NkN8m2CYjpgQYQXqSs0I84OLIC0hkEKoPtiH3gmKoiJDU7QpLgoLjLIQCpEsNJ1vqUOdO7ppbuec5+V+rj4ctwzd8IIbbi6u+8f1539dt3A78eXC7QizUF7gyV1fD1Yqg4JWz84yffhm0qkFqBogB9rM8tZdtwVsPUhWhGcFJngGeWrPzHm5oaMmkfEg1usvLFyc8jLRqDOMru7AyC8saQr7GG7f5fvDeH7Ej8CM66nIF+8yngt6HWaKh7k49Soy9nXurCi1o3qUbS3zWfrYeQDTB/Qj6kX6Ybhw4B+bOYoLKCC9H3Nu/leUTZ1JdRWkkn2ldcCamzrcf47KKXdAJllSlxAOkRgyHsGC/zRday5Qld9DyoM4/q/rUoy/CXh3jzOu3bHUVZeU+DEn8FInkPBFlu3+nW3Nw0mk6vCDiWg8CeJaxEwuHS3+z5RgY+YBR6V1Z1nxSOfoaPa4LASWxxdNp+VWTk7+4vzaou8v8PN+xo+KY2xsw6une2frhw05CTYOmQvsEhjhWjn0bmXPjpE1+kplmmkP3suftwTubK9Vq22qKmrBhpY4jvd5afdRA3wGjFAgcnTK2s4hY0/GPNIb0nErGMCRxWOOX64Z8RAC4oCXdklmEvcL8o0BfkNK4lUg9HTl+oPlQxdNo3Mg4Nv175e/1LDGzZen30MEjRUtmXSfiTVu1kK8W4txyV6BMKlbgk3lMwYCiusNy9fVfvvwMxv8Ynl6vxoByANLTWplvuj/nF9m2+PDtt1eiHPBr1oIfhCChQMBw6Aw0UulqTKZdfVvfG7VcfIqLG9bcldL/+pdWTLxLUy8Qq38heUIjh4XlzZxzQm19lLFlr8vdQ97rjZVOLf8nclzckbcD4wxXMidpX30sFd37Fv/GtwwhzhxGVAprjbg0gCAEeIgwCZyTV2Z1REEW8O4py0wsjeloKoMr6iCY6dP92H6Vw/oTyICIthibxjm/DfN9lVz8IqtqKYLUXfoKVMVQVVJOElGjrnnUt9T9wbgp8AyYKaGlqingHZU/uG2NTZSVqwHQTWkx9hxjkpWDaCg6Ckj5qebgBVbT3V3NNXMSiWSDdGV3hrtzla7J+duwPOToIg42ChPQOQjspnSlp1V+Gjdged7+8UN5CRAV7a5EdFNwCjEaBR27b3W890TE7g24NAP/mMDXRWrGoFPQI9ls/MWO2dWFAar/xcOIImbbpA3zgAAAABJRU5ErkJggg==);
+        }
+    </style>
+    <div>
+        <a href="https://bokeh.org" target="_blank" class="bk-notebook-logo"></a>
+        <span id="e51e8790-0656-4dca-ab46-4452ad388187">Loading BokehJS ...</span>
+    </div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+const JS_MIME_TYPE = 'application/javascript';
+  const HTML_MIME_TYPE = 'text/html';
+  const EXEC_MIME_TYPE = 'application/vnd.bokehjs_exec.v0+json';
+  const CLASS_NAME = 'output_bokeh rendered_html';
+
+  /**
+   * Render data to the DOM node
+   */
+  function render(props, node) {
+    const script = document.createElement("script");
+    node.appendChild(script);
+  }
+
+  /**
+   * Handle when an output is cleared or removed
+   */
+  function handleClearOutput(event, handle) {
+    function drop(id) {
+      const view = Bokeh.index.get_by_id(id)
+      if (view != null) {
+        view.model.document.clear()
+        Bokeh.index.delete(view)
+      }
+    }
+
+    const cell = handle.cell;
+
+    const id = cell.output_area._bokeh_element_id;
+    const server_id = cell.output_area._bokeh_server_id;
+
+    // Clean up Bokeh references
+    if (id != null) {
+      drop(id)
+    }
+
+    if (server_id !== undefined) {
+      // Clean up Bokeh references
+      const cmd_clean = "from bokeh.io.state import curstate; print(curstate().uuid_to_server['" + server_id + "'].get_sessions()[0].document.roots[0]._id)";
+      cell.notebook.kernel.execute(cmd_clean, {
+        iopub: {
+          output: function(msg) {
+            const id = msg.content.text.trim()
+            drop(id)
+          }
+        }
+      });
+      // Destroy server and session
+      const cmd_destroy = "import bokeh.io.notebook as ion; ion.destroy_server('" + server_id + "')";
+      cell.notebook.kernel.execute(cmd_destroy);
+    }
+  }
+
+  /**
+   * Handle when a new output is added
+   */
+  function handleAddOutput(event, handle) {
+    const output_area = handle.output_area;
+    const output = handle.output;
+
+    // limit handleAddOutput to display_data with EXEC_MIME_TYPE content only
+    if ((output.output_type != "display_data") || (!Object.prototype.hasOwnProperty.call(output.data, EXEC_MIME_TYPE))) {
+      return
+    }
+
+    const toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+
+    if (output.metadata[EXEC_MIME_TYPE]["id"] !== undefined) {
+      toinsert[toinsert.length - 1].firstChild.textContent = output.data[JS_MIME_TYPE];
+      // store reference to embed id on output_area
+      output_area._bokeh_element_id = output.metadata[EXEC_MIME_TYPE]["id"];
+    }
+    if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+      const bk_div = document.createElement("div");
+      bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+      const script_attrs = bk_div.children[0].attributes;
+      for (let i = 0; i < script_attrs.length; i++) {
+        toinsert[toinsert.length - 1].firstChild.setAttribute(script_attrs[i].name, script_attrs[i].value);
+        toinsert[toinsert.length - 1].firstChild.textContent = bk_div.children[0].textContent
+      }
+      // store reference to server id on output_area
+      output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+    }
+  }
+
+  function register_renderer(events, OutputArea) {
+
+    function append_mime(data, metadata, element) {
+      // create a DOM node to render to
+      const toinsert = this.create_output_subarea(
+        metadata,
+        CLASS_NAME,
+        EXEC_MIME_TYPE
+      );
+      this.keyboard_manager.register_events(toinsert);
+      // Render to node
+      const props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+      render(props, toinsert[toinsert.length - 1]);
+      element.append(toinsert);
+      return toinsert
+    }
+
+    /* Handle when an output is cleared or removed */
+    events.on('clear_output.CodeCell', handleClearOutput);
+    events.on('delete.Cell', handleClearOutput);
+
+    /* Handle when a new output is added */
+    events.on('output_added.OutputArea', handleAddOutput);
+
+    /**
+     * Register the mime type and append_mime function with output_area
+     */
+    OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+      /* Is output safe? */
+      safe: true,
+      /* Index of renderer in `output_area.display_order` */
+      index: 0
+    });
+  }
+
+  // register the mime type if in Jupyter Notebook environment and previously unregistered
+  if (root.Jupyter !== undefined) {
+    const events = require('base/js/events');
+    const OutputArea = require('notebook/js/outputarea').OutputArea;
+
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  }
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  const NB_LOAD_WARNING = {'data': {'text/html':
+     "<div style='background-color: #fdd'>\n"+
+     "<p>\n"+
+     "BokehJS does not appear to have successfully loaded. If loading BokehJS from CDN, this \n"+
+     "may be due to a slow or bad network connection. Possible fixes:\n"+
+     "</p>\n"+
+     "<ul>\n"+
+     "<li>re-rerun `output_notebook()` to attempt to load from CDN again, or</li>\n"+
+     "<li>use INLINE resources instead, as so:</li>\n"+
+     "</ul>\n"+
+     "<code>\n"+
+     "from bokeh.resources import INLINE\n"+
+     "output_notebook(resources=INLINE)\n"+
+     "</code>\n"+
+     "</div>"}};
+
+  function display_loaded() {
+    const el = document.getElementById("e51e8790-0656-4dca-ab46-4452ad388187");
+    if (el != null) {
+      el.textContent = "BokehJS is loading...";
+    }
+    if (root.Bokeh !== undefined) {
+      if (el != null) {
+        el.textContent = "BokehJS " + root.Bokeh.version + " successfully loaded.";
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(display_loaded, 100)
+    }
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls == null || js_urls.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    root._bokeh_is_loading = css_urls.length + js_urls.length;
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error(url) {
+      console.error("failed to load " + url);
+    }
+
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error.bind(null, url);
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-3.3.4.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.3.4.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.3.4.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.3.4.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.3.4.min.js"];
+  const css_urls = [];
+
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {
+    }
+  ];
+
+  function run_inline_js() {
+    if (root.Bokeh !== undefined || force === true) {
+          for (let i = 0; i < inline_js.length; i++) {
+      inline_js[i].call(root, root.Bokeh);
+    }
+if (force === true) {
+        display_loaded();
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    } else if (force !== true) {
+      const cell = $(document.getElementById("e51e8790-0656-4dca-ab46-4452ad388187")).parents('.cell').data().cell;
+      cell.output_area.append_execute_result(NB_LOAD_WARNING)
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));
+</script>
+</div>
+</div>
+<div id="fd636aa7-b659-4799-b9a6-f1e5aa1614d8" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>source <span class="op">=</span> ColumnDataSource(data<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    desc<span class="op">=</span>[<span class="st">'A'</span>, <span class="st">'b'</span>, <span class="st">'C'</span>, <span class="st">'d'</span>, <span class="st">'E'</span>],</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>TOOLTIPS <span class="op">=</span> [</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"index"</span>, <span class="st">"$index"</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"(x,y)"</span>, <span class="st">"($x, $y)"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"desc"</span>, <span class="st">"@desc"</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> bokeh_figure(width<span class="op">=</span><span class="dv">400</span>, height<span class="op">=</span><span class="dv">400</span>, tooltips<span class="op">=</span>TOOLTIPS,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>           title<span class="op">=</span><span class="st">"Mouse over the dots"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>p.scatter(<span class="st">'x'</span>, <span class="st">'y'</span>, size<span class="op">=</span><span class="dv">20</span>, source<span class="op">=</span>source)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>bokeh_show(p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+
+  <div id="fb4d5e62-3155-4613-a167-93b259f31c59" data-root-id="p1094" style="display: contents;"></div>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/javascript">
+(function(root) {
+  function embed_document(root) {
+  const docs_json = {"80f71dd9-dff0-4a9d-90f9-989761de13d9":{"version":"3.3.4","title":"Bokeh Application","roots":[{"type":"object","name":"Figure","id":"p1094","attributes":{"width":400,"height":400,"x_range":{"type":"object","name":"DataRange1d","id":"p1095"},"y_range":{"type":"object","name":"DataRange1d","id":"p1096"},"x_scale":{"type":"object","name":"LinearScale","id":"p1104"},"y_scale":{"type":"object","name":"LinearScale","id":"p1105"},"title":{"type":"object","name":"Title","id":"p1097","attributes":{"text":"Mouse over the dots"}},"renderers":[{"type":"object","name":"GlyphRenderer","id":"p1134","attributes":{"data_source":{"type":"object","name":"ColumnDataSource","id":"p1091","attributes":{"selected":{"type":"object","name":"Selection","id":"p1092","attributes":{"indices":[],"line_indices":[]}},"selection_policy":{"type":"object","name":"UnionRenderers","id":"p1093"},"data":{"type":"map","entries":[["x",[1,2,3,4,5]],["y",[2,5,8,2,7]],["desc",["A","b","C","d","E"]]]}}},"view":{"type":"object","name":"CDSView","id":"p1135","attributes":{"filter":{"type":"object","name":"AllIndices","id":"p1136"}}},"glyph":{"type":"object","name":"Scatter","id":"p1131","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":20},"line_color":{"type":"value","value":"#1f77b4"},"fill_color":{"type":"value","value":"#1f77b4"}}},"nonselection_glyph":{"type":"object","name":"Scatter","id":"p1132","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":20},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.1},"fill_color":{"type":"value","value":"#1f77b4"},"fill_alpha":{"type":"value","value":0.1},"hatch_alpha":{"type":"value","value":0.1}}},"muted_glyph":{"type":"object","name":"Scatter","id":"p1133","attributes":{"x":{"type":"field","field":"x"},"y":{"type":"field","field":"y"},"size":{"type":"value","value":20},"line_color":{"type":"value","value":"#1f77b4"},"line_alpha":{"type":"value","value":0.2},"fill_color":{"type":"value","value":"#1f77b4"},"fill_alpha":{"type":"value","value":0.2},"hatch_alpha":{"type":"value","value":0.2}}}}}],"toolbar":{"type":"object","name":"Toolbar","id":"p1103","attributes":{"tools":[{"type":"object","name":"PanTool","id":"p1116"},{"type":"object","name":"WheelZoomTool","id":"p1117","attributes":{"renderers":"auto"}},{"type":"object","name":"BoxZoomTool","id":"p1118","attributes":{"overlay":{"type":"object","name":"BoxAnnotation","id":"p1119","attributes":{"syncable":false,"level":"overlay","visible":false,"left":{"type":"number","value":"nan"},"right":{"type":"number","value":"nan"},"top":{"type":"number","value":"nan"},"bottom":{"type":"number","value":"nan"},"left_units":"canvas","right_units":"canvas","top_units":"canvas","bottom_units":"canvas","line_color":"black","line_alpha":1.0,"line_width":2,"line_dash":[4,4],"fill_color":"lightgrey","fill_alpha":0.5}}}},{"type":"object","name":"SaveTool","id":"p1124"},{"type":"object","name":"ResetTool","id":"p1125"},{"type":"object","name":"HelpTool","id":"p1126"},{"type":"object","name":"HoverTool","id":"p1127","attributes":{"renderers":"auto","tooltips":[["index","$index"],["(x,y)","($x, $y)"],["desc","@desc"]]}}]}},"left":[{"type":"object","name":"LinearAxis","id":"p1111","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1112","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1113"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p1114"}}}],"below":[{"type":"object","name":"LinearAxis","id":"p1106","attributes":{"ticker":{"type":"object","name":"BasicTicker","id":"p1107","attributes":{"mantissas":[1,2,5]}},"formatter":{"type":"object","name":"BasicTickFormatter","id":"p1108"},"major_label_policy":{"type":"object","name":"AllLabels","id":"p1109"}}}],"center":[{"type":"object","name":"Grid","id":"p1110","attributes":{"axis":{"id":"p1106"}}},{"type":"object","name":"Grid","id":"p1115","attributes":{"dimension":1,"axis":{"id":"p1111"}}}]}}]}};
+  const render_items = [{"docid":"80f71dd9-dff0-4a9d-90f9-989761de13d9","roots":{"p1094":"fb4d5e62-3155-4613-a167-93b259f31c59"},"root_ids":["p1094"]}];
+  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    let attempts = 0;
+    const timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else {
+        attempts++;
+        if (attempts > 100) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>
+</div>
+<div id="97500b7d-6689-461a-92de-8272d8448c7d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/results/nnsparsh/full/"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>zscore_df <span class="op">=</span> pd.read_pickle(os.path.join(data_dir, <span class="ss">f"modselect/zscore_all.pkl"</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>trait_df  <span class="op">=</span> pd.read_pickle(os.path.join(data_dir, <span class="ss">f"modselect/traits_all.pkl"</span>))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>variant_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/allvar.pruned.closesttss.hugo"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>variant_df       <span class="op">=</span> pd.read_csv(variant_filename, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cbdd6dd3-0f09-449f-b9a8-e514c24fa932" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>method <span class="op">=</span> <span class="st">'nnm_sparse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="5d1adb17-3165-4ae5-a764-15a95c463925" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>res_filename <span class="op">=</span> os.path.join(result_dir, <span class="ss">f"</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_model.pkl"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> (<span class="bu">open</span>(res_filename, <span class="st">"rb"</span>)) <span class="im">as</span> fh:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    lowrank_model <span class="op">=</span> pickle.load(fh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="6b7edb3f-bbee-4ae7-8859-fb0fc7f7a595" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lowrank_model.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>dict_keys(['max_iter_', 'model_', 'svd_method_', 'svd_max_iter_', 'simplex_method_', 'stop_criteria_', 'tol_', 'step_size_tol_', 'fxrel_tol_', 'show_progress_', 'prog_step_skip_', 'is_debug_', 'suppress_warnings_', 'is_benchmark_', 'benchmark_method_', 'weight_', 'mask_', 'weight_mask_', 'Y_', 'rank_', 'l1_thres_', 'fm_list_', 'fl_list_', 'fx_list_', 'dg_list_', 'st_list_', 'cpu_time_', 'convergence_msg_', 'X_', 'M_'])</code></pre>
+</div>
+</div>
+<div id="bb4d08f7-dc20-464f-926f-92205809de4e" class="cell" data-execution_count="44">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array(zscore_df.drop(labels <span class="op">=</span> [<span class="st">'rsid'</span>], axis <span class="op">=</span> <span class="dv">1</span>).values.T)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X_cent <span class="op">=</span> X <span class="op">-</span> np.mean(X, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>lowX <span class="op">=</span> lowrank_model[<span class="st">'X_'</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>lowX_cent <span class="op">=</span> lowX <span class="op">-</span> np.mean(lowX, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>lowX_std <span class="op">=</span> lowX_cent <span class="op">/</span> np.sqrt(np.prod(lowX_cent.shape))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="st">"Nuclear Norms"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Low rank model: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(lowX, <span class="bu">ord</span> <span class="op">=</span> <span class="st">'nuc'</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Input data: </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X, <span class="bu">ord</span> <span class="op">=</span> <span class="st">'nuc'</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Input data (mean centered): </span><span class="sc">{</span>np<span class="sc">.</span>linalg<span class="sc">.</span>norm(X_cent, <span class="bu">ord</span> <span class="op">=</span> <span class="st">'nuc'</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nuclear Norms
+Low rank model: 8050.750
+Input data: 496751.155
+Input data (mean centered): 495872.387</code></pre>
+</div>
+</div>
+<div id="6d11eab5-1631-47e8-8ace-56983db067c2" class="cell" data-execution_count="50">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># o1 = sp_hierarchy.leaves_list(sp_hierarchy.linkage(np.cov(X_cent), method = 'centroid'))</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># o2 = sp_hierarchy.leaves_list(sp_hierarchy.linkage(np.cov(lowX_std), method = 'centroid'))</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">8</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>mpy_plotfn.plot_covariance_heatmap(ax1, X_cent[o1, :], vmax <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>mpy_plotfn.plot_covariance_heatmap(ax2, lowX_cent[o2, :], vmax <span class="op">=</span> <span class="fl">0.05</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Input data"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Low-dimensional data"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(w_pad <span class="op">=</span> <span class="fl">4.0</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cc8c86a1-1eaf-4722-ad5f-9b5921f7b8b2" class="cell" data-execution_count="111">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_loadings_factors(X, k <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">#X_cent = mpy_simulate.do_standardize(X, scale = False)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#X_cent /= np.sqrt(np.prod(X_cent.shape))</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    U, S, Vt <span class="op">=</span> np.linalg.svd(X, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    S2 <span class="op">=</span> np.square(S)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    explained_variance <span class="op">=</span> S2 <span class="op">/</span> np.<span class="bu">sum</span>(S2)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        k <span class="op">=</span> np.where(explained_variance <span class="op">&lt;</span> <span class="fl">1e-12</span>)[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    U_low <span class="op">=</span> U[:, :k]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    S_low <span class="op">=</span> S[:k]</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    factors <span class="op">=</span> Vt[:k, :].T</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    loadings <span class="op">=</span> U_low <span class="op">@</span> np.diag(S_low)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> U_low, S_low, loadings, factors</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>U0, S0, loadings0, factors0 <span class="op">=</span> compute_loadings_factors(lowX)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>U1, S1, loadings1, factors1 <span class="op">=</span> compute_loadings_factors(lowX_std)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>U2, S2, loadings2, factors2 <span class="op">=</span> compute_loadings_factors(X_cent)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="a5a7fcd6-ecef-4d15-967a-32613b258165" class="cell" data-execution_count="113">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax1.plot(np.arange(S0.shape[<span class="dv">0</span>]), np.log10(np.square(S0) <span class="op">/</span> np.<span class="bu">sum</span>(np.square(S0))), marker <span class="op">=</span> <span class="st">'o'</span>, label <span class="op">=</span> <span class="st">'lowX'</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ax1.plot(np.arange(S1.shape[0]), np.log10(np.square(S1) / np.sum(np.square(S1))), marker = 'o', label = 'lowX_std', alpha = 0.4)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax1.plot(np.arange(S2.shape[<span class="dv">0</span>]), np.log10(np.square(S2) <span class="op">/</span> np.<span class="bu">sum</span>(np.square(S2))), marker <span class="op">=</span> <span class="st">'o'</span>, label <span class="op">=</span> <span class="st">'X_cent'</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax1.legend()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="6db2f858-7a60-4fc8-b1d2-ac48d3c7e12a" class="cell" data-execution_count="169">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nnm_loadings  <span class="op">=</span> loadings0.copy()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tsvd_loadings <span class="op">=</span> U2[:, :loadings0.shape[<span class="dv">1</span>]] <span class="op">@</span> np.diag(S2[:loadings0.shape[<span class="dv">1</span>]])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>o1 <span class="op">=</span> sp_hierarchy.leaves_list(sp_hierarchy.linkage(np.cov(tsvd_loadings), method <span class="op">=</span> <span class="st">'centroid'</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>o2 <span class="op">=</span> sp_hierarchy.leaves_list(sp_hierarchy.linkage(np.cov(nnm_loadings), method <span class="op">=</span> <span class="st">'centroid'</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">8</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>mpy_plotfn.plot_covariance_heatmap(ax1, tsvd_loadings[o1, :])</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>mpy_plotfn.plot_covariance_heatmap(ax2, nnm_loadings[o2, :])</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Truncated SVD"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">"Nuclear Norm Minimization"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(w_pad <span class="op">=</span> <span class="fl">4.0</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="959fa9bb-25d0-49ac-b05f-f792a36673f9" class="cell" data-execution_count="170">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>no_prescription_idx <span class="op">=</span> trait_df[trait_df[<span class="st">'trait_type'</span>] <span class="op">!=</span> <span class="st">'prescriptions'</span>].index</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>nnm_loadings_noprescription  <span class="op">=</span> nnm_loadings[no_prescription_idx, :]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tsvd_loadings_noprescription <span class="op">=</span> tsvd_loadings[no_prescription_idx, :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="2b454987-9f35-4f98-a178-c95bcc36fe52" class="cell" data-execution_count="262">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> umap</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>nnm_reducer <span class="op">=</span> umap.UMAP(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    n_neighbors <span class="op">=</span> <span class="dv">10</span>, metric <span class="op">=</span> <span class="st">'cosine'</span>, min_dist <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>nnm_embedding <span class="op">=</span> nnm_reducer.fit_transform(nnm_loadings_noprescription)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>tsvd_reducer <span class="op">=</span> umap.UMAP(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    n_neighbors <span class="op">=</span> <span class="dv">10</span>, metric <span class="op">=</span> <span class="st">'cosine'</span>, min_dist <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>tsvd_embedding <span class="op">=</span> tsvd_reducer.fit_transform(tsvd_loadings_noprescription)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="053fc9bd-e8b6-4d89-93c5-8d99cfb91ad6" class="cell" data-execution_count="260">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>trait_type_dict <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    trait: color <span class="cf">for</span> trait, color <span class="kw">in</span> <span class="bu">zip</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        trait_df[<span class="st">'trait_type'</span>].unique().tolist(), </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        mpl_stylesheet.banskt_colors()[:<span class="bu">len</span>(trait_df[<span class="st">'trait_type'</span>].unique())])</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="3091f8ae-15ae-4be7-9f35-74b2ee8daeba" class="cell" data-execution_count="272">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nnm_reducer <span class="op">=</span> umap.UMAP(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    n_neighbors <span class="op">=</span> <span class="dv">10</span>, metric <span class="op">=</span> <span class="st">'cosine'</span>, min_dist <span class="op">=</span> <span class="fl">0.4</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    set_op_mix_ratio <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#densmap=True, dens_lambda=1.0,</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#random_state = 42,</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    target_n_neighbors <span class="op">=</span> <span class="dv">50</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>nnm_embedding <span class="op">=</span> nnm_reducer.fit_transform(nnm_loadings_noprescription)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">8</span>))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> trait, color <span class="kw">in</span> trait_type_dict.items():</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    selectidx <span class="op">=</span> np.array(trait_df[trait_df[<span class="st">'trait_type'</span>] <span class="op">==</span> trait].index)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    tidx <span class="op">=</span> np.searchsorted(no_prescription_idx, selectidx)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    ax1.scatter(nnm_embedding[tidx, <span class="dv">0</span>], nnm_embedding[tidx, <span class="dv">1</span>], s <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> color, label <span class="op">=</span> trait)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    ax2.scatter(tsvd_embedding[tidx, <span class="dv">0</span>], tsvd_embedding[tidx, <span class="dv">1</span>], s <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, color <span class="op">=</span> color, label <span class="op">=</span> trait)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">#ax2.scatter(nnm_loadings_noprescription[tidx, ipc1], nnm_loadings_noprescription[tidx, ipc2], s = 20, alpha = 0.6, color = color, label = trait)</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>ax2.legend()</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(w_pad <span class="op">=</span> <span class="fl">4.0</span>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3106aa11-070b-48cc-b850-3f6ab9b5b49c" class="cell" data-execution_count="104">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">18</span>, <span class="dv">8</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">121</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(<span class="dv">122</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>ipc1 <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ipc2 <span class="op">=</span> <span class="dv">11</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ax1.scatter(loadings0[:, ipc1], loadings0[:, ipc2], s <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>ax2.scatter(loadings2[:, ipc1], loadings2[:, ipc2], s <span class="op">=</span> <span class="dv">20</span>, alpha <span class="op">=</span> <span class="fl">0.4</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(w_pad <span class="op">=</span> <span class="fl">4.0</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="76e72a2b-1328-4bbb-b9d7-69570f543e3e" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(xmat):</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    xmat2 <span class="op">=</span> xmat <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xmat2 <span class="op">/</span> np.<span class="bu">sum</span>(xmat2, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(xmat):</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    xmat2 <span class="op">=</span> xmat <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xmat2 <span class="op">/</span> np.<span class="bu">sum</span>(xmat2, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>U, S, loadings, factors <span class="op">=</span> get_principal_components(lowrank_model[<span class="st">'X_'</span>])</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>cos2_pheno   <span class="op">=</span> compute_cos(loadings)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>cos2_variant <span class="op">=</span> compute_cos(factors <span class="op">@</span> np.diag(S))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>contribution_pheno   <span class="op">=</span> compute_contribution(loadings)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>contribution_variant <span class="op">=</span> compute_contribution(factors <span class="op">@</span> np.diag(S))</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># cos2_pheno = get_cos2_scores(loadings)</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># contribution_pheno = get_contribution_scores(loadings)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="list-of-phenotypes" class="level1">
+<h1>List of phenotypes</h1>
+<div id="7e3758c8-53ca-4bb9-a04b-94594a0886e1" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>trait_df[<span class="st">'description'</span>].to_list()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>['Non-cancer illness code, self-reported',
+ 'Albumin',
+ 'Alkaline phosphatase',
+ 'Alanine aminotransferase',
+ 'Apolipoprotein A',
+ 'Apolipoprotein B',
+ 'Aspartate aminotransferase',
+ 'Urea',
+ 'Calcium',
+ 'Cholesterol',
+ 'Creatinine',
+ 'C-reactive protein',
+ 'Cystatin C',
+ 'Gamma glutamyltransferase',
+ 'Glycated haemoglobin (HbA1c)',
+ 'HDL cholesterol',
+ 'IGF-1',
+ 'Phosphate',
+ 'SHBG',
+ 'Total protein',
+ 'Triglycerides',
+ 'Urate',
+ 'Pulse rate, automated reading',
+ 'Time spent watching television (TV)',
+ 'Morning/evening person (chronotype)',
+ 'Ventricular rate',
+ 'P duration',
+ 'QRS duration',
+ 'Comparative body size at age 10',
+ 'Comparative height size at age 10',
+ 'Sitting height',
+ 'Fluid intelligence score',
+ 'Birth weight',
+ 'Neuroticism score',
+ 'Forced expiratory volume in 1-second (FEV1), Best measure',
+ 'Forced vital capacity (FVC), Best measure',
+ 'Forced expiratory volume in 1-second (FEV1), predicted',
+ 'Forced expiratory volume in 1-second (FEV1), predicted percentage',
+ 'Body mass index (BMI)',
+ 'Weight',
+ 'Age first had sexual intercourse',
+ 'Overall health rating',
+ 'Age hayfever or allergic rhinitis diagnosed by doctor',
+ 'Age asthma diagnosed by doctor',
+ 'Posterior thigh lean muscle volume (right)',
+ 'Posterior thigh lean muscle volume (left)',
+ 'Visceral adipose tissue volume (VAT)',
+ 'Abdominal subcutaneous adipose tissue volume (ASAT)',
+ 'Total trunk fat volume',
+ 'Year ended full time education',
+ 'Minimum carotid IMT (intima-medial thickness) at 120 degrees',
+ 'Mean carotid IMT (intima-medial thickness) at 120 degrees',
+ 'Maximum carotid IMT (intima-medial thickness) at 120 degrees',
+ 'Minimum carotid IMT (intima-medial thickness) at 150 degrees',
+ 'Mean carotid IMT (intima-medial thickness) at 150 degrees',
+ 'Maximum carotid IMT (intima-medial thickness) at 150 degrees',
+ 'Minimum carotid IMT (intima-medial thickness) at 210 degrees',
+ 'Mean carotid IMT (intima-medial thickness) at 210 degrees',
+ 'Maximum carotid IMT (intima-medial thickness) at 210 degrees',
+ 'Minimum carotid IMT (intima-medial thickness) at 240 degrees',
+ 'Mean carotid IMT (intima-medial thickness) at 240 degrees',
+ 'Maximum carotid IMT (intima-medial thickness) at 240 degrees',
+ 'Weight',
+ 'Body fat percentage',
+ 'Whole body fat mass',
+ 'Whole body fat-free mass',
+ 'Whole body water mass',
+ 'Body mass index (BMI)',
+ 'Basal metabolic rate',
+ 'Impedance of whole body',
+ 'Impedance of leg (right)',
+ 'Impedance of leg (left)',
+ 'Impedance of arm (right)',
+ 'Impedance of arm (left)',
+ 'Leg fat percentage (right)',
+ 'Leg fat mass (right)',
+ 'Leg fat-free mass (right)',
+ 'Leg predicted mass (right)',
+ 'Leg fat percentage (left)',
+ 'Leg fat mass (left)',
+ 'Leg fat-free mass (left)',
+ 'Leg predicted mass (left)',
+ 'Arm fat percentage (right)',
+ 'Arm fat mass (right)',
+ 'Arm fat-free mass (right)',
+ 'Arm predicted mass (right)',
+ 'Arm fat percentage (left)',
+ 'Arm fat mass (left)',
+ 'Arm fat-free mass (left)',
+ 'Arm predicted mass (left)',
+ 'Trunk fat percentage',
+ 'Trunk fat mass',
+ 'Trunk fat-free mass',
+ 'Trunk predicted mass',
+ 'Relative age of first facial hair',
+ 'Age when periods started (menarche)',
+ 'Birth weight of first child',
+ 'Age at first live birth',
+ 'Age at hysterectomy',
+ 'Number of cigarettes previously smoked daily',
+ 'White blood cell (leukocyte) count',
+ 'Red blood cell (erythrocyte) count',
+ 'Haemoglobin concentration',
+ 'Haematocrit percentage',
+ 'Mean corpuscular volume',
+ 'Mean corpuscular haemoglobin',
+ 'Red blood cell (erythrocyte) distribution width',
+ 'Platelet count',
+ 'Platelet crit',
+ 'Mean platelet (thrombocyte) volume',
+ 'Platelet distribution width',
+ 'Lymphocyte count',
+ 'Monocyte count',
+ 'Neutrophill count',
+ 'Eosinophill count',
+ 'Lymphocyte percentage',
+ 'Monocyte percentage',
+ 'Neutrophill percentage',
+ 'Eosinophill percentage',
+ 'Reticulocyte percentage',
+ 'Reticulocyte count',
+ 'Mean reticulocyte volume',
+ 'Mean sphered cell volume',
+ 'Immature reticulocyte fraction',
+ 'High light scatter reticulocyte percentage',
+ 'High light scatter reticulocyte count',
+ 'Forced vital capacity (FVC)',
+ 'Forced expiratory volume in 1-second (FEV1)',
+ 'Peak expiratory flow (PEF)',
+ 'Ankle spacing width',
+ 'Heel Broadband ultrasound attenuation, direct entry',
+ 'Heel quantitative ultrasound index (QUI), direct entry',
+ 'Heel bone mineral density (BMD)',
+ 'Weight, manual entry',
+ 'Age at menopause (last menstrual period)',
+ 'Age asthma diagnosed',
+ 'Age emphysema/chronic bronchitis diagnosed',
+ 'Age deep-vein thrombosis (DVT, blood clot in leg) diagnosed',
+ 'Diastolic blood pressure, automated reading',
+ 'Systolic blood pressure, automated reading',
+ 'Ankle spacing width (left)',
+ 'Heel broadband ultrasound attenuation (left)',
+ 'Heel quantitative ultrasound index (QUI), direct entry (left)',
+ 'Heel bone mineral density (BMD) (left)',
+ 'Heel bone mineral density (BMD) T-score, automated (left)',
+ 'Ankle spacing width (right)',
+ 'Heel broadband ultrasound attenuation (right)',
+ 'Heel quantitative ultrasound index (QUI), direct entry (right)',
+ 'Heel bone mineral density (BMD) (right)',
+ 'Heel bone mineral density (BMD) T-score, automated (right)',
+ 'Pulse rate',
+ 'Round of numeric memory test',
+ 'Maximum digits remembered correctly',
+ 'Number of rounds of numeric memory test performed',
+ 'Duration screen displayed',
+ 'Hand grip strength (left)',
+ 'Hand grip strength (right)',
+ 'Waist circumference',
+ 'Hip circumference',
+ 'Standing height',
+ 'Spherical power (right)',
+ 'Spherical power (left)',
+ '3mm weak meridian (left)',
+ '6mm weak meridian (left)',
+ '6mm weak meridian (right)',
+ '3mm weak meridian (right)',
+ 'Seated height',
+ '6mm asymmetry angle (left)',
+ '3mm strong meridian (right)',
+ '6mm strong meridian (right)',
+ '6mm strong meridian (left)',
+ '3mm strong meridian (left)',
+ '6mm asymmetry index (left)',
+ '6mm asymmetry index (right)',
+ 'Intra-ocular pressure, corneal-compensated (right)',
+ 'Intra-ocular pressure, Goldmann-correlated (right)',
+ 'Corneal hysteresis (right)',
+ 'Corneal resistance factor (right)',
+ 'Intra-ocular pressure, corneal-compensated (left)',
+ 'Intra-ocular pressure, Goldmann-correlated (left)',
+ 'Corneal hysteresis (left)',
+ 'Corneal resistance factor (left)',
+ 'Heel bone mineral density (BMD) T-score, automated',
+ 'Age completed full time education',
+ 'Systolic blood pressure, manual reading',
+ 'Diastolic blood pressure, manual reading',
+ 'Pulse rate (during blood-pressure measurement)',
+ 'Albumin/Globulin ratio',
+ 'Diastolic blood pressure, automated reading, adjusted by medication',
+ 'Diastolic blood pressure, combined automated + manual reading',
+ 'Diastolic blood pressure, combined automated + manual reading, adjusted by medication',
+ 'Diastolic blood pressure, manual reading, adjusted by medication',
+ 'FEV1/FVC ratio',
+ 'LDL direct, adjusted by medication',
+ 'Mean arterial pressure, automated reading',
+ 'Mean arterial pressure, automated reading, adjusted by medication',
+ 'Mean arterial pressure, combined automated + manual reading',
+ 'Mean arterial pressure, combined automated + manual reading, adjusted by medication',
+ 'Mean arterial pressure, manual reading',
+ 'Mean arterial pressure, manual reading, adjusted by medication',
+ 'Non-albumin protein',
+ 'Pulse pressure, automated reading',
+ 'Pulse pressure, automated reading, adjusted by medication',
+ 'Pulse pressure, combined automated + manual reading',
+ 'Pulse pressure, combined automated + manual reading, adjusted by medication',
+ 'Pulse pressure, manual reading',
+ 'Pulse pressure, manual reading, adjusted by medication',
+ 'Systolic blood pressure, automated reading, adjusted by medication',
+ 'Systolic blood pressure, combined automated + manual reading',
+ 'Systolic blood pressure, combined automated + manual reading, adjusted by medication',
+ 'Systolic blood pressure, manual reading, adjusted by medication',
+ 'Smoking status, ever vs never',
+ 'Estimated glomerular filtration rate, serum creatinine',
+ 'Estimated glomerular filtration rate, cystain C',
+ 'Estimated glomerular filtration rate, serum creatinine + cystain C',
+ 'pheno 48 / pheno 49']</code></pre>
+</div>
+</div>
+<div id="4c95687d-ffdd-4161-83ba-38fc4b5bdb92" class="cell" data-execution_count="54">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>trait_df.query(<span class="st">"description == 'Body mass index (BMI)'"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># trait_df.query("description == 'Triglycerides'")</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># trait_df.query("description == 'Systolic blood pressure, combined automated + manual reading, adjusted by medication'")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">zindex</th>
+<th data-quarto-table-cell-role="th">trait_type</th>
+<th data-quarto-table-cell-role="th">phenocode</th>
+<th data-quarto-table-cell-role="th">pheno_sex</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">description_more</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">BIN_QT</th>
+<th data-quarto-table-cell-role="th">n_cases_EUR</th>
+<th data-quarto-table-cell-role="th">n_controls_EUR</th>
+<th data-quarto-table-cell-role="th">N</th>
+<th data-quarto-table-cell-role="th">Neff</th>
+<th data-quarto-table-cell-role="th">estimates.final.h2_observed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2084</td>
+<td>2085</td>
+<td>continuous</td>
+<td>21001</td>
+<td>both_sexes</td>
+<td>Body mass index (BMI)</td>
+<td>BMI value here is constructed from height and ...</td>
+<td>UK Biobank Assessment Centre &gt; Physical measur...</td>
+<td>QT</td>
+<td>419163</td>
+<td>NaN</td>
+<td>419163</td>
+<td>419163.0</td>
+<td>0.262</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2144</td>
+<td>2145</td>
+<td>continuous</td>
+<td>23104</td>
+<td>both_sexes</td>
+<td>Body mass index (BMI)</td>
+<td>Body composition estimation by impedance measu...</td>
+<td>UK Biobank Assessment Centre &gt; Physical measur...</td>
+<td>QT</td>
+<td>413186</td>
+<td>NaN</td>
+<td>413186</td>
+<td>413186.0</td>
+<td>0.268</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="3dd6fe8c-20a2-4943-90c2-d225350594e1" class="cell" data-execution_count="55">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>zindex <span class="op">=</span> <span class="dv">2085</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>trait_df.loc[[zindex <span class="op">-</span> <span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="55">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">zindex</th>
+<th data-quarto-table-cell-role="th">trait_type</th>
+<th data-quarto-table-cell-role="th">phenocode</th>
+<th data-quarto-table-cell-role="th">pheno_sex</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">description_more</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">BIN_QT</th>
+<th data-quarto-table-cell-role="th">n_cases_EUR</th>
+<th data-quarto-table-cell-role="th">n_controls_EUR</th>
+<th data-quarto-table-cell-role="th">N</th>
+<th data-quarto-table-cell-role="th">Neff</th>
+<th data-quarto-table-cell-role="th">estimates.final.h2_observed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2084</td>
+<td>2085</td>
+<td>continuous</td>
+<td>21001</td>
+<td>both_sexes</td>
+<td>Body mass index (BMI)</td>
+<td>BMI value here is constructed from height and ...</td>
+<td>UK Biobank Assessment Centre &gt; Physical measur...</td>
+<td>QT</td>
+<td>419163</td>
+<td>NaN</td>
+<td>419163</td>
+<td>419163.0</td>
+<td>0.262</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="f72c4133-f2c4-48e8-b2bf-14340168bc96" class="cell" data-execution_count="56">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> np.array(trait_df.index)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>tidx <span class="op">=</span> np.searchsorted(trait_indices, zindex <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>top_factor <span class="op">=</span> np.argsort(cos2_pheno[tidx,:])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>top_factor_score <span class="op">=</span> cos2_pheno[tidx, top_factor]</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>top_traits_idx <span class="op">=</span> np.argsort(contribution_pheno[:,top_factor])[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>top_traits_name <span class="op">=</span> trait_df.loc[trait_indices[top_traits_idx]][<span class="st">'description'</span>].to_list()</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="contribution-of-traits-to-factors" class="level1">
+<h1>Contribution of traits to factors</h1>
+<div id="a2971ce1-c03e-479e-b4c4-2e1a959cc7b3" class="cell" data-execution_count="79">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(xmat):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    xstd  <span class="op">=</span> xmat <span class="op">/</span> np.sqrt(np.var(xmat, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    xstd2 <span class="op">=</span> xstd <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xstd2 <span class="op">/</span> np.<span class="bu">sum</span>(xstd2, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(xmat):</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    xstd  <span class="op">=</span> xmat <span class="op">/</span> np.sqrt(np.var(xmat, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    xstd2 <span class="op">=</span> xstd <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xstd2 <span class="op">/</span> np.<span class="bu">sum</span>(xstd2, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(factor):</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">0</span>).reshape((<span class="dv">1</span>, factor.shape[<span class="dv">1</span>])))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(factor):</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">1</span>).reshape((factor.shape[<span class="dv">0</span>], <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="6f37697e-04c7-4a0a-962e-07e561fb8a8a" class="cell" data-execution_count="95">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cos2_pheno         = compute_cos(loadings)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># contribution_pheno = compute_contribution(loadings)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cos2_pheno         <span class="op">=</span> get_cos2_scores(loadings)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>contribution_pheno <span class="op">=</span> get_contribution_scores(loadings)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>zindex <span class="op">=</span> <span class="dv">2085</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> np.array(trait_df.index)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>tidx <span class="op">=</span> np.searchsorted(trait_indices, zindex <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>top_factor <span class="op">=</span> np.argsort(cos2_pheno[tidx,:])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>top_traits_idx <span class="op">=</span> np.argsort(contribution_pheno[:,top_factor])[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>top_traits_name <span class="op">=</span> trait_df.loc[trait_indices[top_traits_idx]][<span class="st">'description'</span>].to_list()</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>n_plot_traits <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> top_traits_score[:n_plot_traits]</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> np.arange(n_plot_traits)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>ax1.barh(yvals, xvals, align <span class="op">=</span> <span class="st">'center'</span>, height <span class="op">=</span> <span class="fl">0.7</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(yvals)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>ax1.set_yticklabels(top_traits_name[:n_plot_traits])</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]:</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(left<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Contribution of traits to PC</span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="importance-of-components" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-components">Importance of components</h2>
+<div id="da4d8fde-da25-4aec-8ae7-9a0974e28421" class="cell" data-execution_count="96">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_pheno.shape[<span class="dv">0</span>])</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_pheno[tidx,:]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="1e48a56d-51b6-4b74-9b3e-929a15453c5b" class="cell" data-execution_count="99">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>top_factor_dict <span class="op">=</span> {i : <span class="bu">list</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cos2_pheno.shape[<span class="dv">0</span>])}</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, trait_name <span class="kw">in</span> <span class="bu">enumerate</span>(trait_df[<span class="st">'description'</span>].to_list()):</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    top_factor <span class="op">=</span> np.argsort(cos2_pheno[i, :])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    top_factor_dict[top_factor].append(trait_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="024dda78-9729-46b2-a346-9bacbd45162b" class="cell" data-execution_count="102">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>top_factor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>top_traits_idx <span class="op">=</span> np.argsort(contribution_pheno[:,top_factor])[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>top_traits_name <span class="op">=</span> trait_df.loc[trait_indices[top_traits_idx]][<span class="st">'description'</span>].to_list()</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print (top_factor_dict[top_factor])</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>n_plot_traits <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> top_traits_score[:n_plot_traits]</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> np.arange(n_plot_traits)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>ax1.barh(yvals, xvals, align <span class="op">=</span> <span class="st">'center'</span>, height <span class="op">=</span> <span class="fl">0.7</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(yvals)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>ax1.set_yticklabels(top_traits_name[:n_plot_traits])</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]:</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(left<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Contribution of traits to PC</span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="which-variants-are-contributing-to-the-top-factor" class="level2">
+<h2 class="anchored" data-anchor-id="which-variants-are-contributing-to-the-top-factor">Which variants are contributing to the top factor?</h2>
+<div id="371e5163-9f85-4e02-8bd4-85f3b32f3d15" class="cell" data-execution_count="159">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>np.square(eigenvals)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="159">
+<pre><code>0.011598380845155945</code></pre>
+</div>
+</div>
+<div id="4e785d61-f6e7-48e1-922a-1dfb5f8a6e47" class="cell" data-execution_count="160">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>tidx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="160">
+<pre><code>38</code></pre>
+</div>
+</div>
+<div id="bf6b5c14-c49a-4843-8fbc-b1d5b2cee631" class="cell" data-execution_count="161">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_ <span class="op">=</span> compute_cos(pcomps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="66d99028-5a27-4780-8018-d7785c185554" class="cell" data-execution_count="172">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(cos2_scores_[tidx, :])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="172">
+<pre><code>0.9999999999999998</code></pre>
+</div>
+</div>
+<div id="1cd43ac3-26a8-485e-8668-0548483a3530" class="cell" data-execution_count="171">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_[:, tidx])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="171">
+<pre><code>array([127,  34,  49, 120, 162,  26,  33, 214,  42, 213, 111,  37, 191,
+        12, 109, 137, 128, 215, 167,  69,  92, 113, 112,  63, 193, 188,
+       108, 144,   9, 123, 183,  97,  21, 203, 119,  96,  20, 126,  83,
+       196,  84,  76, 197,  46, 202, 149,  73, 145, 129, 164, 104,  75,
+        87,   4,  64, 107,  25,  27,  74,  79,  11, 103,  41,  99,  15,
+       130,  68, 150,  98, 135,  29,  77, 209,  60, 208,  78, 106, 155,
+       105, 181,  81,  70, 151, 210, 101, 165,  39, 132,  24, 121,  28,
+        91,  54,  30, 117,  62,  36, 171, 176, 148,  94, 170, 140, 195,
+        72, 154,  17,  66, 177, 173, 159,  93, 152, 192,  71,  52, 142,
+       124, 207, 146, 182, 122,  53, 115, 139,  59,  18, 160, 204,  88,
+        31, 161, 134, 163,  90, 178, 200,   0, 110,   3,  35, 138,  51,
+       179, 180,  58,  95, 168, 100, 143,  16, 175, 189,  65,  67, 172,
+       187, 174, 157,  80, 169, 205,  48, 147,   1,  85,  47,  86, 185,
+         5, 186,  89, 190, 198,  38,  61,  55, 125, 158, 136, 201,  32,
+       194, 102,  82,  14,  40,  57, 141,  19, 114, 212,  44, 133, 206,
+       156,  50,  45, 166, 184, 116,  43,   2,  23,  13, 131,   6, 199,
+       118, 153,  22, 211,  56,   8,  10,   7])</code></pre>
+</div>
+</div>
+<div id="d78fc39e-f4fa-4898-8907-8a3ca1d4c07e" class="cell" data-execution_count="153">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_)[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="153">
+<pre><code>0</code></pre>
+</div>
+</div>
+<div id="08cee10a-c6a0-47f4-b420-da8497377a04" class="cell" data-execution_count="157">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="157">
+<pre><code>array([0.50815977, 0.46848446, 0.01892753])</code></pre>
+</div>
+</div>
+<div id="c6a06fd3-2c5a-465e-9a89-6d0623a958c2" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="ecea250e-993f-4f20-8edc-3249e247e23a" class="cell" data-execution_count="149">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_scores_.shape[<span class="dv">0</span>])</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_scores_</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology-all-phenotype_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="7ef9bbf6-800d-421a-95cc-4d0c2d70b70f" class="cell" data-execution_count="140">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.square(std_pcomps), axis <span class="op">=</span> <span class="dv">0</span>)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="140">
+<pre><code>216.00000000000006</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

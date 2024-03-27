@@ -2,178 +2,182 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://banskt.github.io/npd-notes/reference/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.662Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.266Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.582Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.170Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2024-03-07-panukb-principal-components.html</loc>
-    <lastmod>2024-03-20T13:59:03.658Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.238Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.662Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.266Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html</loc>
-    <lastmod>2024-03-20T13:59:03.654Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.230Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2024-03-18-panukb-biology.html</loc>
-    <lastmod>2024-03-20T13:59:03.662Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html</loc>
-    <lastmod>2024-03-20T13:59:03.646Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-10-23-structure-plot.html</loc>
-    <lastmod>2024-03-20T13:59:03.502Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-12-preprocess.html</loc>
-    <lastmod>2024-03-20T13:59:03.354Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-09-25-npd-application-check-Copy1.html</loc>
-    <lastmod>2024-03-20T13:59:03.486Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-06-23-external-validation-metrics.html</loc>
-    <lastmod>2024-03-20T13:59:03.378Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-05-simulation-setup.html</loc>
-    <lastmod>2024-03-20T13:59:03.418Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/manhattan_plot_to_tsv.html</loc>
-    <lastmod>2024-03-20T13:59:03.554Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-28-choosing-penalty-update-method.html</loc>
-    <lastmod>2024-03-20T13:59:03.430Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/Untitled.html</loc>
-    <lastmod>2024-03-20T13:59:03.554Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-23-frank-wolfe.html</loc>
-    <lastmod>2024-03-20T13:59:03.370Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/weighted_nuclear_norm_minimization.html</loc>
-    <lastmod>2024-03-20T13:59:03.582Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html</loc>
-    <lastmod>2024-03-20T13:59:03.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/weighted-nnm.html</loc>
-    <lastmod>2024-03-20T13:59:03.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-19-weighted-nnm-python-class.html</loc>
-    <lastmod>2024-03-20T13:59:03.338Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html</loc>
-    <lastmod>2024-03-20T13:59:03.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/meetings/2023-07-12.html</loc>
-    <lastmod>2024-03-20T13:59:03.326Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/resources/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.662Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/meetings/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.326Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html</loc>
-    <lastmod>2024-03-20T13:59:03.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html</loc>
-    <lastmod>2024-03-20T13:59:03.342Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/develop/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.350Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-08-02-comparison-of-noise-models.html</loc>
-    <lastmod>2024-03-20T13:59:03.462Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-01-how-to-simulate.html</loc>
-    <lastmod>2024-03-20T13:59:03.386Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/simplex-projection-methods.html</loc>
-    <lastmod>2024-03-20T13:59:03.554Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-16-robustpca.html</loc>
-    <lastmod>2024-03-20T13:59:03.362Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-06-05-broad-trait-clusters.html</loc>
-    <lastmod>2024-03-20T13:59:03.378Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/robust_pca_cross_validation.html</loc>
-    <lastmod>2024-03-20T13:59:03.554Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-16-pca-sumstat.html</loc>
-    <lastmod>2024-03-20T13:59:03.358Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-08-08-npd-application.html</loc>
-    <lastmod>2024-03-20T13:59:03.474Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.554Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2024-01-29-simulation-comparisons.html</loc>
-    <lastmod>2024-03-20T13:59:03.550Z</lastmod>
-  </url>
-  <url>
-    <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-10-30-preprocess-ukbb.html</loc>
-    <lastmod>2024-03-20T13:59:03.582Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.262Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html</loc>
-    <lastmod>2024-03-20T13:59:03.614Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.198Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-10-30-preprocess-ukbb.html</loc>
+    <lastmod>2024-03-27T15:33:46.170Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2024-01-29-simulation-comparisons.html</loc>
+    <lastmod>2024-03-27T15:33:46.142Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/index.html</loc>
+    <lastmod>2024-03-27T15:33:46.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-08-08-npd-application.html</loc>
+    <lastmod>2024-03-27T15:33:46.078Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-16-pca-sumstat.html</loc>
+    <lastmod>2024-03-27T15:33:45.974Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/robust_pca_cross_validation.html</loc>
+    <lastmod>2024-03-27T15:33:46.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-06-05-broad-trait-clusters.html</loc>
+    <lastmod>2024-03-27T15:33:45.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-16-robustpca.html</loc>
+    <lastmod>2024-03-27T15:33:45.978Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/simplex-projection-methods.html</loc>
+    <lastmod>2024-03-27T15:33:46.150Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-01-how-to-simulate.html</loc>
+    <lastmod>2024-03-27T15:33:45.998Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-08-02-comparison-of-noise-models.html</loc>
+    <lastmod>2024-03-27T15:33:46.066Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/index.html</loc>
+    <lastmod>2024-03-27T15:33:45.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html</loc>
+    <lastmod>2024-03-27T15:33:45.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html</loc>
+    <lastmod>2024-03-27T15:33:45.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/meetings/index.html</loc>
+    <lastmod>2024-03-27T15:33:45.946Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/resources/index.html</loc>
+    <lastmod>2024-03-27T15:33:46.266Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/meetings/2023-07-12.html</loc>
+    <lastmod>2024-03-27T15:33:45.946Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html</loc>
+    <lastmod>2024-03-27T15:33:45.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/2023-07-19-weighted-nnm-python-class.html</loc>
+    <lastmod>2024-03-27T15:33:45.958Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/develop/weighted-nnm.html</loc>
+    <lastmod>2024-03-27T15:33:45.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html</loc>
+    <lastmod>2024-03-27T15:33:46.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/weighted_nuclear_norm_minimization.html</loc>
+    <lastmod>2024-03-27T15:33:46.170Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-23-frank-wolfe.html</loc>
+    <lastmod>2024-03-27T15:33:45.986Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/Untitled.html</loc>
+    <lastmod>2024-03-27T15:33:46.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-28-choosing-penalty-update-method.html</loc>
+    <lastmod>2024-03-27T15:33:46.038Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/manhattan_plot_to_tsv.html</loc>
+    <lastmod>2024-03-27T15:33:46.146Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-07-05-simulation-setup.html</loc>
+    <lastmod>2024-03-27T15:33:46.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-06-23-external-validation-metrics.html</loc>
+    <lastmod>2024-03-27T15:33:45.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-09-25-npd-application-check-Copy1.html</loc>
+    <lastmod>2024-03-27T15:33:46.090Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-05-12-preprocess.html</loc>
+    <lastmod>2024-03-27T15:33:45.970Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/explore/2023-10-23-structure-plot.html</loc>
+    <lastmod>2024-03-27T15:33:46.106Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html</loc>
+    <lastmod>2024-03-27T15:33:46.226Z</lastmod>
+  </url>
+  <url>
+    <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html</loc>
+    <lastmod>2024-03-27T15:33:46.262Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-11-27-snp-position-filter.html</loc>
-    <lastmod>2024-03-20T13:59:03.586Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.178Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html</loc>
-    <lastmod>2024-03-20T13:59:03.614Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.198Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2023-10-30-rpca-ialm.html</loc>
-    <lastmod>2024-03-20T13:59:03.586Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.174Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html</loc>
-    <lastmod>2024-03-20T13:59:03.646Z</lastmod>
+    <lastmod>2024-03-27T15:33:46.226Z</lastmod>
   </url>
   <url>
     <loc>https://banskt.github.io/npd-notes/index.html</loc>
-    <lastmod>2024-03-20T13:59:03.326Z</lastmod>
+    <lastmod>2024-03-27T15:33:45.946Z</lastmod>
   </url>
 </urlset>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.552">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -155,7 +155,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#list-of-phenotypes" id="toc-list-of-phenotypes" class="nav-link active" data-scroll-target="#list-of-phenotypes">List of phenotypes</a></li>
+  <li><a href="#contribution-of-traits-to-factors" id="toc-contribution-of-traits-to-factors" class="nav-link" data-scroll-target="#contribution-of-traits-to-factors">Contribution of traits to factors</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-03-18-panukb-biology.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -220,11 +227,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="97500b7d-6689-461a-92de-8272d8448c7d" class="cell" data-execution_count="2">
+<div id="97500b7d-6689-461a-92de-8272d8448c7d" class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/nnsparsh"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/nnsparsh/h20.1_pval5e-08/"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>h2_cut <span class="op">=</span> <span class="fl">0.1</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pval_cut <span class="op">=</span> <span class="fl">5e-8</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -249,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    lowrank_model <span class="op">=</span> pickle.load(fh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="76e72a2b-1328-4bbb-b9d7-69570f543e3e" class="cell" data-execution_count="5">
+<div id="76e72a2b-1328-4bbb-b9d7-69570f543e3e" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
@@ -257,41 +264,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">/=</span> np.sqrt(np.prod(X_cent.shape))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    U, S, Vt <span class="op">=</span> np.linalg.svd(X_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    loadings <span class="op">=</span> U <span class="op">@</span> np.diag(S)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    factors <span class="op">=</span> Vt.T</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    factors  <span class="op">=</span> Vt.T</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> U, S, loadings, factors</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_cos2_scores(pcomps):</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    ntrait, npcomp <span class="op">=</span> pcomps.shape</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros((ntrait, npcomp))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>))</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#std_pcomps = pcomps.copy()</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(ntrait):</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        cos2_trait <span class="op">=</span> np.array([np.square(std_pcomps[i, j]) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(npcomp)])</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        x[i, :] <span class="op">=</span> cos2_trait <span class="op">/</span> np.<span class="bu">sum</span>(cos2_trait)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_contribution_scores(pcomps):</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    ntrait, npcomp <span class="op">=</span> pcomps.shape</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros((ntrait, npcomp))</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>)).reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(npcomp):</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        trait_contr <span class="op">=</span> np.array([np.square(std_pcomps[j, i]) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(ntrait)])</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        x[:, i] <span class="op">=</span> trait_contr <span class="op">/</span> np.<span class="bu">sum</span>(trait_contr)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(factor):</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">0</span>).reshape((<span class="dv">1</span>, factor.shape[<span class="dv">1</span>])))</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(factor):</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">1</span>).reshape((factor.shape[<span class="dv">0</span>], <span class="dv">1</span>)))</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>U, S, loadings, factors <span class="op">=</span> get_principal_components(lowrank_model[<span class="st">'X_'</span>])</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>cos2_pheno   <span class="op">=</span> compute_cos(loadings)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>cos2_variant <span class="op">=</span> compute_cos(factors <span class="op">@</span> np.diag(S))</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>contribution_pheno   <span class="op">=</span> compute_contribution(loadings)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>contribution_variant <span class="op">=</span> compute_contribution(factors <span class="op">@</span> np.diag(S))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(xmat):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    xmat2 <span class="op">=</span> xmat <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xmat2 <span class="op">/</span> np.<span class="bu">sum</span>(xmat2, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(xmat):</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    xmat2 <span class="op">=</span> xmat <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xmat2 <span class="op">/</span> np.<span class="bu">sum</span>(xmat2, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>U, S, loadings, factors <span class="op">=</span> get_principal_components(lowrank_model[<span class="st">'X_'</span>])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>cos2_pheno   <span class="op">=</span> compute_cos(loadings)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>cos2_variant <span class="op">=</span> compute_cos(factors <span class="op">@</span> np.diag(S))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>contribution_pheno   <span class="op">=</span> compute_contribution(loadings)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>contribution_variant <span class="op">=</span> compute_contribution(factors <span class="op">@</span> np.diag(S))</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># cos2_pheno = get_cos2_scores(loadings)</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># contribution_pheno = get_contribution_scores(loadings)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="list-of-phenotypes" class="level1">
+<h1>List of phenotypes</h1>
 <div id="7e3758c8-53ca-4bb9-a04b-94594a0886e1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
@@ -516,13 +510,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'pheno 48 / pheno 49']</code></pre>
 </div>
 </div>
-<div id="4c95687d-ffdd-4161-83ba-38fc4b5bdb92" class="cell" data-execution_count="7">
+<div id="4c95687d-ffdd-4161-83ba-38fc4b5bdb92" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>trait_df.query(<span class="st">"description == 'Body mass index (BMI)'"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#trait_df.query("description == 'Triglycerides'")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># trait_df.query("description == 'Triglycerides'")</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># trait_df.query("description == 'Systolic blood pressure, combined automated + manual reading, adjusted by medication'")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="54">
 <div>
 <div>
 
@@ -586,13 +581,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3dd6fe8c-20a2-4943-90c2-d225350594e1" class="cell" data-execution_count="8">
+<div id="3dd6fe8c-20a2-4943-90c2-d225350594e1" class="cell" data-execution_count="55">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>zindex <span class="op">=</span> <span class="dv">2085</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>trait_df.loc[[zindex <span class="op">-</span> <span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="55">
 <div>
 <div>
 
@@ -640,7 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f72c4133-f2c4-48e8-b2bf-14340168bc96" class="cell" data-execution_count="17">
+<div id="f72c4133-f2c4-48e8-b2bf-14340168bc96" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> np.array(trait_df.index)</span>
@@ -653,61 +648,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="importance-of-components" class="level2">
-<h2 class="anchored" data-anchor-id="importance-of-components">Importance of components</h2>
-<div id="da4d8fde-da25-4aec-8ae7-9a0974e28421" class="cell" data-execution_count="11">
+</section>
+<section id="contribution-of-traits-to-factors" class="level1">
+<h1>Contribution of traits to factors</h1>
+<div id="a2971ce1-c03e-479e-b4c4-2e1a959cc7b3" class="cell" data-execution_count="79">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_pheno.shape[<span class="dv">0</span>])</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_pheno[tidx,:]</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(xmat):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    xstd  <span class="op">=</span> xmat <span class="op">/</span> np.sqrt(np.var(xmat, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    xstd2 <span class="op">=</span> xstd <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xstd2 <span class="op">/</span> np.<span class="bu">sum</span>(xstd2, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(xmat):</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    xstd  <span class="op">=</span> xmat <span class="op">/</span> np.sqrt(np.var(xmat, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    xstd2 <span class="op">=</span> xstd <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xstd2 <span class="op">/</span> np.<span class="bu">sum</span>(xstd2, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_contribution(factor):</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">0</span>).reshape((<span class="dv">1</span>, factor.shape[<span class="dv">1</span>])))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cos(factor):</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (factor <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (np.<span class="bu">sum</span>(factor <span class="op">**</span> <span class="dv">2</span>, axis <span class="op">=</span> <span class="dv">1</span>).reshape((factor.shape[<span class="dv">0</span>], <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-03-18-panukb-biology_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
-</div>
-</div>
-<div id="024dda78-9729-46b2-a346-9bacbd45162b" class="cell" data-execution_count="18">
+<div id="6f37697e-04c7-4a0a-962e-07e561fb8a8a" class="cell" data-execution_count="95">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">12</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>n_plot_traits <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> top_traits_score[:n_plot_traits]</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> np.arange(n_plot_traits)[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax1.barh(yvals, xvals, align <span class="op">=</span> <span class="st">'center'</span>, height <span class="op">=</span> <span class="fl">0.7</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(yvals)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax1.set_yticklabels(top_traits_name[:n_plot_traits])</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]:</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(left<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f" Contribution of traits to PC</span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cos2_pheno         = compute_cos(loadings)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># contribution_pheno = compute_contribution(loadings)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cos2_pheno         <span class="op">=</span> get_cos2_scores(loadings)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>contribution_pheno <span class="op">=</span> get_contribution_scores(loadings)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>zindex <span class="op">=</span> <span class="dv">2085</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>trait_indices <span class="op">=</span> np.array(trait_df.index)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>tidx <span class="op">=</span> np.searchsorted(trait_indices, zindex <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>top_factor <span class="op">=</span> np.argsort(cos2_pheno[tidx,:])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>top_traits_idx <span class="op">=</span> np.argsort(contribution_pheno[:,top_factor])[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>top_traits_name <span class="op">=</span> trait_df.loc[trait_indices[top_traits_idx]][<span class="st">'description'</span>].to_list()</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>n_plot_traits <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> top_traits_score[:n_plot_traits]</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> np.arange(n_plot_traits)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>ax1.barh(yvals, xvals, align <span class="op">=</span> <span class="st">'center'</span>, height <span class="op">=</span> <span class="fl">0.7</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(yvals)</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>ax1.set_yticklabels(top_traits_name[:n_plot_traits])</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]:</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(left<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Contribution of traits to PC</span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="2024-03-18-panukb-biology_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="importance-of-components" class="level2">
+<h2 class="anchored" data-anchor-id="importance-of-components">Importance of components</h2>
+<div id="da4d8fde-da25-4aec-8ae7-9a0974e28421" class="cell" data-execution_count="96">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_pheno.shape[<span class="dv">0</span>])</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_pheno[tidx,:]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="1e48a56d-51b6-4b74-9b3e-929a15453c5b" class="cell" data-execution_count="99">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>top_factor_dict <span class="op">=</span> {i : <span class="bu">list</span>() <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(cos2_pheno.shape[<span class="dv">0</span>])}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, trait_name <span class="kw">in</span> <span class="bu">enumerate</span>(trait_df[<span class="st">'description'</span>].to_list()):</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    top_factor <span class="op">=</span> np.argsort(cos2_pheno[i, :])[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    top_factor_dict[top_factor].append(trait_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="024dda78-9729-46b2-a346-9bacbd45162b" class="cell" data-execution_count="102">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>top_factor <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>top_traits_idx <span class="op">=</span> np.argsort(contribution_pheno[:,top_factor])[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>top_traits_name <span class="op">=</span> trait_df.loc[trait_indices[top_traits_idx]][<span class="st">'description'</span>].to_list()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>top_traits_score <span class="op">=</span> contribution_pheno[top_traits_idx, top_factor]</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print (top_factor_dict[top_factor])</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">12</span>))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>n_plot_traits <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> top_traits_score[:n_plot_traits]</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> np.arange(n_plot_traits)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>ax1.barh(yvals, xvals, align <span class="op">=</span> <span class="st">'center'</span>, height <span class="op">=</span> <span class="fl">0.7</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(yvals)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>ax1.set_yticklabels(top_traits_name[:n_plot_traits])</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'left'</span>]:</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(left<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"Contribution of traits to PC</span><span class="sc">{</span>top_factor <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2024-03-18-panukb-biology_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -718,7 +796,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="371e5163-9f85-4e02-8bd4-85f3b32f3d15" class="cell" data-execution_count="159">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.square(eigenvals)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>np.square(eigenvals)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="159">
 <pre><code>0.011598380845155945</code></pre>
@@ -727,7 +805,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="4e785d61-f6e7-48e1-922a-1dfb5f8a6e47" class="cell" data-execution_count="160">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tidx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tidx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="160">
 <pre><code>38</code></pre>
@@ -736,13 +814,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="bf6b5c14-c49a-4843-8fbc-b1d5b2cee631" class="cell" data-execution_count="161">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_ <span class="op">=</span> compute_cos(pcomps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_ <span class="op">=</span> compute_cos(pcomps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div id="66d99028-5a27-4780-8018-d7785c185554" class="cell" data-execution_count="172">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(cos2_scores_[tidx, :])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(cos2_scores_[tidx, :])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="172">
 <pre><code>0.9999999999999998</code></pre>
@@ -751,7 +829,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="1cd43ac3-26a8-485e-8668-0548483a3530" class="cell" data-execution_count="171">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_[:, tidx])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_[:, tidx])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="171">
 <pre><code>array([127,  34,  49, 120, 162,  26,  33, 214,  42, 213, 111,  37, 191,
@@ -776,7 +854,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="d78fc39e-f4fa-4898-8907-8a3ca1d4c07e" class="cell" data-execution_count="153">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_)[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>np.argsort(cos2_scores_)[::<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="153">
 <pre><code>0</code></pre>
@@ -785,7 +863,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="08cee10a-c6a0-47f4-b420-da8497377a04" class="cell" data-execution_count="157">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cos2_scores_[:<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="157">
 <pre><code>array([0.50815977, 0.46848446, 0.01892753])</code></pre>
@@ -794,26 +872,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="ecea250e-993f-4f20-8edc-3249e247e23a" class="cell" data-execution_count="149">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_scores_.shape[<span class="dv">0</span>])</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_scores_</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize <span class="op">=</span> (<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>xvals <span class="op">=</span> np.arange(cos2_scores_.shape[<span class="dv">0</span>])</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>yvals <span class="op">=</span> cos2_scores_</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(xvals, yvals, align <span class="op">=</span> <span class="st">'center'</span>, width <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> side <span class="kw">in</span> [<span class="st">'top'</span>, <span class="st">'right'</span>]:</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    ax1.spines[side].set_visible(<span class="va">False</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(bottom<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="ss">f"Importance of PCs"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="ss">f"PC Index"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2024-03-18-panukb-biology_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="2024-03-18-panukb-biology_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -821,8 +899,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="7ef9bbf6-800d-421a-95cc-4d0c2d70b70f" class="cell" data-execution_count="140">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.square(std_pcomps), axis <span class="op">=</span> <span class="dv">0</span>)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(np.square(std_pcomps), axis <span class="op">=</span> <span class="dv">0</span>)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="140">
 <pre><code>216.00000000000006</code></pre>
@@ -830,6 +908,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1305,4 +1384,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-03-18-panukb-biology.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/banskt/npd-notes/blob/main/notebooks/ukbb/2024-03-18-panukb-biology.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/banskt/npd-notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
