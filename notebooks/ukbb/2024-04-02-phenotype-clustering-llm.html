@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -207,7 +207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cafaf5f0-6340-4dc7-80b8-58ec86dca64a" class="cell" data-execution_count="2">
+<div id="cafaf5f0-6340-4dc7-80b8-58ec86dca64a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>mpl_stylesheet.banskt_presentation(splinecolor <span class="op">=</span> <span class="st">'black'</span>, dpi <span class="op">=</span> <span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="9a04de0b-d0c9-4e40-9cc9-477ad019ac44" class="cell" data-execution_count="3">
+<div id="9a04de0b-d0c9-4e40-9cc9-477ad019ac44" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
@@ -232,14 +232,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sentence_transformers <span class="im">import</span> util <span class="im">as</span> st_util</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="98ec2c5e-9b45-4680-88f4-958009920360" class="cell" data-execution_count="4">
+<div id="98ec2c5e-9b45-4680-88f4-958009920360" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>trait_df  <span class="op">=</span> pd.read_pickle(os.path.join(data_dir, <span class="ss">f"modselect/traits_all_with_desc.pkl"</span>))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>trait_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <div>
 
@@ -535,7 +535,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="phenotype-description-to-sentences" class="level1">
 <h1>Phenotype Description to Sentences</h1>
 <p>First we convert all descriptions to sentences, which will be used for embedding.</p>
-<div id="913f996f-ebaf-4d86-8b02-b19ccb58d7bb" class="cell" data-execution_count="5">
+<div id="913f996f-ebaf-4d86-8b02-b19ccb58d7bb" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>long_desc  <span class="op">=</span> trait_df[<span class="st">'long_description'</span>].tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -546,7 +546,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Get embedding from sentences</h1>
 <p>I decided to use <a href="https://www.sbert.net/">Sentence Transformer</a> for clustering the long description of the phenotypes. This is an ideal usecase for LLM models.</p>
 <p>Several pre-trained models are available on <a href="https://huggingface.co/">Hugginface</a>. Any pre-trained models can be loaded. Some of them are trained for Sentence Transformer, as you can search <a href="https://huggingface.co/models?library=sentence-transformers&amp;sort=trending">here</a>. I found a few which are trained on medical data. 1. https://huggingface.co/menadsa/S-Bio_ClinicalBERT 2. https://huggingface.co/ls-da3m0ns/bge_large_medical</p>
-<div id="8fa509cd-ed24-4a2b-9359-35a226ebe586" class="cell" data-execution_count="6">
+<div id="8fa509cd-ed24-4a2b-9359-35a226ebe586" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mean Pooling - Take attention mask into account for correct averaging</span></span>
@@ -578,7 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sentence_embeddings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="5f98ebd6-6680-4243-be6d-dfef71e2f2b2" class="cell" data-execution_count="7">
+<div id="5f98ebd6-6680-4243-be6d-dfef71e2f2b2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model_names <span class="op">=</span> {</span>
@@ -588,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="275d4462-3f0c-427b-ab42-b994f1656b88" class="cell" data-execution_count="8">
+<div id="275d4462-3f0c-427b-ab42-b994f1656b88" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>embeddings <span class="op">=</span> <span class="bu">dict</span>()</span>
@@ -598,166 +598,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"a39cd50a3e7e4d8e88662943fcac7383","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"433be5531fa643d493243f239c3f1ff4","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"3f6ad5079bdf4fcdb040701a63a9438a","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"25dd6980cdab44798c537f4f78041ccc","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"ca0a7d08a730437f9ad06034b078ae41","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"adb5fc88491d42f1992934dd27ab8919","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"2fed66d9415f4412a8ed447704e1474f","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"32c2a5338a454f3290d406f0f1731baf","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"af41d2b699574e388300184b1f7eefe6","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"8f76a0c3049440d28b26f5724d52550e","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"38508d10d37e4e479fafb01bd6b3e79d","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"000eaebda2af48de85be8a8e3b07d4fd","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"b0c8a132e97b4b389818f410957db618","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"3a57e151789045b7b2851c4edce0498c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"8be99a4cfc75465180ca76b18a83093c","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"c3501a6e426b4dc4b3399e6899df5dbe","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"39e38a2f27da4a91b1e3c877032feaa0","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"1ce2525f9d2b4212a973e9f284d3650e","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
 Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"4b2136c65e6240bea151c921fe12f8fa","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"b094d9d5ec304e9bb053016df4653302","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
-<div class="cell-output cell-output-display">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"f9b960ff7cd94830b78775c3b60a3bea","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
-</script>
-</div>
 </div>
 </section>
 <section id="compute-clusters-from-embeddings" class="level1">
 <h1>Compute clusters from embeddings</h1>
 <p>We can either use K-Means clustering or community detection</p>
-<div id="982455c0-8218-4c98-aa71-ad6c50b55537" class="cell" data-execution_count="22">
+<div id="982455c0-8218-4c98-aa71-ad6c50b55537" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_clusters_kmeans(embeddings, n_clusters <span class="op">=</span> <span class="dv">30</span>):</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform kmean clustering</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    clustering_model <span class="op">=</span> AgglomerativeClustering(n_clusters <span class="op">=</span> n_clusters)  <span class="co"># , affinity='cosine', linkage='average', distance_threshold=0.4)</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    clustering_model.fit(embeddings)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    cluster_assignment <span class="op">=</span> clustering_model.labels_</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_clusters_kmeans(embeddings, n_clusters <span class="op">=</span> <span class="dv">30</span>):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> KMeans(n_clusters <span class="op">=</span> n_clusters, random_state<span class="op">=</span><span class="dv">0</span>, max_iter <span class="op">=</span> <span class="dv">10000</span>, n_init<span class="op">=</span><span class="st">'auto'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    model.fit(embeddings)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    cluster_assignment <span class="op">=</span> model.labels_</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    phenotype_clusters <span class="op">=</span> [<span class="bu">list</span>(np.where(cluster_assignment <span class="op">==</span> i)[<span class="dv">0</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(np.<span class="bu">max</span>(cluster_assignment) <span class="op">+</span> <span class="dv">1</span>)]</span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> phenotype_clusters</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cluster_community(embeddings, n_size <span class="op">=</span> <span class="dv">10</span>, n_clusters <span class="op">=</span> <span class="dv">30</span>, thres_step <span class="op">=</span> <span class="fl">0.05</span>):</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    clusters <span class="op">=</span> st_util.community_detection(embeddings, min_community_size <span class="op">=</span> n_size, threshold <span class="op">=</span> threshold)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(clusters) <span class="op">&lt;</span> n_clusters:</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        threshold <span class="op">-=</span> thres_step</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        clusters <span class="op">=</span> st_util.community_detection(embeddings, min_community_size <span class="op">=</span> n_size, threshold <span class="op">=</span> threshold)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> clusters, threshold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_clusters_hierarchical(embeddings, n_clusters <span class="op">=</span> <span class="dv">30</span>):</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    clustering_model <span class="op">=</span> AgglomerativeClustering(n_clusters <span class="op">=</span> n_clusters)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    clustering_model.fit(embeddings)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    cluster_assignment <span class="op">=</span> clustering_model.labels_</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    phenotype_clusters <span class="op">=</span> [<span class="bu">list</span>(np.where(cluster_assignment <span class="op">==</span> i)[<span class="dv">0</span>]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(np.<span class="bu">max</span>(cluster_assignment) <span class="op">+</span> <span class="dv">1</span>)]</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> phenotype_clusters</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_cluster_community(embeddings, n_size <span class="op">=</span> <span class="dv">10</span>, n_clusters <span class="op">=</span> <span class="dv">30</span>, thres_step <span class="op">=</span> <span class="fl">0.05</span>):</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    clusters <span class="op">=</span> st_util.community_detection(embeddings, min_community_size <span class="op">=</span> n_size, threshold <span class="op">=</span> threshold)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="bu">len</span>(clusters) <span class="op">&lt;</span> n_clusters:</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        threshold <span class="op">-=</span> thres_step</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        clusters <span class="op">=</span> st_util.community_detection(embeddings, min_community_size <span class="op">=</span> n_size, threshold <span class="op">=</span> threshold)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> clusters, threshold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="3d5c09be-a5ef-4d2d-80aa-86699831fcf1" class="cell" data-execution_count="25">
+<div id="3d5c09be-a5ef-4d2d-80aa-86699831fcf1" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>clusters_community <span class="op">=</span> <span class="bu">dict</span>()</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>clusters_kmeans <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> model_name <span class="kw">in</span> model_names.keys():</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    clusters_community[model_name], threshold <span class="op">=</span> compute_cluster_community(embeddings[model_name], thres_step <span class="op">=</span> <span class="fl">0.01</span>, n_clusters <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    clusters_kmeans[model_name] <span class="op">=</span> compute_clusters_kmeans(embeddings[model_name], n_clusters <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    kmeans_sizes <span class="op">=</span> <span class="st">", "</span>.join([<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(x)<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> clusters_kmeans[model_name]])</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ch">\n\t</span><span class="ss">Community: </span><span class="sc">{</span><span class="bu">len</span>(clusters_community[model_name])<span class="sc">}</span><span class="ss"> clusters | auto threshold = </span><span class="sc">{</span>threshold<span class="sc">:.2f}</span><span class="ch">\n\t</span><span class="ss">KMeans: [</span><span class="sc">{</span>kmeans_sizes<span class="sc">}</span><span class="ss">]</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>clusters_agglom <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> model_name <span class="kw">in</span> model_names.keys():</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    clusters_community[model_name], threshold <span class="op">=</span> compute_cluster_community(embeddings[model_name], thres_step <span class="op">=</span> <span class="fl">0.01</span>, n_clusters <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    clusters_kmeans[model_name] <span class="op">=</span> compute_clusters_kmeans(embeddings[model_name], n_clusters <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    clusters_agglom[model_name] <span class="op">=</span> compute_clusters_hierarchical(embeddings[model_name], n_clusters <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    kmeans_sizes <span class="op">=</span> <span class="st">", "</span>.join([<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(x)<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> clusters_kmeans[model_name]])</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    agglom_sizes <span class="op">=</span> <span class="st">", "</span>.join([<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(x)<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> clusters_agglom[model_name]])</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>model_name<span class="sc">}</span><span class="ch">\n\t</span><span class="ss">Community: </span><span class="sc">{</span><span class="bu">len</span>(clusters_community[model_name])<span class="sc">}</span><span class="ss"> clusters | auto threshold = </span><span class="sc">{</span>threshold<span class="sc">:.2f}</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"</span><span class="ch">\t</span><span class="ss">KMeans: [</span><span class="sc">{</span>kmeans_sizes<span class="sc">}</span><span class="ss">]</span><span class="ch">\n</span><span class="ss">"</span> <span class="op">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>           <span class="ss">f"</span><span class="ch">\t</span><span class="ss">Cosine: [</span><span class="sc">{</span>agglom_sizes<span class="sc">}</span><span class="ss">]</span><span class="ch">\n</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>ls-da3m0ns/bge_large_medical
-    Community: 21 clusters | auto threshold = 0.70
-    KMeans: [128, 177, 117, 184, 188, 75, 99, 148, 438, 98, 56, 24, 150, 189, 85, 154, 50, 35, 45, 43]
+    Community: 35 clusters | auto threshold = 0.68
+    KMeans: [81, 57, 54, 138, 62, 76, 28, 142, 110, 122, 94, 40, 123, 23, 73, 98, 79, 139, 52, 125, 56, 126, 67, 93, 28, 54, 144, 62, 44, 93]
+    Cosine: [154, 188, 99, 49, 86, 150, 123, 111, 45, 186, 56, 54, 187, 189, 65, 30, 50, 35, 52, 43, 98, 55, 23, 24, 12, 62, 100, 35, 37, 85]
 
 medicalai/ClinicalBERT
-    Community: 20 clusters | auto threshold = 0.83
-    KMeans: [263, 125, 238, 117, 141, 72, 117, 144, 260, 38, 94, 188, 268, 127, 21, 54, 72, 45, 56, 43]
+    Community: 34 clusters | auto threshold = 0.79
+    KMeans: [63, 120, 110, 39, 110, 77, 63, 40, 160, 22, 84, 93, 146, 19, 62, 107, 85, 74, 151, 86, 140, 47, 84, 46, 37, 82, 135, 18, 123, 60]
+    Cosine: [72, 68, 87, 134, 38, 268, 23, 144, 58, 76, 104, 188, 155, 71, 104, 54, 72, 45, 56, 43, 21, 24, 94, 65, 85, 33, 189, 59, 32, 21]
 
 emilyalsentzer/Bio_ClinicalBERT
-    Community: 29 clusters | auto threshold = 0.93
-    KMeans: [68, 345, 334, 210, 77, 170, 147, 47, 93, 115, 76, 34, 69, 119, 163, 109, 31, 55, 106, 115]
+    Community: 43 clusters | auto threshold = 0.92
+    KMeans: [42, 139, 124, 91, 49, 53, 65, 59, 103, 101, 136, 68, 36, 73, 127, 92, 44, 142, 60, 29, 73, 60, 107, 32, 90, 136, 88, 95, 89, 80]
+    Cosine: [231, 130, 50, 106, 73, 34, 163, 47, 178, 115, 74, 62, 69, 122, 98, 109, 31, 55, 88, 115, 29, 76, 58, 114, 27, 43, 40, 39, 31, 76]
 </code></pre>
 </div>
 </div>
-<div id="a70ec01b-7270-4c73-b156-e72d4119a879" class="cell" data-execution_count="26">
+<div id="a70ec01b-7270-4c73-b156-e72d4119a879" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m, citems <span class="kw">in</span> clusters_community.items():</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m, citems <span class="kw">in</span> clusters_agglom.items():</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span> (<span class="ss">f"Model name: </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -778,173 +698,173 @@ emilyalsentzer/Bio_ClinicalBERT
 <div class="cell-output cell-output-stdout">
 <pre><code>Model name: ls-da3m0ns/bge_large_medical
 
-Cluster 1, #32 Elements 
-     Other fruit intake
-     Mixed fruit intake
-     Other sweets intake
-     ...
-     Grapefruit juice intake
-     Other cheese intake
-     Side salad intake
-
-Cluster 2, #30 Elements 
-     6mm cylindrical power angle (left)
-     6mm cylindrical power angle (right)
-     3mm cylindrical power angle (left)
-     ...
-     3mm strong meridian angle (right)
-     3mm weak meridian angle (right)
-     6mm regularity index (right)
-
-Cluster 3, #26 Elements 
-     Systolic blood pressure, automated reading
-     Systolic blood pressure, combined automated + manual reading
-     Systolic blood pressure, automated reading, adjusted by medication
-     ...
-     Pulse pressure, manual reading, adjusted by medication
-     Mean arterial pressure, manual reading, adjusted by medication
-     Elevated blood pressure reading without diagnosis of hypertension
-
-Cluster 19, #10 Elements 
-     Heart valve disorders
-     Rheumatic disease of the heart valves
-     Aortic valve disease
-     ...
-     I35 Nonrheumatic aortic valve disorders
-     Heart valve replaced
-     heart valve problem/heart murmur self-reported
-
-Cluster 20, #10 Elements 
-     Other arthropathies
-     Other disorders of synovium, tendon, and bursa
-     Other disorders of bone and cartilage
-     ...
-     Other acquired musculoskeletal deformity
-     Other disorders of soft tissues
-     Gout and other crystal arthropathies
-
-Cluster 21, #10 Elements 
-     Duration of vigorous activity
-     Time spent doing vigorous physical activity
-     Duration of moderate activity
+Cluster 1, #154 Elements 
+     G47 Sleep disorders
+     R47 Speech disturbances, not elsewhere classified
+     R49 Voice disturbances
      ...
      Duration walking for pleasure
-     Number of days/week of moderate physical activity 10+ minutes
-     Time spent doing light physical activity
+     Frequency of strenuous sports in last 4 weeks
+     FEV1/FVC ratio
+
+Cluster 2, #188 Elements 
+     D68 Other coagulation defects
+     D69 Purpura and other haemorrhagic conditions
+     E87 Other disorders of fluid, electrolyte and acid-base balance
+     ...
+     ECG, phase time
+     ECG, number of stages in a phase
+     Pulse rate (during blood-pressure measurement)
+
+Cluster 3, #99 Elements 
+     N41 Inflammatory diseases of prostate
+     N42 Other disorders of prostate
+     N43 Hydrocele and spermatocele
+     ...
+     Number of stillbirths
+     Number of spontaneous miscarriages
+     Number of pregnancy terminations
+
+Cluster 28, #35 Elements 
+     E03 Other hypothyroidism
+     E04 Other non-toxic goitre
+     E05 Thyrotoxicosis [hyperthyroidism]
+     ...
+     levothyroxine sodium medication
+     Oestradiol
+     Testosterone
+
+Cluster 29, #37 Elements 
+     S00 Superficial injury of head
+     S01 Open wound of head
+     S09 Other and unspecified injuries of head
+     ...
+     Contusion
+     fracture lower leg / ankle self-reported
+     Falls in the last year
+
+Cluster 30, #85 Elements 
+     F05 Delirium, not induced by alcohol and other psychoactive substances
+     F31 Bipolar affective disorder
+     F32 Depressive episode
+     ...
+     Financial situation satisfaction
+     Longest period of depression
+     Number of depression episodes
 ---------------------
 
 Model name: medicalai/ClinicalBERT
 
-Cluster 1, #79 Elements 
-     Tea intake
-     Green tea intake
-     Other tea intake
+Cluster 1, #72 Elements 
+     D50 Iron deficiency anaemia
+     D51 Vitamin B12 deficiency anaemia
+     E53 Deficiency of other B group vitamins
      ...
-     White rice intake
-     Cereal bar intake
-     Wholemeal pasta intake
+     Vitamin C
+     Vitamin D
+     Vitamin E
 
-Cluster 2, #25 Elements 
-     Malignant neoplasm of uterus
-     Malignant neoplasm of bladder
-     Malignant neoplasm of ovary
+Cluster 2, #68 Elements 
+     G45 Transient cerebral ischaemic attacks and related syndromes
+     I21 Acute myocardial infarction
+     I24 Other acute ischaemic heart diseases
      ...
-     Z80 Family history of malignant neoplasm
-     C44 Other malignant neoplasms of skin
-     C79 Secondary malignant neoplasm of other sites
+     atrial fibrillation self-reported
+     Ventricular rate
+     Age deep-vein thrombosis (DVT, blood clot in leg) diagnosed
 
-Cluster 3, #20 Elements 
-     3mm strong meridian angle (left)
-     3mm strong meridian angle (right)
-     3mm weak meridian angle (left)
+Cluster 3, #87 Elements 
+     C43 Malignant melanoma of skin
+     D05 Carcinoma in situ of breast
+     K04 Diseases of pulp and periapical tissues
      ...
-     3mm asymmetry angle (left)
-     6mm asymmetry angle (right)
-     3mm asymmetry index (right)
+     Trunk fat mass
+     Trunk fat-free mass
+     Trunk predicted mass
 
-Cluster 18, #10 Elements 
-     3mm cylindrical power angle (left)
-     3mm cylindrical power angle (right)
-     6mm cylindrical power angle (left)
+Cluster 28, #59 Elements 
+     5-alpha reductase inhibitor|BPH|benign prostatic hyperplasia
+     ACE inhibitor|anti-hypertensive
+     DPP-4 inhibitor|diabetes
      ...
-     6mm cylindrical power (left)
-     Cylindrical power (left)
-     Cylindrical power (right)
+     sodium/potassium transporter inhibitor|heart failure
+     tricyclic antihistamine|selective histamine H1 inverse agonist|antihistamine
+     xanthine oxidase inhibitor|anti-gout agent
 
-Cluster 19, #10 Elements 
-     White wine intake
-     Red wine intake
-     Rose wine intake
+Cluster 29, #32 Elements 
+     E10 Insulin-dependent diabetes mellitus
+     E11 Non-insulin-dependent diabetes mellitus
+     E14 Unspecified diabetes mellitus
      ...
-     Average monthly champagne plus white wine intake
-     Average weekly champagne plus white wine intake
-     Average weekly fortified wine intake
+     Diabetes (mother illness)
+     Most recent bowel cancer screening
+     Age high blood pressure diagnosed
 
-Cluster 20, #10 Elements 
-     Fracture of neck of femur
-     Fracture of unspecified part of femur
-     Fracture of ankle and foot
+Cluster 30, #21 Elements 
+     Diastolic blood pressure, automated reading
+     Systolic blood pressure, automated reading
+     Systolic blood pressure, manual reading
      ...
-     Fracture of tibia and fibula
-     Fracture of radius and ulna
-     Fracture of humerus
+     Systolic blood pressure, combined automated + manual reading
+     Systolic blood pressure, combined automated + manual reading, adjusted by medication
+     Systolic blood pressure, manual reading, adjusted by medication
 ---------------------
 
 Model name: emilyalsentzer/Bio_ClinicalBERT
 
-Cluster 1, #95 Elements 
-     White fish intake
-     White rice intake
-     Brown rice intake
+Cluster 1, #231 Elements 
+     H00 Hordeolum and chalazion
+     Desogestrel
+     albuterol
      ...
-     Avocado intake
-     Bran cereal intake
-     Bread intake
+     Retinol
+     Carotene
+     pheno 48 / pheno 49
 
-Cluster 2, #46 Elements 
-     Secondary malignant neoplasm of digestive systems
-     C78 Secondary malignant neoplasm of respiratory and digestive organs
-     Secondary malignant neoplasm of liver
+Cluster 2, #130 Elements 
+     A41 Other septicaemia
+     B37 Candidiasis
+     B95 Streptococcus and staphylococcus as the cause of diseases classified to other chapters
      ...
-     D12 Benign neoplasm of colon, rectum, anus and anal canal
-     Malignant neoplasm, other
-     Malignant neoplasm of rectum, rectosigmoid junction, and anus
+     Facial ageing
+     Relative age of first facial hair
+     Tinnitus severity/nuisance
 
-Cluster 3, #43 Elements 
-     chronic sinusitis self-reported
-     nasal/sinus disorder self-reported
-     chronic fatigue syndrome self-reported
+Cluster 3, #50 Elements 
+     Bacterial enteritis
+     Viral Enteritis
+     Bacterial infection NOS
      ...
-     hayfever/allergic rhinitis self-reported
-     thyroid problem (not cancer) self-reported
-     malignant melanoma self-reported
+     Financial situation satisfaction
+     Private healthcare
+     Noisy workplace
 
-Cluster 27, #10 Elements 
-     folic acid
-     zinc product medication
-     lactulose product medication
+Cluster 28, #39 Elements 
+     R00 Abnormalities of heart beat
+     R01 Cardiac murmurs and other cardiac sounds
+     R06 Abnormalities of breathing
      ...
-     gamolenic acid
-     vitamin c product medication
-     vitamin c product medication
+     Malaise and fatigue
+     Leg pain on walking : action taken
+     Multi-site chronic pain
 
-Cluster 28, #10 Elements 
-     Other disorders of prostate
-     Other disorders of bladder
-     Inflammatory diseases of prostate
+Cluster 29, #31 Elements 
+     Pulse rate, automated reading
+     Ventricular rate
+     Basal metabolic rate
      ...
-     Other disorders of eye
-     Cancer of prostate
-     Other disorders of eyelids
+     Systolic blood pressure, combined automated + manual reading
+     Systolic blood pressure, combined automated + manual reading, adjusted by medication
+     Systolic blood pressure, manual reading, adjusted by medication
 
-Cluster 29, #10 Elements 
-     H35 Other retinal disorders
-     H26 Other cataract
-     Other retinal disorders
+Cluster 30, #76 Elements 
+     H04 Disorders of lachrymal system
+     H52 Disorders of refraction and accommodation
+     I08 Multiple valve diseases
      ...
-     H53 Visual disturbances
-     H36 Retinal disorders in diseases classified elsewhere
-     H61 Other disorders of external ear
+     Duration of fitness test
+     Duration of walks
+     LDL direct, adjusted by medication
 ---------------------
 </code></pre>
 </div>
@@ -952,7 +872,7 @@ Cluster 29, #10 Elements
 </section>
 <section id="save-the-clusters" class="level1">
 <h1>Save the clusters</h1>
-<div id="a4a37a5f-8963-4c3b-be66-e77410153e5e" class="cell" data-execution_count="31">
+<div id="a4a37a5f-8963-4c3b-be66-e77410153e5e" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> save_cluster_list(filepath, clusters):</span>
@@ -970,7 +890,11 @@ Cluster 29, #10 Elements
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> method, clusters <span class="kw">in</span> clusters_kmeans.items():</span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    m_filename <span class="op">=</span> os.path.join(outdir, <span class="ss">f"</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">/kmeans_clusters.pkl"</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    save_cluster_list(m_filename, clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    save_cluster_list(m_filename, clusters)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> method, clusters <span class="kw">in</span> clusters_agglom.items():</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    m_filename <span class="op">=</span> os.path.join(outdir, <span class="ss">f"</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">/agglomerative_clusters.pkl"</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    save_cluster_list(m_filename, clusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
