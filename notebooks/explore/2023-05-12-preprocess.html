@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Saikat Banerjee">
 <meta name="dcterms.date" content="2023-05-12">
 
-<title>NPD Network - Preprocess NPD summary statistics</title>
+<title>Preprocess NPD summary statistics – NPD Network</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -328,10 +328,9 @@ memory usage: 63.0 MB</code></pre>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>assoc_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -510,7 +509,6 @@ memory usage: 63.0 MB</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div id="7208a44a-db9f-4c9e-bae7-0996a8698cb2" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
@@ -630,7 +628,7 @@ Number of unique studies: 92</code></pre>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-hist-snp-distribution" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-hist-snp-distribution" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-hist-snp-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-12-preprocess_files/figure-html/fig-hist-snp-distribution-output-1.png" class="img-fluid figure-img">
@@ -718,10 +716,9 @@ memory usage: 62.6 MB</code></pre>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>assoc_df_fa_nsnp_nodup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -900,7 +897,6 @@ memory usage: 62.6 MB</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div id="e6c91214-6c65-4afd-8d4e-b7174e1dc964" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1048,10 +1044,9 @@ memory usage: 7.1 MB</code></pre>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1350,7 +1345,6 @@ memory usage: 7.1 MB</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div id="16bd68cd-5b7d-45ef-b2e2-a3e01894de3f" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1384,7 +1378,7 @@ Length: 92, dtype: float64</code></pre>
 <span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-missingness" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-missingness" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-missingness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-12-preprocess_files/figure-html/fig-missingness-output-1.png" class="img-fluid figure-img">
@@ -1649,7 +1643,7 @@ memory usage: 6.2 MB</code></pre>
 <span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-se-vs-beta-std" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-se-vs-beta-std" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-se-vs-beta-std-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-12-preprocess_files/figure-html/fig-se-vs-beta-std-output-1.png" class="img-fluid figure-img">
@@ -1801,7 +1795,7 @@ Phenotypes removed:
 <span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-zscore-distribution" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-zscore-distribution" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-zscore-distribution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-12-preprocess_files/figure-html/fig-zscore-distribution-output-1.png" class="img-fluid figure-img">
@@ -1949,10 +1943,9 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2131,7 +2124,6 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div id="778d51f2-bd81-4e67-8e15-1e0d40a2693e" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2148,10 +2140,9 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <div>
-<div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2258,7 +2249,6 @@ PGC3_SCZ_wave3_public.v2.txt.gz</code></pre>
 </div>
 </div>
 </div>
-</div>
 <div id="3d69ea2c-30f8-451f-9d22-ab09fe964064" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
@@ -2306,18 +2296,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2349,7 +2328,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -2408,7 +2409,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Saikat Banerjee">
 <meta name="dcterms.date" content="2023-07-05">
 
-<title>NPD Network - Simulation setup for benchmarking matrix factorization methods</title>
+<title>Simulation setup for benchmarking matrix factorization methods – NPD Network</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -474,17 +474,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(rpca.L_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-error">
-<pre><code>NameError: name 'lmb' is not defined</code></pre>
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[18], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> rpca <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">IALM</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg ansi-bold">      2</span> rpca<span style="color:rgb(98,98,98)">.</span>fit(Y_cent)
+<span class="ansi-green-fg ansi-bold">      3</span> np<span style="color:rgb(98,98,98)">.</span>linalg<span style="color:rgb(98,98,98)">.</span>matrix_rank(rpca<span style="color:rgb(98,98,98)">.</span>L_)
+
+File <span class="ansi-green-fg">~/work/nnwmf/src/nnwmf/optimize/inexact_alm.py:85</span>, in <span class="ansi-cyan-fg">IALM.__init__</span><span class="ansi-blue-fg">(self, rho, tau, mu_update_method, max_iter, primal_tol, dual_tol)</span>
+<span class="ansi-green-fg ansi-bold">     82</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> rho <span style="color:rgb(98,98,98)">&gt;</span> <span style="color:rgb(98,98,98)">1</span>
+<span class="ansi-green-fg ansi-bold">     83</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> tau <span style="color:rgb(98,98,98)">&gt;</span> <span style="color:rgb(98,98,98)">1</span>
+<span class="ansi-green-fg">---&gt; 85</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>lmb_ <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">lmb</span>
+<span class="ansi-green-fg ansi-bold">     86</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>rho_ <span style="color:rgb(98,98,98)">=</span> rho
+<span class="ansi-green-fg ansi-bold">     87</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>max_iter_ <span style="color:rgb(98,98,98)">=</span> max_iter
+
+<span class="ansi-red-fg">NameError</span>: name 'lmb' is not defined</pre>
+</div>
 </div>
 </div>
 <div id="16ccb650-2c9e-4f11-b6d1-275c8c429cad" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(L_rpca, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(Y_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>pcomps_rpca <span class="op">=</span> U_rpca <span class="op">@</span> np.diag(S_rpca)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, class_labels, unique_labels)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(L_rpca, scale <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>U_rpca, S_rpca, Vt_rpca <span class="op">=</span> np.linalg.svd(Y_rpca_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>pcomps_rpca <span class="op">=</span> U_rpca <span class="op">@</span> np.diag(S_rpca)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>axmain, axs <span class="op">=</span> mpy_plotfn.plot_principal_components(pcomps_rpca, class_labels, unique_labels)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -497,23 +513,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="0159636c-520d-457c-9426-5e05c56b8ad3" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_rmse(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> np.ones(original.shape)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(mse)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Y_true_cent <span class="op">=</span> mpy_simulate.do_standardize(Y_true, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(L_rpca, scale <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>rmse_nnm <span class="op">=</span> get_rmse(Y_true_cent, Y_nnm_cent)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>rmse_wnnm <span class="op">=</span> get_rmse(Y_true_cent, Y_wnnm_cent)</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>rmse_rpca <span class="op">=</span> get_rmse(Y_true_cent, Y_rpca_cent)</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_rmse(original, recovered, mask <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mask <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        mask <span class="op">=</span> np.ones(original.shape)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> np.<span class="bu">sum</span>(mask)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square((original <span class="op">-</span> recovered) <span class="op">*</span> mask)) <span class="op">/</span> n</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.sqrt(mse)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>Y_true_cent <span class="op">=</span> mpy_simulate.do_standardize(Y_true, scale <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>Y_rpca_cent <span class="op">=</span> mpy_simulate.do_standardize(L_rpca, scale <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>rmse_nnm <span class="op">=</span> get_rmse(Y_true_cent, Y_nnm_cent)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>rmse_wnnm <span class="op">=</span> get_rmse(Y_true_cent, Y_wnnm_cent)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>rmse_rpca <span class="op">=</span> get_rmse(Y_true_cent, Y_rpca_cent)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>rmse_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.1448  Nuclear Norm Minimization
@@ -524,20 +540,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="0137b15d-0664-427c-8d88-cf40c1384c4f" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_psnr(original, recovered):</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    n, p <span class="op">=</span> original.shape</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    maxsig2 <span class="op">=</span> np.square(np.<span class="bu">max</span>(original) <span class="op">-</span> np.<span class="bu">min</span>(original))</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square(recovered <span class="op">-</span> original)) <span class="op">/</span> (n <span class="op">*</span> p)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> np.log10(maxsig2 <span class="op">/</span> mse)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>psnr_nnm <span class="op">=</span> get_psnr(Y_true_cent, Y_nnm_cent)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>psnr_wnnm <span class="op">=</span> get_psnr(Y_true_cent, Y_wnnm_cent)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>psnr_rpca <span class="op">=</span> get_psnr(Y_true_cent, Y_rpca_cent)</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_psnr(original, recovered):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    n, p <span class="op">=</span> original.shape</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    maxsig2 <span class="op">=</span> np.square(np.<span class="bu">max</span>(original) <span class="op">-</span> np.<span class="bu">min</span>(original))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    mse <span class="op">=</span> np.<span class="bu">sum</span>(np.square(recovered <span class="op">-</span> original)) <span class="op">/</span> (n <span class="op">*</span> p)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="dv">10</span> <span class="op">*</span> np.log10(maxsig2 <span class="op">/</span> mse)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>psnr_nnm <span class="op">=</span> get_psnr(Y_true_cent, Y_nnm_cent)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>psnr_wnnm <span class="op">=</span> get_psnr(Y_true_cent, Y_wnnm_cent)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>psnr_rpca <span class="op">=</span> get_psnr(Y_true_cent, Y_rpca_cent)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>psnr_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>21.2372 Nuclear Norm Minimization
@@ -548,22 +564,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="c92fd5d4-67f3-438e-8f85-e557a2656da7" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics <span class="im">as</span> skmetrics</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_adjusted_MI_score(pcomp, class_labels):</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> skmetrics.pairwise.pairwise_distances(pcomp, metric<span class="op">=</span><span class="st">'euclidean'</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> AgglomerativeClustering(n_clusters <span class="op">=</span> <span class="dv">4</span>, linkage <span class="op">=</span> <span class="st">'average'</span>, metric <span class="op">=</span> <span class="st">'precomputed'</span>)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    class_pred <span class="op">=</span> model.fit_predict(distance_matrix)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> skmetrics.adjusted_mutual_info_score(class_labels, class_pred)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>adjusted_mi_nnm <span class="op">=</span> get_adjusted_MI_score(pcomps_nnm,   class_labels)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>adjusted_mi_wnnm <span class="op">=</span> get_adjusted_MI_score(pcomps_wnnm, class_labels)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>adjusted_mi_rpca <span class="op">=</span> get_adjusted_MI_score(pcomps_rpca, class_labels)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> AgglomerativeClustering</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> metrics <span class="im">as</span> skmetrics</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_adjusted_MI_score(pcomp, class_labels):</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    distance_matrix <span class="op">=</span> skmetrics.pairwise.pairwise_distances(pcomp, metric<span class="op">=</span><span class="st">'euclidean'</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> AgglomerativeClustering(n_clusters <span class="op">=</span> <span class="dv">4</span>, linkage <span class="op">=</span> <span class="st">'average'</span>, metric <span class="op">=</span> <span class="st">'precomputed'</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    class_pred <span class="op">=</span> model.fit_predict(distance_matrix)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> skmetrics.adjusted_mutual_info_score(class_labels, class_pred)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>adjusted_mi_nnm <span class="op">=</span> get_adjusted_MI_score(pcomps_nnm,   class_labels)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>adjusted_mi_wnnm <span class="op">=</span> get_adjusted_MI_score(pcomps_wnnm, class_labels)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>adjusted_mi_rpca <span class="op">=</span> get_adjusted_MI_score(pcomps_rpca, class_labels)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_nnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Nuclear Norm Minimization"</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_wnnm<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Weighted Nuclear Norm Minimization"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"</span><span class="sc">{</span>adjusted_mi_rpca<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">Robust PCA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>-0.0006 Nuclear Norm Minimization
@@ -611,18 +627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -654,7 +659,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -713,7 +740,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

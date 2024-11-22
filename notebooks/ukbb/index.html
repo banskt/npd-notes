@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>NPD Network - UKBB</title>
+<title>UKBB – NPD Network</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../notebooks/production/index.html" rel="next">
 <link href="../../notebooks/develop/index.html" rel="prev">
 <script src="../../site_libs/quarto-listing/list.min.js"></script>
 <script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
@@ -133,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   })
   </script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -148,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    });
 }}});
   </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -192,7 +193,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -215,19 +216,19 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notebooks/explore/index.html">Subcategory</a></li><li class="breadcrumb-item"><a href="../../notebooks/ukbb/index.html">UKBB</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -252,9 +253,9 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Subcategory</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,6 +278,12 @@ window.Quarto = {
  <span class="menu-text">UKBB</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notebooks/production/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Production</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -284,7 +291,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -351,7 +358,7 @@ window.Quarto = {
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1712358081485" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="136" data-listing-title-sort="Manifold embedding of NNM loadings" data-listing-filename-sort="2024-04-03-panukb-nnm-embedding.ipynb">
+<tr data-index="0" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1732304857919" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="136" data-listing-title-sort="Manifold embedding of NNM loadings" data-listing-filename-sort="2024-04-03-panukb-nnm-embedding.ipynb">
 <td>
 <span class="listing-date">24-04-03</span>
 </td>
@@ -359,7 +366,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-04-03-panukb-nnm-embedding.html" class="title listing-title">Manifold embedding of NNM loadings</a>
 </td>
 </tr>
-<tr data-index="1" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1712358081497" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140" data-listing-title-sort="UMAP on low rank matrix and loadings" data-listing-filename-sort="2024-04-03-panukb-umap-nnm.ipynb">
+<tr data-index="1" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1732304857935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="140" data-listing-title-sort="UMAP on low rank matrix and loadings" data-listing-filename-sort="2024-04-03-panukb-umap-nnm.ipynb">
 <td>
 <span class="listing-date">24-04-03</span>
 </td>
@@ -367,7 +374,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-04-03-panukb-umap-nnm.html" class="title listing-title">UMAP on low rank matrix and loadings</a>
 </td>
 </tr>
-<tr data-index="2" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1712358081501" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Choose parameters for UMAP plot" data-listing-filename-sort="2024-04-03-panukb-umap-parameters.ipynb">
+<tr data-index="2" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1732304857935" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Choose parameters for UMAP plot" data-listing-filename-sort="2024-04-03-panukb-umap-parameters.ipynb">
 <td>
 <span class="listing-date">24-04-03</span>
 </td>
@@ -375,7 +382,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-04-03-panukb-umap-parameters.html" class="title listing-title">Choose parameters for UMAP plot</a>
 </td>
 </tr>
-<tr data-index="3" data-listing-date-sort="1712016000000" data-listing-file-modified-sort="1712358081481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="91" data-listing-title-sort="Semantic clustering of PanUKB phenotypes" data-listing-filename-sort="2024-04-02-phenotype-clustering-llm.ipynb">
+<tr data-index="3" data-listing-date-sort="1712016000000" data-listing-file-modified-sort="1732304857911" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="91" data-listing-title-sort="Semantic clustering of PanUKB phenotypes" data-listing-filename-sort="2024-04-02-phenotype-clustering-llm.ipynb">
 <td>
 <span class="listing-date">24-04-02</span>
 </td>
@@ -383,7 +390,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-04-02-phenotype-clustering-llm.html" class="title listing-title">Semantic clustering of PanUKB phenotypes</a>
 </td>
 </tr>
-<tr data-index="4" data-listing-date-sort="1711497600000" data-listing-file-modified-sort="1712358081481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="62" data-listing-title-sort="Interactive UMAP plot from PanUKB data" data-listing-filename-sort="2024-03-27-panukb-interactive-umap.ipynb">
+<tr data-index="4" data-listing-date-sort="1711497600000" data-listing-file-modified-sort="1732304857911" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="62" data-listing-title-sort="Interactive UMAP plot from PanUKB data" data-listing-filename-sort="2024-03-27-panukb-interactive-umap.ipynb">
 <td>
 <span class="listing-date">24-03-27</span>
 </td>
@@ -391,7 +398,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-03-27-panukb-interactive-umap.html" class="title listing-title">Interactive UMAP plot from PanUKB data</a>
 </td>
 </tr>
-<tr data-index="5" data-listing-date-sort="1711497600000" data-listing-file-modified-sort="1712358081481" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="40" data-listing-title-sort="Rename descriptions for PanUKB phenotypes" data-listing-filename-sort="2024-03-27-rename-descriptions.ipynb">
+<tr data-index="5" data-listing-date-sort="1711497600000" data-listing-file-modified-sort="1732304857911" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="40" data-listing-title-sort="Rename descriptions for PanUKB phenotypes" data-listing-filename-sort="2024-03-27-rename-descriptions.ipynb">
 <td>
 <span class="listing-date">24-03-27</span>
 </td>
@@ -399,7 +406,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-03-27-rename-descriptions.html" class="title listing-title">Rename descriptions for PanUKB phenotypes</a>
 </td>
 </tr>
-<tr data-index="6" data-listing-date-sort="1710720000000" data-listing-file-modified-sort="1712358081469" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17" data-listing-title-sort="Understanding the biology of diseases" data-listing-filename-sort="2024-03-18-panukb-biology-all-phenotype.ipynb">
+<tr data-index="6" data-listing-date-sort="1710720000000" data-listing-file-modified-sort="1732304857899" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17" data-listing-title-sort="Understanding the biology of diseases" data-listing-filename-sort="2024-03-18-panukb-biology-all-phenotype.ipynb">
 <td>
 <span class="listing-date">24-03-18</span>
 </td>
@@ -407,7 +414,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html" class="title listing-title">Understanding the biology of diseases</a>
 </td>
 </tr>
-<tr data-index="7" data-listing-date-sort="1710720000000" data-listing-file-modified-sort="1712358081473" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="17" data-listing-title-sort="Understanding the biology of diseases" data-listing-filename-sort="2024-03-18-panukb-biology.ipynb">
+<tr data-index="7" data-listing-date-sort="1710720000000" data-listing-file-modified-sort="1732304857903" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="33" data-listing-title-sort="Understanding the biology of diseases" data-listing-filename-sort="2024-03-18-panukb-biology.ipynb">
 <td>
 <span class="listing-date">24-03-18</span>
 </td>
@@ -415,7 +422,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-03-18-panukb-biology.html" class="title listing-title">Understanding the biology of diseases</a>
 </td>
 </tr>
-<tr data-index="8" data-listing-date-sort="1709769600000" data-listing-file-modified-sort="1712358081445" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Characterization of PanUKB hidden factors" data-listing-filename-sort="2024-03-07-panukb-principal-components.ipynb">
+<tr data-index="8" data-listing-date-sort="1709769600000" data-listing-file-modified-sort="1732304857883" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Characterization of PanUKB hidden factors" data-listing-filename-sort="2024-03-07-panukb-principal-components.ipynb">
 <td>
 <span class="listing-date">24-03-07</span>
 </td>
@@ -423,7 +430,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-03-07-panukb-principal-components.html" class="title listing-title">Characterization of PanUKB hidden factors</a>
 </td>
 </tr>
-<tr data-index="9" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1712358081441" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="158" data-listing-title-sort="Missing data imputation for UK Biobank" data-listing-filename-sort="2024-02-28-matrix-reconstruction-panukb.ipynb">
+<tr data-index="9" data-listing-date-sort="1709078400000" data-listing-file-modified-sort="1732304857879" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="158" data-listing-title-sort="Missing data imputation for UK Biobank" data-listing-filename-sort="2024-02-28-matrix-reconstruction-panukb.ipynb">
 <td>
 <span class="listing-date">24-02-28</span>
 </td>
@@ -431,7 +438,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html" class="title listing-title">Missing data imputation for UK Biobank</a>
 </td>
 </tr>
-<tr data-index="10" data-listing-date-sort="1706572800000" data-listing-file-modified-sort="1712358081437" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25" data-listing-title-sort="Prefiltering data from PanUKB" data-listing-filename-sort="2024-01-20-panukb-data-filtering-for-masked-input.ipynb">
+<tr data-index="10" data-listing-date-sort="1706572800000" data-listing-file-modified-sort="1732304857875" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25" data-listing-title-sort="Prefiltering data from PanUKB" data-listing-filename-sort="2024-01-20-panukb-data-filtering-for-masked-input.ipynb">
 <td>
 <span class="listing-date">24-01-30</span>
 </td>
@@ -439,7 +446,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html" class="title listing-title">Prefiltering data from PanUKB</a>
 </td>
 </tr>
-<tr data-index="11" data-listing-date-sort="1702339200000" data-listing-file-modified-sort="1712358081433" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28" data-listing-title-sort="Pan-UKB Hidden Factors v01" data-listing-filename-sort="2023-12-12-hidden-factors-pan-ukb.ipynb">
+<tr data-index="11" data-listing-date-sort="1702339200000" data-listing-file-modified-sort="1732304857871" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="28" data-listing-title-sort="Pan-UKB Hidden Factors v01" data-listing-filename-sort="2023-12-12-hidden-factors-pan-ukb.ipynb">
 <td>
 <span class="listing-date">23-12-12</span>
 </td>
@@ -447,7 +454,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html" class="title listing-title">Pan-UKB Hidden Factors v01</a>
 </td>
 </tr>
-<tr data-index="12" data-listing-date-sort="1702252800000" data-listing-file-modified-sort="1712358081405" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="123" data-listing-title-sort="Pan-UKB Pleitropy of Diseases v01" data-listing-filename-sort="2023-12-11-pleiotropy-from-contribution-scores.ipynb">
+<tr data-index="12" data-listing-date-sort="1702252800000" data-listing-file-modified-sort="1732304857851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="123" data-listing-title-sort="Pan-UKB Pleitropy of Diseases v01" data-listing-filename-sort="2023-12-11-pleiotropy-from-contribution-scores.ipynb">
 <td>
 <span class="listing-date">23-12-11</span>
 </td>
@@ -455,7 +462,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html" class="title listing-title">Pan-UKB Pleitropy of Diseases v01</a>
 </td>
 </tr>
-<tr data-index="13" data-listing-date-sort="1701993600000" data-listing-file-modified-sort="1712358081405" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="Pan-UKB Principal Components v01" data-listing-filename-sort="2023-12-08-panukb-principal-components-v01.ipynb">
+<tr data-index="13" data-listing-date-sort="1701993600000" data-listing-file-modified-sort="1732304857847" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="Pan-UKB Principal Components v01" data-listing-filename-sort="2023-12-08-panukb-principal-components-v01.ipynb">
 <td>
 <span class="listing-date">23-12-08</span>
 </td>
@@ -463,7 +470,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html" class="title listing-title">Pan-UKB Principal Components v01</a>
 </td>
 </tr>
-<tr data-index="14" data-listing-date-sort="1701043200000" data-listing-file-modified-sort="1712358081385" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="LD filtering of UKBB data" data-listing-filename-sort="2023-11-27-snp-position-filter.ipynb">
+<tr data-index="14" data-listing-date-sort="1701043200000" data-listing-file-modified-sort="1732304857835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="LD filtering of UKBB data" data-listing-filename-sort="2023-11-27-snp-position-filter.ipynb">
 <td>
 <span class="listing-date">23-11-27</span>
 </td>
@@ -471,7 +478,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2023-11-27-snp-position-filter.html" class="title listing-title">LD filtering of UKBB data</a>
 </td>
 </tr>
-<tr data-index="15" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1712358081381" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Preprocessing UKBB data" data-listing-filename-sort="2023-10-30-preprocess-ukbb.ipynb">
+<tr data-index="15" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1732304857831" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Preprocessing UKBB data" data-listing-filename-sort="2023-10-30-preprocess-ukbb.ipynb">
 <td>
 <span class="listing-date">23-10-30</span>
 </td>
@@ -479,7 +486,7 @@ window.Quarto = {
 <a href="../../notebooks/ukbb/2023-10-30-preprocess-ukbb.html" class="title listing-title">Preprocessing UKBB data</a>
 </td>
 </tr>
-<tr data-index="16" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1712358081385" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="First look at NPD phenotypes in the UKBB data" data-listing-filename-sort="2023-10-30-rpca-ialm.ipynb">
+<tr data-index="16" data-listing-date-sort="1698624000000" data-listing-file-modified-sort="1732304857831" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="First look at NPD phenotypes in the UKBB data" data-listing-filename-sort="2023-10-30-rpca-ialm.ipynb">
 <td>
 <span class="listing-date">23-10-30</span>
 </td>
@@ -528,18 +535,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -571,7 +567,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -630,7 +648,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -967,6 +985,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../notebooks/production/index.html" class="pagination-link" aria-label="Production">
+        <span class="nav-page-text">Production</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -979,7 +1000,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    date-format: "YY-MM-DD"</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>We are looking at the UK Biobank summary statistics of NPD phenotypes.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>We are looking at the UK Biobank summary statistics of NPD phenotypes.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

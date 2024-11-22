@@ -1,16 +1,45 @@
 [
   {
-    "listing": "/notebooks/develop/index.html",
+    "listing": "/notebooks/ukbb/index.html",
     "items": [
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
+      "/notebooks/ukbb/2024-04-03-panukb-nnm-embedding.html",
+      "/notebooks/ukbb/2024-04-03-panukb-umap-nnm.html",
+      "/notebooks/ukbb/2024-04-03-panukb-umap-parameters.html",
+      "/notebooks/ukbb/2024-04-02-phenotype-clustering-llm.html",
+      "/notebooks/ukbb/2024-03-27-panukb-interactive-umap.html",
+      "/notebooks/ukbb/2024-03-27-rename-descriptions.html",
+      "/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html",
+      "/notebooks/ukbb/2024-03-18-panukb-biology.html",
+      "/notebooks/ukbb/2024-03-07-panukb-principal-components.html",
+      "/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html",
+      "/notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html",
+      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
+      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
+      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
+      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
+      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
+      "/notebooks/ukbb/2023-10-30-rpca-ialm.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/production/index.html",
+    "items": [
+      "/notebooks/production/2024-11-01-ashg24.html",
+      "/notebooks/production/2024-04-12-R01-progress-report.html",
+      "/notebooks/production/2024-04-08-probgen24.html",
+      "/notebooks/production/2024-10-09-simulation-figures-manuscript.html"
     ]
   },
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/production/2024-11-01-ashg24.html",
+      "/notebooks/develop/2024-10-08-panukb-biology.html",
+      "/notebooks/develop/2024-10-08-panukb-pca.html",
+      "/notebooks/develop/2024-10-07-save-panukb-components.html",
+      "/notebooks/production/2024-04-12-R01-progress-report.html",
+      "/notebooks/production/2024-04-08-probgen24.html",
+      "/notebooks/production/2024-10-09-simulation-figures-manuscript.html",
       "/notebooks/ukbb/2024-04-03-panukb-nnm-embedding.html",
       "/notebooks/ukbb/2024-04-03-panukb-umap-nnm.html",
       "/notebooks/ukbb/2024-04-03-panukb-umap-parameters.html",
@@ -70,25 +99,15 @@
     ]
   },
   {
-    "listing": "/notebooks/ukbb/index.html",
+    "listing": "/notebooks/develop/index.html",
     "items": [
-      "/notebooks/ukbb/2024-04-03-panukb-nnm-embedding.html",
-      "/notebooks/ukbb/2024-04-03-panukb-umap-nnm.html",
-      "/notebooks/ukbb/2024-04-03-panukb-umap-parameters.html",
-      "/notebooks/ukbb/2024-04-02-phenotype-clustering-llm.html",
-      "/notebooks/ukbb/2024-03-27-panukb-interactive-umap.html",
-      "/notebooks/ukbb/2024-03-27-rename-descriptions.html",
-      "/notebooks/ukbb/2024-03-18-panukb-biology-all-phenotype.html",
-      "/notebooks/ukbb/2024-03-18-panukb-biology.html",
-      "/notebooks/ukbb/2024-03-07-panukb-principal-components.html",
-      "/notebooks/ukbb/2024-02-28-matrix-reconstruction-panukb.html",
-      "/notebooks/ukbb/2024-01-20-panukb-data-filtering-for-masked-input.html",
-      "/notebooks/ukbb/2023-12-12-hidden-factors-pan-ukb.html",
-      "/notebooks/ukbb/2023-12-11-pleiotropy-from-contribution-scores.html",
-      "/notebooks/ukbb/2023-12-08-panukb-principal-components-v01.html",
-      "/notebooks/ukbb/2023-11-27-snp-position-filter.html",
-      "/notebooks/ukbb/2023-10-30-preprocess-ukbb.html",
-      "/notebooks/ukbb/2023-10-30-rpca-ialm.html"
+      "/notebooks/develop/2024-10-08-panukb-biology.html",
+      "/notebooks/develop/2024-10-08-panukb-pca.html",
+      "/notebooks/develop/2024-10-07-save-panukb-components.html",
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
     ]
   }
 ]

@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Saikat Banerjee">
 <meta name="dcterms.date" content="2023-05-23">
 
-<title>NPD Network - Nuclear norm regularization using Frank-Wolfe algorithm</title>
+<title>Nuclear norm regularization using Frank-Wolfe algorithm – NPD Network</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    });
 }}});
   </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -162,7 +162,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -185,7 +185,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -337,7 +337,7 @@ window.Quarto = {
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-input-eigenvalues" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-input-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-eigenvalues-output-1.png" class="img-fluid figure-img">
@@ -656,7 +656,7 @@ Figure&nbsp;1: Eigenvalues obtained using SVD of the input matrix
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-fw-descent" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fw-descent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-output-1.png" class="img-fluid figure-img">
@@ -692,7 +692,7 @@ Figure&nbsp;2: Frank-Wolfe optimization statistic
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-proj-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-input-proj-eigenvalues" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-input-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-proj-eigenvalues-output-1.png" class="img-fluid figure-img">
@@ -765,7 +765,7 @@ RMSE on test data = 0.6567133713958933</code></pre>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent-missing" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-fw-descent-missing" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fw-descent-missing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-missing-output-1.png" class="img-fluid figure-img">
@@ -802,7 +802,7 @@ Figure&nbsp;4: Frank-Wolfe optimization statistic for missing data
 <span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-input-missing-proj-eigenvalues" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-input-missing-proj-eigenvalues" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-input-missing-proj-eigenvalues-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-input-missing-proj-eigenvalues-output-1.png" class="img-fluid figure-img">
@@ -876,7 +876,7 @@ CV sequence 14, r = 8000.0, training error = 0.46060258805130466, test_error = 0
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-cv-training-error" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-cv-training-error" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cv-training-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-cv-training-error-output-1.png" class="img-fluid figure-img">
@@ -911,7 +911,7 @@ Figure&nbsp;6: CV training error
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-fw-descent-cvopt" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-fw-descent-cvopt" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fw-descent-cvopt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-fw-descent-cvopt-output-1.png" class="img-fluid figure-img">
@@ -972,7 +972,7 @@ Figure&nbsp;7: Frank-Wolfe minimization at optimum regularization parameter
 <span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-pca-low-rank-approx" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-pca-low-rank-approx" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pca-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-pca-low-rank-approx-output-1.png" class="img-fluid figure-img">
@@ -1041,7 +1041,7 @@ Figure&nbsp;8: Comparison of the first two principal components of input matrix 
 <span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-multiple-pcs-low-rank-approx" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-multiple-pcs-low-rank-approx" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-multiple-pcs-low-rank-approx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="2023-05-23-frank-wolfe_files/figure-html/fig-multiple-pcs-low-rank-approx-output-1.png" class="img-fluid figure-img">
@@ -1138,18 +1138,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1181,7 +1170,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1240,7 +1251,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
