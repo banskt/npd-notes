@@ -1,0 +1,11 @@
+---
+title: "Production"
+listing:
+    contents: "20[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-*.ipynb"
+    type: table
+    sort: "date desc"
+    fields: [date, title]
+    date-format: "YY-MM-DD"
+---
+
+Production ready plots for presentations, posters and publications.

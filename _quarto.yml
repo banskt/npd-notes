@@ -29,6 +29,7 @@ website:
             - notebooks/explore/index.qmd
             - notebooks/develop/index.qmd
             - notebooks/ukbb/index.qmd
+            - notebooks/production/index.qmd
 #
     - title: "Meetings"
       contents:

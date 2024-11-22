@@ -48,7 +48,7 @@ def plot_principal_components(pcomp, class_labels, class_props,
         pc2 = comp[:, i]
         for label in unique_labels:
             idx = np.array([k for k, x in enumerate(labels) if x == label])
-            ax.scatter(pc1[idx], pc2[idx], s = 50, alpha = 0.7, label = label)
+            ax.scatter(pc1[idx], pc2[idx], s = 20, alpha = 0.7, label = label)
         return
 
     fig = plt.figure(figsize = (figw, figh))
