@@ -1,0 +1,11 @@
+---
+title: "PsychGen"
+listing:
+    contents: "20[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-[[:digit:]][[:digit:]]-*.ipynb"
+    type: table
+    sort: "date desc"
+    fields: [date, title]
+    date-format: "YY-MM-DD"
+---
+
+Analysis of underlying genetic architecture of neuropsychiatric traits.

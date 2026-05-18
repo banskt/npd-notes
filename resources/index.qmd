@@ -9,7 +9,7 @@ title: "Resources"
   curated by Shane Crinion and Niamh Mullins.
 
 ## Github
-  - [Software for low rank matrix approximation](https://github.com/banskt/weighted-pca-frank-wolfe) by Saikat Banerjee
+  - [Software for low rank matrix approximation](https://github.com/daklab/clorinn) by Saikat Banerjee
   - [DSC for numerical experiments](https://github.com/banskt/lrma-dsc) by Saikat Banerjee
   - [NPD phenotypes from UK Biobank](https://github.com/banskt/ukbb-npd-analyses) by Saikat Banerjee
   - [Pilot NPD Sumstat Project](https://github.com/daklab/npd_sumstats) by David Knowles.

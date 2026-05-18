@@ -30,6 +30,7 @@ website:
             - notebooks/develop/index.qmd
             - notebooks/ukbb/index.qmd
             - notebooks/production/index.qmd
+            - notebooks/psychgen/index.qmd
 #
     - title: "Meetings"
       contents:
