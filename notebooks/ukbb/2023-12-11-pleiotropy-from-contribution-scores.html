@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>Pan-UKB Pleitropy of Diseases v01 – NPD Network</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -23,8 +26,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +39,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -66,15 +70,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2d70165cbe18ff832460ad5e981e3096.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +112,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -209,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="a5623879-20b6-4919-a7bc-e37cf0f70fcb" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -225,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">"../utils/"</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> simulate <span class="im">as</span> mpy_simulate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -234,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="3fcf38df-5c48-4969-a37d-43dcad063a88" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/data"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>result_dir <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/work/npd/PanUKB/nnwmf"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>zscore_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/GWAS_Zscore.tsv"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trait_filename <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>data_dir<span class="sc">}</span><span class="ss">/trait_manifest_TableS6_no_readme.tsv"</span></span>
@@ -248,19 +253,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>trait_df.columns <span class="op">=</span> colnames</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>trait_df_mod <span class="op">=</span> trait_df.drop(labels <span class="op">=</span> [<span class="st">'coding'</span>, <span class="st">'modifier'</span>, <span class="st">'coding_description'</span>, <span class="st">'filename'</span>, <span class="st">'aws_link'</span>], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>trait_df_mod[<span class="st">'trait_name'</span>] <span class="op">=</span> trait_df_mod[<span class="st">'description'</span>]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>trait_df_mod[<span class="st">'trait_name'</span>] <span class="op">=</span> trait_df_mod[<span class="st">'trait_name'</span>].fillna(trait_df_mod[<span class="st">'phenocode'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>trait_df_mod[<span class="st">'trait_name'</span>] <span class="op">=</span> trait_df_mod[<span class="st">'trait_name'</span>].fillna(trait_df_mod[<span class="st">'phenocode'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="873ac85a-4843-4414-8090-4302bf021648" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df.loc[:, zscore_df.columns<span class="op">!=</span><span class="st">'rsid'</span>]).T</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X_nan <span class="op">=</span> np.array(zscore_df.loc[:, zscore_df.columns<span class="op">!=</span><span class="st">'rsid'</span>]).T</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_nan_cent <span class="op">=</span> X_nan <span class="op">-</span> np.nanmean(X_nan, axis <span class="op">=</span> <span class="dv">0</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_nan_mask <span class="op">=</span> np.isnan(X_nan)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_cent <span class="op">=</span> np.nan_to_num(X_nan_cent, copy <span class="op">=</span> <span class="va">True</span>, nan <span class="op">=</span> <span class="fl">0.0</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"We have </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> samples (phenotypes) and </span><span class="sc">{</span>X_cent<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> features (variants)"</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Fraction of Nan entries: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(X_nan_mask) <span class="op">/</span> np<span class="sc">.</span>prod(X_cent.shape)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (<span class="ss">f"Fraction of Nan entries: </span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">sum</span>(X_nan_mask) <span class="op">/</span> np<span class="sc">.</span>prod(X_cent.shape)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>We have 2483 samples (phenotypes) and 51399 features (variants)
@@ -270,7 +275,7 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="eb76361d-645d-45c8-834e-29d6b74f529c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mf_methods <span class="op">=</span> [<span class="st">'ialm'</span>, <span class="st">'nnm_sparse'</span>, <span class="st">'tsvd'</span>]</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mf_methods <span class="op">=</span> [<span class="st">'ialm'</span>, <span class="st">'nnm_sparse'</span>, <span class="st">'tsvd'</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>method_prefix <span class="op">=</span> {</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'ialm'</span> : <span class="st">'ialm_maxiter10000_admm'</span>,</span>
@@ -289,13 +294,13 @@ Fraction of Nan entries: 0.000</code></pre>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    ialm <span class="op">=</span> pickle.load(handle)</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span> (<span class="ss">f"</span><span class="sc">{</span>result_dir<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>method_prefix[<span class="st">'nnm_sparse'</span>]<span class="sc">}</span><span class="ss">_progress.pkl"</span>, <span class="st">'rb'</span>) <span class="im">as</span> handle:</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    nnm_sparse <span class="op">=</span> pickle.load(handle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    nnm_sparse <span class="op">=</span> pickle.load(handle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="810495f0-a013-410a-91a2-fe0ade3d87bc" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_principal_components(X):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">=</span> mpy_simulate.do_standardize(X, scale <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    X_cent <span class="op">/=</span> np.sqrt(np.prod(X_cent.shape))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    U, S, Vt <span class="op">=</span> np.linalg.svd(X_cent, full_matrices <span class="op">=</span> <span class="va">False</span>)</span>
@@ -314,13 +319,13 @@ Fraction of Nan entries: 0.000</code></pre>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            lowrank_X[m] <span class="op">=</span> pickle.load(handle)</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>lowrank_X[<span class="st">'tsvd'</span>] <span class="op">=</span> X_cent.copy()</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    loadings[m], pcomps[m], eigenvals[m] <span class="op">=</span> get_principal_components(lowrank_X[m])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    loadings[m], pcomps[m], eigenvals[m] <span class="op">=</span> get_principal_components(lowrank_X[m])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div id="cfe92aed-d99d-473c-995b-86618d38adeb" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_cos2_scores(pcomps):</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_cos2_scores(pcomps):</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ntrait, npcomp <span class="op">=</span> pcomps.shape</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros((ntrait, npcomp))</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    std_pcomps <span class="op">=</span> pcomps <span class="op">/</span> np.sqrt(np.var(pcomps[:,:], axis <span class="op">=</span> <span class="dv">0</span>))</span>
@@ -345,7 +350,7 @@ Fraction of Nan entries: 0.000</code></pre>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>trait_contributions <span class="op">=</span> <span class="bu">dict</span>()</span>
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m <span class="kw">in</span> mf_methods:</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    trait_contributions[m] <span class="op">=</span> get_contribution_scores(pcomps[m][:,:npcomp])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    trait_contributions[m] <span class="op">=</span> get_contribution_scores(pcomps[m][:,:npcomp])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -359,12 +364,12 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="95a4e2f1-e5f3-4175-af69-7caeee43c0f6" class="cell" data-execution_count="95">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.core.display <span class="im">import</span> HTML</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> titlecase(s):</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> re.sub(<span class="vs">r"[A-Za-z]+('[A-Za-z]+)?"</span>, <span class="kw">lambda</span> mo: mo.group(<span class="dv">0</span>).capitalize(),s)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> re.sub(<span class="vs">r"</span><span class="pp">[A-Za-z]</span><span class="op">+</span><span class="kw">(</span><span class="vs">'</span><span class="pp">[A-Za-z]</span><span class="op">+</span><span class="kw">)</span><span class="op">?</span><span class="vs">"</span>, <span class="kw">lambda</span> mo: mo.group(<span class="dv">0</span>).capitalize(),s)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> print_markdown(string, color <span class="op">=</span> <span class="va">None</span>):</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    colorstr <span class="op">=</span> <span class="st">"&lt;span style='color:</span><span class="sc">{}</span><span class="st">'&gt;</span><span class="sc">{}</span><span class="st">&lt;/span&gt;"</span>.<span class="bu">format</span>(color, string)</span>
@@ -406,7 +411,7 @@ Fraction of Nan entries: 0.000</code></pre>
 <span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        trait_names <span class="op">=</span> trait_df_mod.loc[top_traits][<span class="st">'trait_name'</span>].tolist()</span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, x <span class="kw">in</span> <span class="bu">zip</span>(top_traits, trait_names):</span>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"    </span><span class="sc">{</span>trait_contributions[m][i, top_factor]<span class="sc">:.4f}</span><span class="ss">   </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -415,7 +420,7 @@ Fraction of Nan entries: 0.000</code></pre>
 <div id="a9709dc3-9ad2-4324-a45e-e9da1e0cc1f0" class="cell" data-execution_count="96">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">930</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">930</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored" data-anchor-id="common-diseases">
@@ -429,7 +434,7 @@ Rheumatoid Arthritis
 <p><span style="color:None">Top Factor: 47 (Contribution: 0.1697)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0236</td>
@@ -501,7 +506,7 @@ Rheumatoid Arthritis
 <p><span style="color:None">Top Factor: 88 (Contribution: 0.0664)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0319</td>
@@ -573,7 +578,7 @@ Rheumatoid Arthritis
 <p><span style="color:None">Top Factor: 73 (Contribution: 0.1319)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0213</td>
@@ -642,7 +647,7 @@ Rheumatoid Arthritis
 <div id="982ed7f2-d32b-49f5-bfb4-6b7438a21131" class="cell" data-execution_count="97">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">420</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">420</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -656,7 +661,7 @@ Cancer Of Prostate
 <p><span style="color:None">Top Factor: 78 (Contribution: 0.0875)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0272</td>
@@ -728,7 +733,7 @@ Cancer Of Prostate
 <p><span style="color:None">Top Factor: 48 (Contribution: 0.0815)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0247</td>
@@ -800,7 +805,7 @@ Cancer Of Prostate
 <p><span style="color:None">Top Factor: 54 (Contribution: 0.0663)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0277</td>
@@ -869,7 +874,7 @@ Cancer Of Prostate
 <div id="b257a0c8-c154-4592-a809-ee148e8b913f" class="cell" data-execution_count="98">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">410</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">410</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -883,7 +888,7 @@ Breast Cancer
 <p><span style="color:None">Top Factor: 25 (Contribution: 0.1298)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0221</td>
@@ -955,7 +960,7 @@ Breast Cancer
 <p><span style="color:None">Top Factor: 66 (Contribution: 0.0840)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0300</td>
@@ -1027,7 +1032,7 @@ Breast Cancer
 <p><span style="color:None">Top Factor: 48 (Contribution: 0.0812)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0133</td>
@@ -1096,7 +1101,7 @@ Breast Cancer
 <div id="b6cb0ec0-5779-4a5d-a1f1-e9cca4001b16" class="cell" data-execution_count="99">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">458</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">458</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -1110,7 +1115,7 @@ Diabetes Mellitus
 <p><span style="color:None">Top Factor: 19 (Contribution: 0.1403)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0364</td>
@@ -1182,7 +1187,7 @@ Diabetes Mellitus
 <p><span style="color:None">Top Factor: 57 (Contribution: 0.0559)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0178</td>
@@ -1254,7 +1259,7 @@ Diabetes Mellitus
 <p><span style="color:None">Top Factor: 26 (Contribution: 0.1503)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.1042</td>
@@ -1323,7 +1328,7 @@ Diabetes Mellitus
 <div id="8d6febf7-c709-4bef-a74d-39aa26a7e435" class="cell" data-execution_count="100">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">529</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">529</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -1337,7 +1342,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 97 (Contribution: 0.0888)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0441</td>
@@ -1409,7 +1414,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 70 (Contribution: 0.0852)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0262</td>
@@ -1481,7 +1486,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 92 (Contribution: 0.1208)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0149</td>
@@ -1550,7 +1555,7 @@ Parkinson’s Disease
 <div id="d448099f-1118-41b3-85b2-05f5091a2c98" class="cell" data-execution_count="101">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">504</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">504</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -1564,7 +1569,7 @@ Dementias
 <p><span style="color:None">Top Factor: 99 (Contribution: 0.1643)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0148</td>
@@ -1636,7 +1641,7 @@ Dementias
 <p><span style="color:None">Top Factor: 74 (Contribution: 0.0601)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0203</td>
@@ -1708,7 +1713,7 @@ Dementias
 <p><span style="color:None">Top Factor: 61 (Contribution: 0.0862)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0324</td>
@@ -1777,7 +1782,7 @@ Dementias
 <div id="3c08d42a-59ad-41e9-83fc-046468500042" class="cell" data-execution_count="102">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">61</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">61</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -1791,7 +1796,7 @@ G47 Sleep Disorders
 <p><span style="color:None">Top Factor: 86 (Contribution: 0.1228)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0469</td>
@@ -1863,7 +1868,7 @@ G47 Sleep Disorders
 <p><span style="color:None">Top Factor: 43 (Contribution: 0.0683)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0234</td>
@@ -1935,7 +1940,7 @@ G47 Sleep Disorders
 <p><span style="color:None">Top Factor: 91 (Contribution: 0.1037)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0136</td>
@@ -2004,7 +2009,7 @@ G47 Sleep Disorders
 <div id="2c5a64bb-69e1-43cd-85c6-fde0e4fa7179" class="cell" data-execution_count="103">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">59</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">59</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -2018,7 +2023,7 @@ G43 Migraine
 <p><span style="color:None">Top Factor: 80 (Contribution: 0.0792)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0312</td>
@@ -2090,7 +2095,7 @@ G43 Migraine
 <p><span style="color:None">Top Factor: 46 (Contribution: 0.0576)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0320</td>
@@ -2162,7 +2167,7 @@ G43 Migraine
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.0733)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -2231,7 +2236,7 @@ G43 Migraine
 <div id="1cec6509-23b7-4ba2-9549-7dccb41aafa0" class="cell" data-execution_count="104">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">591</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">591</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -2245,7 +2250,7 @@ Hypertension
 <p><span style="color:None">Top Factor: 2 (Contribution: 0.0982)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0595</td>
@@ -2317,7 +2322,7 @@ Hypertension
 <p><span style="color:None">Top Factor: 15 (Contribution: 0.1904)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0670</td>
@@ -2389,7 +2394,7 @@ Hypertension
 <p><span style="color:None">Top Factor: 3 (Contribution: 0.1210)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0461</td>
@@ -2458,7 +2463,7 @@ Hypertension
 <div id="c71d71b7-bf9e-4e89-9cfc-51e14bef33f1" class="cell" data-execution_count="105">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">2350</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">2350</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -2472,7 +2477,7 @@ Standing Height
 <p><span style="color:None">Top Factor: 7 (Contribution: 0.2952)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0748</td>
@@ -2544,7 +2549,7 @@ Standing Height
 <p><span style="color:None">Top Factor: 4 (Contribution: 0.1740)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.1274</td>
@@ -2616,7 +2621,7 @@ Standing Height
 <p><span style="color:None">Top Factor: 2 (Contribution: 0.2623)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0640</td>
@@ -2685,7 +2690,7 @@ Standing Height
 <div id="f7b59d73-4a1e-41df-95f0-93d3da9da340" class="cell" data-execution_count="106">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1747</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1747</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -2699,7 +2704,7 @@ Intake Of Sugar Added To Coffee
 <p><span style="color:None">Top Factor: 52 (Contribution: 0.1127)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0152</td>
@@ -2771,7 +2776,7 @@ Intake Of Sugar Added To Coffee
 <p><span style="color:None">Top Factor: 54 (Contribution: 0.0723)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0427</td>
@@ -2843,7 +2848,7 @@ Intake Of Sugar Added To Coffee
 <p><span style="color:None">Top Factor: 75 (Contribution: 0.0839)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0341</td>
@@ -2912,7 +2917,7 @@ Intake Of Sugar Added To Coffee
 <div id="1aa6c123-d5de-4222-abfc-91da7bc256f6" class="cell" data-execution_count="107">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1677</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pan_ukb_pleiotropy(<span class="dv">1677</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -2926,7 +2931,7 @@ Covid-19 Positive (Controls Only Covid-19 Negative)
 <p><span style="color:None">Top Factor: 42 (Contribution: 0.4360)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0801</td>
@@ -2998,7 +3003,7 @@ Covid-19 Positive (Controls Only Covid-19 Negative)
 <p><span style="color:None">Top Factor: 47 (Contribution: 0.0847)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0245</td>
@@ -3070,7 +3075,7 @@ Covid-19 Positive (Controls Only Covid-19 Negative)
 <p><span style="color:None">Top Factor: 67 (Contribution: 0.5227)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0846</td>
@@ -3142,8 +3147,8 @@ Covid-19 Positive (Controls Only Covid-19 Negative)
 <div id="fd29cbd4-2711-4592-9579-dc2f27b825fd" class="cell" data-execution_count="108">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">52</span>,<span class="dv">58</span>):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">52</span>,<span class="dv">58</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored" data-anchor-id="neuropsychiatric-disorders">
@@ -3157,7 +3162,7 @@ F05 Delirium, Not Induced By Alcohol And Other Psychoactive Substances
 <p><span style="color:None">Top Factor: 99 (Contribution: 0.1305)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0148</td>
@@ -3229,7 +3234,7 @@ F05 Delirium, Not Induced By Alcohol And Other Psychoactive Substances
 <p><span style="color:None">Top Factor: 28 (Contribution: 0.0542)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0267</td>
@@ -3301,7 +3306,7 @@ F05 Delirium, Not Induced By Alcohol And Other Psychoactive Substances
 <p><span style="color:None">Top Factor: 33 (Contribution: 0.0945)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.1299</td>
@@ -3378,7 +3383,7 @@ F10 Mental And Behavioural Disorders Due To Use Of Alcohol
 <p><span style="color:None">Top Factor: 94 (Contribution: 0.0704)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0258</td>
@@ -3450,7 +3455,7 @@ F10 Mental And Behavioural Disorders Due To Use Of Alcohol
 <p><span style="color:None">Top Factor: 32 (Contribution: 0.1297)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0387</td>
@@ -3522,7 +3527,7 @@ F10 Mental And Behavioural Disorders Due To Use Of Alcohol
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.1128)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -3599,7 +3604,7 @@ F17 Mental And Behavioural Disorders Due To Use Of Tobacco
 <p><span style="color:None">Top Factor: 51 (Contribution: 0.0921)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0368</td>
@@ -3671,7 +3676,7 @@ F17 Mental And Behavioural Disorders Due To Use Of Tobacco
 <p><span style="color:None">Top Factor: 5 (Contribution: 0.0615)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0297</td>
@@ -3743,7 +3748,7 @@ F17 Mental And Behavioural Disorders Due To Use Of Tobacco
 <p><span style="color:None">Top Factor: 38 (Contribution: 0.0717)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0276</td>
@@ -3820,7 +3825,7 @@ F31 Bipolar Affective Disorder
 <p><span style="color:None">Top Factor: 92 (Contribution: 0.1087)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0288</td>
@@ -3892,7 +3897,7 @@ F31 Bipolar Affective Disorder
 <p><span style="color:None">Top Factor: 23 (Contribution: 0.0730)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0272</td>
@@ -3964,7 +3969,7 @@ F31 Bipolar Affective Disorder
 <p><span style="color:None">Top Factor: 45 (Contribution: 0.0787)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0188</td>
@@ -4041,7 +4046,7 @@ F32 Depressive Episode
 <p><span style="color:None">Top Factor: 50 (Contribution: 0.1116)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0225</td>
@@ -4113,7 +4118,7 @@ F32 Depressive Episode
 <p><span style="color:None">Top Factor: 5 (Contribution: 0.0612)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0297</td>
@@ -4185,7 +4190,7 @@ F32 Depressive Episode
 <p><span style="color:None">Top Factor: 45 (Contribution: 0.0855)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0188</td>
@@ -4262,7 +4267,7 @@ F41 Other Anxiety Disorders
 <p><span style="color:None">Top Factor: 100 (Contribution: 0.0925)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0203</td>
@@ -4334,7 +4339,7 @@ F41 Other Anxiety Disorders
 <p><span style="color:None">Top Factor: 93 (Contribution: 0.0847)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0244</td>
@@ -4406,7 +4411,7 @@ F41 Other Anxiety Disorders
 <p><span style="color:None">Top Factor: 53 (Contribution: 0.0682)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0102</td>
@@ -4475,8 +4480,8 @@ F41 Other Anxiety Disorders
 <div id="02820fe0-6464-48c2-bc63-497c3bba23cb" class="cell" data-execution_count="109">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">520</span>,<span class="dv">538</span>):</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">520</span>,<span class="dv">538</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    pan_ukb_pleiotropy(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored">
@@ -4490,7 +4495,7 @@ Other Mental Disorder
 <p><span style="color:None">Top Factor: 6 (Contribution: 0.1623)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0290</td>
@@ -4562,7 +4567,7 @@ Other Mental Disorder
 <p><span style="color:None">Top Factor: 82 (Contribution: 0.0722)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0312</td>
@@ -4634,7 +4639,7 @@ Other Mental Disorder
 <p><span style="color:None">Top Factor: 10 (Contribution: 0.1058)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0384</td>
@@ -4711,7 +4716,7 @@ Substance Addiction And Disorders
 <p><span style="color:None">Top Factor: 94 (Contribution: 0.0746)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0258</td>
@@ -4783,7 +4788,7 @@ Substance Addiction And Disorders
 <p><span style="color:None">Top Factor: 32 (Contribution: 0.0623)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0387</td>
@@ -4855,7 +4860,7 @@ Substance Addiction And Disorders
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.1156)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -4932,7 +4937,7 @@ Alcohol-Related Disorders
 <p><span style="color:None">Top Factor: 57 (Contribution: 0.0858)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0175</td>
@@ -5004,7 +5009,7 @@ Alcohol-Related Disorders
 <p><span style="color:None">Top Factor: 5 (Contribution: 0.0513)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0297</td>
@@ -5076,7 +5081,7 @@ Alcohol-Related Disorders
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.1049)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -5153,7 +5158,7 @@ Alcoholism
 <p><span style="color:None">Top Factor: 94 (Contribution: 0.0867)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0258</td>
@@ -5225,7 +5230,7 @@ Alcoholism
 <p><span style="color:None">Top Factor: 15 (Contribution: 0.0573)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0670</td>
@@ -5297,7 +5302,7 @@ Alcoholism
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.0766)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -5374,7 +5379,7 @@ Alcoholic Liver Damage
 <p><span style="color:None">Top Factor: 94 (Contribution: 0.0981)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0258</td>
@@ -5446,7 +5451,7 @@ Alcoholic Liver Damage
 <p><span style="color:None">Top Factor: 88 (Contribution: 0.0513)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0319</td>
@@ -5518,7 +5523,7 @@ Alcoholic Liver Damage
 <p><span style="color:None">Top Factor: 89 (Contribution: 0.1356)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0327</td>
@@ -5595,7 +5600,7 @@ Tobacco Use Disorder
 <p><span style="color:None">Top Factor: 51 (Contribution: 0.0944)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0368</td>
@@ -5667,7 +5672,7 @@ Tobacco Use Disorder
 <p><span style="color:None">Top Factor: 42 (Contribution: 0.0911)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0228</td>
@@ -5739,7 +5744,7 @@ Tobacco Use Disorder
 <p><span style="color:None">Top Factor: 38 (Contribution: 0.0719)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0276</td>
@@ -5816,7 +5821,7 @@ Sleep Disorders
 <p><span style="color:None">Top Factor: 86 (Contribution: 0.1209)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0469</td>
@@ -5888,7 +5893,7 @@ Sleep Disorders
 <p><span style="color:None">Top Factor: 4 (Contribution: 0.0595)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.1274</td>
@@ -5960,7 +5965,7 @@ Sleep Disorders
 <p><span style="color:None">Top Factor: 91 (Contribution: 0.1044)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0136</td>
@@ -6037,7 +6042,7 @@ Sleep Apnea
 <p><span style="color:None">Top Factor: 86 (Contribution: 0.1234)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0469</td>
@@ -6109,7 +6114,7 @@ Sleep Apnea
 <p><span style="color:None">Top Factor: 99 (Contribution: 0.0651)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0275</td>
@@ -6181,7 +6186,7 @@ Sleep Apnea
 <p><span style="color:None">Top Factor: 91 (Contribution: 0.1055)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0136</td>
@@ -6258,7 +6263,7 @@ Other Cerebral Degenerations
 <p><span style="color:None">Top Factor: 32 (Contribution: 0.0892)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0219</td>
@@ -6330,7 +6335,7 @@ Other Cerebral Degenerations
 <p><span style="color:None">Top Factor: 76 (Contribution: 0.1215)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0407</td>
@@ -6402,7 +6407,7 @@ Other Cerebral Degenerations
 <p><span style="color:None">Top Factor: 61 (Contribution: 0.1172)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0324</td>
@@ -6479,7 +6484,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 97 (Contribution: 0.0888)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0441</td>
@@ -6551,7 +6556,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 70 (Contribution: 0.0852)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0262</td>
@@ -6623,7 +6628,7 @@ Parkinson’s Disease
 <p><span style="color:None">Top Factor: 92 (Contribution: 0.1208)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0149</td>
@@ -6700,7 +6705,7 @@ Extrapyramidal Disease And Abnormal Movement Disorders
 <p><span style="color:None">Top Factor: 68 (Contribution: 0.0752)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0221</td>
@@ -6772,7 +6777,7 @@ Extrapyramidal Disease And Abnormal Movement Disorders
 <p><span style="color:None">Top Factor: 95 (Contribution: 0.0865)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0408</td>
@@ -6844,7 +6849,7 @@ Extrapyramidal Disease And Abnormal Movement Disorders
 <p><span style="color:None">Top Factor: 95 (Contribution: 0.0773)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0487</td>
@@ -6921,7 +6926,7 @@ Degenerative Disease Of The Spinal Cord
 <p><span style="color:None">Top Factor: 62 (Contribution: 0.0881)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0405</td>
@@ -6993,7 +6998,7 @@ Degenerative Disease Of The Spinal Cord
 <p><span style="color:None">Top Factor: 98 (Contribution: 0.0866)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0240</td>
@@ -7065,7 +7070,7 @@ Degenerative Disease Of The Spinal Cord
 <p><span style="color:None">Top Factor: 68 (Contribution: 0.0984)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0098</td>
@@ -7142,7 +7147,7 @@ Multiple Sclerosis
 <p><span style="color:None">Top Factor: 74 (Contribution: 0.0911)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0203</td>
@@ -7214,7 +7219,7 @@ Multiple Sclerosis
 <p><span style="color:None">Top Factor: 65 (Contribution: 0.0684)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0205</td>
@@ -7286,7 +7291,7 @@ Multiple Sclerosis
 <p><span style="color:None">Top Factor: 77 (Contribution: 0.0818)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0424</td>
@@ -7363,7 +7368,7 @@ Other Headache Syndromes
 <p><span style="color:None">Top Factor: 92 (Contribution: 0.0529)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0288</td>
@@ -7435,7 +7440,7 @@ Other Headache Syndromes
 <p><span style="color:None">Top Factor: 48 (Contribution: 0.0612)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0247</td>
@@ -7507,7 +7512,7 @@ Other Headache Syndromes
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.1011)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -7584,7 +7589,7 @@ Migraine
 <p><span style="color:None">Top Factor: 80 (Contribution: 0.0772)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0312</td>
@@ -7656,7 +7661,7 @@ Migraine
 <p><span style="color:None">Top Factor: 100 (Contribution: 0.0520)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0150</td>
@@ -7728,7 +7733,7 @@ Migraine
 <p><span style="color:None">Top Factor: 56 (Contribution: 0.0774)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0227</td>
@@ -7805,7 +7810,7 @@ Hemiplegia
 <p><span style="color:None">Top Factor: 50 (Contribution: 0.1700)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0225</td>
@@ -7877,7 +7882,7 @@ Hemiplegia
 <p><span style="color:None">Top Factor: 25 (Contribution: 0.0582)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0297</td>
@@ -7949,7 +7954,7 @@ Hemiplegia
 <p><span style="color:None">Top Factor: 64 (Contribution: 0.2000)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0165</td>
@@ -8026,7 +8031,7 @@ Epilepsy, Recurrent Seizures, Convulsions
 <p><span style="color:None">Top Factor: 98 (Contribution: 0.0502)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0171</td>
@@ -8098,7 +8103,7 @@ Epilepsy, Recurrent Seizures, Convulsions
 <p><span style="color:None">Top Factor: 96 (Contribution: 0.1166)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0249</td>
@@ -8170,7 +8175,7 @@ Epilepsy, Recurrent Seizures, Convulsions
 <p><span style="color:None">Top Factor: 64 (Contribution: 0.1090)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0165</td>
@@ -8247,7 +8252,7 @@ Epilepsy
 <p><span style="color:None">Top Factor: 98 (Contribution: 0.0738)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0171</td>
@@ -8319,7 +8324,7 @@ Epilepsy
 <p><span style="color:None">Top Factor: 96 (Contribution: 0.1300)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0249</td>
@@ -8391,7 +8396,7 @@ Epilepsy
 <p><span style="color:None">Top Factor: 61 (Contribution: 0.0849)</span></p>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true" align:left;}="">
+<table class="caption-top table table-sm table-striped small" align:left;}="">
 <tbody>
 <tr class="odd">
 <td>0.0324</td>
@@ -8463,297 +8468,301 @@ Epilepsy
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
-          // default icon
-          link.classList.add("external");
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
           } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
         }
-        return container.innerHTML
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/banskt\.github\.io\/npd-notes\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -8761,185 +8770,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 
 

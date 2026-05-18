@@ -2,6 +2,7 @@
   {
     "listing": "/notebooks/ukbb/index.html",
     "items": [
+      "/notebooks/ukbb/2025-01-27-phenotype-correlation-pruning.html",
       "/notebooks/ukbb/2024-04-03-panukb-nnm-embedding.html",
       "/notebooks/ukbb/2024-04-03-panukb-umap-nnm.html",
       "/notebooks/ukbb/2024-04-03-panukb-umap-parameters.html",
@@ -24,6 +25,14 @@
   {
     "listing": "/notebooks/production/index.html",
     "items": [
+      "/notebooks/production/2026-02-12-softimpute-benchmark.html",
+      "/notebooks/production/2026-02-12-clorinn-simulations.html",
+      "/notebooks/production/2025-07-24-clorinn-panukb-explained-variance.html",
+      "/notebooks/production/2025-05-01-clorinn-noisy-simulations.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d-nnmsparse.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d.html",
+      "/notebooks/production/2024-12-12-colormann-panukb.html",
+      "/notebooks/production/2024-12-12-colormann-simulations.html",
       "/notebooks/production/2024-11-01-ashg24.html",
       "/notebooks/production/2024-04-12-R01-progress-report.html",
       "/notebooks/production/2024-04-08-probgen24.html",
@@ -33,6 +42,15 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/production/2026-02-12-softimpute-benchmark.html",
+      "/notebooks/production/2026-02-12-clorinn-simulations.html",
+      "/notebooks/production/2025-07-24-clorinn-panukb-explained-variance.html",
+      "/notebooks/production/2025-05-01-clorinn-noisy-simulations.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d-nnmsparse.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d.html",
+      "/notebooks/production/2024-12-12-colormann-panukb.html",
+      "/notebooks/production/2024-12-12-colormann-simulations.html",
+      "/notebooks/ukbb/2025-01-27-phenotype-correlation-pruning.html",
       "/notebooks/production/2024-11-01-ashg24.html",
       "/notebooks/develop/2024-10-08-panukb-biology.html",
       "/notebooks/develop/2024-10-08-panukb-pca.html",
