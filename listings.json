@@ -23,20 +23,35 @@
     ]
   },
   {
-    "listing": "/notebooks/production/index.html",
+    "listing": "/notebooks/develop/index.html",
     "items": [
-      "/notebooks/production/2026-02-12-softimpute-benchmark.html",
-      "/notebooks/production/2026-02-12-clorinn-simulations.html",
-      "/notebooks/production/2025-07-24-clorinn-panukb-explained-variance.html",
-      "/notebooks/production/2025-05-01-clorinn-noisy-simulations.html",
-      "/notebooks/production/2025-04-10-colormann-panukb-t2d-nnmsparse.html",
-      "/notebooks/production/2025-04-10-colormann-panukb-t2d.html",
-      "/notebooks/production/2024-12-12-colormann-panukb.html",
-      "/notebooks/production/2024-12-12-colormann-simulations.html",
-      "/notebooks/production/2024-11-01-ashg24.html",
-      "/notebooks/production/2024-04-12-R01-progress-report.html",
-      "/notebooks/production/2024-04-08-probgen24.html",
-      "/notebooks/production/2024-10-09-simulation-figures-manuscript.html"
+      "/notebooks/develop/2024-10-08-panukb-biology.html",
+      "/notebooks/develop/2024-10-08-panukb-pca.html",
+      "/notebooks/develop/2024-10-07-save-panukb-components.html",
+      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
+      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
+      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
+      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/explore/index.html",
+    "items": [
+      "/notebooks/explore/2024-01-29-simulation-comparisons.html",
+      "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
+      "/notebooks/explore/2023-10-23-structure-plot.html",
+      "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
+      "/notebooks/explore/2023-08-08-npd-application.html",
+      "/notebooks/explore/2023-08-02-comparison-of-noise-models.html",
+      "/notebooks/explore/2023-07-28-choosing-penalty-update-method.html",
+      "/notebooks/explore/2023-07-05-simulation-setup.html",
+      "/notebooks/explore/2023-07-01-how-to-simulate.html",
+      "/notebooks/explore/2023-06-23-external-validation-metrics.html",
+      "/notebooks/explore/2023-06-05-broad-trait-clusters.html",
+      "/notebooks/explore/2023-05-23-frank-wolfe.html",
+      "/notebooks/explore/2023-05-16-pca-sumstat.html",
+      "/notebooks/explore/2023-05-16-robustpca.html",
+      "/notebooks/explore/2023-05-12-preprocess.html"
     ]
   },
   {
@@ -97,35 +112,24 @@
     ]
   },
   {
-    "listing": "/notebooks/explore/index.html",
+    "listing": "/notebooks/production/index.html",
     "items": [
-      "/notebooks/explore/2024-01-29-simulation-comparisons.html",
-      "/notebooks/explore/2023-12-14-comparison-of-simulation-strategies.html",
-      "/notebooks/explore/2023-10-23-structure-plot.html",
-      "/notebooks/explore/2023-09-25-npd-application-check-Copy1.html",
-      "/notebooks/explore/2023-08-08-npd-application.html",
-      "/notebooks/explore/2023-08-02-comparison-of-noise-models.html",
-      "/notebooks/explore/2023-07-28-choosing-penalty-update-method.html",
-      "/notebooks/explore/2023-07-05-simulation-setup.html",
-      "/notebooks/explore/2023-07-01-how-to-simulate.html",
-      "/notebooks/explore/2023-06-23-external-validation-metrics.html",
-      "/notebooks/explore/2023-06-05-broad-trait-clusters.html",
-      "/notebooks/explore/2023-05-23-frank-wolfe.html",
-      "/notebooks/explore/2023-05-16-pca-sumstat.html",
-      "/notebooks/explore/2023-05-16-robustpca.html",
-      "/notebooks/explore/2023-05-12-preprocess.html"
+      "/notebooks/production/2026-02-12-softimpute-benchmark.html",
+      "/notebooks/production/2026-02-12-clorinn-simulations.html",
+      "/notebooks/production/2025-07-24-clorinn-panukb-explained-variance.html",
+      "/notebooks/production/2025-05-01-clorinn-noisy-simulations.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d-nnmsparse.html",
+      "/notebooks/production/2025-04-10-colormann-panukb-t2d.html",
+      "/notebooks/production/2024-12-12-colormann-panukb.html",
+      "/notebooks/production/2024-12-12-colormann-simulations.html",
+      "/notebooks/production/2024-11-01-ashg24.html",
+      "/notebooks/production/2024-04-12-R01-progress-report.html",
+      "/notebooks/production/2024-04-08-probgen24.html",
+      "/notebooks/production/2024-10-09-simulation-figures-manuscript.html"
     ]
   },
   {
-    "listing": "/notebooks/develop/index.html",
-    "items": [
-      "/notebooks/develop/2024-10-08-panukb-biology.html",
-      "/notebooks/develop/2024-10-08-panukb-pca.html",
-      "/notebooks/develop/2024-10-07-save-panukb-components.html",
-      "/notebooks/develop/2023-08-03-demonstration-frankwolfe-methods-simulation.html",
-      "/notebooks/develop/2023-07-29-frank-wolfe-nnm-sparse.html",
-      "/notebooks/develop/2023-07-24-nnmfw-cross-validation-python-class.html",
-      "/notebooks/develop/2023-07-19-weighted-nnm-python-class.html"
-    ]
+    "listing": "/notebooks/psychgen/index.html",
+    "items": []
   }
 ]
