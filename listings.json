@@ -23,6 +23,13 @@
     ]
   },
   {
+    "listing": "/notebooks/psychgen/index.html",
+    "items": [
+      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-0.html",
+      "/notebooks/psychgen/2026-04-30-pgd-fw-nnm-split-replication-cv.html"
+    ]
+  },
+  {
     "listing": "/notebooks/develop/index.html",
     "items": [
       "/notebooks/develop/2024-10-08-panukb-biology.html",
@@ -57,6 +64,8 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-0.html",
+      "/notebooks/psychgen/2026-04-30-pgd-fw-nnm-split-replication-cv.html",
       "/notebooks/production/2026-02-12-softimpute-benchmark.html",
       "/notebooks/production/2026-02-12-clorinn-simulations.html",
       "/notebooks/production/2025-07-24-clorinn-panukb-explained-variance.html",
@@ -127,9 +136,5 @@
       "/notebooks/production/2024-04-08-probgen24.html",
       "/notebooks/production/2024-10-09-simulation-figures-manuscript.html"
     ]
-  },
-  {
-    "listing": "/notebooks/psychgen/index.html",
-    "items": []
   }
 ]
