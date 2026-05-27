@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -76,10 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-2d70165cbe18ff832460ad5e981e3096.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-7d50be1b0c53a45bc16918313d362846.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -492,872 +492,165 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
-<section id="sanity-check-projection-distance-grid" class="level2">
-<h2 class="anchored" data-anchor-id="sanity-check-projection-distance-grid">Sanity check: projection-distance grid</h2>
-<p>Inspect the main metric before plotting. Rows are ranks <code>k</code>; columns are nuclear-norm radii <code>r</code>.</p>
-<div id="665bfe22-89a8-4c76-b0dc-4611f423947d" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dist_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">nucnorm</th>
-<th data-quarto-table-cell-role="th">1</th>
-<th data-quarto-table-cell-role="th">2</th>
-<th data-quarto-table-cell-role="th">4</th>
-<th data-quarto-table-cell-role="th">8</th>
-<th data-quarto-table-cell-role="th">16</th>
-<th data-quarto-table-cell-role="th">32</th>
-<th data-quarto-table-cell-role="th">64</th>
-<th data-quarto-table-cell-role="th">128</th>
-<th data-quarto-table-cell-role="th">256</th>
-<th data-quarto-table-cell-role="th">512</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">4096</th>
-<th data-quarto-table-cell-role="th">8192</th>
-<th data-quarto-table-cell-role="th">9742</th>
-<th data-quarto-table-cell-role="th">11585</th>
-<th data-quarto-table-cell-role="th">13777</th>
-<th data-quarto-table-cell-role="th">16384</th>
-<th data-quarto-table-cell-role="th">19484</th>
-<th data-quarto-table-cell-role="th">23170</th>
-<th data-quarto-table-cell-role="th">27554</th>
-<th data-quarto-table-cell-role="th">32768</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">k</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">1</th>
-<td>0.021770</td>
-<td>0.022354</td>
-<td>0.023633</td>
-<td>0.026768</td>
-<td>0.034373</td>
-<td>0.060326</td>
-<td>0.279794</td>
-<td>0.104825</td>
-<td>0.152003</td>
-<td>0.316756</td>
-<td>...</td>
-<td>0.320522</td>
-<td>0.506330</td>
-<td>0.501743</td>
-<td>0.396054</td>
-<td>0.301842</td>
-<td>0.215812</td>
-<td>0.144993</td>
-<td>0.116290</td>
-<td>0.095999</td>
-<td>0.079928</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">2</th>
-<td>0.203261</td>
-<td>0.274409</td>
-<td>0.266199</td>
-<td>0.326992</td>
-<td>0.054074</td>
-<td>0.295683</td>
-<td>0.086641</td>
-<td>0.081347</td>
-<td>0.200903</td>
-<td>0.353936</td>
-<td>...</td>
-<td>0.275586</td>
-<td>0.227962</td>
-<td>0.246326</td>
-<td>0.252714</td>
-<td>0.184844</td>
-<td>0.165869</td>
-<td>0.145464</td>
-<td>0.125931</td>
-<td>0.106317</td>
-<td>0.102684</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">3</th>
-<td>0.529161</td>
-<td>0.577392</td>
-<td>0.536371</td>
-<td>0.566602</td>
-<td>0.169477</td>
-<td>0.096735</td>
-<td>0.076713</td>
-<td>0.111989</td>
-<td>0.217589</td>
-<td>0.190335</td>
-<td>...</td>
-<td>0.244471</td>
-<td>0.343232</td>
-<td>0.201930</td>
-<td>0.178022</td>
-<td>0.227835</td>
-<td>0.247659</td>
-<td>0.207810</td>
-<td>0.179524</td>
-<td>0.164217</td>
-<td>0.137322</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">4</th>
-<td>0.600799</td>
-<td>0.564718</td>
-<td>0.635676</td>
-<td>0.625170</td>
-<td>0.484521</td>
-<td>0.072289</td>
-<td>0.145789</td>
-<td>0.088911</td>
-<td>0.147440</td>
-<td>0.208327</td>
-<td>...</td>
-<td>0.198169</td>
-<td>0.247239</td>
-<td>0.255817</td>
-<td>0.262621</td>
-<td>0.186821</td>
-<td>0.171281</td>
-<td>0.175579</td>
-<td>0.275854</td>
-<td>0.315842</td>
-<td>0.177260</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">5</th>
-<td>0.648400</td>
-<td>0.588592</td>
-<td>0.662308</td>
-<td>0.634612</td>
-<td>0.601823</td>
-<td>0.248111</td>
-<td>0.067116</td>
-<td>0.083585</td>
-<td>0.279528</td>
-<td>0.250431</td>
-<td>...</td>
-<td>0.291562</td>
-<td>0.211142</td>
-<td>0.248516</td>
-<td>0.253508</td>
-<td>0.181319</td>
-<td>0.158097</td>
-<td>0.142910</td>
-<td>0.145071</td>
-<td>0.145925</td>
-<td>0.149781</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">6</th>
-<td>0.660207</td>
-<td>0.624654</td>
-<td>0.665486</td>
-<td>0.643133</td>
-<td>0.635789</td>
-<td>0.352287</td>
-<td>0.171369</td>
-<td>0.086962</td>
-<td>0.181595</td>
-<td>0.190666</td>
-<td>...</td>
-<td>0.165505</td>
-<td>0.209361</td>
-<td>0.387707</td>
-<td>0.216801</td>
-<td>0.186497</td>
-<td>0.184637</td>
-<td>0.408319</td>
-<td>0.194301</td>
-<td>0.135193</td>
-<td>0.120031</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">7</th>
-<td>0.659052</td>
-<td>0.654132</td>
-<td>0.668800</td>
-<td>0.661838</td>
-<td>0.658699</td>
-<td>0.410838</td>
-<td>0.248090</td>
-<td>0.079737</td>
-<td>0.174569</td>
-<td>0.226141</td>
-<td>...</td>
-<td>0.258335</td>
-<td>0.298405</td>
-<td>0.213943</td>
-<td>0.196292</td>
-<td>0.276207</td>
-<td>0.281091</td>
-<td>0.200430</td>
-<td>0.224400</td>
-<td>0.216707</td>
-<td>0.178804</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">8</th>
-<td>0.660754</td>
-<td>0.668207</td>
-<td>0.676398</td>
-<td>0.670966</td>
-<td>0.674419</td>
-<td>0.477241</td>
-<td>0.395293</td>
-<td>0.127913</td>
-<td>0.226393</td>
-<td>0.209724</td>
-<td>...</td>
-<td>0.155959</td>
-<td>0.226286</td>
-<td>0.180093</td>
-<td>0.173730</td>
-<td>0.154254</td>
-<td>0.290103</td>
-<td>0.165114</td>
-<td>0.123460</td>
-<td>0.110062</td>
-<td>0.102487</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">9</th>
-<td>0.667229</td>
-<td>0.659147</td>
-<td>0.675788</td>
-<td>0.670403</td>
-<td>0.663070</td>
-<td>0.492301</td>
-<td>0.325064</td>
-<td>0.236133</td>
-<td>0.119586</td>
-<td>0.216279</td>
-<td>...</td>
-<td>0.167974</td>
-<td>0.140022</td>
-<td>0.133098</td>
-<td>0.141958</td>
-<td>0.232874</td>
-<td>0.125818</td>
-<td>0.124066</td>
-<td>0.126144</td>
-<td>0.130920</td>
-<td>0.128427</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">10</th>
-<td>0.663729</td>
-<td>0.645370</td>
-<td>0.666638</td>
-<td>0.665415</td>
-<td>0.642089</td>
-<td>0.526992</td>
-<td>0.286492</td>
-<td>0.227014</td>
-<td>0.125000</td>
-<td>0.203073</td>
-<td>...</td>
-<td>0.170039</td>
-<td>0.158907</td>
-<td>0.159270</td>
-<td>0.141397</td>
-<td>0.132470</td>
-<td>0.149546</td>
-<td>0.191185</td>
-<td>0.170913</td>
-<td>0.137571</td>
-<td>0.118974</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">11</th>
-<td>0.653227</td>
-<td>0.648982</td>
-<td>0.655942</td>
-<td>0.663579</td>
-<td>0.636723</td>
-<td>0.542060</td>
-<td>0.315229</td>
-<td>0.226680</td>
-<td>0.205973</td>
-<td>0.229727</td>
-<td>...</td>
-<td>0.148883</td>
-<td>0.177333</td>
-<td>0.296877</td>
-<td>0.231520</td>
-<td>0.183564</td>
-<td>0.144202</td>
-<td>0.128840</td>
-<td>0.123530</td>
-<td>0.126755</td>
-<td>0.124764</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">12</th>
-<td>0.647815</td>
-<td>0.644796</td>
-<td>0.647189</td>
-<td>0.657039</td>
-<td>0.634875</td>
-<td>0.542376</td>
-<td>0.401987</td>
-<td>0.297775</td>
-<td>0.091210</td>
-<td>0.172295</td>
-<td>...</td>
-<td>0.225370</td>
-<td>0.134914</td>
-<td>0.133053</td>
-<td>0.173915</td>
-<td>0.203066</td>
-<td>0.138884</td>
-<td>0.125501</td>
-<td>0.125405</td>
-<td>0.138663</td>
-<td>0.127219</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">13</th>
-<td>0.645068</td>
-<td>0.634569</td>
-<td>0.640201</td>
-<td>0.655377</td>
-<td>0.637249</td>
-<td>0.552736</td>
-<td>0.414100</td>
-<td>0.270003</td>
-<td>0.219551</td>
-<td>0.185230</td>
-<td>...</td>
-<td>0.201447</td>
-<td>0.276826</td>
-<td>0.130945</td>
-<td>0.209423</td>
-<td>0.151690</td>
-<td>0.146454</td>
-<td>0.144382</td>
-<td>0.134493</td>
-<td>0.109652</td>
-<td>0.099926</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">14</th>
-<td>0.639642</td>
-<td>0.630299</td>
-<td>0.635480</td>
-<td>0.646388</td>
-<td>0.634297</td>
-<td>0.551926</td>
-<td>0.417402</td>
-<td>0.273897</td>
-<td>0.208688</td>
-<td>0.178881</td>
-<td>...</td>
-<td>0.121710</td>
-<td>0.113704</td>
-<td>0.154568</td>
-<td>0.129166</td>
-<td>0.184424</td>
-<td>0.250567</td>
-<td>0.178167</td>
-<td>0.127090</td>
-<td>0.111694</td>
-<td>0.106479</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">15</th>
-<td>0.637661</td>
-<td>0.626039</td>
-<td>0.624528</td>
-<td>0.632767</td>
-<td>0.625635</td>
-<td>0.555211</td>
-<td>0.424546</td>
-<td>0.269076</td>
-<td>0.142236</td>
-<td>0.123683</td>
-<td>...</td>
-<td>0.159821</td>
-<td>0.134709</td>
-<td>0.138176</td>
-<td>0.152514</td>
-<td>0.140381</td>
-<td>0.170584</td>
-<td>0.132584</td>
-<td>0.122780</td>
-<td>0.110983</td>
-<td>0.109904</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">16</th>
-<td>0.633798</td>
-<td>0.619918</td>
-<td>0.618673</td>
-<td>0.623019</td>
-<td>0.618064</td>
-<td>0.560887</td>
-<td>0.457233</td>
-<td>0.320675</td>
-<td>0.199447</td>
-<td>0.134429</td>
-<td>...</td>
-<td>0.154963</td>
-<td>0.151707</td>
-<td>0.123215</td>
-<td>0.126346</td>
-<td>0.111391</td>
-<td>0.093523</td>
-<td>0.088187</td>
-<td>0.086144</td>
-<td>0.087315</td>
-<td>0.084148</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">17</th>
-<td>0.633179</td>
-<td>0.619101</td>
-<td>0.615998</td>
-<td>0.619426</td>
-<td>0.614817</td>
-<td>0.553194</td>
-<td>0.473218</td>
-<td>0.366062</td>
-<td>0.173846</td>
-<td>0.150205</td>
-<td>...</td>
-<td>0.102382</td>
-<td>0.122330</td>
-<td>0.139635</td>
-<td>0.163327</td>
-<td>0.117141</td>
-<td>0.120783</td>
-<td>0.125901</td>
-<td>0.208189</td>
-<td>0.114036</td>
-<td>0.093891</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">18</th>
-<td>0.626797</td>
-<td>0.616877</td>
-<td>0.616661</td>
-<td>0.618028</td>
-<td>0.611843</td>
-<td>0.548432</td>
-<td>0.474486</td>
-<td>0.374961</td>
-<td>0.198811</td>
-<td>0.154444</td>
-<td>...</td>
-<td>0.105974</td>
-<td>0.107963</td>
-<td>0.154328</td>
-<td>0.135993</td>
-<td>0.103536</td>
-<td>0.121129</td>
-<td>0.137080</td>
-<td>0.106028</td>
-<td>0.107577</td>
-<td>0.106659</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">19</th>
-<td>0.622102</td>
-<td>0.615457</td>
-<td>0.609793</td>
-<td>0.616998</td>
-<td>0.610163</td>
-<td>0.547620</td>
-<td>0.483343</td>
-<td>0.386162</td>
-<td>0.235022</td>
-<td>0.167785</td>
-<td>...</td>
-<td>0.127883</td>
-<td>0.132950</td>
-<td>0.119774</td>
-<td>0.153111</td>
-<td>0.238867</td>
-<td>0.120212</td>
-<td>0.131742</td>
-<td>0.231032</td>
-<td>0.136658</td>
-<td>0.162114</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">20</th>
-<td>0.619828</td>
-<td>0.613809</td>
-<td>0.605362</td>
-<td>0.613492</td>
-<td>0.604743</td>
-<td>0.547950</td>
-<td>0.490879</td>
-<td>0.400664</td>
-<td>0.240726</td>
-<td>0.231434</td>
-<td>...</td>
-<td>0.170172</td>
-<td>0.203510</td>
-<td>0.129631</td>
-<td>0.106692</td>
-<td>0.085386</td>
-<td>0.078175</td>
-<td>0.076375</td>
-<td>0.080929</td>
-<td>0.108289</td>
-<td>0.120661</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">21</th>
-<td>0.614594</td>
-<td>0.613430</td>
-<td>0.603499</td>
-<td>0.611493</td>
-<td>0.600098</td>
-<td>0.543960</td>
-<td>0.497656</td>
-<td>0.414459</td>
-<td>0.245262</td>
-<td>0.206913</td>
-<td>...</td>
-<td>0.187105</td>
-<td>0.209084</td>
-<td>0.157256</td>
-<td>0.092092</td>
-<td>0.078625</td>
-<td>0.078079</td>
-<td>0.084960</td>
-<td>0.083060</td>
-<td>0.080142</td>
-<td>0.081833</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">22</th>
-<td>0.610790</td>
-<td>0.612906</td>
-<td>0.597798</td>
-<td>0.608064</td>
-<td>0.597299</td>
-<td>0.541162</td>
-<td>0.500719</td>
-<td>0.427059</td>
-<td>0.232650</td>
-<td>0.192035</td>
-<td>...</td>
-<td>0.217630</td>
-<td>0.146230</td>
-<td>0.125634</td>
-<td>0.093102</td>
-<td>0.119670</td>
-<td>0.120781</td>
-<td>0.093612</td>
-<td>0.090799</td>
-<td>0.111113</td>
-<td>0.109520</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">23</th>
-<td>0.607174</td>
-<td>0.612037</td>
-<td>0.599578</td>
-<td>0.603753</td>
-<td>0.594936</td>
-<td>0.542660</td>
-<td>0.503804</td>
-<td>0.430821</td>
-<td>0.259136</td>
-<td>0.192955</td>
-<td>...</td>
-<td>0.229208</td>
-<td>0.142508</td>
-<td>0.192696</td>
-<td>0.129440</td>
-<td>0.210843</td>
-<td>0.175275</td>
-<td>0.124295</td>
-<td>0.125307</td>
-<td>0.107406</td>
-<td>0.091736</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">24</th>
-<td>0.602842</td>
-<td>0.608530</td>
-<td>0.596357</td>
-<td>0.599284</td>
-<td>0.587992</td>
-<td>0.542520</td>
-<td>0.511932</td>
-<td>0.441961</td>
-<td>0.273805</td>
-<td>0.198132</td>
-<td>...</td>
-<td>0.214826</td>
-<td>0.170142</td>
-<td>0.173236</td>
-<td>0.156336</td>
-<td>0.106760</td>
-<td>0.106633</td>
-<td>0.128976</td>
-<td>0.169334</td>
-<td>0.125297</td>
-<td>0.099436</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">25</th>
-<td>0.602202</td>
-<td>0.609923</td>
-<td>0.592516</td>
-<td>0.592501</td>
-<td>0.580094</td>
-<td>0.543117</td>
-<td>0.508039</td>
-<td>0.453017</td>
-<td>0.279889</td>
-<td>0.129747</td>
-<td>...</td>
-<td>0.262111</td>
-<td>0.109381</td>
-<td>0.120330</td>
-<td>0.099806</td>
-<td>0.113050</td>
-<td>0.127559</td>
-<td>0.123499</td>
-<td>0.140465</td>
-<td>0.158791</td>
-<td>0.159888</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">26</th>
-<td>0.598796</td>
-<td>0.609891</td>
-<td>0.590709</td>
-<td>0.591005</td>
-<td>0.575211</td>
-<td>0.540133</td>
-<td>0.510660</td>
-<td>0.461997</td>
-<td>0.321974</td>
-<td>0.203850</td>
-<td>...</td>
-<td>0.278312</td>
-<td>0.136202</td>
-<td>0.120601</td>
-<td>0.118398</td>
-<td>0.112459</td>
-<td>0.121558</td>
-<td>0.131622</td>
-<td>0.130897</td>
-<td>0.125373</td>
-<td>0.131924</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">27</th>
-<td>0.598933</td>
-<td>0.609539</td>
-<td>0.592673</td>
-<td>0.587457</td>
-<td>0.569565</td>
-<td>0.534417</td>
-<td>0.510804</td>
-<td>0.468141</td>
-<td>0.335313</td>
-<td>0.203075</td>
-<td>...</td>
-<td>0.259189</td>
-<td>0.104518</td>
-<td>0.091463</td>
-<td>0.175920</td>
-<td>0.079426</td>
-<td>0.127755</td>
-<td>0.199556</td>
-<td>0.123211</td>
-<td>0.096763</td>
-<td>0.102651</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">28</th>
-<td>0.597045</td>
-<td>0.610238</td>
-<td>0.593628</td>
-<td>0.585127</td>
-<td>0.566945</td>
-<td>0.531710</td>
-<td>0.509054</td>
-<td>0.473331</td>
-<td>0.353599</td>
-<td>0.245288</td>
-<td>...</td>
-<td>0.242326</td>
-<td>0.121173</td>
-<td>0.103792</td>
-<td>0.080314</td>
-<td>0.083416</td>
-<td>0.073992</td>
-<td>0.076766</td>
-<td>0.087318</td>
-<td>0.096291</td>
-<td>0.103542</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">29</th>
-<td>0.591526</td>
-<td>0.608426</td>
-<td>0.590332</td>
-<td>0.584003</td>
-<td>0.562854</td>
-<td>0.528735</td>
-<td>0.509348</td>
-<td>0.479696</td>
-<td>0.352139</td>
-<td>0.238389</td>
-<td>...</td>
-<td>0.257938</td>
-<td>0.146728</td>
-<td>0.125919</td>
-<td>0.104113</td>
-<td>0.165585</td>
-<td>0.080548</td>
-<td>0.088685</td>
-<td>0.150417</td>
-<td>0.116675</td>
-<td>0.111856</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">30</th>
-<td>0.591642</td>
-<td>0.609591</td>
-<td>0.586972</td>
-<td>0.579900</td>
-<td>0.557749</td>
-<td>0.530255</td>
-<td>0.509235</td>
-<td>0.481561</td>
-<td>0.359296</td>
-<td>0.221380</td>
-<td>...</td>
-<td>0.254894</td>
-<td>0.150338</td>
-<td>0.140501</td>
-<td>0.089838</td>
-<td>0.094996</td>
-<td>0.097462</td>
-<td>0.078555</td>
-<td>0.084079</td>
-<td>0.092323</td>
-<td>0.125614</td>
-</tr>
-</tbody>
-</table>
-
-<p>30 rows × 22 columns</p>
-</div>
-</div>
-</div>
-</section>
 <section id="main-cross-validation-plot" class="level2">
 <h2 class="anchored" data-anchor-id="main-cross-validation-plot">Main cross-validation plot</h2>
 <p>Use this figure to decide where the projection distance stops improving materially as the nuclear-norm radius increases. The left panel gives the full <code>k</code> by <code>r</code> grid; the right panel shows one rank slice through the same grid.</p>
-<div id="1bc238b1-0d78-4fcc-97f3-58c27e094ab5" class="cell" data-execution_count="13">
+<div id="1bc238b1-0d78-4fcc-97f3-58c27e094ab5" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_heatmap(ax, X, rank_list, k_list,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        vmin <span class="op">=</span> <span class="dv">0</span>, vcenter <span class="op">=</span> <span class="fl">0.9</span>, vmax <span class="op">=</span> <span class="fl">1.0</span>):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    cmap1 <span class="op">=</span> mpl_cmaps.get_cmap(<span class="st">"YlOrRd"</span>).copy()</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    cmap1.set_bad(<span class="st">"w"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    norm1 <span class="op">=</span> mpl_colors.TwoSlopeNorm(vmin <span class="op">=</span> vmin, vcenter <span class="op">=</span> vcenter, vmax <span class="op">=</span> vmax)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    im1 <span class="op">=</span> ax.imshow(X, cmap <span class="op">=</span> cmap1, norm <span class="op">=</span> norm1, origin <span class="op">=</span> <span class="st">'lower'</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    divider <span class="op">=</span> make_axes_locatable(ax)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    cax <span class="op">=</span> divider.append_axes(<span class="st">"right"</span>, size<span class="op">=</span><span class="st">"5%"</span>, pad<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> plt.colorbar(im1, cax<span class="op">=</span>cax, fraction <span class="op">=</span> <span class="fl">0.1</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Nuclear norm constraint radius r"</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Rank k"</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(np.arange(<span class="bu">len</span>(k_list)))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    ax.set_yticklabels([<span class="bu">str</span>(<span class="bu">int</span>(k)) <span class="cf">for</span> k <span class="kw">in</span> k_list])</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(np.arange(<span class="bu">len</span>(rank_list)))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> rank_list], rotation<span class="op">=</span><span class="dv">90</span>)    </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_projection_distance_figure(prefix,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        k_choose<span class="op">=</span><span class="dv">24</span>, vmin<span class="op">=</span><span class="fl">0.09</span>, vcenter<span class="op">=</span><span class="fl">0.12</span>, vmax<span class="op">=</span><span class="fl">0.2</span>):</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> load_stability_jsons(stability_out_dir, prefix)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    dist_df <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_dist"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> dist_df.columns.to_numpy()</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> dist_df.index.to_numpy()</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">9</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>                          width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="fl">0.8</span>],  <span class="co"># heatmap, line plot</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>                          wspace<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                         )</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>    plot_heatmap(ax1, dist_df.to_numpy(), rank_list, k_list, </span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>                 vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"Mean projection distance across splits"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot a single row of the heatmap as a line plot. </span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Makes it easier to see the plateau onset for one chosen rank.</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    dist_vals <span class="op">=</span> dist_df.loc[k_choose].to_numpy()</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    ax2.plot(np.arange(<span class="bu">len</span>(dist_vals)), dist_vals, <span class="st">'o-'</span>)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">"Nuclear norm constraint radius r"</span>)</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="ss">f"Mean projection distance across splits at k=</span><span class="sc">{</span>k_choose<span class="sc">:d}</span><span class="ss">"</span>)</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>    ax2.set_xticks(np.arange(<span class="bu">len</span>(dist_vals)))</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    ax2.set_xticklabels(rank_list, rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="ss">f"Fixed-rank slice at k=</span><span class="sc">{</span>k_choose<span class="sc">}</span><span class="ss">"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    fig.savefig(</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>        fig_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_projection_distance.png"</span>,</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        bbox_inches<span class="op">=</span><span class="st">"tight"</span>,</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    plt.close(fig)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plt.show()</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prefix <span class="kw">in</span> PREFIXES:</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>    k_choose <span class="op">=</span> <span class="dv">24</span></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>    vmin, vcenter, vmax <span class="op">=</span> <span class="fl">0.09</span>, <span class="fl">0.12</span>, <span class="fl">0.20</span></span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prefix <span class="op">==</span> <span class="st">"pgd_afw_nnm_corr"</span>:</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>        k_choose <span class="op">=</span> <span class="dv">20</span></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        vmin, vcenter, vmax <span class="op">=</span> <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>    make_projection_distance_figure(prefix,</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>        k_choose<span class="op">=</span>k_choose, vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.asarray(x, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    powers <span class="op">=</span> np.arange(np.ceil(np.log2(x.<span class="bu">min</span>())), np.floor(np.log2(x.<span class="bu">max</span>())) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    xlabels <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> powers</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> scale <span class="op">==</span> <span class="st">"log10"</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log10(x)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log10(xlabels)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> scale <span class="op">==</span> <span class="st">"log2"</span>:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log2(x)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log2(xlabels)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> x</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> xlabels</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    xlabel_str <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>r<span class="sc">:g}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> xlabels]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xscale, xticks, xlabel_str</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> centers_to_edges(x):</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.asarray(x, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    edges <span class="op">=</span> np.empty(<span class="bu">len</span>(x) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    edges[<span class="dv">1</span>:<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> (x[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> x[<span class="dv">1</span>:])</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    edges[<span class="dv">0</span>] <span class="op">=</span> x[<span class="dv">0</span>] <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> (x[<span class="dv">1</span>] <span class="op">-</span> x[<span class="dv">0</span>])</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    edges[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> x[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (x[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> x[<span class="op">-</span><span class="dv">2</span>])</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> edges</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_heatmap(ax, X, rank_list, k_list,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        vmin<span class="op">=</span><span class="dv">0</span>, vcenter<span class="op">=</span><span class="fl">0.9</span>, vmax<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        scale<span class="op">=</span><span class="st">"log2"</span>):</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    cmap1 <span class="op">=</span> mpl_cmaps.get_cmap(<span class="st">"YlOrRd"</span>).copy()</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    cmap1.set_bad(<span class="st">"w"</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    norm1 <span class="op">=</span> mpl_colors.TwoSlopeNorm(vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    r, rticks, rlabels <span class="op">=</span> get_r_scaled(rank_list, scale<span class="op">=</span>scale)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    x_edges <span class="op">=</span> centers_to_edges(r)</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    y_edges <span class="op">=</span> np.arange(<span class="bu">len</span>(k_list) <span class="op">+</span> <span class="dv">1</span>) <span class="op">-</span> <span class="fl">0.5</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    im1 <span class="op">=</span> ax.pcolormesh(x_edges, y_edges, X, cmap<span class="op">=</span>cmap1, norm<span class="op">=</span>norm1, shading<span class="op">=</span><span class="st">"auto"</span>)</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># match imshow(origin="upper")</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="bu">len</span>(k_list) <span class="op">-</span> <span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    divider <span class="op">=</span> make_axes_locatable(ax)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    cax <span class="op">=</span> divider.append_axes(<span class="st">"right"</span>, size<span class="op">=</span><span class="st">"5%"</span>, pad<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> plt.colorbar(im1, cax<span class="op">=</span>cax, fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Nuclear norm constraint radius r"</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Rank k"</span>)</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(np.arange(<span class="bu">len</span>(k_list)))</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    ax.set_yticklabels([<span class="bu">str</span>(<span class="bu">int</span>(k)) <span class="cf">for</span> k <span class="kw">in</span> k_list])</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(rticks)</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> rlabels], rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> im1</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_projection_distance_figure(prefix,</span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>        vmin<span class="op">=</span><span class="fl">0.09</span>, vcenter<span class="op">=</span><span class="fl">0.12</span>, vmax<span class="op">=</span><span class="fl">0.2</span>):</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>    smooth_window <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> load_stability_jsons(stability_out_dir, prefix)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>    dist_df <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_dist"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>    smoothed_dist_df <span class="op">=</span> dist_df.rolling(window<span class="op">=</span>smooth_window, center<span class="op">=</span><span class="va">True</span>, min_periods<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    se_dist_df <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"se_dist"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> dist_df.columns.to_numpy()</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> dist_df.index.to_numpy()</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">15</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">2</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>                          width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># heatmap, line plot</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>                          wspace<span class="op">=</span><span class="fl">0.2</span>, hspace<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    ax3 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>    ax4 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    im1 <span class="op">=</span> plot_heatmap(ax1, dist_df.to_numpy(), rank_list, k_list, </span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>                 vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"Mean projection distance across splits"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot rows of the heatmap as a line plot. </span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Makes it easier to see the plateau onset for chosen ranks.</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>    k_choose <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>]</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>    r, rticks, rlabels <span class="op">=</span> get_r_scaled(rank_list, scale<span class="op">=</span><span class="st">'log2'</span>)</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>    rlabels <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(r)<span class="sc">:d}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> rlabels]</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> k_choose:</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> dist_df.loc[k].to_numpy()</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>        se <span class="op">=</span> se_dist_df.loc[k].to_numpy()</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>        ax2.plot(r, y, <span class="st">'o-'</span>, label<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>k<span class="sc">:d}</span><span class="ss">"</span>)</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>        ax2.fill_between(r, y <span class="op">-</span> se, y <span class="op">+</span> se, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">"Nuclear norm constraint radius r"</span>)</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="ss">f"Mean projection distance"</span>)</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>    ax2.set_xticks(rticks)</span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>    ax2.set_xticklabels(rlabels, rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="ss">f"Slices over r at selected k"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>    ax2.legend(loc <span class="op">=</span> <span class="st">'upper right'</span>, frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>, ncol <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot columns of the heatmap as a line plot. </span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Makes it easier to see the variation over ranks.</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>    r_choose <span class="op">=</span> [<span class="dv">128</span>, <span class="dv">256</span>, <span class="dv">512</span>, <span class="dv">1024</span>, <span class="dv">2048</span>, <span class="dv">4096</span>, <span class="dv">8192</span>, <span class="dv">16384</span>]</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> r <span class="kw">in</span> r_choose:</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> smoothed_dist_df[r].to_numpy()</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> np.arange(<span class="bu">len</span>(y))</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>        se <span class="op">=</span> se_dist_df[r].to_numpy()</span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>        ax3.plot(x, y, <span class="st">'o-'</span>, label<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>r<span class="sc">:d}</span><span class="ss">"</span>)</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>        ax3.fill_between(x, y <span class="op">-</span> se, y <span class="op">+</span> se, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>    ax3.set_xlabel(<span class="st">"Rank k"</span>)</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>    ax3.set_ylabel(<span class="ss">f"Mean projection distance"</span>)</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticks(x)</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticklabels(k_list, rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>    ax3.set_title(<span class="ss">f"Slices over k at selected r, smoothed over 5 k-neighbors"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>    ax3.legend(loc <span class="op">=</span> <span class="st">'upper left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.2</span>, <span class="fl">0.95</span>), frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>, ncol <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot rows of the heatmap as a line plot. </span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Makes it easier to see the plateau onset for chosen ranks.</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>    k_choose <span class="op">=</span> [<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>]</span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>    r, rticks, rlabels <span class="op">=</span> get_r_scaled(rank_list, scale<span class="op">=</span><span class="st">'log2'</span>)</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>    rlabels <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span><span class="bu">int</span>(r)<span class="sc">:d}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> rlabels]</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> k_choose:</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> smoothed_dist_df.loc[k].to_numpy()</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>        ax4.plot(r, y, <span class="st">'o-'</span>, label<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>k<span class="sc">:d}</span><span class="ss">"</span>)</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>    ax4.set_xlabel(<span class="st">"Nuclear norm constraint radius r"</span>)</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>    ax4.set_ylabel(<span class="ss">f"Mean projection distance"</span>)</span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>    ax4.set_xticks(rticks)</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>    ax4.set_xticklabels(rlabels, rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="ss">f"Slices over r at selected k, smoothed over </span><span class="sc">{</span>smooth_window<span class="sc">:d}</span><span class="ss"> k-neighbors"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>    ax4.legend(loc <span class="op">=</span> <span class="st">'upper right'</span>, frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>, ncol <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a>    fig.savefig(</span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>        fig_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_projection_distance.png"</span>,</span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>        bbox_inches<span class="op">=</span><span class="st">"tight"</span>,</span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a>    plt.close(fig)</span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plt.show()</span></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prefix <span class="kw">in</span> PREFIXES:</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>    vmin, vcenter, vmax <span class="op">=</span> <span class="fl">0.09</span>, <span class="fl">0.18</span>, <span class="fl">0.30</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> prefix <span class="op">==</span> <span class="st">"pgd_afw_nnm_corr"</span>:</span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>        vmin, vcenter, vmax <span class="op">=</span> <span class="fl">0.05</span>, <span class="fl">0.3</span>, <span class="fl">0.6</span></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>    make_projection_distance_figure(prefix, vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">pgd_fw_nnm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">pgd_afw_nnm</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">pgd_fw_nnm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">pgd_afw_nnm_corr</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p><img src="figures/split_replication_cv/pgd_fw_nnm_projection_distance.png" class="img-fluid"></p>
@@ -1371,44 +664,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="diagnostics" class="level2">
 <h2 class="anchored" data-anchor-id="diagnostics">Diagnostics</h2>
 <p>These plots are secondary checks. They help distinguish a real stability plateau from artifacts caused by changing effective rank or unstable high-dimensional directions.</p>
-<div id="0b34bc14-38e5-4ec7-a2d7-51d2a3ad70a9" class="cell" data-execution_count="15">
+<div id="0b34bc14-38e5-4ec7-a2d7-51d2a3ad70a9" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_diagnostics_energy_angle_figure(prefix):</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    records      <span class="op">=</span> load_stability_jsons(stability_out_dir, prefix)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    energy_df    <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_energy"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    gap_angle_df <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_gap_angle"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> energy_df.columns.to_numpy()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> energy_df.index.to_numpy()</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">9</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                          width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                          wspace<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                         )</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    plot_heatmap(ax1, energy_df.to_numpy(), rank_list, k_list, vmin <span class="op">=</span> <span class="fl">0.8</span>, vcenter <span class="op">=</span> <span class="fl">0.9</span>, vmax <span class="op">=</span> <span class="fl">1.0</span>)</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"Mean cumulative singular-value energy"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> gap_angle_df.columns.to_numpy()</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> gap_angle_df.index.to_numpy()</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    plot_heatmap(ax2, gap_angle_df.to_numpy(), rank_list, k_list, vmin <span class="op">=</span> <span class="dv">0</span>, vcenter <span class="op">=</span> <span class="dv">45</span>, vmax <span class="op">=</span> <span class="fl">90.0</span>)</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">"Mean largest principal angle across splits"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    fig.savefig(</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        fig_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_energy_gap_angle.png"</span>,</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        bbox_inches<span class="op">=</span><span class="st">"tight"</span>,</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    plt.close(fig)</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prefix <span class="kw">in</span> PREFIXES:</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    make_diagnostics_energy_angle_figure(prefix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_diagnostics_energy_angle_figure(prefix):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    records      <span class="op">=</span> load_stability_jsons(stability_out_dir, prefix)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    energy_df    <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_energy"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    gap_angle_df <span class="op">=</span> build_by_k_metrics_grid(records, <span class="st">"mean_gap_angle"</span>, duplicate<span class="op">=</span><span class="st">"first"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> energy_df.columns.to_numpy()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> energy_df.index.to_numpy()</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="fl">7.5</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                          width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                          wspace<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    im1 <span class="op">=</span> plot_heatmap(ax1, energy_df.to_numpy(), rank_list, k_list, vmin <span class="op">=</span> <span class="fl">0.8</span>, vcenter <span class="op">=</span> <span class="fl">0.9</span>, vmax <span class="op">=</span> <span class="fl">1.0</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"Mean cumulative singular-value energy"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    rank_list <span class="op">=</span> gap_angle_df.columns.to_numpy()</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> gap_angle_df.index.to_numpy()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    im2 <span class="op">=</span> plot_heatmap(ax2, gap_angle_df.to_numpy(), rank_list, k_list, vmin <span class="op">=</span> <span class="dv">0</span>, vcenter <span class="op">=</span> <span class="dv">45</span>, vmax <span class="op">=</span> <span class="fl">90.0</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="st">"Mean largest principal angle across splits"</span>, pad <span class="op">=</span> <span class="dv">20</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    fig.savefig(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        fig_dir <span class="op">/</span> <span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_energy_gap_angle.png"</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        bbox_inches<span class="op">=</span><span class="st">"tight"</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    plt.close(fig)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> prefix <span class="kw">in</span> PREFIXES:</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    make_diagnostics_energy_angle_figure(prefix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pgd_fw_nnm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">pgd_afw_nnm</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">pgd_fw_nnm</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">pgd_afw_nnm_corr</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p><img src="figures/split_replication_cv/pgd_fw_nnm_energy_gap_angle.png" class="img-fluid"></p>
