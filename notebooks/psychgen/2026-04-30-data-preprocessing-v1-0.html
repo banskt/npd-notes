@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Saikat Banerjee">
+<meta name="dcterms.date" content="2026-04-30">
 
-<title>Map trait names – NPD Network</title>
+<title>PGC v1.0 data preprocessing – NPD Network</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -162,18 +164,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Map trait names</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">PGC v1.0 data preprocessing</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li></ul></div></div>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Saikat Banerjee </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 30, 2026</p>
+    </div>
+  </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    This notebook prepares the versioned PGC input files used by the Clorinn v2 pipeline.
+  </div>
+</div>
 
 
 </header>
@@ -189,7 +209,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="78f8403d-9e52-4beb-a12b-e32abe8b5092" class="cell" data-execution_count="2">
+<section id="configuration-and-input-files" class="level2">
+<h2 class="anchored" data-anchor-id="configuration-and-input-files">Configuration and input files</h2>
+<p>The raw inputs are provided by Shane:</p>
+<ul>
+<li><code>corrected_sign_zscore_df.csv</code>: SNP-by-trait Z-score matrix, transposed after reading so rows are traits and columns are SNPs;</li>
+<li><code>corrected_non_smooth_sigma.csv</code>: LDSC-derived sampling covariance across traits;</li>
+<li><code>category_dic.txt</code>: trait-to-category mapping used for plotting and summaries.</li>
+</ul>
+<p>The output files are versioned using <code>outsuffix = "v1_0"</code> and written to <code>pgc_v1.0/</code>.</p>
+<div id="78f8403d-9e52-4beb-a12b-e32abe8b5092" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datadir <span class="op">=</span> <span class="st">"/Users/sbanerjee/Documents/work/clorinn_v2/input_data"</span></span>
@@ -219,8 +248,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    trait_to_group <span class="op">=</span> json.load(f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Some trait names have changed between assembling Z-scores and sampling covariance. Here, we pull everything to a common scheme.</p>
-<div id="372e466a-29b4-4927-bc0c-7ce98eaa1d9f" class="cell" data-execution_count="3">
+</section>
+<section id="normalize-trait-names" class="level2">
+<h2 class="anchored" data-anchor-id="normalize-trait-names">Normalize trait names</h2>
+<p>Trait names are not perfectly consistent across the Z-score matrix, LDSC covariance, and trait-category map.</p>
+<p>We apply a common normalization rule:</p>
+<ul>
+<li>replace hyphens with underscores</li>
+<li>rename known aliases manually, currently <code>Saxena -&gt; Daytime_sleepiness</code></li>
+<li>apply the same normalization to all trait-bearing objects</li>
+</ul>
+<p>This keeps downstream alignment explicit and avoids silent mismatches.</p>
+<div id="372e466a-29b4-4927-bc0c-7ce98eaa1d9f" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_trait_name(name):</span>
@@ -242,77 +281,78 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="af00a2de-55ad-4c6b-95c8-3228dfa040f4" class="cell" data-execution_count="4">
+</section>
+<section id="drop-traits-without-ldsc-covariance-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="drop-traits-without-ldsc-covariance-estimates">Drop traits without LDSC covariance estimates</h2>
+<p>Some traits are present in the Z-score matrix but absent from the LDSC covariance because their LDSC intercepts were <code>NaN</code>.</p>
+<p>We remove these traits from the Z-score matrix so that the final Z-score matrix and sampling covariance describe the same trait set.</p>
+<div id="a9e8a464-4db3-4e3c-abd8-edee216ff1db" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traits <span class="op">=</span> <span class="bu">list</span>(Z_df.index)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>missing_rows <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(A_df.index)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(A_df.columns)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_rows <span class="kw">or</span> missing_cols:</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Noise covariance is missing traits from Z. "</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Missing rows: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_rows)<span class="sc">}</span><span class="ss">; "</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"missing columns: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_cols)<span class="sc">}</span><span class="ss">."</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 5</span>
-<span class="ansi-green-fg">      3</span> missing_cols = <span style="color:rgb(0,135,0)">set</span>(traits) - <span style="color:rgb(0,135,0)">set</span>(A_df.columns)
-<span class="ansi-green-fg">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> missing_rows <span style="font-weight:bold;color:rgb(175,0,255)">or</span> missing_cols:
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">5</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">ValueError</span>(
-<span class="ansi-green-fg">      6</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Noise covariance is missing traits from Z. </span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">      7</span>         <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Missing rows: </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">sorted</span>(missing_rows)<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">; </span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">      8</span>         <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">missing columns: </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">sorted</span>(missing_cols)<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">.</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">      9</span>     )
-
-<span class="ansi-red-fg">ValueError</span>: Noise covariance is missing traits from Z. Missing rows: ['Lipoprotein_A_UKBB_EUR', 'daner_uniman', 'mdd_symptoms_2023_Comm_MDD5b_psychomotorSlow']; missing columns: ['Lipoprotein_A_UKBB_EUR', 'daner_uniman', 'mdd_symptoms_2023_Comm_MDD5b_psychomotorSlow'].</pre>
-</div>
-</div>
-</div>
-<div id="0779d9d8-e275-4098-bd21-8aa5e569bf73" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traits <span class="op">=</span> <span class="bu">list</span>(A_df.index)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>missing_rows <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(Z_df.index)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_rows:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Z is missing traits from noise covariance. "</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Missing rows: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_rows)<span class="sc">}</span><span class="ss">. "</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>traits_to_drop <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NaN intercepts from LDSC</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and hence not included in the covariance</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mdd_symptoms_2023_Comm_MDD5b_psychomotorSlow"</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lipoprotein_A_UKBB_EUR"</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"daner_uniman"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Z_df <span class="op">=</span> Z_df.drop(index <span class="op">=</span> traits_to_drop)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="20fd0ff3-7f3e-4bf4-bf90-9183b72ef7ca" class="cell" data-execution_count="6">
+</section>
+<section id="check-trait-overlap" class="level2">
+<h2 class="anchored" data-anchor-id="check-trait-overlap">Check trait overlap</h2>
+<p>Before aligning the matrices, we check whether all Z-score traits are present in the LDSC covariance and vice versa.</p>
+<p>Traits missing from the covariance usually indicate LDSC intercept failures or traits excluded during covariance construction. These traits are from the Z-score matrix before producing the final aligned release files.</p>
+<div id="af00a2de-55ad-4c6b-95c8-3228dfa040f4" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Column-name label types</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Z_df.columns.<span class="bu">map</span>(<span class="bu">type</span>).value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>traits <span class="op">=</span> <span class="bu">list</span>(Z_df.index)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>missing_rows <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(A_df.index)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(A_df.columns)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_rows <span class="kw">or</span> missing_cols:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Noise covariance is missing traits from Z. "</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Missing rows: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_rows)<span class="sc">}</span><span class="ss">; "</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"missing columns: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_cols)<span class="sc">}</span><span class="ss">."</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="0779d9d8-e275-4098-bd21-8aa5e569bf73" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>traits <span class="op">=</span> <span class="bu">list</span>(A_df.index)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>missing_rows <span class="op">=</span> <span class="bu">set</span>(traits) <span class="op">-</span> <span class="bu">set</span>(Z_df.index)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> missing_rows:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Z is missing traits from noise covariance. "</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Missing rows: </span><span class="sc">{</span><span class="bu">sorted</span>(missing_rows)<span class="sc">}</span><span class="ss">. "</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="20fd0ff3-7f3e-4bf4-bf90-9183b72ef7ca" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Column-name label types</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Z_df.columns.<span class="bu">map</span>(<span class="bu">type</span>).value_counts())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'str'&gt;    46504
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<section id="drop-traits" class="level2">
-<h2 class="anchored" data-anchor-id="drop-traits">Drop traits</h2>
-<p>Some traits produced <code>NaN</code> intercepts in LDSC and hence not included in the covariance. Drop them here, so we don’t have to align Z and covariance everytime they are called.</p>
-<div id="a9e8a464-4db3-4e3c-abd8-edee216ff1db" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>traits_to_drop <span class="op">=</span> [</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NaN intercepts from LDSC</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and hence not included in the covariance</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mdd_symptoms_2023_Comm_MDD5b_psychomotorSlow"</span>, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Lipoprotein_A_UKBB_EUR"</span>, </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"daner_uniman"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>Z_df <span class="op">=</span> Z_df.drop(index <span class="op">=</span> traits_to_drop)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<div id="3ecf3c4f-6f86-4d10-be0d-f4f9ce890853" class="cell" data-execution_count="8">
+</section>
+<section id="align-z-scores-and-sampling-covariance" class="level2">
+<h2 class="anchored" data-anchor-id="align-z-scores-and-sampling-covariance">Align Z-scores and sampling covariance</h2>
+<p>After dropping unavailable traits, we take the common trait set and reorder both objects consistently.</p>
+<p>The final aligned objects are:</p>
+<ul>
+<li><code>Z_aligned</code>: traits × SNPs Z-score matrix;</li>
+<li><code>A_aligned</code>: traits × traits sampling covariance matrix.</li>
+</ul>
+<p>These are the objects written to disk for downstream Clorinn analyses.</p>
+<div id="3ecf3c4f-6f86-4d10-be0d-f4f9ce890853" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>common <span class="op">=</span> A_df.index.intersection(A_df.index).intersection(Z_df.index)</span>
@@ -333,7 +373,13 @@ Name: count, dtype: int64</code></pre>
 Number of SNPs: 46504</code></pre>
 </div>
 </div>
-<div id="e4253862-a947-4228-b934-b55f11d4cc41" class="cell" data-execution_count="9">
+</section>
+<section id="validate-sampling-covariance" class="level2">
+<h2 class="anchored" data-anchor-id="validate-sampling-covariance">Validate sampling covariance</h2>
+<p>The LDSC sampling covariance must be numerically well behaved for the correlated-noise Clorinn objective.</p>
+<p>We check for symmetry and positive definiteness.</p>
+<p>A symmetric positive-definite covariance is required for stable likelihood evaluation, inversion, and missingness-pattern-specific covariance operations downstream.</p>
+<div id="e4253862-a947-4228-b934-b55f11d4cc41" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tol <span class="op">=</span> <span class="fl">1e-8</span></span>
@@ -361,6 +407,33 @@ Number of SNPs: 46504</code></pre>
 This matrix is PD.</code></pre>
 </div>
 </div>
+</section>
+<section id="write-release-files" class="level2">
+<h2 class="anchored" data-anchor-id="write-release-files">Write release files</h2>
+<p>The final release files are:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Object</th>
+<th style="text-align: left;">Output file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">aligned Z-score matrix</td>
+<td style="text-align: left;"><code>zscore_v1_0.csv</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">aligned sampling covariance</td>
+<td style="text-align: left;"><code>sampling_covariance_v1_0.csv</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">normalized trait-category map</td>
+<td style="text-align: left;"><code>trait_to_group_v1_0.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>These files define the PGC v1.0 input bundle used by the downstream Snakemake/Clorinn pipeline.</p>
 <div id="cfd5946f-0faf-42b5-8738-f22cc3cd3e5d" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
