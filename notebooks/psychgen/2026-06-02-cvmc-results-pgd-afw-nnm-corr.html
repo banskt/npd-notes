@@ -250,7 +250,7 @@ window.Quarto = {
 </section>
 <section id="configuration" class="level2">
 <h2 class="anchored" data-anchor-id="configuration">Configuration</h2>
-<div id="e70a36fb-a250-43a5-bc52-769976d97cb4" class="cell" data-execution_count="1">
+<div id="e70a36fb-a250-43a5-bc52-769976d97cb4" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -406,7 +406,7 @@ window.Quarto = {
 <section id="mahalanobis-loss" class="level2">
 <h2 class="anchored" data-anchor-id="mahalanobis-loss">Mahalanobis loss</h2>
 <p>The CVMC pipeline, in its current implementation, does not report the Mahalanobis loss on the heldout entries. Hence, we have to calculate it post-hoc. Since this is time-consuming, we save the dataframe for future reproduction.</p>
-<div id="6a7e3fe6-cbf1-4d3a-914b-7e89c1994458" class="cell" data-execution_count="2">
+<div id="6a7e3fe6-cbf1-4d3a-914b-7e89c1994458" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># corr_mse_long_df = get_mahalanobis_error_from_simulations(</span></span>
@@ -416,7 +416,7 @@ window.Quarto = {
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>corr_mse_long_df <span class="op">=</span> pd.read_csv(<span class="st">"cvmc_mahalanobis_mse_all_folds.csv"</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="edacfc5e-fa86-4580-ad8b-2358a3b88bf2" class="cell" data-execution_count="5">
+<div id="edacfc5e-fa86-4580-ad8b-2358a3b88bf2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_summary_df(long_df, metric_name):</span>
@@ -442,7 +442,7 @@ window.Quarto = {
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>corr_mse_df <span class="op">=</span> get_summary_df(corr_mse_long_df, <span class="st">"mahalanobis_mse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="0b3243df-58c5-422e-9a97-3097e2bae93f" class="cell" data-execution_count="6">
+<div id="0b3243df-58c5-422e-9a97-3097e2bae93f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">6</span>))</span>
@@ -524,7 +524,15 @@ window.Quarto = {
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> rlabels], rotation<span class="op">=</span><span class="dv">90</span>)</span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Nuclear norm constraint r"</span>)</span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, ax <span class="kw">in</span> <span class="bu">zip</span>([<span class="st">"(a)"</span>, <span class="st">"(b)"</span>], [ax1, ax2]):</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">1.1</span>, label, transform<span class="op">=</span>ax.transAxes, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.savefig(</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co">#         f"figures/cvmc_nnmcorr_heldout_error.pdf",</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co">#         bbox_inches="tight",</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>

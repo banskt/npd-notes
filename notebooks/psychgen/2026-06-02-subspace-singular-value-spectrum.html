@@ -380,7 +380,7 @@ window.Quarto = {
 <span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.asarray(ranks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="b6f5df32-a18e-4d62-9459-73a7cc45347e" class="cell" data-execution_count="10">
+<div id="b6f5df32-a18e-4d62-9459-73a7cc45347e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
@@ -560,17 +560,17 @@ window.Quarto = {
 <span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>    prefix1, subspace_out_dir, </span>
 <span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>    r_scale<span class="op">=</span><span class="st">'log2'</span>, k_highlight<span class="op">=</span><span class="dv">15</span>,</span>
 <span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"PGD+AFW / NNM-Corr"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"NNM-Corr / PGD+AFW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>prefix2 <span class="op">=</span> <span class="st">"pgd_fw_nnm"</span></span>
 <span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>make_singular_value_plots(</span>
 <span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>    ax4, ax5, ax6, </span>
 <span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>    prefix2, subspace_out_dir, </span>
-<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>    r_scale<span class="op">=</span><span class="st">'log2'</span>, show_yaxis<span class="op">=</span><span class="va">False</span>, k_highlight<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>    r_scale<span class="op">=</span><span class="st">'log2'</span>, show_yaxis<span class="op">=</span><span class="va">False</span>, k_highlight<span class="op">=</span><span class="dv">15</span>,</span>
 <span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>ax4.set_title(<span class="st">"PGD+FW / NNM"</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>ax4.set_title(<span class="st">"NNM / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.savefig('cvsr_singular_value_spectrum_of_subspaces.png', bbox_inches='tight')</span></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'figures/cvsr_singular_value_spectrum.pdf'</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
 <span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
@@ -589,7 +589,7 @@ window.Quarto = {
 </section>
 <section id="claim" class="level2">
 <h2 class="anchored" data-anchor-id="claim">Claim</h2>
-<p>The gap-vs-r panel shows NNM-Corr does have a stable regime and NNM doesn’t, and that difference is mechanistically attributable to the noise correction widening the BBP margin. This is a clean methods result: <strong>correlated-noise whitening converts NNM’s all-at-once collapse into an ordered factor-entry path with a regularization-robust rank plateau.</strong></p>
+<p>The gap-vs-r panel shows NNM-Corr does have a stable regime and NNM doesn’t, and that difference is mechanistically attributable to the noise correction widening the BBP margin. This is a clean methods result: <strong>correlated-noise whitening converts NNM’s all-at-once collapse into an ordered factor-entry path with a rank plateau.</strong></p>
 <p>Things to do: 1. Add the analytic detection edge under A so “supercritical vs marginal” is a derived statement, not just a visual. 2. Refit on a finer grid inside [256,4096] — the current x-ticks are powers of two, so the plateau is resolved by maybe three points; a denser grid turns “looks flat” into “is flat.”</p>
 
 

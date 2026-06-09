@@ -279,7 +279,7 @@ window.Quarto = {
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fit_result_out_dir <span class="op">=</span> Path(data_root) <span class="op">/</span> <span class="st">"fit_result"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="bcb53a2e-7eba-41dd-acdf-5cf41c2ea63f" class="cell" data-execution_count="5">
+<div id="bcb53a2e-7eba-41dd-acdf-5cf41c2ea63f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_stability_jsons(stability_dir, prefix):</span>
@@ -339,7 +339,7 @@ window.Quarto = {
 <section id="the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
 <p>The solution path is not smooth. There are spikes along the projected distance matrix. We reproduce the heatmap here for posterity.</p>
-<div id="c8eb26ec-ab0d-4de0-a9bb-36bb27d50779" class="cell" data-execution_count="6">
+<div id="c8eb26ec-ab0d-4de0-a9bb-36bb27d50779" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> centers_to_edges(x):</span>
@@ -481,7 +481,7 @@ window.Quarto = {
 (k=20, r=2048)
 (k=20, r=8192)
 (k=25, r=4096)</code></pre>
-<div id="219db44a-be14-4057-b420-e4165e66c31f" class="cell" data-execution_count="7">
+<div id="219db44a-be14-4057-b420-e4165e66c31f" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>suspicious_cells<span class="op">=</span>[</span>
@@ -499,7 +499,7 @@ window.Quarto = {
 </section>
 <section id="look-at-per-repeat-distances-not-only-the-mean" class="level2">
 <h2 class="anchored" data-anchor-id="look-at-per-repeat-distances-not-only-the-mean">Look at per-repeat distances, not only the mean</h2>
-<div id="6cddfe28-5d70-4d08-9787-bf2bb83da1b2" class="cell" data-execution_count="9">
+<div id="6cddfe28-5d70-4d08-9787-bf2bb83da1b2" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_metrics_per_pair(records, metric):</span>
@@ -549,7 +549,7 @@ window.Quarto = {
 </section>
 <section id="check-objective-monotonicity-per-split" class="level2">
 <h2 class="anchored" data-anchor-id="check-objective-monotonicity-per-split">Check objective monotonicity per split</h2>
-<div id="cbb73652-3619-496e-81a4-20920010f887" class="cell" data-tags="[]" data-execution_count="10">
+<div id="cbb73652-3619-496e-81a4-20920010f887" class="cell" data-tags="[]" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_convergence_per_split(rank_list, n_repeat<span class="op">=</span><span class="dv">5</span>, n_split<span class="op">=</span><span class="dv">2</span>):</span>
@@ -579,12 +579,12 @@ window.Quarto = {
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>convergence_df <span class="op">=</span> build_convergence_per_split(rank_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="06314775-ad90-4fad-bb76-5d2d7d0bb8ef" class="cell" data-execution_count="11">
+<div id="06314775-ad90-4fad-bb76-5d2d7d0bb8ef" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>convergence_df.query(<span class="st">"repeat==0 and split==0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -832,7 +832,7 @@ window.Quarto = {
 </section>
 <section id="are-the-spikes-caused-by-small-spectral-gaps" class="level2">
 <h2 class="anchored" data-anchor-id="are-the-spikes-caused-by-small-spectral-gaps">Are the spikes caused by small spectral gaps?</h2>
-<div id="7d27f1f6-5814-4843-9f39-32d1a729bb10" class="cell" data-tags="[]" data-execution_count="14">
+<div id="7d27f1f6-5814-4843-9f39-32d1a729bb10" class="cell" data-tags="[]" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> _pair_to_mat_indices(pair_labels, mat_labels):</span>
@@ -1031,12 +1031,12 @@ window.Quarto = {
 <span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a>energy_df <span class="op">=</span> build_spectral_gap_pair(records, subspace <span class="op">=</span> subspace_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="b6b2f8b9-e9de-4af6-90c0-319ab7fa8164" class="cell" data-execution_count="15">
+<div id="b6b2f8b9-e9de-4af6-90c0-319ab7fa8164" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>energy_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -1207,14 +1207,14 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="25bc06d0-dc6b-4557-99de-e99b350dbce7" class="cell" data-execution_count="16">
+<div id="25bc06d0-dc6b-4557-99de-e99b350dbce7" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> spearmanr</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_gap_distance_scatter(ax, energy_df,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"gap_ratio"</span>, y<span class="op">=</span><span class="st">"distance"</span>, add_fit<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        k_values<span class="op">=</span><span class="va">None</span>, nucnorm_values<span class="op">=</span><span class="va">None</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        k_values<span class="op">=</span><span class="va">None</span>, nucnorm_values<span class="op">=</span><span class="va">None</span>, marker_size<span class="op">=</span><span class="dv">40</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        min_s_norm<span class="op">=</span><span class="fl">0.01</span>, max_distance<span class="op">=</span><span class="fl">0.5</span>, min_gap_ratio<span class="op">=</span><span class="fl">0.6</span>, </span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        color_by<span class="op">=</span><span class="st">"nucnorm"</span>, cmap<span class="op">=</span><span class="st">"viridis"</span>, color_norm<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -1225,68 +1225,82 @@ window.Quarto = {
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[x, y, color_by])</span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">==</span> <span class="st">"gap_ratio"</span>:</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"gap_ratio"</span>] <span class="op">&gt;</span> min_gap_ratio]</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k_values <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"k"</span>].isin(k_values)]</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nucnorm_values <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"nucnorm"</span>].isin(nucnorm_values)]</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> {</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gap_ratio"</span>: <span class="st">"Gap ratio"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"neglog_rel_gap"</span>: <span class="st">"Negative log relative gap"</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"distance"</span>: <span class="st">"Projection distance"</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">==</span> <span class="st">"gap_ratio"</span>:</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"gap_ratio"</span>] <span class="op">&gt;</span> min_gap_ratio]</span>
 <span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    rho, pval <span class="op">=</span> spearmanr(df[x], df[y])</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> ax.scatter(df[x], df[y], </span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>df[color_by],</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span>cmap,</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        norm<span class="op">=</span>color_norm, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> k_values <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"k"</span>].isin(k_values)]</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> nucnorm_values <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        df <span class="op">=</span> df[df[<span class="st">"nucnorm"</span>].isin(nucnorm_values)]</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    rho, pval <span class="op">=</span> spearmanr(df[x], df[y])</span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> add_fit:</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        xv <span class="op">=</span> df[x].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        yv <span class="op">=</span> df[y].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        m, b <span class="op">=</span> np.polyfit(xv, yv, deg<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> ax.scatter(df[x], df[y], </span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>df[color_by],</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        cmap<span class="op">=</span>cmap,</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        norm<span class="op">=</span>color_norm, alpha<span class="op">=</span><span class="fl">0.8</span>, s<span class="op">=</span>marker_size)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use visible x-range for the fit line</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        xlo, xhi <span class="op">=</span> ax.get_xlim()</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        xfit <span class="op">=</span> np.linspace(xlo, xhi, <span class="dv">200</span>)</span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        yfit <span class="op">=</span> m <span class="op">*</span> xfit <span class="op">+</span> b</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        ax.plot(xfit, yfit, lw<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'gray'</span>,label<span class="op">=</span><span class="ss">f"y=</span><span class="sc">{</span>m<span class="sc">:.3g}</span><span class="ss">x+</span><span class="sc">{</span>b<span class="sc">:.3g}</span><span class="ss">"</span>)</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(x)</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(y)</span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>y<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>x<span class="sc">}</span><span class="ch">\n</span><span class="ss">Spearman rho=</span><span class="sc">{</span>rho<span class="sc">:.3f}</span><span class="ss">, p=</span><span class="sc">{</span>pval<span class="sc">:.2g}</span><span class="ss">, n=</span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df, sc</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> add_fit:</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>        xv <span class="op">=</span> df[x].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        yv <span class="op">=</span> df[y].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        m, b <span class="op">=</span> np.polyfit(xv, yv, deg<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Use visible x-range for the fit line</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        xlo, xhi <span class="op">=</span> ax.get_xlim()</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        xfit <span class="op">=</span> np.linspace(xlo, xhi, <span class="dv">200</span>)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>        yfit <span class="op">=</span> m <span class="op">*</span> xfit <span class="op">+</span> b</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>        ax.plot(xfit, yfit, lw<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">'gray'</span>,label<span class="op">=</span><span class="ss">f"y=</span><span class="sc">{</span>m<span class="sc">:.3g}</span><span class="ss">x+</span><span class="sc">{</span>b<span class="sc">:.3g}</span><span class="ss">"</span>)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        ax.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">8</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>                      width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># heatmap, line plot</span></span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>                      wspace<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>                     )</span>
-<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>nucnorm_values <span class="op">=</span> rank_list[<span class="dv">8</span>:<span class="dv">14</span>]</span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> np.arange(<span class="dv">5</span>, <span class="dv">26</span>)</span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>energy_df[<span class="st">"neglog_rel_gap"</span>]   <span class="op">=</span> <span class="op">-</span>np.log10(energy_df[<span class="st">"rel_s_gap"</span>].clip(lower<span class="op">=</span><span class="fl">1e-12</span>))</span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="co"># color_norm = mpl_colors.LogNorm(vmin=np.min(nucnorm_values), vmax=np.max(nucnorm_values))</span></span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>color_norm <span class="op">=</span> mpl_colors.BoundaryNorm(boundaries<span class="op">=</span>[<span class="dv">0</span>] <span class="op">+</span> nucnorm_values, ncolors<span class="op">=</span><span class="dv">256</span>)</span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>df_gap_ratio, sc <span class="op">=</span> make_gap_distance_scatter(ax1, energy_df, x<span class="op">=</span><span class="st">"gap_ratio"</span>, </span>
-<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm<span class="op">=</span>color_norm)</span>
-<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>df_rel_gap, _    <span class="op">=</span> make_gap_distance_scatter(ax2, energy_df, x<span class="op">=</span><span class="st">"neglog_rel_gap"</span>, </span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm<span class="op">=</span>color_norm)</span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(sc, ax<span class="op">=</span>[ax1, ax2], pad<span class="op">=</span><span class="fl">0.02</span>)</span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Nuclear norm radius r"</span>)</span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>cbar.set_ticks(nucnorm_values)</span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>cbar.set_ticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> nucnorm_values])</span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(labels[x])</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(labels[y])</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"</span><span class="sc">{</span>labels[y]<span class="sc">}</span><span class="ss"> vs </span><span class="sc">{</span>labels[x]<span class="sc">}</span><span class="ch">\n</span><span class="ss">Spearman rho=</span><span class="sc">{</span>rho<span class="sc">:.3f}</span><span class="ss">, p=</span><span class="sc">{</span>pval<span class="sc">:.2g}</span><span class="ss">, n=</span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df, sc</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">8</span>), constrained_layout<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>                      width_ratios<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">1</span>],  <span class="co"># heatmap, line plot</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>                      wspace<span class="op">=</span><span class="fl">0.1</span>, hspace<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>                     )</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>nucnorm_values <span class="op">=</span> rank_list[<span class="dv">8</span>:<span class="dv">14</span>]</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> np.arange(<span class="dv">5</span>, <span class="dv">26</span>)</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>energy_df[<span class="st">"neglog_rel_gap"</span>]   <span class="op">=</span> <span class="op">-</span>np.log10(energy_df[<span class="st">"rel_s_gap"</span>].clip(lower<span class="op">=</span><span class="fl">1e-12</span>))</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a><span class="co"># color_norm = mpl_colors.LogNorm(vmin=np.min(nucnorm_values), vmax=np.max(nucnorm_values))</span></span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>color_norm <span class="op">=</span> mpl_colors.BoundaryNorm(boundaries<span class="op">=</span>[<span class="dv">0</span>] <span class="op">+</span> nucnorm_values, ncolors<span class="op">=</span><span class="dv">256</span>)</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>df_gap_ratio, sc <span class="op">=</span> make_gap_distance_scatter(ax1, energy_df, x<span class="op">=</span><span class="st">"gap_ratio"</span>, </span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm<span class="op">=</span>color_norm)</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>df_rel_gap, _    <span class="op">=</span> make_gap_distance_scatter(ax2, energy_df, x<span class="op">=</span><span class="st">"neglog_rel_gap"</span>, </span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm<span class="op">=</span>color_norm)</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(sc, ax<span class="op">=</span>[ax1, ax2], pad<span class="op">=</span><span class="fl">0.02</span>)</span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Nuclear norm radius r"</span>)</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>cbar.set_ticks(nucnorm_values)</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a>cbar.set_ticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> nucnorm_values])</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, ax <span class="kw">in</span> <span class="bu">zip</span>([<span class="st">"(a)"</span>, <span class="st">"(b)"</span>], [ax1, ax2]):</span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">1.1</span>, label, transform<span class="op">=</span>ax.transAxes, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.savefig(</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a><span class="co">#         f"figures/cvsr_nnmcorr_gap_distance_scatter.pdf",</span></span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a><span class="co">#         bbox_inches="tight",</span></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1296,7 +1310,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="43aa7fba-8ff4-480d-add3-1df1118783f5" class="cell" data-execution_count="17">
+<div id="43aa7fba-8ff4-480d-add3-1df1118783f5" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>energy_mean_df <span class="op">=</span> (</span>
@@ -1322,9 +1336,9 @@ window.Quarto = {
 <span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> np.arange(<span class="dv">5</span>, <span class="dv">26</span>)</span>
 <span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>color_norm <span class="op">=</span> mpl_colors.LogNorm(vmin<span class="op">=</span>np.<span class="bu">min</span>(nucnorm_values), vmax<span class="op">=</span>np.<span class="bu">max</span>(nucnorm_values))</span>
 <span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>_, sc <span class="op">=</span> make_gap_distance_scatter(ax1, energy_mean_df, x<span class="op">=</span><span class="st">"gap_ratio"</span>, </span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>_, sc <span class="op">=</span> make_gap_distance_scatter(ax1, energy_mean_df, x<span class="op">=</span><span class="st">"gap_ratio"</span>, marker_size<span class="op">=</span><span class="dv">100</span>,</span>
 <span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm <span class="op">=</span> color_norm)</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>_, _  <span class="op">=</span> make_gap_distance_scatter(ax2, energy_mean_df, x<span class="op">=</span><span class="st">"neglog_rel_gap"</span>, </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>_, _  <span class="op">=</span> make_gap_distance_scatter(ax2, energy_mean_df, x<span class="op">=</span><span class="st">"neglog_rel_gap"</span>, marker_size<span class="op">=</span><span class="dv">100</span>,</span>
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>                          nucnorm_values<span class="op">=</span>nucnorm_values, k_values<span class="op">=</span>k_values, color_norm <span class="op">=</span> color_norm)</span>
 <span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> fig.colorbar(sc, ax<span class="op">=</span>[ax1, ax2], pad<span class="op">=</span><span class="fl">0.02</span>)</span>
@@ -1332,7 +1346,15 @@ window.Quarto = {
 <span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>cbar.set_ticks(nucnorm_values)</span>
 <span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>cbar.set_ticklabels([<span class="bu">str</span>(<span class="bu">int</span>(r)) <span class="cf">for</span> r <span class="kw">in</span> nucnorm_values])</span>
 <span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, ax <span class="kw">in</span> <span class="bu">zip</span>([<span class="st">"(a)"</span>, <span class="st">"(b)"</span>], [ax1, ax2]):</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">1.1</span>, label, transform<span class="op">=</span>ax.transAxes, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>fig.savefig(</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"figures/cvsr_nnmcorr_gap_distance_scatter.pdf"</span>,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        bbox_inches<span class="op">=</span><span class="st">"tight"</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
