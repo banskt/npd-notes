@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>From the subspace stability cross-validation, we observed that the NNM-Corr’s correlated-noise whitening converts NNM’s all-at-once spectral collapse into an ordered factor-entry path. <a href="../../notebooks/psychgen/2026-06-02-subspace-singular-value-spectrum.html">Click here to view the diagnostics notebook</a>. Here, we check whether the same behavior persists for the full PGC data.</p>
 <p>We show the results for 3 groups of traits: 1. All 107 traits 2. Excluding “Biomarkers” traits 3. Excluding “Biomarkers” and “Neurite density” traits</p>
-<div id="e4cf4ce3-5b6b-4499-ae2e-e57bdbd93a5f" class="cell" data-execution_count="2">
+<div id="e4cf4ce3-5b6b-4499-ae2e-e57bdbd93a5f" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -226,360 +226,416 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.axes_grid1 <span class="im">import</span> make_axes_locatable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<div id="f44298f2-c686-4600-b45e-79a601248de8" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trait_dirs <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"107 traits"</span>: Path(<span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/clorinn/low_rank_fit"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"78 traits"</span>:  Path(<span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/v1.1/low_rank_fit"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"51 traits"</span>:  Path(<span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/v1.2/low_rank_fit"</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 <div id="6507a2de-c382-4c0b-8733-a6f2fce69177" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_svd_npz(svd_dir, prefix):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    svd_dir <span class="op">=</span> Path(svd_dir)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> svd_dir.glob(<span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_r*.npz"</span>):</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> np.load(path, allow_pickle<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> data:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            fit_params <span class="op">=</span> data[<span class="st">"fit_params"</span>].item()</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            nucnorm <span class="op">=</span> fit_params[<span class="st">"nucnorm"</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> data[<span class="st">"s"</span>]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            n_factors <span class="op">=</span> <span class="bu">len</span>(s)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> {<span class="st">"nucnorm"</span>: nucnorm,}</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            row.update({<span class="ss">f"s</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">"</span>: s[k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n_factors)})</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            rows.append(row)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> (pd.DataFrame(rows)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>              .sort_values([<span class="st">"nucnorm"</span>])</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>              .reset_index(drop<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_singular_value_metrics(df, k_list<span class="op">=</span><span class="va">None</span>, metric<span class="op">=</span><span class="st">"value"</span>):</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    s_cols <span class="op">=</span> <span class="bu">sorted</span>(</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> re.match(<span class="vs">r"</span><span class="dv">^</span><span class="vs">s</span><span class="dv">\d</span><span class="op">+</span><span class="dv">$</span><span class="vs">"</span>, c)],</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                key<span class="op">=</span><span class="kw">lambda</span> x: <span class="bu">int</span>(x[<span class="dv">1</span>:])</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    k_obs  <span class="op">=</span> np.asarray([<span class="bu">int</span>(x[<span class="dv">1</span>:]) <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> x <span class="kw">in</span> s_cols]) <span class="co"># observed k values, idx + 1</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    k_req  <span class="op">=</span> k_obs <span class="cf">if</span> k_list <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> np.asarray(k_list)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    k_idx  <span class="op">=</span> np.searchsorted(k_obs, k_req)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> metric <span class="kw">in</span> (<span class="st">"gap_ratio"</span>, <span class="st">"relative_gap"</span>):</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># requires k_next </span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        valid <span class="op">=</span> (k_idx <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="op">&amp;</span> (k_idx <span class="op">&lt;</span> <span class="bu">len</span>(k_obs) <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> np.<span class="bu">all</span>(valid):</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Some requested k are not available: </span><span class="sc">{</span>k_req[<span class="op">~</span>valid]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    S     <span class="op">=</span> df[s_cols].to_numpy() <span class="co"># nucnorms x k_obs</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    s_1   <span class="op">=</span> S[:, k_obs <span class="op">==</span> <span class="dv">1</span>] <span class="co"># first eigenvalue (max eigenvalue) for all r/x</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    s_sum <span class="op">=</span> np.<span class="bu">sum</span>(S, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> S[:, k_idx]</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> metric <span class="op">==</span> <span class="st">"norm_value"</span>:</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        y <span class="op">/=</span> s_1</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> metric <span class="op">==</span> <span class="st">"gap_ratio"</span>:</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        y <span class="op">/=</span> S[:, k_idx <span class="op">+</span> <span class="dv">1</span>]</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> metric <span class="op">==</span> <span class="st">"relative_gap"</span>:</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> (y <span class="op">-</span> S[:, k_idx <span class="op">+</span> <span class="dv">1</span>]) <span class="op">/</span> np.where(y <span class="op">&gt;</span> <span class="dv">0</span>, y, np.nan)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_effective_rank_at_nucnorm(df, nucnorm, <span class="op">*</span>, thres<span class="op">=</span><span class="fl">0.9</span>, method<span class="op">=</span><span class="st">"energy"</span>):</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    S_arr <span class="op">=</span> get_singular_value_metrics(df, metric<span class="op">=</span><span class="st">"value"</span>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    norms <span class="op">=</span> df[<span class="st">"nucnorm"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>).ravel()</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    r_idx <span class="op">=</span> np.searchsorted(norms, nucnorm)</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> S_arr[r_idx, :].ravel()</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> method <span class="op">==</span> <span class="st">"energy"</span>:</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        cum <span class="op">=</span> np.cumsum(s) <span class="op">/</span> np.<span class="bu">sum</span>(s)</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.searchsorted(cum, thres)</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(idx)</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"participation_ratio"</span>:</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        s2 <span class="op">=</span> np.<span class="bu">sum</span>(s<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> <span class="bu">float</span>((np.<span class="bu">sum</span>(s)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> s2) <span class="cf">if</span> s2 <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="fl">0.0</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> idx</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"count"</span>:</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        t <span class="op">=</span> thres <span class="op">*</span> np.<span class="bu">max</span>(s)</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.<span class="bu">sum</span>(s <span class="op">&gt;</span> t)</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"spectral_gap"</span>:</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        gap <span class="op">=</span> s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">1</span>:]</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        rel_gap <span class="op">=</span> gap <span class="op">/</span> np.where(s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>, s[:<span class="op">-</span><span class="dv">1</span>], np.nan)</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(np.argmax(rel_gap)) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"spectral_gap_loose"</span>:</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>        gap <span class="op">=</span> s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">1</span>:]</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>        rel_gap <span class="op">=</span> gap <span class="op">/</span> np.where(s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>, s[:<span class="op">-</span><span class="dv">1</span>], np.nan)</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>        gap_thres <span class="op">=</span> thres <span class="op">*</span> np.<span class="bu">max</span>(rel_gap)</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.<span class="bu">max</span>(np.where(rel_gap <span class="op">&gt;</span> gap_thres))</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(idx) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Method undefined."</span>)</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_effective_ranks(df, nucnorms, <span class="op">*</span>, thres<span class="op">=</span><span class="fl">0.9</span>, method<span class="op">=</span><span class="st">"energy"</span>):</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    ranks<span class="op">=</span> (</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        [get_effective_rank_at_nucnorm(df, r, method<span class="op">=</span>method, thres<span class="op">=</span>thres) </span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>         <span class="cf">for</span> r <span class="kw">in</span> nucnorms]</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.asarray(ranks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.asarray(x, dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    powers <span class="op">=</span> np.arange(np.ceil(np.log2(x.<span class="bu">min</span>())), np.floor(np.log2(x.<span class="bu">max</span>())) <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    xlabels <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> powers</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> scale <span class="op">==</span> <span class="st">"log10"</span>:</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log10(x)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log10(xlabels)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> scale <span class="op">==</span> <span class="st">"log2"</span>:</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log2(x)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log2(xlabels)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> x</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> xlabels</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    xlabel_str <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>r<span class="sc">:g}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> xlabels]</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xscale, xticks, xlabel_str</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> style_blank_axis(ax):</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> style_colorbar_yticks(cbar, cmap, norm):</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tick, value <span class="kw">in</span> <span class="bu">zip</span>(cbar.ax.yaxis.get_major_ticks(), cbar.ax.get_yticks()):</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> cmap(norm(value))</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        tick.tick1line.set_markeredgecolor(color)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        tick.tick2line.set_markeredgecolor(color)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        tick.tick1line.set_color(<span class="st">"none"</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        tick.tick2line.set_color(<span class="st">"none"</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for tick_label, value in zip(cbar.ax.get_yticklabels(), cbar.ax.get_yticks()):</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># tick_label.set_color(cmap(norm(value)))</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_line_plots_with_colorbar_inset(ax, x, y, ycols,</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">""</span>, cbar_label<span class="op">=</span><span class="st">""</span>, cbar_xpos<span class="op">=</span><span class="st">""</span>, show_cbar<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        vcenter<span class="op">=</span><span class="va">None</span>, cmap<span class="op">=</span><span class="va">None</span>, norm<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">    Create K = len(ycols) line plots, color maps to values in ycols</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">    x : ndarray(N,)</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">    y : ndarray(N, K), columns of y correspond to values in k_list</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns cmap, norm for future use.</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> matplotlib.cm <span class="im">import</span> ScalarMappable</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_svd_npz(svd_dir, prefix):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    svd_dir <span class="op">=</span> Path(svd_dir)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> svd_dir.glob(<span class="ss">f"</span><span class="sc">{</span>prefix<span class="sc">}</span><span class="ss">_r*.npz"</span>):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> np.load(path, allow_pickle<span class="op">=</span><span class="va">True</span>) <span class="im">as</span> data:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            fit_params <span class="op">=</span> data[<span class="st">"fit_params"</span>].item()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            nucnorm <span class="op">=</span> fit_params[<span class="st">"nucnorm"</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> data[<span class="st">"s"</span>]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            n_factors <span class="op">=</span> <span class="bu">len</span>(s)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            row <span class="op">=</span> {<span class="st">"nucnorm"</span>: nucnorm,}</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            row.update({<span class="ss">f"s</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">"</span>: s[k] <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(n_factors)})</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            rows.append(row)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> (pd.DataFrame(rows)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>              .sort_values([<span class="st">"nucnorm"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>              .reset_index(drop<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_singular_value_metrics(df, k_list<span class="op">=</span><span class="va">None</span>, metric<span class="op">=</span><span class="st">"value"</span>):</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    s_cols <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> re.match(<span class="vs">r"</span><span class="dv">^</span><span class="vs">s</span><span class="dv">\d</span><span class="op">+</span><span class="dv">$</span><span class="vs">"</span>, c)],</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                key<span class="op">=</span><span class="kw">lambda</span> x: <span class="bu">int</span>(x[<span class="dv">1</span>:])</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    k_obs  <span class="op">=</span> np.asarray([<span class="bu">int</span>(x[<span class="dv">1</span>:]) <span class="op">+</span> <span class="dv">1</span> <span class="cf">for</span> x <span class="kw">in</span> s_cols]) <span class="co"># observed k values, idx + 1</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    k_req  <span class="op">=</span> k_obs <span class="cf">if</span> k_list <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> np.asarray(k_list)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    k_idx  <span class="op">=</span> np.searchsorted(k_obs, k_req)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> metric <span class="kw">in</span> (<span class="st">"gap_ratio"</span>, <span class="st">"relative_gap"</span>):</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># requires k_next </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        valid <span class="op">=</span> (k_idx <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="op">&amp;</span> (k_idx <span class="op">&lt;</span> <span class="bu">len</span>(k_obs) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> np.<span class="bu">all</span>(valid):</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f"Some requested k are not available: </span><span class="sc">{</span>k_req[<span class="op">~</span>valid]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    S     <span class="op">=</span> df[s_cols].to_numpy() <span class="co"># nucnorms x k_obs</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    s_1   <span class="op">=</span> S[:, k_obs <span class="op">==</span> <span class="dv">1</span>] <span class="co"># first eigenvalue (max eigenvalue) for all r/x</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    s_sum <span class="op">=</span> np.<span class="bu">sum</span>(S, axis <span class="op">=</span> <span class="dv">1</span>, keepdims <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> S[:, k_idx]</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> metric <span class="op">==</span> <span class="st">"norm_value"</span>:</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        y <span class="op">/=</span> s_1</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> metric <span class="op">==</span> <span class="st">"gap_ratio"</span>:</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        y <span class="op">/=</span> S[:, k_idx <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> metric <span class="op">==</span> <span class="st">"relative_gap"</span>:</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> (y <span class="op">-</span> S[:, k_idx <span class="op">+</span> <span class="dv">1</span>]) <span class="op">/</span> np.where(y <span class="op">&gt;</span> <span class="dv">0</span>, y, np.nan)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> y</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cmap <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> mpl_cmaps.get_cmap(<span class="st">"viridis"</span>).copy()</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> norm <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        vmin <span class="op">=</span> <span class="bu">min</span>(ycols)</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        vmax <span class="op">=</span> <span class="bu">max</span>(ycols)</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> vcenter <span class="kw">is</span> <span class="va">None</span>: vcenter <span class="op">=</span> (vmin <span class="op">+</span> vmax) <span class="op">/</span> <span class="fl">2.</span></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        norm <span class="op">=</span> mpl_colors.TwoSlopeNorm(vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>(ycols):</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        ax.plot(x, y[:, i], color<span class="op">=</span>cmap(norm(i)))</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_cbar:</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.inset_axes([cbar_xpos, <span class="fl">0.15</span>, <span class="fl">0.02</span>, <span class="fl">0.7</span>]) </span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        sm <span class="op">=</span> ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span>cmap)</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        cbar <span class="op">=</span> plt.colorbar(sm, cax<span class="op">=</span>cax, fraction <span class="op">=</span> <span class="fl">0.1</span>)</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Colorbar style</span></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        style_blank_axis(cbar.ax)</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        cbar.ax.tick_params(right<span class="op">=</span><span class="va">True</span>, labelright<span class="op">=</span><span class="va">True</span>, pad<span class="op">=</span><span class="dv">5</span>, width<span class="op">=</span><span class="dv">2</span>, length<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>        cbar.set_label(cbar_label, labelpad <span class="op">=</span> <span class="dv">10</span>)</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        cbar.ax.yaxis.set_label_position(<span class="st">'left'</span>)</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        style_colorbar_yticks(cbar, cmap, norm)</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> side, border <span class="kw">in</span> <span class="bu">list</span>(cbar.ax.spines.items()):</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>            border.set_visible(<span class="va">False</span>)</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cmap, norm</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_effective_rank_at_nucnorm(df, nucnorm, <span class="op">*</span>, thres<span class="op">=</span><span class="fl">0.9</span>, method<span class="op">=</span><span class="st">"energy"</span>):</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    S_arr <span class="op">=</span> get_singular_value_metrics(df, metric<span class="op">=</span><span class="st">"value"</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    norms <span class="op">=</span> df[<span class="st">"nucnorm"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>).ravel()</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    r_idx <span class="op">=</span> np.searchsorted(norms, nucnorm)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> S_arr[r_idx, :].ravel()</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> method <span class="op">==</span> <span class="st">"energy"</span>:</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        cum <span class="op">=</span> np.cumsum(s) <span class="op">/</span> np.<span class="bu">sum</span>(s)</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.searchsorted(cum, thres)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(idx)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"participation_ratio"</span>:</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>        s2 <span class="op">=</span> np.<span class="bu">sum</span>(s<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> <span class="bu">float</span>((np.<span class="bu">sum</span>(s)<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> s2) <span class="cf">if</span> s2 <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> <span class="fl">0.0</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> idx</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"count"</span>:</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        t <span class="op">=</span> thres <span class="op">*</span> np.<span class="bu">max</span>(s)</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.<span class="bu">sum</span>(s <span class="op">&gt;</span> t)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"spectral_gap"</span>:</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>        gap <span class="op">=</span> s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">1</span>:]</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        rel_gap <span class="op">=</span> gap <span class="op">/</span> np.where(s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>, s[:<span class="op">-</span><span class="dv">1</span>], np.nan)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(np.argmax(rel_gap)) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"spectral_gap_loose"</span>:</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>        gap <span class="op">=</span> s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> s[<span class="dv">1</span>:]</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        rel_gap <span class="op">=</span> gap <span class="op">/</span> np.where(s[:<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>, s[:<span class="op">-</span><span class="dv">1</span>], np.nan)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        gap_thres <span class="op">=</span> thres <span class="op">*</span> np.<span class="bu">max</span>(rel_gap)</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.<span class="bu">max</span>(np.where(rel_gap <span class="op">&gt;</span> gap_thres))</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>(idx) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Method undefined."</span>)</span>
 <span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_singular_value_plots(ax1, ax2, ax3, prefix, </span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        svd_out_dir, r_scale<span class="op">=</span><span class="st">'log10'</span>, show_yaxis<span class="op">=</span><span class="va">True</span>, k_max<span class="op">=</span><span class="dv">65</span>,</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">20</span>, r_choose<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="co"># load data </span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    df          <span class="op">=</span> load_svd_npz(svd_out_dir, prefix)   </span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    nucnorms    <span class="op">=</span> df[<span class="st">"nucnorm"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># common x-axis for all plots</span></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>    x, xticks, xlabels  <span class="op">=</span> get_r_scaled(nucnorms, scale<span class="op">=</span>r_scale)</span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">""</span></span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax1: fan of normalized singular values --</span></span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> np.arange(<span class="dv">2</span>, k_max)</span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    k_center <span class="op">=</span> <span class="dv">15</span></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> get_singular_value_metrics(df, k_list, metric<span class="op">=</span><span class="st">"norm_value"</span>)</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>    show_cbar <span class="op">=</span> <span class="va">True</span></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis: </span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>        <span class="co"># show_cbar = True</span></span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="vs">r"Normalized eigenvalue </span><span class="dv">$</span><span class="vs">s_k / s_1</span><span class="dv">$</span><span class="vs">"</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    cmap, norm <span class="op">=</span> make_line_plots_with_colorbar_inset(</span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>        ax1, x, y, k_list,</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>        show_cbar<span class="op">=</span>show_cbar,</span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span>ylabel, cbar_label<span class="op">=</span><span class="vs">r"Rank </span><span class="dv">$</span><span class="vs">k</span><span class="dv">$</span><span class="vs">"</span>, cbar_xpos<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>        vcenter<span class="op">=</span>k_center)</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    ax1.plot(x, y[:, k_highlight<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'orangered'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="ss">f"k=</span><span class="sc">{</span>k_highlight<span class="sc">:d}</span><span class="ss">"</span>)</span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>    ax1.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>, loc<span class="op">=</span><span class="st">'upper center'</span>)</span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax2: effective ranks --</span></span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>    rank_methods <span class="op">=</span> {</span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>        <span class="st">"participation_ratio"</span>: </span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"Participation ratio"</span>}, </span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"energy"</span>: </span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">0.95</span>, <span class="st">"label"</span>: <span class="ss">f"Cumulative singular values &gt; 0.95"</span>}, </span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>        <span class="st">"spectral_gap"</span>: </span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"k at which maximum spectral gap (gmax) sits"</span>},</span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>        <span class="st">"count"</span>: </span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">1e-4</span>, <span class="st">"label"</span>: <span class="st">"Number of eigenvalues &gt; 1e-4"</span>},</span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>        <span class="st">"spectral_gap_loose"</span>:</span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">0.7</span>,  <span class="st">"label"</span>: <span class="st">"Max k at which spectral gap &gt; 70</span><span class="sc">% g</span><span class="st">max"</span>},</span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> {}</span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>    rank_lines <span class="op">=</span> {}</span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m, mdict <span class="kw">in</span> rank_methods.items():</span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>        ranks[m] <span class="op">=</span> get_effective_ranks(df, nucnorms, method<span class="op">=</span>m, thres<span class="op">=</span>mdict[<span class="st">"thres"</span>])</span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="op">!=</span> <span class="st">"spectral_gap_loose"</span>:</span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>            rank_lines[m], <span class="op">=</span> ax2.plot(x, ranks[m],  <span class="st">'o-'</span>, label<span class="op">=</span>mdict[<span class="st">"label"</span>])</span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis: </span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Effective rank"</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>    ax2.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(ylabel)</span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax3: relative spectral gap --</span></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>    <span class="co"># k_list = [8, 10, 12, 15, 20, 25, 30, 40]</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> get_singular_value_metrics(df, k_list, metric<span class="op">=</span><span class="st">"relative_gap"</span>)       </span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>(k_list):</span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ax3.plot(x, y[:, i], 'o-', label=f"{k}")</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>        ax3.plot(x, y[:, i], color<span class="op">=</span>cmap(norm(i)))</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>    ax3.plot(x, y[:, k_highlight<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'orangered'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="ss">f"k=</span><span class="sc">{</span>k_highlight<span class="sc">:d}</span><span class="ss">"</span>)</span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis:</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="vs">r"Relative spectral gap"</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>    ax3.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>    ax3.set_ylabel(ylabel)</span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- mark the chosen rank --</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r_choose <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>        r_choose_idx <span class="op">=</span> np.argwhere(nucnorms <span class="op">==</span> r_choose)</span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ax <span class="kw">in</span> [ax1, ax2, ax3]:</span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>            ax.axvline(x<span class="op">=</span>x[r_choose_idx], color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'dotted'</span>)</span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- mark the x-axis --</span></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticks(xticks)</span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticklabels(xlabels, rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>    ax3.set_xlabel(<span class="st">"Nuclear norm constraint r"</span>)</span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_effective_ranks(df, nucnorms, <span class="op">*</span>, thres<span class="op">=</span><span class="fl">0.9</span>, method<span class="op">=</span><span class="st">"energy"</span>):</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    ranks<span class="op">=</span> (</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        [get_effective_rank_at_nucnorm(df, r, method<span class="op">=</span>method, thres<span class="op">=</span>thres) </span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>         <span class="cf">for</span> r <span class="kw">in</span> nucnorms]</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.asarray(ranks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="0f42f5b4-acfe-4d0a-8f29-065c17b0ad3a" class="cell" data-execution_count="5">
+</section>
+<section id="choose-the-ranks-to-show-in-each-plot" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-ranks-to-show-in-each-plot">Choose the ranks to show in each plot</h2>
+<div id="d5a14a32-1666-4d95-a4cc-dbec3e583298" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_svd_spectrum_figure(svd_out_dir,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span><span class="dv">406</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">15</span>, k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">""</span>):</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">16</span>))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">2</span>, wspace<span class="op">=</span><span class="dv">0</span>, hspace<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">0</span>])</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    ax3 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">2</span>, <span class="dv">0</span>])</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ax4 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax1)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ax5 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax2)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    ax6 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">2</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax3)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> r_at_target_rank(df, k_target, <span class="op">*</span>, method<span class="op">=</span><span class="st">"energy"</span>, thres<span class="op">=</span><span class="fl">0.95</span>):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    nucnorms <span class="op">=</span> df[<span class="st">"nucnorm"</span>].to_numpy(<span class="bu">float</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> get_effective_ranks(df, nucnorms, method<span class="op">=</span>method, thres<span class="op">=</span>thres).astype(<span class="bu">float</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> np.argsort(nucnorms)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    r, g <span class="op">=</span> nucnorms[order], ranks[order]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    hit <span class="op">=</span> np.where(g <span class="op">&gt;=</span> k_target)[<span class="dv">0</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(hit) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> np.nan                      <span class="co"># k_target not reached on this grid</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    j <span class="op">=</span> hit[<span class="dv">0</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> j <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> r[<span class="dv">0</span>]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># snap to whichever bracketing grid point is closer in rank</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> r[j] <span class="cf">if</span> <span class="bu">abs</span>(g[j] <span class="op">-</span> k_target) <span class="op">&lt;=</span> <span class="bu">abs</span>(g[j<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> k_target) <span class="cf">else</span> r[j<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax1, ax2, ax3, ax4, ax5, ax6):</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        style_blank_axis(ax)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        ax.patch.set_alpha(<span class="fl">0.0</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax1, ax2, ax3):</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(left<span class="op">=</span><span class="va">True</span>, labelleft<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax3, ax6):</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(bottom<span class="op">=</span><span class="va">True</span>, labelbottom<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    prefix1 <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    make_singular_value_plots(</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        ax1, ax2, ax3, </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        prefix1, svd_out_dir, </span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        r_scale<span class="op">=</span><span class="st">'log2'</span>, k_highlight<span class="op">=</span>k_highlight,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        r_choose<span class="op">=</span>nnm_corr_r_choose,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span>k_max,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"NNM-Corr / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    prefix2 <span class="op">=</span> <span class="st">"pgd_fw_nnm"</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    make_singular_value_plots(</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        ax4, ax5, ax6, </span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        prefix2, svd_out_dir, </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>        r_scale<span class="op">=</span><span class="st">'log2'</span>, show_yaxis<span class="op">=</span><span class="va">False</span>, k_highlight<span class="op">=</span>k_highlight,</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span>k_max,</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="st">"NNM / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    outfile_name<span class="op">=</span><span class="ss">f"figures/pgc_singular_value_spectrum_</span><span class="sc">{</span>file_out_suffix<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.pdf"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.png"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> choose_rank_for_one_subset(svd_out_dir, k_star):</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k_target <span class="kw">in</span> [k_star]:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        r_corr <span class="op">=</span> r_at_target_rank(load_svd_npz(svd_out_dir, <span class="st">"pgd_fw_nnm_corr"</span>), k_target)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        r_nnm  <span class="op">=</span> r_at_target_rank(load_svd_npz(svd_out_dir, <span class="st">"pgd_fw_nnm"</span>),      k_target)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"k"</span>: k_star,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NNM"</span>: r_nnm,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"NNM-Corr"</span>: r_corr,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>k_choose <span class="op">=</span> {</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"107 traits"</span>: <span class="dv">30</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"78 traits"</span>:  <span class="dv">25</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"51 traits"</span>:  <span class="dv">10</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> {</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    data_name: choose_rank_for_one_subset(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        Path(data_root) <span class="op">/</span> <span class="st">"svd"</span>, </span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        k_choose[data_name]) <span class="cf">for</span> data_name, data_root <span class="kw">in</span> trait_dirs.items()</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>rank_df <span class="op">=</span> pd.DataFrame(rows).T</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co"># display(rank_df.style.format({"Effective Rank": "{:g}"}))</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>display(HTML(rank_df.to_html()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">k</th>
+<th data-quarto-table-cell-role="th">NNM</th>
+<th data-quarto-table-cell-role="th">NNM-Corr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">107 traits</th>
+<td>30.0</td>
+<td>8192.0</td>
+<td>2580.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">78 traits</th>
+<td>25.0</td>
+<td>4096.0</td>
+<td>1024.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">51 traits</th>
+<td>10.0</td>
+<td>1625.0</td>
+<td>813.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-tags="[]" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.asarray(x, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    powers <span class="op">=</span> np.arange(np.ceil(np.log2(x.<span class="bu">min</span>())), np.floor(np.log2(x.<span class="bu">max</span>())) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    xlabels <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> powers</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> scale <span class="op">==</span> <span class="st">"log10"</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log10(x)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log10(xlabels)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> scale <span class="op">==</span> <span class="st">"log2"</span>:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> np.log2(x)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> np.log2(xlabels)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        xscale <span class="op">=</span> x</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        xticks <span class="op">=</span> xlabels</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    xlabel_str <span class="op">=</span> [<span class="ss">f"</span><span class="sc">{</span>r<span class="sc">:g}</span><span class="ss">"</span> <span class="cf">for</span> r <span class="kw">in</span> xlabels]</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xscale, xticks, xlabel_str</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> style_blank_axis(ax):</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(bottom <span class="op">=</span> <span class="va">False</span>, top <span class="op">=</span> <span class="va">False</span>, left <span class="op">=</span> <span class="va">False</span>, right <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        labelbottom <span class="op">=</span> <span class="va">False</span>, labeltop <span class="op">=</span> <span class="va">False</span>, labelleft <span class="op">=</span> <span class="va">False</span>, labelright <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> style_colorbar_yticks(cbar, cmap, norm):</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tick, value <span class="kw">in</span> <span class="bu">zip</span>(cbar.ax.yaxis.get_major_ticks(), cbar.ax.get_yticks()):</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> cmap(norm(value))</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        tick.tick1line.set_markeredgecolor(color)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        tick.tick2line.set_markeredgecolor(color)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        tick.tick1line.set_color(<span class="st">"none"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        tick.tick2line.set_color(<span class="st">"none"</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># for tick_label, value in zip(cbar.ax.get_yticklabels(), cbar.ax.get_yticks()):</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># tick_label.set_color(cmap(norm(value)))</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_line_plots_with_colorbar_inset(ax, x, y, ycols,</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">""</span>, cbar_label<span class="op">=</span><span class="st">""</span>, cbar_xpos<span class="op">=</span><span class="st">""</span>, show_cbar<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        vcenter<span class="op">=</span><span class="va">None</span>, cmap<span class="op">=</span><span class="va">None</span>, norm<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">    Create K = len(ycols) line plots, color maps to values in ycols</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">    x : ndarray(N,)</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">    y : ndarray(N, K), columns of y correspond to values in k_list</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns cmap, norm for future use.</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> matplotlib.cm <span class="im">import</span> ScalarMappable</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cmap <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        cmap <span class="op">=</span> mpl_cmaps.get_cmap(<span class="st">"viridis"</span>).copy()</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> norm <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>        vmin <span class="op">=</span> <span class="bu">min</span>(ycols)</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        vmax <span class="op">=</span> <span class="bu">max</span>(ycols)</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> vcenter <span class="kw">is</span> <span class="va">None</span>: vcenter <span class="op">=</span> (vmin <span class="op">+</span> vmax) <span class="op">/</span> <span class="fl">2.</span></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        norm <span class="op">=</span> mpl_colors.TwoSlopeNorm(vmin<span class="op">=</span>vmin, vcenter<span class="op">=</span>vcenter, vmax<span class="op">=</span>vmax)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>(ycols):</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>        ax.plot(x, y[:, i], color<span class="op">=</span>cmap(norm(i)))</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(ylabel)</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_cbar:</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>        cax <span class="op">=</span> ax.inset_axes([cbar_xpos, <span class="fl">0.15</span>, <span class="fl">0.02</span>, <span class="fl">0.7</span>]) </span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        sm <span class="op">=</span> ScalarMappable(norm<span class="op">=</span>norm, cmap<span class="op">=</span>cmap)</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        cbar <span class="op">=</span> plt.colorbar(sm, cax<span class="op">=</span>cax, fraction <span class="op">=</span> <span class="fl">0.1</span>)</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Colorbar style</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        style_blank_axis(cbar.ax)</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        cbar.ax.tick_params(right<span class="op">=</span><span class="va">True</span>, labelright<span class="op">=</span><span class="va">True</span>, pad<span class="op">=</span><span class="dv">5</span>, width<span class="op">=</span><span class="dv">2</span>, length<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>        cbar.set_label(cbar_label, labelpad <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        cbar.ax.yaxis.set_label_position(<span class="st">'left'</span>)</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        style_colorbar_yticks(cbar, cmap, norm)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> side, border <span class="kw">in</span> <span class="bu">list</span>(cbar.ax.spines.items()):</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>            border.set_visible(<span class="va">False</span>)</span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cmap, norm</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_singular_value_plots(ax1, ax2, ax3, prefix, </span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>        svd_out_dir, r_scale<span class="op">=</span><span class="st">'log10'</span>, show_yaxis<span class="op">=</span><span class="va">True</span>, k_max<span class="op">=</span><span class="dv">65</span>,</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">20</span>, r_choose<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>    <span class="co"># load data </span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    df          <span class="op">=</span> load_svd_npz(svd_out_dir, prefix)   </span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    nucnorms    <span class="op">=</span> df[<span class="st">"nucnorm"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>    <span class="co"># common x-axis for all plots</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>    x, xticks, xlabels  <span class="op">=</span> get_r_scaled(nucnorms, scale<span class="op">=</span>r_scale)</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>    ylabel<span class="op">=</span><span class="st">""</span></span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax1: fan of normalized singular values --</span></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>    k_list <span class="op">=</span> np.arange(<span class="dv">2</span>, k_max)</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>    k_center <span class="op">=</span> <span class="dv">15</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> get_singular_value_metrics(df, k_list, metric<span class="op">=</span><span class="st">"norm_value"</span>)</span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>    show_cbar <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis: </span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>        <span class="co"># show_cbar = True</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="vs">r"Normalized eigenvalue </span><span class="dv">$</span><span class="vs">s_k / s_1</span><span class="dv">$</span><span class="vs">"</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>    cmap, norm <span class="op">=</span> make_line_plots_with_colorbar_inset(</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>        ax1, x, y, k_list,</span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>        show_cbar<span class="op">=</span>show_cbar,</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span>ylabel, cbar_label<span class="op">=</span><span class="vs">r"Rank </span><span class="dv">$</span><span class="vs">k</span><span class="dv">$</span><span class="vs">"</span>, cbar_xpos<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a>        vcenter<span class="op">=</span>k_center)</span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>    ax1.plot(x, y[:, k_highlight<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'orangered'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="ss">f"k=</span><span class="sc">{</span>k_highlight<span class="sc">:d}</span><span class="ss">"</span>)</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>    ax1.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>, loc<span class="op">=</span><span class="st">'upper center'</span>)</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax2: effective ranks --</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>    rank_methods <span class="op">=</span> {</span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>        <span class="st">"participation_ratio"</span>: </span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"Participation ratio"</span>}, </span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>        <span class="st">"energy"</span>: </span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">0.95</span>, <span class="st">"label"</span>: <span class="ss">f"Cumulative singular values &gt; 0.95"</span>}, </span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>        <span class="st">"spectral_gap"</span>: </span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"k at which maximum spectral gap (gmax) sits"</span>},</span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a>        <span class="st">"count"</span>: </span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">1e-4</span>, <span class="st">"label"</span>: <span class="st">"Number of eigenvalues &gt; 1e-4"</span>},</span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a>        <span class="st">"spectral_gap_loose"</span>:</span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>            {<span class="st">"thres"</span>: <span class="fl">0.7</span>,  <span class="st">"label"</span>: <span class="st">"Max k at which spectral gap &gt; 70</span><span class="sc">% g</span><span class="st">max"</span>},</span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>    ranks <span class="op">=</span> {}</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>    rank_lines <span class="op">=</span> {}</span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m, mdict <span class="kw">in</span> rank_methods.items():</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>        ranks[m] <span class="op">=</span> get_effective_ranks(df, nucnorms, method<span class="op">=</span>m, thres<span class="op">=</span>mdict[<span class="st">"thres"</span>])</span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m <span class="op">!=</span> <span class="st">"spectral_gap_loose"</span>:</span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>            rank_lines[m], <span class="op">=</span> ax2.plot(x, ranks[m],  <span class="st">'o-'</span>, label<span class="op">=</span>mdict[<span class="st">"label"</span>])</span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis: </span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="st">"Effective rank"</span></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>    ax2.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(ylabel)</span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- ax3: relative spectral gap --</span></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>    <span class="co"># k_list = [8, 10, 12, 15, 20, 25, 30, 40]</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> get_singular_value_metrics(df, k_list, metric<span class="op">=</span><span class="st">"relative_gap"</span>)       </span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, k <span class="kw">in</span> <span class="bu">enumerate</span>(k_list):</span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a>        <span class="co"># ax3.plot(x, y[:, i], 'o-', label=f"{k}")</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>        ax3.plot(x, y[:, i], color<span class="op">=</span>cmap(norm(i)))</span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>    ax3.plot(x, y[:, k_highlight<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'orangered'</span>, lw<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="ss">f"k=</span><span class="sc">{</span>k_highlight<span class="sc">:d}</span><span class="ss">"</span>)</span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> show_yaxis:</span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>        ylabel<span class="op">=</span><span class="vs">r"Relative spectral gap"</span></span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a>    ax3.legend(frameon <span class="op">=</span> <span class="va">False</span>, handlelength <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a>    ax3.set_ylabel(ylabel)</span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- mark the chosen rank --</span></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r_choose <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a>        r_choose_idx <span class="op">=</span> np.argwhere(nucnorms <span class="op">==</span> r_choose)</span>
+<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ax <span class="kw">in</span> [ax1, ax2, ax3]:</span>
+<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a>            ax.axvline(x<span class="op">=</span>x[r_choose_idx], color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'dotted'</span>)</span>
+<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>    <span class="co"># -- mark the x-axis --</span></span>
+<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticks(xticks)</span>
+<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>    ax3.set_xticklabels(xlabels, rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a>    ax3.set_xlabel(<span class="st">"Nuclear norm constraint r"</span>)</span>
+<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="0f42f5b4-acfe-4d0a-8f29-065c17b0ad3a" class="cell" data-tags="[]" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_svd_spectrum_figure(svd_out_dir,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        nnm_r_choose<span class="op">=</span><span class="dv">8192</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span><span class="dv">2580</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">30</span>, k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">16</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    gs <span class="op">=</span> fig.add_gridspec(nrows<span class="op">=</span><span class="dv">3</span>, ncols<span class="op">=</span><span class="dv">2</span>, wspace<span class="op">=</span><span class="dv">0</span>, hspace<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    ax1 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    ax3 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">2</span>, <span class="dv">0</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    ax4 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">0</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax1)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    ax5 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">1</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax2)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ax6 <span class="op">=</span> fig.add_subplot(gs[<span class="dv">2</span>, <span class="dv">1</span>], sharey<span class="op">=</span>ax3)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax1, ax2, ax3, ax4, ax5, ax6):</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        style_blank_axis(ax)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        ax.patch.set_alpha(<span class="fl">0.0</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax1, ax2, ax3):</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(left<span class="op">=</span><span class="va">True</span>, labelleft<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> (ax3, ax6):</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        ax.tick_params(bottom<span class="op">=</span><span class="va">True</span>, labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    prefix1 <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    make_singular_value_plots(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        ax1, ax2, ax3, </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        prefix1, svd_out_dir, </span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        r_scale<span class="op">=</span><span class="st">'log2'</span>, </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span>k_highlight,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        r_choose<span class="op">=</span>nnm_corr_r_choose,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span>k_max,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="st">"NNM-Corr / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    prefix2 <span class="op">=</span> <span class="st">"pgd_fw_nnm"</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    make_singular_value_plots(</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        ax4, ax5, ax6, </span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        prefix2, svd_out_dir, </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>        r_scale<span class="op">=</span><span class="st">'log2'</span>, show_yaxis<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span>k_highlight,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        r_choose<span class="op">=</span>nnm_r_choose,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span>k_max,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="st">"NNM / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    outfile_name<span class="op">=</span><span class="ss">f"figures/pgc_singular_value_spectrum_</span><span class="sc">{</span>file_out_suffix<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.pdf"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.png"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="traits" class="level2">
 <h2 class="anchored" data-anchor-id="traits">107 traits</h2>
-<div id="7d7b93ad-3c4f-4e89-ba28-0e2f183bdd0e" class="cell" data-execution_count="6">
+<div id="7d7b93ad-3c4f-4e89-ba28-0e2f183bdd0e" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_root <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/clorinn/low_rank_fit"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>svd_out_dir <span class="op">=</span> Path(data_root) <span class="op">/</span> <span class="st">"svd"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(svd_out_dir,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span><span class="dv">406</span>, </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">15</span>, k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2026-06-04-pgc-singular-value-spectrum_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="traits-excluding-biomarkers" class="level2">
-<h2 class="anchored" data-anchor-id="traits-excluding-biomarkers">78 traits (excluding “Biomarkers”)</h2>
-<div id="2f2f1887-5bf4-425f-9c39-46a8babb3441" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_root <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/v1.1/low_rank_fit"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>svd_out_dir <span class="op">=</span> Path(data_root) <span class="op">/</span> <span class="st">"svd"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(svd_out_dir,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span><span class="dv">406</span>, </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">15</span>, k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2026-06-04-pgc-singular-value-spectrum_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="traits-excluding-biomarker-and-neurite-density-traits" class="level2">
-<h2 class="anchored" data-anchor-id="traits-excluding-biomarker-and-neurite-density-traits">51 traits (excluding “Biomarker” and “Neurite density” traits)</h2>
-<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_root <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/v1.2/low_rank_fit"</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>svd_out_dir <span class="op">=</span> Path(data_root) <span class="op">/</span> <span class="st">"svd"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"107 traits"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_root<span class="op">=</span>trait_dirs[data_name]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(svd_out_dir,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span><span class="dv">406</span>, </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">15</span>, k_max<span class="op">=</span><span class="dv">50</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(Path(data_root) <span class="op">/</span> <span class="st">"svd"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="bu">int</span>(rank_df.loc[data_name][<span class="st">"k"</span>]),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        nnm_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM"</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM-Corr"</span>],</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -589,72 +645,198 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="9">
+</section>
+<section id="traits-excluding-biomarkers" class="level2">
+<h2 class="anchored" data-anchor-id="traits-excluding-biomarkers">78 traits (excluding “Biomarkers”)</h2>
+<div id="2f2f1887-5bf4-425f-9c39-46a8babb3441" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prefix   <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df       <span class="op">=</span> load_svd_npz(svd_out_dir, prefix)   </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r_choose <span class="op">=</span> <span class="dv">406</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>rank_methods <span class="op">=</span> {</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"participation_ratio"</span>: </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"Participation ratio"</span>}, </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"energy"</span>: </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">0.95</span>, <span class="st">"label"</span>: <span class="ss">f"Cumulative singular values &gt; 0.95"</span>}, </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spectral_gap"</span>: </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"k at which maximum spectral gap (gmax) sits"</span>},</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"count"</span>: </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">1e-4</span>, <span class="st">"label"</span>: <span class="st">"Number of eigenvalues &gt; 1e-4"</span>},</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spectral_gap_loose"</span>:</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">0.7</span>,  <span class="st">"label"</span>: <span class="st">"Max k at which spectral gap &gt; 70</span><span class="sc">% g</span><span class="st">max"</span>},</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> m, mdict <span class="kw">in</span> rank_methods.items():</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> get_effective_rank_at_nucnorm(df, r_choose, thres<span class="op">=</span>mdict[<span class="st">"thres"</span>], method<span class="op">=</span>m)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    label <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>mdict[<span class="st">'label'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    rows[label] <span class="op">=</span> {<span class="st">"Effective Rank"</span>: rank}</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>rank_df <span class="op">=</span> pd.DataFrame(rows).T</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Nuclear norm = </span><span class="sc">{</span>r_choose<span class="sc">:g}</span><span class="ss">"</span>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>display(rank_df.style.<span class="bu">format</span>({<span class="st">"Effective Rank"</span>: <span class="st">"</span><span class="sc">{:g}</span><span class="st">"</span>}))</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># display(HTML(rank_df.to_html()))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"78 traits"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data_root<span class="op">=</span>trait_dirs[data_name]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(Path(data_root) <span class="op">/</span> <span class="st">"svd"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="bu">int</span>(rank_df.loc[data_name][<span class="st">"k"</span>]),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        nnm_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM"</span>],</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM-Corr"</span>],</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span><span class="dv">65</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2026-06-04-pgc-singular-value-spectrum_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="traits-excluding-biomarker-and-neurite-density-traits" class="level2">
+<h2 class="anchored" data-anchor-id="traits-excluding-biomarker-and-neurite-density-traits">51 traits (excluding “Biomarker” and “Neurite density” traits)</h2>
+<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"51 traits"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_root<span class="op">=</span>trait_dirs[data_name]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>make_svd_spectrum_figure(Path(data_root) <span class="op">/</span> <span class="st">"svd"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="bu">int</span>(rank_df.loc[data_name][<span class="st">"k"</span>]),</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        nnm_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM"</span>],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        nnm_corr_r_choose<span class="op">=</span>rank_df.loc[data_name][<span class="st">"NNM-Corr"</span>],</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        k_max<span class="op">=</span><span class="dv">50</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2026-06-04-pgc-singular-value-spectrum_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prefix   <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>rank_methods <span class="op">=</span> {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"participation_ratio"</span>: </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"Participation ratio"</span>}, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"energy"</span>: </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">0.95</span>, <span class="st">"label"</span>: <span class="ss">f"Cumulative singular values &gt; 0.95"</span>}, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spectral_gap"</span>: </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="va">None</span>, <span class="st">"label"</span>: <span class="st">"k at which maximum spectral gap (gmax) sits"</span>},</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"count"</span>: </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">1e-4</span>, <span class="st">"label"</span>: <span class="st">"Number of eigenvalues &gt; 1e-4"</span>},</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"spectral_gap_loose"</span>:</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"thres"</span>: <span class="fl">0.7</span>,  <span class="st">"label"</span>: <span class="st">"Max k at which spectral gap &gt; 70</span><span class="sc">% g</span><span class="st">max"</span>},</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, HTML</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> data_name, data_root <span class="kw">in</span> trait_dirs.items():</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    svd_out_dir <span class="op">=</span> Path(data_root) <span class="op">/</span> <span class="st">"svd"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> load_svd_npz(svd_out_dir, prefix)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    r_choose <span class="op">=</span> rank_df.loc[data_name][<span class="st">"NNM-Corr"</span>]</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> m, mdict <span class="kw">in</span> rank_methods.items():</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        rank <span class="op">=</span> get_effective_rank_at_nucnorm(df, r_choose, thres<span class="op">=</span>mdict[<span class="st">"thres"</span>], method<span class="op">=</span>m)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>mdict[<span class="st">'label'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        rows[label] <span class="op">=</span> {<span class="st">"Effective Rank"</span>: rank}</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>data_name<span class="sc">}</span><span class="ss"> | Threshold r = </span><span class="sc">{</span>r_choose<span class="sc">:g}</span><span class="ss">"</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    display(pd.DataFrame(rows).T.style.<span class="bu">format</span>({<span class="st">"Effective Rank"</span>: <span class="st">"</span><span class="sc">{:g}</span><span class="st">"</span>}))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># display(HTML(pd.DataFrame(rows).T.to_html()))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Nuclear norm = 406</code></pre>
+<pre><code>107 traits | Threshold r = 2580</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_ee948" class="caption-top table table-sm table-striped small">
+<table id="T_d07ed" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_ee948_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+<th id="T_d07ed_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_ee948_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
-<td id="T_ee948_row0_col0" class="data row0 col0">4.37612</td>
+<th id="T_d07ed_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_d07ed_row0_col0" class="data row0 col0">20.4139</td>
 </tr>
 <tr class="even">
-<th id="T_ee948_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
-<td id="T_ee948_row1_col0" class="data row1 col0">6</td>
+<th id="T_d07ed_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_d07ed_row1_col0" class="data row1 col0">31</td>
 </tr>
 <tr class="odd">
-<th id="T_ee948_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
-<td id="T_ee948_row2_col0" class="data row2 col0">9</td>
+<th id="T_d07ed_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_d07ed_row2_col0" class="data row2 col0">43</td>
 </tr>
 <tr class="even">
-<th id="T_ee948_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
-<td id="T_ee948_row3_col0" class="data row3 col0">11</td>
+<th id="T_d07ed_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_d07ed_row3_col0" class="data row3 col0">46</td>
 </tr>
 <tr class="odd">
-<th id="T_ee948_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
-<td id="T_ee948_row4_col0" class="data row4 col0">11</td>
+<th id="T_d07ed_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_d07ed_row4_col0" class="data row4 col0">46</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>78 traits | Threshold r = 1024</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<style type="text/css">
+</style>
+
+<table id="T_8e471" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_8e471_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th id="T_8e471_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_8e471_row0_col0" class="data row0 col0">18.7438</td>
+</tr>
+<tr class="even">
+<th id="T_8e471_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_8e471_row1_col0" class="data row1 col0">25</td>
+</tr>
+<tr class="odd">
+<th id="T_8e471_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_8e471_row2_col0" class="data row2 col0">32</td>
+</tr>
+<tr class="even">
+<th id="T_8e471_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_8e471_row3_col0" class="data row3 col0">33</td>
+</tr>
+<tr class="odd">
+<th id="T_8e471_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_8e471_row4_col0" class="data row4 col0">34</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>51 traits | Threshold r = 813</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<style type="text/css">
+</style>
+
+<table id="T_7a995" class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_7a995_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th id="T_7a995_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_7a995_row0_col0" class="data row0 col0">6.44503</td>
+</tr>
+<tr class="even">
+<th id="T_7a995_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_7a995_row1_col0" class="data row1 col0">11</td>
+</tr>
+<tr class="odd">
+<th id="T_7a995_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_7a995_row2_col0" class="data row2 col0">21</td>
+</tr>
+<tr class="even">
+<th id="T_7a995_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_7a995_row3_col0" class="data row3 col0">23</td>
+</tr>
+<tr class="odd">
+<th id="T_7a995_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_7a995_row4_col0" class="data row4 col0">21</td>
 </tr>
 </tbody>
 </table>
