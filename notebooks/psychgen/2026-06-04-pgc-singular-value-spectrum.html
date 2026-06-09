@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="background">Background</h2>
 <p>From the subspace stability cross-validation, we observed that the NNM-Corr’s correlated-noise whitening converts NNM’s all-at-once spectral collapse into an ordered factor-entry path. <a href="../../notebooks/psychgen/2026-06-02-subspace-singular-value-spectrum.html">Click here to view the diagnostics notebook</a>. Here, we check whether the same behavior persists for the full PGC data.</p>
 <p>We show the results for 3 groups of traits: 1. All 107 traits 2. Excluding “Biomarkers” traits 3. Excluding “Biomarkers” and “Neurite density” traits</p>
-<div id="e4cf4ce3-5b6b-4499-ae2e-e57bdbd93a5f" class="cell" data-execution_count="1">
+<div id="e4cf4ce3-5b6b-4499-ae2e-e57bdbd93a5f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.axes_grid1 <span class="im">import</span> make_axes_locatable</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="6507a2de-c382-4c0b-8733-a6f2fce69177" class="cell" data-execution_count="2">
+<div id="6507a2de-c382-4c0b-8733-a6f2fce69177" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_svd_npz(svd_dir, prefix):</span>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.asarray(ranks)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-execution_count="3">
+<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
@@ -570,7 +570,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="traits-excluding-biomarker-and-neurite-density-traits" class="level2">
 <h2 class="anchored" data-anchor-id="traits-excluding-biomarker-and-neurite-density-traits">51 traits (excluding “Biomarker” and “Neurite density” traits)</h2>
-<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell">
+<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_root <span class="op">=</span> <span class="st">"/gpfs/commons/home/sbanerjee/pgc/analysis/v1.2/low_rank_fit"</span></span>
@@ -581,13 +581,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        k_highlight<span class="op">=</span><span class="dv">15</span>, k_max<span class="op">=</span><span class="dv">50</span>, save_figure<span class="op">=</span><span class="va">True</span>,</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        file_out_suffix<span class="op">=</span><span class="st">"v1_2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="2026-06-04-pgc-singular-value-spectrum_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="18">
+</div>
+</div>
+<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prefix   <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df       <span class="op">=</span> load_svd_npz(svd_out_dir, prefix)   </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r_choose <span class="op">=</span> <span class="dv">1290</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r_choose <span class="op">=</span> <span class="dv">406</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>rank_methods <span class="op">=</span> {</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"participation_ratio"</span>: </span>
@@ -615,39 +622,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># display(HTML(rank_df.to_html()))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Nuclear norm = 1290</code></pre>
+<pre><code>Nuclear norm = 406</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_64576" class="caption-top table table-sm table-striped small">
+<table id="T_ee948" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_64576_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+<th id="T_ee948_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_64576_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
-<td id="T_64576_row0_col0" class="data row0 col0">9.77768</td>
+<th id="T_ee948_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_ee948_row0_col0" class="data row0 col0">4.37612</td>
 </tr>
 <tr class="even">
-<th id="T_64576_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
-<td id="T_64576_row1_col0" class="data row1 col0">19</td>
+<th id="T_ee948_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_ee948_row1_col0" class="data row1 col0">6</td>
 </tr>
 <tr class="odd">
-<th id="T_64576_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
-<td id="T_64576_row2_col0" class="data row2 col0">33</td>
+<th id="T_ee948_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_ee948_row2_col0" class="data row2 col0">9</td>
 </tr>
 <tr class="even">
-<th id="T_64576_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
-<td id="T_64576_row3_col0" class="data row3 col0">35</td>
+<th id="T_ee948_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_ee948_row3_col0" class="data row3 col0">11</td>
 </tr>
 <tr class="odd">
-<th id="T_64576_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
-<td id="T_64576_row4_col0" class="data row4 col0">33</td>
+<th id="T_ee948_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_ee948_row4_col0" class="data row4 col0">11</td>
 </tr>
 </tbody>
 </table>
