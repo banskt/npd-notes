@@ -321,7 +321,7 @@ window.Quarto = {
 <section id="read-data" class="level2">
 <h2 class="anchored" data-anchor-id="read-data">Read data</h2>
 <p>Also do some basic sanity check.</p>
-<div id="4d33c39b-da1f-44dd-82a3-950e3f73ad81" class="cell" data-execution_count="6">
+<div id="4d33c39b-da1f-44dd-82a3-950e3f73ad81" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_root<span class="op">=</span><span class="st">"/gpfs/commons/home/sbanerjee/pgc/input"</span></span>
@@ -370,12 +370,12 @@ populated off-diagonal fraction: 0.951</code></pre>
 <section id="plotting-function-and-spearman-correlation-to-compare" class="level2">
 <h2 class="anchored" data-anchor-id="plotting-function-and-spearman-correlation-to-compare">Plotting function and Spearman correlation to compare</h2>
 <p>Use Spearman correlation instead of Pearson correlation because we want to compare the rankings, not the absolute magnitudes.</p>
-<div id="222589e2-4b07-4a9d-9070-58b565cac86a" class="cell" data-execution_count="10">
+<div id="222589e2-4b07-4a9d-9070-58b565cac86a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> spearmanr, pearsonr</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_heatmap_figure(A, B):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_heatmap_figure(A, B, title_A<span class="op">=</span><span class="st">""</span>, title_B<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_mpl_norm(X):</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        ok <span class="op">=</span> np.isfinite(X)</span>
@@ -399,62 +399,64 @@ populated off-diagonal fraction: 0.951</code></pre>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    divider <span class="op">=</span> make_axes_locatable(ax1)</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    cax <span class="op">=</span> divider.append_axes(<span class="st">"right"</span>, size<span class="op">=</span><span class="st">"5%"</span>, pad<span class="op">=</span><span class="fl">0.2</span>)</span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> plt.colorbar(im1, cax<span class="op">=</span>cax, fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    im2 <span class="op">=</span> ax2.imshow(B, cmap<span class="op">=</span>cmap1, norm<span class="op">=</span>get_mpl_norm(B), origin<span class="op">=</span><span class="st">'lower'</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    divider <span class="op">=</span> make_axes_locatable(ax2)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    cax <span class="op">=</span> divider.append_axes(<span class="st">"right"</span>, size<span class="op">=</span><span class="st">"5%"</span>, pad<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> plt.colorbar(im2, cax<span class="op">=</span>cax, fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(title_A, pad<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    im2 <span class="op">=</span> ax2.imshow(B, cmap<span class="op">=</span>cmap1, norm<span class="op">=</span>get_mpl_norm(B), origin<span class="op">=</span><span class="st">'lower'</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    divider <span class="op">=</span> make_axes_locatable(ax2)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    cax <span class="op">=</span> divider.append_axes(<span class="st">"right"</span>, size<span class="op">=</span><span class="st">"5%"</span>, pad<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    cbar <span class="op">=</span> plt.colorbar(im2, cax<span class="op">=</span>cax, fraction<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(title_B, pad<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> offdiag_check(S, G, R, P, n_perm<span class="op">=</span><span class="dv">10000</span>, seed<span class="op">=</span><span class="dv">0</span>,thr<span class="op">=</span><span class="fl">0.05</span>):</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">    S = bivariate intercept (sampling covariance)</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co">    G = bivariate slope (genetic covariance)</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">    Off-diagonals only</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.asarray(S, <span class="bu">float</span>)</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> np.asarray(G, <span class="bu">float</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> np.asarray(R, <span class="bu">float</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> np.asarray(P, <span class="bu">float</span>)</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    iu <span class="op">=</span> np.triu_indices_from(S, k<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    x, y, rg, rg_p <span class="op">=</span> np.<span class="bu">abs</span>(S[iu]), G[iu], R[iu], P[iu]</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    ok <span class="op">=</span> np.isfinite(x) <span class="op">&amp;</span> np.isfinite(y) <span class="op">&amp;</span> np.isfinite(rg)</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    x, y, rg, rg_p <span class="op">=</span> x[ok], y[ok], rg[ok], rg_p[ok]</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    r_obs <span class="op">=</span> spearmanr(x, y).statistic       <span class="co"># rank -&gt; robust to the two different scales</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lo, hi <span class="kw">in</span> [(<span class="dv">0</span>, <span class="fl">.05</span>), (<span class="fl">.05</span>, <span class="fl">.1</span>), (<span class="fl">.1</span>, <span class="fl">.2</span>), (<span class="fl">.2</span>, <span class="fl">.4</span>), (<span class="fl">.4</span>, <span class="fl">2.01</span>)]:</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> (np.<span class="bu">abs</span>(x) <span class="op">&gt;=</span> lo) <span class="op">&amp;</span> (np.<span class="bu">abs</span>(x) <span class="op">&lt;</span> hi)</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">5</span>:</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(f"|Sampling Covariance| ∈ [{lo},{hi}):\tn={m.sum():5d}  ")</span></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"|Sampling Covariance| ∈ [</span><span class="sc">{</span>lo<span class="sc">:.2f}</span><span class="ss">,</span><span class="sc">{</span>hi<span class="sc">:.2f}</span><span class="ss">)"</span></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">n = </span><span class="sc">{</span>m<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:5d}</span><span class="ss">"</span></span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">ρ = </span><span class="sc">{</span>spearmanr(x[m], y[m])<span class="sc">.</span>statistic<span class="sc">:+.3f}</span><span class="ss">"</span></span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">median|rg| = </span><span class="sc">{</span>np<span class="sc">.</span>median(np.<span class="bu">abs</span>(rg[m]))<span class="sc">:.3f}</span><span class="ss">"</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">95th|rg| = </span><span class="sc">{</span>np<span class="sc">.</span>quantile(np.<span class="bu">abs</span>(rg[m]),<span class="fl">.95</span>)<span class="sc">:.3f}</span><span class="ss">"</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">frac_sig = </span><span class="sc">{</span>np<span class="sc">.</span>mean(rg_p[m]<span class="op">&lt;</span>thr)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)<span class="op">;</span> n <span class="op">=</span> S.shape[<span class="dv">0</span>]<span class="op">;</span> null <span class="op">=</span> np.empty(n_perm)</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(n_perm):</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> rng.permutation(n)</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        null[b] <span class="op">=</span> spearmanr(S[np.ix_(p, p)][iu][ok], y).statistic</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> (np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(null) <span class="op">&gt;=</span> <span class="bu">abs</span>(r_obs)) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (n_perm <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(spearman<span class="op">=</span>r_obs, pearson<span class="op">=</span>pearsonr(x, y)[<span class="dv">0</span>], mantel_p<span class="op">=</span>p, x<span class="op">=</span>x, y<span class="op">=</span>y)</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_zscore(zscore_path):</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(Path(zscore_path), header<span class="op">=</span><span class="dv">0</span>, index_col<span class="op">=</span><span class="dv">0</span>, dtype<span class="op">=</span>{<span class="dv">0</span>: <span class="bu">str</span>})</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    df.index <span class="op">=</span> df.index.<span class="bu">map</span>(<span class="bu">str</span>)</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> df.columns.<span class="bu">map</span>(<span class="bu">str</span>)</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> offdiag_check(S, G, R, P, n_perm<span class="op">=</span><span class="dv">10000</span>, seed<span class="op">=</span><span class="dv">0</span>,thr<span class="op">=</span><span class="fl">0.05</span>):</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="co">    S = bivariate intercept (sampling covariance)</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="co">    G = bivariate slope (genetic covariance)</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="co">    Off-diagonals only</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> np.asarray(S, <span class="bu">float</span>)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    G <span class="op">=</span> np.asarray(G, <span class="bu">float</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    R <span class="op">=</span> np.asarray(R, <span class="bu">float</span>)</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> np.asarray(P, <span class="bu">float</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    iu <span class="op">=</span> np.triu_indices_from(S, k<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    x, y, rg, rg_p <span class="op">=</span> np.<span class="bu">abs</span>(S[iu]), G[iu], R[iu], P[iu]</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    ok <span class="op">=</span> np.isfinite(x) <span class="op">&amp;</span> np.isfinite(y) <span class="op">&amp;</span> np.isfinite(rg)</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    x, y, rg, rg_p <span class="op">=</span> x[ok], y[ok], rg[ok], rg_p[ok]</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>    r_obs <span class="op">=</span> spearmanr(x, y).statistic       <span class="co"># rank -&gt; robust to the two different scales</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lo, hi <span class="kw">in</span> [(<span class="dv">0</span>, <span class="fl">.05</span>), (<span class="fl">.05</span>, <span class="fl">.1</span>), (<span class="fl">.1</span>, <span class="fl">.2</span>), (<span class="fl">.2</span>, <span class="fl">.4</span>), (<span class="fl">.4</span>, <span class="fl">2.01</span>)]:</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>        m <span class="op">=</span> (np.<span class="bu">abs</span>(x) <span class="op">&gt;=</span> lo) <span class="op">&amp;</span> (np.<span class="bu">abs</span>(x) <span class="op">&lt;</span> hi)</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> m.<span class="bu">sum</span>() <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>            <span class="co"># print(f"|Sampling Covariance| ∈ [{lo},{hi}):\tn={m.sum():5d}  ")</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"|Sampling Covariance| ∈ [</span><span class="sc">{</span>lo<span class="sc">:.2f}</span><span class="ss">,</span><span class="sc">{</span>hi<span class="sc">:.2f}</span><span class="ss">)"</span></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">n = </span><span class="sc">{</span>m<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:5d}</span><span class="ss">"</span></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">ρ = </span><span class="sc">{</span>spearmanr(x[m], y[m])<span class="sc">.</span>statistic<span class="sc">:+.3f}</span><span class="ss">"</span></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">median|rg| = </span><span class="sc">{</span>np<span class="sc">.</span>median(np.<span class="bu">abs</span>(rg[m]))<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">95th|rg| = </span><span class="sc">{</span>np<span class="sc">.</span>quantile(np.<span class="bu">abs</span>(rg[m]),<span class="fl">.95</span>)<span class="sc">:.3f}</span><span class="ss">"</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>                  <span class="ss">f"</span><span class="ch">\n\t</span><span class="ss">frac_sig = </span><span class="sc">{</span>np<span class="sc">.</span>mean(rg_p[m]<span class="op">&lt;</span>thr)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)<span class="op">;</span> n <span class="op">=</span> S.shape[<span class="dv">0</span>]<span class="op">;</span> null <span class="op">=</span> np.empty(n_perm)</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(n_perm):</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> rng.permutation(n)</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>        null[b] <span class="op">=</span> spearmanr(S[np.ix_(p, p)][iu][ok], y).statistic</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> (np.<span class="bu">sum</span>(np.<span class="bu">abs</span>(null) <span class="op">&gt;=</span> <span class="bu">abs</span>(r_obs)) <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> (n_perm <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">dict</span>(spearman<span class="op">=</span>r_obs, pearson<span class="op">=</span>pearsonr(x, y)[<span class="dv">0</span>], mantel_p<span class="op">=</span>p, x<span class="op">=</span>x, y<span class="op">=</span>y)</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_zscore(zscore_path):</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(Path(zscore_path), header<span class="op">=</span><span class="dv">0</span>, index_col<span class="op">=</span><span class="dv">0</span>, dtype<span class="op">=</span>{<span class="dv">0</span>: <span class="bu">str</span>})</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    df.index <span class="op">=</span> df.index.<span class="bu">map</span>(<span class="bu">str</span>)</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> df.columns.<span class="bu">map</span>(<span class="bu">str</span>)</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="traits" class="level2">
 <h2 class="anchored" data-anchor-id="traits">107 traits</h2>
-<div id="360d2e7e-0545-4a18-9c4e-aff65e92f033" class="cell" data-execution_count="11">
+<div id="360d2e7e-0545-4a18-9c4e-aff65e92f033" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> load_zscore(Path(data_root) <span class="op">/</span> <span class="st">"pgc_v1.0/zscore_v1_0.csv"</span>)</span>
@@ -470,8 +472,11 @@ populated off-diagonal fraction: 0.951</code></pre>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df <span class="kw">in</span> (S, G, R, R_p, S_se, G_se, R_se)</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(S_107, G_107)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_107, G_107, R_107, R_p_107)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    S_107, G_107, </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    title_A<span class="op">=</span><span class="st">"Sampling Covariance (Intercepts)"</span>, </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    title_B<span class="op">=</span><span class="st">"Unnormalized Genetic Covariance (Slopes)"</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_107, G_107, R_107, R_p_107)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -512,9 +517,9 @@ populated off-diagonal fraction: 0.951</code></pre>
     95th|rg| = 0.961
     frac_sig = 0.995</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>{'spearman': 0.3260796871672002,
- 'pearson': 0.8993361068681656,
+ 'pearson': 0.8993361068681653,
  'mantel_p': 9.999000099990002e-05,
  'x': array([0.001368  , 0.00216529, 0.0007015 , ..., 0.14691438, 0.14256507,
         0.00458009]),
@@ -524,7 +529,7 @@ populated off-diagonal fraction: 0.951</code></pre>
 </section>
 <section id="traits-1" class="level2">
 <h2 class="anchored" data-anchor-id="traits-1">78 traits</h2>
-<div id="4a70127f-184c-4bb7-a052-951e26028599" class="cell" data-execution_count="12">
+<div id="4a70127f-184c-4bb7-a052-951e26028599" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> load_zscore(Path(data_root) <span class="op">/</span> <span class="st">"pgc_v1.1/zscore_v1_1.csv"</span>)</span>
@@ -540,8 +545,11 @@ populated off-diagonal fraction: 0.951</code></pre>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df <span class="kw">in</span> (S, G, R, R_p, S_se, G_se, R_se)</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(S_78, G_78)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_78, G_78, R_78, R_p_78)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    S_78, G_78, </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    title_A<span class="op">=</span><span class="st">"Sampling Covariance (Intercepts)"</span>, </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    title_B<span class="op">=</span><span class="st">"Unnormalized Genetic Covariance (Slopes)"</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_78, G_78, R_78, R_p_78)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -582,9 +590,9 @@ populated off-diagonal fraction: 0.951</code></pre>
     95th|rg| = 0.961
     frac_sig = 0.994</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>{'spearman': 0.5188576637631885,
- 'pearson': 0.9415594245932898,
+ 'pearson': 0.9415594245932899,
  'mantel_p': 9.999000099990002e-05,
  'x': array([0.001368  , 0.00216529, 0.0007015 , ..., 0.14691438, 0.14256507,
         0.00458009]),
@@ -594,7 +602,7 @@ populated off-diagonal fraction: 0.951</code></pre>
 </section>
 <section id="traits-2" class="level2">
 <h2 class="anchored" data-anchor-id="traits-2">51 traits</h2>
-<div id="a84df2d3-5383-45a4-9834-5f1880700090" class="cell" data-execution_count="13">
+<div id="a84df2d3-5383-45a4-9834-5f1880700090" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> load_zscore(Path(data_root) <span class="op">/</span> <span class="st">"pgc_v1.2/zscore_v1_2.csv"</span>)</span>
@@ -610,8 +618,11 @@ populated off-diagonal fraction: 0.951</code></pre>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df <span class="kw">in</span> (S, G, R, R_p, S_se, G_se, R_se)</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>]</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(S_51, G_51)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_51, G_51, R_51, R_p_51)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>make_heatmap_figure(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    S_51, G_51, </span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    title_A<span class="op">=</span><span class="st">"Sampling Covariance (Intercepts)"</span>, </span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    title_B<span class="op">=</span><span class="st">"Unnormalized Genetic Covariance (Slopes)"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>offdiag_check(S_51, G_51, R_51, R_p_51)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -652,9 +663,9 @@ populated off-diagonal fraction: 0.951</code></pre>
     95th|rg| = 1.138
     frac_sig = 0.833</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>{'spearman': 0.30867082856852446,
- 'pearson': 0.3899733385363103,
+ 'pearson': 0.38997333853631033,
  'mantel_p': 9.999000099990002e-05,
  'x': array([0.001368  , 0.00216529, 0.0007015 , ..., 0.14691438, 0.14256507,
         0.00458009]),

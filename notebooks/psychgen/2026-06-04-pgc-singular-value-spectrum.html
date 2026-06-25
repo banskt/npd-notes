@@ -327,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="choose-the-ranks-to-show-in-each-plot" class="level2">
 <h2 class="anchored" data-anchor-id="choose-the-ranks-to-show-in-each-plot">Choose the ranks to show in each plot</h2>
-<div id="d5a14a32-1666-4d95-a4cc-dbec3e583298" class="cell" data-execution_count="19">
+<div id="d5a14a32-1666-4d95-a4cc-dbec3e583298" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> r_at_target_rank(df, k_target, <span class="op">*</span>, method<span class="op">=</span><span class="st">"energy"</span>, thres<span class="op">=</span><span class="fl">0.95</span>):</span>
@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-tags="[]" data-execution_count="6">
+<div id="32c35e10-366c-4e24-8489-575c572a9fa6" class="cell" data-tags="[]" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_r_scaled(x, scale<span class="op">=</span><span class="st">"log2"</span>):</span>
@@ -572,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="0f42f5b4-acfe-4d0a-8f29-065c17b0ad3a" class="cell" data-tags="[]" data-execution_count="7">
+<div id="0f42f5b4-acfe-4d0a-8f29-065c17b0ad3a" class="cell" data-tags="[]" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_svd_spectrum_figure(svd_out_dir,</span>
@@ -622,15 +622,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    ax4.set_title(<span class="st">"NNM / PGD+FW"</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    outfile_name<span class="op">=</span><span class="ss">f"figures/pgc_singular_value_spectrum_</span><span class="sc">{</span>file_out_suffix<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.pdf"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="ss">f"</span><span class="sc">{</span>outfile_name<span class="sc">}</span><span class="ss">.png"</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plt.savefig(f"{outfile_name}.pdf", bbox_inches='tight')</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plt.savefig(f"{outfile_name}.png", bbox_inches='tight')</span></span>
 <span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="traits" class="level2">
 <h2 class="anchored" data-anchor-id="traits">107 traits</h2>
-<div id="7d7b93ad-3c4f-4e89-ba28-0e2f183bdd0e" class="cell" data-execution_count="14">
+<div id="7d7b93ad-3c4f-4e89-ba28-0e2f183bdd0e" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"107 traits"</span></span>
@@ -654,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="traits-excluding-biomarkers" class="level2">
 <h2 class="anchored" data-anchor-id="traits-excluding-biomarkers">78 traits (excluding “Biomarkers”)</h2>
-<div id="2f2f1887-5bf4-425f-9c39-46a8babb3441" class="cell" data-execution_count="15">
+<div id="2f2f1887-5bf4-425f-9c39-46a8babb3441" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"78 traits"</span></span>
@@ -678,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="traits-excluding-biomarker-and-neurite-density-traits" class="level2">
 <h2 class="anchored" data-anchor-id="traits-excluding-biomarker-and-neurite-density-traits">51 traits (excluding “Biomarker” and “Neurite density” traits)</h2>
-<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell" data-execution_count="16">
+<div id="9e363557-8612-4bcd-a1f8-bd5367f65007" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_name<span class="op">=</span><span class="st">"51 traits"</span></span>
@@ -699,7 +699,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="17">
+<div id="63670a10-7c27-4fd1-bded-71aa6b82af52" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prefix   <span class="op">=</span> <span class="st">"pgd_fw_nnm_corr"</span></span>
@@ -734,115 +734,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># display(HTML(pd.DataFrame(rows).T.to_html()))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>107 traits | Threshold r = 2580</code></pre>
+<pre><code>107 traits | Threshold r = 1290</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_d07ed" class="caption-top table table-sm table-striped small">
+<table id="T_a3df5" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_d07ed_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+<th id="T_a3df5_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_d07ed_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
-<td id="T_d07ed_row0_col0" class="data row0 col0">20.4139</td>
+<th id="T_a3df5_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_a3df5_row0_col0" class="data row0 col0">14.9819</td>
 </tr>
 <tr class="even">
-<th id="T_d07ed_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
-<td id="T_d07ed_row1_col0" class="data row1 col0">31</td>
+<th id="T_a3df5_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_a3df5_row1_col0" class="data row1 col0">21</td>
 </tr>
 <tr class="odd">
-<th id="T_d07ed_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
-<td id="T_d07ed_row2_col0" class="data row2 col0">43</td>
+<th id="T_a3df5_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_a3df5_row2_col0" class="data row2 col0">28</td>
 </tr>
 <tr class="even">
-<th id="T_d07ed_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
-<td id="T_d07ed_row3_col0" class="data row3 col0">46</td>
+<th id="T_a3df5_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_a3df5_row3_col0" class="data row3 col0">29</td>
 </tr>
 <tr class="odd">
-<th id="T_d07ed_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
-<td id="T_d07ed_row4_col0" class="data row4 col0">46</td>
+<th id="T_a3df5_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_a3df5_row4_col0" class="data row4 col0">31</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>78 traits | Threshold r = 1024</code></pre>
+<pre><code>78 traits | Threshold r = 406</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_8e471" class="caption-top table table-sm table-striped small">
+<table id="T_4e538" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_8e471_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+<th id="T_4e538_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_8e471_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
-<td id="T_8e471_row0_col0" class="data row0 col0">18.7438</td>
+<th id="T_4e538_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_4e538_row0_col0" class="data row0 col0">16.7555</td>
 </tr>
 <tr class="even">
-<th id="T_8e471_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
-<td id="T_8e471_row1_col0" class="data row1 col0">25</td>
+<th id="T_4e538_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_4e538_row1_col0" class="data row1 col0">16</td>
 </tr>
 <tr class="odd">
-<th id="T_8e471_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
-<td id="T_8e471_row2_col0" class="data row2 col0">32</td>
+<th id="T_4e538_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_4e538_row2_col0" class="data row2 col0">20</td>
 </tr>
 <tr class="even">
-<th id="T_8e471_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
-<td id="T_8e471_row3_col0" class="data row3 col0">33</td>
+<th id="T_4e538_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_4e538_row3_col0" class="data row3 col0">20</td>
 </tr>
 <tr class="odd">
-<th id="T_8e471_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
-<td id="T_8e471_row4_col0" class="data row4 col0">34</td>
+<th id="T_4e538_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_4e538_row4_col0" class="data row4 col0">23</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>51 traits | Threshold r = 813</code></pre>
+<pre><code>51 traits | Threshold r = 406</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <style type="text/css">
 </style>
 
-<table id="T_7a995" class="caption-top table table-sm table-striped small">
+<table id="T_ce3cc" class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
-<th id="T_7a995_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
+<th id="T_ce3cc_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">Effective Rank</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th id="T_7a995_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
-<td id="T_7a995_row0_col0" class="data row0 col0">6.44503</td>
+<th id="T_ce3cc_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">Participation ratio</th>
+<td id="T_ce3cc_row0_col0" class="data row0 col0">4.37612</td>
 </tr>
 <tr class="even">
-<th id="T_7a995_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
-<td id="T_7a995_row1_col0" class="data row1 col0">11</td>
+<th id="T_ce3cc_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">Cumulative singular values &gt; 0.95</th>
+<td id="T_ce3cc_row1_col0" class="data row1 col0">6</td>
 </tr>
 <tr class="odd">
-<th id="T_7a995_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
-<td id="T_7a995_row2_col0" class="data row2 col0">21</td>
+<th id="T_ce3cc_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">k at which maximum spectral gap (gmax) sits</th>
+<td id="T_ce3cc_row2_col0" class="data row2 col0">9</td>
 </tr>
 <tr class="even">
-<th id="T_7a995_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
-<td id="T_7a995_row3_col0" class="data row3 col0">23</td>
+<th id="T_ce3cc_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">Number of eigenvalues &gt; 1e-4</th>
+<td id="T_ce3cc_row3_col0" class="data row3 col0">11</td>
 </tr>
 <tr class="odd">
-<th id="T_7a995_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
-<td id="T_7a995_row4_col0" class="data row4 col0">21</td>
+<th id="T_ce3cc_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">Max k at which spectral gap &gt; 70% gmax</th>
+<td id="T_ce3cc_row4_col0" class="data row4 col0">11</td>
 </tr>
 </tbody>
 </table>

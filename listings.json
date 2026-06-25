@@ -12,21 +12,6 @@
     ]
   },
   {
-    "listing": "/notebooks/psychgen/index.html",
-    "items": [
-      "/notebooks/psychgen/2026-06-11-pgc-low-rank-vs-ldsc-slopes-intercepts.html",
-      "/notebooks/psychgen/2026-06-10-ldsc-slopes-vs-intercepts.html",
-      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-1.html",
-      "/notebooks/psychgen/2026-06-04-pgc-singular-value-spectrum.html",
-      "/notebooks/psychgen/2026-06-02-cvmc-results-pgd-afw-nnm-corr.html",
-      "/notebooks/psychgen/2026-06-02-cvsr-diagnostics-pgd-afw-nnm-corr.html",
-      "/notebooks/psychgen/2026-06-02-subspace-singular-value-spectrum.html",
-      "/notebooks/psychgen/2026-04-30-data-preprocessing-shielded-noise-covariance.html",
-      "/notebooks/psychgen/2026-04-30-cvsr-results.html",
-      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-0.html"
-    ]
-  },
-  {
     "listing": "/notebooks/explore/index.html",
     "items": [
       "/notebooks/explore/2024-01-29-simulation-comparisons.html",
@@ -44,6 +29,22 @@
       "/notebooks/explore/2023-05-16-pca-sumstat.html",
       "/notebooks/explore/2023-05-16-robustpca.html",
       "/notebooks/explore/2023-05-12-preprocess.html"
+    ]
+  },
+  {
+    "listing": "/notebooks/psychgen/index.html",
+    "items": [
+      "/notebooks/psychgen/2026-06-12-data-preprocessing-shrinked-noise-covariance.html",
+      "/notebooks/psychgen/2026-06-11-pgc-low-rank-vs-ldsc-slopes-intercepts.html",
+      "/notebooks/psychgen/2026-06-10-ldsc-slopes-vs-intercepts.html",
+      "/notebooks/psychgen/2026-06-08-data-preprocessing-shielded-noise-covariance.html",
+      "/notebooks/psychgen/2026-06-06-data-preprocessing-v1-1.html",
+      "/notebooks/psychgen/2026-06-04-pgc-singular-value-spectrum.html",
+      "/notebooks/psychgen/2026-06-02-cvmc-results-pgd-afw-nnm-corr.html",
+      "/notebooks/psychgen/2026-06-02-cvsr-diagnostics-pgd-afw-nnm-corr.html",
+      "/notebooks/psychgen/2026-06-02-subspace-singular-value-spectrum.html",
+      "/notebooks/psychgen/2026-04-30-cvsr-results.html",
+      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-0.html"
     ]
   },
   {
@@ -89,14 +90,15 @@
   {
     "listing": "/notebooks/index.html",
     "items": [
+      "/notebooks/psychgen/2026-06-12-data-preprocessing-shrinked-noise-covariance.html",
       "/notebooks/psychgen/2026-06-11-pgc-low-rank-vs-ldsc-slopes-intercepts.html",
       "/notebooks/psychgen/2026-06-10-ldsc-slopes-vs-intercepts.html",
-      "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-1.html",
+      "/notebooks/psychgen/2026-06-08-data-preprocessing-shielded-noise-covariance.html",
+      "/notebooks/psychgen/2026-06-06-data-preprocessing-v1-1.html",
       "/notebooks/psychgen/2026-06-04-pgc-singular-value-spectrum.html",
       "/notebooks/psychgen/2026-06-02-cvmc-results-pgd-afw-nnm-corr.html",
       "/notebooks/psychgen/2026-06-02-cvsr-diagnostics-pgd-afw-nnm-corr.html",
       "/notebooks/psychgen/2026-06-02-subspace-singular-value-spectrum.html",
-      "/notebooks/psychgen/2026-04-30-data-preprocessing-shielded-noise-covariance.html",
       "/notebooks/psychgen/2026-04-30-cvsr-results.html",
       "/notebooks/psychgen/2026-04-30-data-preprocessing-v1-0.html",
       "/notebooks/production/2026-02-12-softimpute-benchmark.html",
